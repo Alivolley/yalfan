@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 
 // MUI
@@ -16,12 +17,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function AppLayout({ children }) {
    const themeConfig = createTheme(getDesignTokens('light'));
+   const router = useRouter();
 
    return (
       <Provider store={store}>
          <ThemeProvider theme={themeConfig}>
             <ToastContainer />
-            <PagesLayout>{children}</PagesLayout>
+            <PagesLayout dir={router.locale === 'en' ? 'ltr' : 'rtl'}>{children}</PagesLayout>
          </ThemeProvider>
       </Provider>
    );

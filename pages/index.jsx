@@ -1,3 +1,15 @@
+import { useTranslations } from 'next-intl';
+
 export default function Home() {
-   return <main>yalfan</main>;
+   const t = useTranslations('home');
+
+   return <main>{t('welcome')}</main>;
+}
+
+export async function getStaticProps(context) {
+   return {
+      props: {
+         messages: (await import(`../messages/${context.locale}.json`)).default,
+      },
+   };
 }

@@ -1,6 +1,6 @@
-function PagesLayout({ children }) {
+function PagesLayout({ children, dir }) {
    return (
-      <div>
+      <div dir={dir}>
          <main>{children}</main>
       </div>
    );
