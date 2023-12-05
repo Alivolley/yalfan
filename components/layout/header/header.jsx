@@ -60,7 +60,6 @@ function Header({ language }) {
                <form onSubmit={handleSubmit(formSubmit)}>
                   <FormControl variant="outlined">
                      <TextField
-                        autoFocus
                         placeholder={t('search')}
                         className="w-[300px]"
                         color="customPink"
