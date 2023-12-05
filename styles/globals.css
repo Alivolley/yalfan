@@ -3,10 +3,15 @@
 @tailwind utilities;
 
 @layer {
-   /* @font-face {
-     font-family: 'rokhFaNum';
-     src: url('../assets/fonts/RokhFaNum-Regular.ttf') format('truetype');
-  } */
+   @font-face {
+      font-family: 'peyda';
+      src: url('../assets/fonts/Peyda-Regular.ttf') format('truetype');
+   }
+
+   @font-face {
+      font-family: 'poppins';
+      src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
+   }
 
    .Toastify__toast-container--top-right {
       right: 0 !important;

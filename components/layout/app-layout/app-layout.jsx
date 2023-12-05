@@ -16,14 +16,17 @@ import getDesignTokens from '@/configs/theme';
 import 'react-toastify/dist/ReactToastify.css';
 
 function AppLayout({ children }) {
-   const themeConfig = createTheme(getDesignTokens('light'));
    const router = useRouter();
+   const direction = router.locale === 'en' ? 'ltr' : 'rtl';
+   const themeConfig = createTheme(getDesignTokens('light', direction, router.locale));
 
    return (
       <Provider store={store}>
          <ThemeProvider theme={themeConfig}>
             <ToastContainer />
-            <PagesLayout dir={router.locale === 'en' ? 'ltr' : 'rtl'}>{children}</PagesLayout>
+            <PagesLayout dir={direction} language={router.locale}>
+               {children}
+            </PagesLayout>
          </ThemeProvider>
       </Provider>
    );

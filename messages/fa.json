@@ -1,4 +1,17 @@
 {
+    "header": {
+        "yalfan": "یـلفـــان",
+        "online shop for bags": "فروشگاه آنلاین کیف و ساک",
+        "search": "جستوجو",
+        "signup": "ورود / ثبت نام",
+        "categories": "دسته بندی ها",
+        "top sellers": "پرفروش ترین ها",
+        "newest": "جدید ترین ها",
+        "discounts and offers": "تخفیف ها و پیشنهاد ها",
+        "any question": "سوالی دارید ؟",
+        "about us": "درباره ما",
+        "contact us": "تماس با ما"
+    },
     "home": {
         "welcome": "خوش آمدید"
     }

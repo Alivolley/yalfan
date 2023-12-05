@@ -1,26 +1,28 @@
-const getDesignTokens = mode => ({
-   direction: 'rtl',
-   colors: {
-      // customOrange: '#FB9B40',
+const getDesignTokens = (mode, direction, language) => ({
+   direction,
+
+   typography: {
+      fontFamily: language === 'en' ? 'poppins' : language === 'fa' ? 'peyda' : 'peyda',
    },
 
    palette: {
       mode,
 
-      // customOrange: {
-      //    main: '#FB9B40',
-      // },
+      customPink: {
+         main: '#FFA3A1',
+      },
+      white: {
+         main: '#ffffff',
+      },
+      borderColor: {
+         main: '#BDCEDE',
+      },
+      textColor: {
+         main: '#626E94',
+      },
    },
 
    components: {
-      MuiTooltip: {
-         styleOverrides: {
-            tooltip: {
-               // fontFamily: 'vazir',
-            },
-         },
-      },
-
       MuiFab: {
          styleOverrides: {
             root: {
@@ -32,12 +34,12 @@ const getDesignTokens = mode => ({
 
       MuiButton: {
          styleOverrides: {
-            root: props => ({
-               fontFamily: 'rokhRegular',
+            root: () => ({
                boxShadow: 'none',
                '&:hover': {
                   boxShadow: '0px 4px 7px 0px #C2C2C236',
                },
+               textTransform: 'none',
                // ...((props.ownerState.color === 'customOrange' || props.ownerState.color === 'customOrange2') && {
                //    color: 'white',
                // }),
@@ -45,32 +47,9 @@ const getDesignTokens = mode => ({
          },
       },
 
-      MuiInputLabel: {
-         styleOverrides: {
-            root: {
-               fontFamily: 'rokhRegular',
-            },
-         },
-      },
-      MuiInputBase: {
-         styleOverrides: {
-            root: {
-               fontFamily: 'rokhRegular',
-            },
-         },
-      },
-      MuiFormHelperText: {
-         styleOverrides: {
-            root: {
-               fontFamily: 'rokhRegular',
-            },
-         },
-      },
-
       MuiTab: {
          styleOverrides: {
             root: props => ({
-               fontFamily: 'rokhRegular',
                ...(props['aria-selected'] &&
                   props.customOrange &&
                   {
@@ -83,15 +62,7 @@ const getDesignTokens = mode => ({
       MuiOutlinedInput: {
          styleOverrides: {
             root: {
-               // borderRadius: '10px',
-            },
-         },
-      },
-
-      MuiPaginationItem: {
-         styleOverrides: {
-            root: {
-               fontFamily: 'rokhFaNum',
+               borderRadius: '10px',
             },
          },
       },

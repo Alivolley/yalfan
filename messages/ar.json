@@ -1,4 +1,17 @@
 {
+    "header": {
+        "yalfan": "یـلفـــان",
+        "online shop for bags": "متجر على الانترنت للحقائب",
+        "search": "يبحث",
+        "signup": "تسجيل الدخول / اشتراك",
+        "categories": "فئات",
+        "top sellers": "أفضل البائعين",
+        "newest": "الأحدث",
+        "discounts and offers": "الخصومات والعروض",
+        "any question": "أي سؤال ؟",
+        "about us": "معلومات عنا",
+        "contact us": "اتصل بنا"
+    },
     "home": {
         "welcome": "اهلا و سهلا"
     }

@@ -1,4 +1,17 @@
 {
+    "header": {
+        "yalfan": "Yalfan",
+        "online shop for bags": "Online shop for bags",
+        "search": "Search",
+        "signup": "Login / SignUp",
+        "categories": "Categories",
+        "top sellers": "Top sellers",
+        "newest": "Newest",
+        "discounts and offers": "Discounts and offers",
+        "any question": "Any question ?",
+        "about us": "About us",
+        "contact us": "Contact us"
+    },
     "home": {
         "welcome": "welcome"
     }

@@ -23,7 +23,9 @@ module.exports = {
          },
 
          colors: {
-            // customOrange: '#FB9B40',
+            customPink: '#FFA3A1',
+            borderColor: '#BDCEDE',
+            textColor: '#626E94',
          },
 
          backgroundImage: {
@@ -32,7 +34,8 @@ module.exports = {
          },
 
          fontFamily: {
-            // rokhFaNum: 'rokhFaNum',
+            peyda: 'peyda',
+            poppins: 'poppins',
          },
          borderRadius: {
             10: '10px',
