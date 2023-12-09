@@ -24,6 +24,7 @@ module.exports = {
 
          colors: {
             customPink: '#FFA3A1',
+            customPinkLow: '#FFEEED',
             borderColor: '#BDCEDE',
             textColor: '#626E94',
          },
@@ -34,7 +35,7 @@ module.exports = {
          },
 
          fontFamily: {
-            peyda: 'peyda',
+            dana: 'dana',
             poppins: 'poppins',
          },
          borderRadius: {

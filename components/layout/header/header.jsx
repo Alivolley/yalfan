@@ -11,6 +11,8 @@ import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlin
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 
 // Assets
 import Link from 'next/link';
@@ -47,21 +49,25 @@ function Header({ language }) {
 
    return (
       <header className="px-8 customMd:px-16">
-         <div className="mt-11 flex items-center justify-between border-b border-solid border-borderColor pb-6">
+         <div className="mt-5 flex items-center justify-between border-solid border-borderColor pb-6 customMd:mt-11 customMd:border-b">
             <div className="flex items-center gap-11">
                <div className="flex items-center gap-3">
-                  <Image src={fakeLogo} alt="logo" />
+                  <div className="h-11 w-[52px] shrink-0 customMd:h-16 customMd:w-[73px]">
+                     <Image src={fakeLogo} alt="logo" className="h-full w-full" />
+                  </div>
                   <div className="space-y-0.5">
-                     <p className="text-xl font-bold">{t('yalfan')}</p>
-                     <p className="text-xs text-[#58595B]">{t('online shop for bags')}</p>
+                     <p className="text-sm font-bold customMd:text-xl">{t('yalfan')}</p>
+                     <p className="text-[8px] text-[#58595B] customXs:text-10 customMd:text-xs">
+                        {t('online shop for bags')}
+                     </p>
                   </div>
                </div>
 
-               <form onSubmit={handleSubmit(formSubmit)}>
+               <form onSubmit={handleSubmit(formSubmit)} className="hidden customMd:block">
                   <FormControl variant="outlined">
                      <TextField
                         placeholder={t('search')}
-                        className="w-[300px]"
+                        className="customLg:w-[300px]"
                         color="customPink"
                         {...register('searchInput', {
                            required: {
@@ -82,7 +88,7 @@ function Header({ language }) {
                </form>
             </div>
 
-            <div className="flex items-stretch gap-3">
+            <div className="hidden items-stretch gap-3 customMd:flex">
                <Fab
                   sx={{
                      width: '60px',
@@ -125,9 +131,34 @@ function Header({ language }) {
                   </Button>
                </Link>
             </div>
+
+            <div className="flex items-center customMd:hidden">
+               <Button
+                  endIcon={<LanguageOutlinedIcon />}
+                  size="small"
+                  onClick={changeDirection}
+                  color="textColor"
+                  className="!uppercase"
+               >
+                  {language}
+               </Button>
+
+               <div className="me-3 h-10 w-[1px] bg-[#E4EAF0]" />
+               <Fab
+                  sx={{
+                     width: '44px',
+                     height: '44px',
+                     borderRadius: '8px',
+                     color: '#D14F4D',
+                  }}
+                  color="customPinkLow"
+               >
+                  <PersonOutlineOutlinedIcon />
+               </Fab>
+            </div>
          </div>
 
-         <div className="flex items-center justify-between py-5">
+         <div className="hidden items-center justify-between py-5 customMd:flex">
             <div className="flex items-center gap-6">
                <Button
                   size="small"

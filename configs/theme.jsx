@@ -2,7 +2,7 @@ const getDesignTokens = (mode, direction, language) => ({
    direction,
 
    typography: {
-      fontFamily: language === 'en' ? 'poppins' : language === 'fa' ? 'peyda' : 'peyda',
+      fontFamily: language === 'en' ? 'poppins' : language === 'fa' ? 'dana' : 'dana',
    },
 
    palette: {
@@ -10,6 +10,9 @@ const getDesignTokens = (mode, direction, language) => ({
 
       customPink: {
          main: '#FFA3A1',
+      },
+      customPinkLow: {
+         main: '#FFEEED',
       },
       white: {
          main: '#ffffff',

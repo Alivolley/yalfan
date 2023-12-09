@@ -4,8 +4,8 @@
 
 @layer {
    @font-face {
-      font-family: 'peyda';
-      src: url('../assets/fonts/Peyda-Regular.ttf') format('truetype');
+      font-family: 'dana';
+      src: url('../assets/fonts/DanaFaNum-Regular.ttf') format('truetype');
    }
 
    @font-face {
