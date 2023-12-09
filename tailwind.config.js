@@ -25,6 +25,7 @@ module.exports = {
          colors: {
             customPink: '#FFA3A1',
             customPinkLow: '#FFEEED',
+            customPinkHigh: '#D14F4D',
             borderColor: '#BDCEDE',
             textColor: '#626E94',
          },

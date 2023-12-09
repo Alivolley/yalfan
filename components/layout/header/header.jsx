@@ -13,6 +13,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 // Assets
 import Link from 'next/link';
@@ -50,16 +51,17 @@ function Header({ language }) {
    return (
       <header className="px-8 customMd:px-16">
          <div className="mt-5 flex items-center justify-between border-solid border-borderColor pb-6 customMd:mt-11 customMd:border-b">
-            <div className="flex items-center gap-11">
-               <div className="flex items-center gap-3">
-                  <div className="h-11 w-[52px] shrink-0 customMd:h-16 customMd:w-[73px]">
+            <div className="flex items-center gap-2 customMd:gap-11">
+               <IconButton className="!p-0 customMd:!hidden">
+                  <MenuOutlinedIcon />
+               </IconButton>
+               <div className="flex items-center gap-2 customMd:gap-3">
+                  <div className="w-[40px] shrink-0 customMd:h-16 customMd:w-[73px]">
                      <Image src={fakeLogo} alt="logo" className="h-full w-full" />
                   </div>
                   <div className="space-y-0.5">
                      <p className="text-sm font-bold customMd:text-xl">{t('yalfan')}</p>
-                     <p className="text-[8px] text-[#58595B] customXs:text-10 customMd:text-xs">
-                        {t('online shop for bags')}
-                     </p>
+                     <p className="text-[8px] text-[#58595B] customMd:text-xs">{t('online shop for bags')}</p>
                   </div>
                </div>
 
@@ -88,7 +90,7 @@ function Header({ language }) {
                </form>
             </div>
 
-            <div className="hidden items-stretch gap-3 customMd:flex">
+            <div className="hidden items-stretch gap-1 customMd:flex lg:gap-3">
                <Fab
                   sx={{
                      width: '60px',
@@ -158,8 +160,8 @@ function Header({ language }) {
             </div>
          </div>
 
-         <div className="hidden items-center justify-between py-5 customMd:flex">
-            <div className="flex items-center gap-6">
+         <div className="hidden items-center justify-between py-3 customMd:flex">
+            <div className="flex items-center gap-1 customLg:gap-6">
                <Button
                   size="small"
                   color="textColor"
@@ -185,8 +187,10 @@ function Header({ language }) {
                </Link>
             </div>
 
-            <div className="flex items-center gap-6 text-xs text-textColor">
-               <Link href="/">{t('any question')}</Link>
+            <div className="flex items-center gap-4 text-xs text-textColor customLg:gap-6">
+               <Link href="/" className="hidden lg:block">
+                  {t('any question')}
+               </Link>
                <Link href="/">{t('about us')}</Link>
                <Link href="/">{t('contact us')}</Link>
                <a href="tel:02152687469" className="flex items-center gap-1">

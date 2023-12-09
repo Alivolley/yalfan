@@ -13,6 +13,9 @@
         "contact us": "Contact us"
     },
     "home": {
-        "welcome": "welcome"
+        "with yalfan": "with yalfan",
+        "make great styles": "make great styles",
+        "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "shop now": "shop now"
     }
 }

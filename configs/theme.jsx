@@ -14,6 +14,9 @@ const getDesignTokens = (mode, direction, language) => ({
       customPinkLow: {
          main: '#FFEEED',
       },
+      customPinkHigh: {
+         main: '#D14F4D',
+      },
       white: {
          main: '#ffffff',
       },
