@@ -13,6 +13,11 @@
       src: url('../assets/fonts/Poppins-Regular.ttf') format('truetype');
    }
 
+   @font-face {
+      font-family: 'rubik';
+      src: url('../assets/fonts/Rubik-Regular.ttf') format('truetype');
+   }
+
    .Toastify__toast-container--top-right {
       right: 0 !important;
    }

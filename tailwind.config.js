@@ -39,6 +39,7 @@ module.exports = {
          fontFamily: {
             dana: 'dana',
             poppins: 'poppins',
+            rubik: 'rubik',
          },
          borderRadius: {
             10: '10px',

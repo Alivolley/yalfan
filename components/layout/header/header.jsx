@@ -1,10 +1,22 @@
+import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 
 // MUI
-import { Button, Fab, FormControl, IconButton, InputAdornment, TextField } from '@mui/material';
+import {
+   Button,
+   ClickAwayListener,
+   Fab,
+   FormControl,
+   Grow,
+   IconButton,
+   InputAdornment,
+   Paper,
+   Popper,
+   TextField,
+} from '@mui/material';
 
 // Icons
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
@@ -23,10 +35,18 @@ import categoriesIcon from '@/assets/icons/menu-categories-icon.svg';
 import discountIcon from '@/assets/icons/discount-icon.svg';
 import callIcon from '@/assets/icons/call-icon.svg';
 
+// hooks
+import useOnClickOutside from '@/hooks/useOnclickOutside';
+
 function Header({ language }) {
+   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+   const [showLanguageDropDown, setShowLanguageDropDown] = useState(false);
+   const languageDropDownRef = useRef();
+
    const t = useTranslations('header');
    const router = useRouter();
    const { pathname, asPath, query } = router;
+   const [languageRef] = useOnClickOutside(() => setShowLanguageSelector(false));
 
    const { register, handleSubmit } = useForm({
       defaultValues: {
@@ -40,12 +60,10 @@ function Header({ language }) {
       // closeModalHandler();
    };
 
-   const changeDirection = () => {
-      if (language === 'en') {
-         router.push({ pathname, query }, asPath, { locale: 'fa' });
-      } else if (language === 'fa') {
-         router.push({ pathname, query }, asPath, { locale: 'en' });
-      }
+   const changeLanguage = lang => {
+      router.push({ pathname, query }, asPath, { locale: lang });
+      setShowLanguageSelector(false);
+      setShowLanguageDropDown(false);
    };
 
    return (
@@ -91,6 +109,35 @@ function Header({ language }) {
             </div>
 
             <div className="hidden items-stretch gap-1 customMd:flex lg:gap-3">
+               <div
+                  className={`flex items-center transition-all duration-100 ${
+                     showLanguageSelector ? 'visible opacity-100' : 'invisible -translate-x-3 opacity-0'
+                  }`}
+               >
+                  <Button
+                     className={`!min-w-0 !px-2 !py-1 ${language === 'ar' ? '!text-[#B1302E]' : ''}`}
+                     color="textColor"
+                     onClick={() => changeLanguage('ar')}
+                  >
+                     AR
+                  </Button>
+                  <div className="mx-1 h-8 w-[1px] bg-[#E4EAF0]" />
+                  <Button
+                     className={`!min-w-0 !px-2 !py-1 ${language === 'en' ? '!text-[#B1302E]' : ''}`}
+                     color="textColor"
+                     onClick={() => changeLanguage('en')}
+                  >
+                     EN
+                  </Button>
+                  <div className="mx-1 h-8 w-[1px] bg-[#E4EAF0]" />
+                  <Button
+                     className={`!min-w-0 !px-2 !py-1 ${language === 'fa' ? '!text-[#B1302E]' : ''}`}
+                     color="textColor"
+                     onClick={() => changeLanguage('fa')}
+                  >
+                     FA
+                  </Button>
+               </div>
                <Fab
                   sx={{
                      width: '60px',
@@ -101,7 +148,8 @@ function Header({ language }) {
                      border: '1px solid #E4EAF0',
                   }}
                   color="white"
-                  onClick={changeDirection}
+                  onClick={() => setShowLanguageSelector(prev => !prev)}
+                  ref={languageRef}
                >
                   {language}
                </Fab>
@@ -138,12 +186,60 @@ function Header({ language }) {
                <Button
                   endIcon={<LanguageOutlinedIcon />}
                   size="small"
-                  onClick={changeDirection}
+                  onClick={() => setShowLanguageDropDown(true)}
                   color="textColor"
                   className="!uppercase"
+                  ref={languageDropDownRef}
                >
                   {language}
                </Button>
+
+               <Popper
+                  open={showLanguageDropDown}
+                  anchorEl={languageDropDownRef.current}
+                  transition
+                  disablePortal
+                  sx={{
+                     zIndex: 1,
+                  }}
+               >
+                  {({ TransitionProps, placement }) => (
+                     <Grow
+                        {...TransitionProps}
+                        style={{
+                           transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                        }}
+                     >
+                        <Paper>
+                           <ClickAwayListener onClickAway={() => setShowLanguageDropDown(false)}>
+                              <div className="flex flex-col">
+                                 <Button
+                                    className={`${language === 'fa' ? '!text-[#B1302E]' : ''}`}
+                                    color="textColor"
+                                    onClick={() => changeLanguage('fa')}
+                                 >
+                                    FA
+                                 </Button>
+                                 <Button
+                                    className={`${language === 'en' ? '!text-[#B1302E]' : ''}`}
+                                    color="textColor"
+                                    onClick={() => changeLanguage('en')}
+                                 >
+                                    EN
+                                 </Button>
+                                 <Button
+                                    className={`${language === 'ar' ? '!text-[#B1302E]' : ''}`}
+                                    color="textColor"
+                                    onClick={() => changeLanguage('ar')}
+                                 >
+                                    AR
+                                 </Button>
+                              </div>
+                           </ClickAwayListener>
+                        </Paper>
+                     </Grow>
+                  )}
+               </Popper>
 
                <div className="me-3 h-10 w-[1px] bg-[#E4EAF0]" />
                <Fab

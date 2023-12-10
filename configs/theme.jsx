@@ -2,7 +2,7 @@ const getDesignTokens = (mode, direction, language) => ({
    direction,
 
    typography: {
-      fontFamily: language === 'en' ? 'poppins' : language === 'fa' ? 'dana' : 'dana',
+      fontFamily: language === 'en' ? 'poppins' : language === 'fa' ? 'dana' : 'rubik',
    },
 
    palette: {

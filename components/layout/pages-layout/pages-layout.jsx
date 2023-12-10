@@ -3,7 +3,7 @@ import RtlProvider from '../rtlProvider/rtlProvider';
 
 function PagesLayout({ children, dir, language }) {
    return (
-      <div dir={dir} className={language === 'en' ? 'font-poppins' : language === 'fa' ? 'font-dana' : 'font-dana'}>
+      <div dir={dir} className={language === 'en' ? 'font-poppins' : language === 'fa' ? 'font-dana' : 'font-rubik'}>
          <RtlProvider isRtl={language !== 'en'}>
             <Header language={language} />
             <main>{children}</main>
