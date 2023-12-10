@@ -6,7 +6,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 
 // Redux
 import { Provider } from 'react-redux';
-import store from '../../../store/store';
+import store from '@/store/store';
 
 // Components
 import PagesLayout from '../pages-layout/pages-layout';

@@ -49,8 +49,8 @@ function Header({ language }) {
    };
 
    return (
-      <header className="px-8 customMd:px-16">
-         <div className="mt-5 flex items-center justify-between border-solid border-borderColor pb-6 customMd:mt-11 customMd:border-b">
+      <header className="sticky top-0 z-10 bg-white px-8 pt-5 customMd:px-16 customMd:pt-10">
+         <div className="flex items-center justify-between border-solid border-borderColor pb-6 customMd:border-b">
             <div className="flex items-center gap-2 customMd:gap-11">
                <IconButton className="!p-0 customMd:!hidden">
                   <MenuOutlinedIcon />

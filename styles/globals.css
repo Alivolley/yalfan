@@ -24,21 +24,21 @@
    }
 
    @media only screen and (min-width: 900px) {
-      /* ::-webkit-scrollbar {
-        width: 8px;
-        height: 5px;
-     }
+      ::-webkit-scrollbar {
+         width: 8px;
+         height: 5px;
+      }
 
-     ::-webkit-scrollbar-track {
-        background: #a7a3a3;
-     }
+      ::-webkit-scrollbar-track {
+         background: #ffffff;
+      }
 
-     ::-webkit-scrollbar-thumb {
-        background: #e27005;
-     }
+      ::-webkit-scrollbar-thumb {
+         background: #d14f4d;
+      }
 
-     ::-webkit-scrollbar-thumb:hover {
-        background: #fb9b40;
-     } */
+      ::-webkit-scrollbar-thumb:hover {
+         background: #df8482;
+      }
    }
 }

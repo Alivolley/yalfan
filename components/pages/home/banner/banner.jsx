@@ -7,8 +7,8 @@ import { Button, Grid } from '@mui/material';
 
 // Assets
 import Link from 'next/link';
-import bannerModel from '../../../../assets/images/banner-home-model.png';
-import bagIcon from '../../../../assets/icons/Bag 2.svg';
+import bannerModel from '@/assets/images/banner-home-model.png';
+import bagIcon from '@/assets/icons/Bag 2.svg';
 
 // Styles
 import BannerStyle from './banner.style';

@@ -28,6 +28,7 @@ module.exports = {
             customPinkHigh: '#D14F4D',
             borderColor: '#BDCEDE',
             textColor: '#626E94',
+            customBlue: '#385E8A',
          },
 
          backgroundImage: {
