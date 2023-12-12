@@ -29,6 +29,7 @@ module.exports = {
             borderColor: '#BDCEDE',
             textColor: '#626E94',
             customBlue: '#385E8A',
+            customGold: '#FF9F1C',
          },
 
          backgroundImage: {

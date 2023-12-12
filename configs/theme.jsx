@@ -29,6 +29,9 @@ const getDesignTokens = (mode, direction, language) => ({
       customBlue: {
          main: '#385E8A',
       },
+      customGold: {
+         main: '#FF9F1C',
+      },
    },
 
    components: {
