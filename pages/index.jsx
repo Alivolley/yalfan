@@ -1,6 +1,7 @@
 // Components
 import Introduce from '@/components/pages/home/Introduce/Introduce';
 import Banner from '@/components/pages/home/banner/banner';
+import BoldProducts from '@/components/pages/home/bold-products/bold-products';
 import Categories from '@/components/pages/home/categories/categories';
 import Newest from '@/components/pages/home/newest/newest';
 import OffersBanner from '@/components/pages/home/offers-banner/offers-banner';
@@ -13,6 +14,7 @@ export default function Home() {
          <OffersBanner />
          <Introduce />
          <Newest />
+         <BoldProducts />
       </main>
    );
 }
