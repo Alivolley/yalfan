@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -14,6 +15,8 @@ import productSample from '@/assets/images/product-sample.png';
 import ProductCardStyle from './product-card.style';
 
 function ProductCard({ isLiked = false, discount = false }) {
+   const t = useTranslations('home');
+
    return (
       <ProductCardStyle href="/" className="w-[162px] shrink-0 rounded-10 bg-white p-2 customMd:flex-1">
          <div
@@ -25,7 +28,7 @@ function ProductCard({ isLiked = false, discount = false }) {
             <Link href="/" className="h-full w-full">
                <Image src={productSample} alt="product" className="h-full w-full object-contain" />
             </Link>
-            <div className="absolute left-1.5 top-1.5 customMd:left-2 customMd:top-2">
+            <div className="absolute end-1.5 top-1.5 customMd:end-2 customMd:top-2">
                <LoadingButton
                   className="!h-[25px] !w-[25px] !min-w-0 !p-0 customMd:!h-[30px] customMd:!w-[30px]"
                   variant="contained"
@@ -36,15 +39,15 @@ function ProductCard({ isLiked = false, discount = false }) {
             </div>
             {discount && (
                <p
-                  className="absolute right-1.5 top-1.5 bg-[#F2485D] px-0.5 pb-3 pt-1.5 text-xs text-white
-                   customMd:right-2 customMd:top-2 customMd:px-[3px] customMd:pb-4 customMd:pt-2 customMd:text-sm"
+                  className="absolute start-1.5 top-1.5 bg-[#F2485D] px-0.5 pb-3 pt-1.5 text-xs text-white
+                   customMd:start-2 customMd:top-2 customMd:px-[3px] customMd:pb-4 customMd:pt-2 customMd:text-sm"
                   id="discount"
                >
                   20%
                </p>
             )}
 
-            <p className="absolute bottom-1 left-1 flex items-center rounded-lg bg-white px-1.5 py-0.5 text-xs font-bold customMd:bottom-2 customMd:left-2">
+            <p className="absolute bottom-1 end-1 flex items-center rounded-lg bg-white px-1.5 py-0.5 text-xs font-bold customMd:bottom-2 customMd:end-2">
                4.1 <StarIcon fontSize="small" color="customGold" />
             </p>
          </div>
@@ -54,7 +57,7 @@ function ProductCard({ isLiked = false, discount = false }) {
                   کیف دیبا دیبا
                </p>
                <p className="whitespace-nowrap text-10 text-[#7E95B0] line-through customMd:text-xs">
-                  {Number(128000).toLocaleString('fa-IR')} تومان
+                  {Number(128000).toLocaleString()} {t('Toman')}
                </p>
             </div>
             <div className="mt-3 flex items-center justify-between gap-1">
@@ -62,7 +65,7 @@ function ProductCard({ isLiked = false, discount = false }) {
                   ساک دستی
                </p>
                <p className="whitespace-nowrap text-sm text-customPinkHigh customMd:text-base">
-                  {Number(110000).toLocaleString('fa-IR')} تومان
+                  {Number(110000).toLocaleString()} {t('Toman')}
                </p>
             </div>
          </Link>
