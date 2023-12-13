@@ -42,6 +42,9 @@ function Newest() {
             <ProductCard discount />
             <ProductCard isLiked />
             <ProductCard />
+            <ProductCard discount />
+            <ProductCard isLiked />
+            <ProductCard />
          </div>
 
          <Link href="/" className="mt-8 block customMd:hidden">

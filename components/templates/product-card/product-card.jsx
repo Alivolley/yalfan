@@ -18,7 +18,7 @@ function ProductCard({ isLiked = false, discount = false }) {
    const t = useTranslations('home');
 
    return (
-      <ProductCardStyle href="/" className="w-[162px] shrink-0 rounded-10 bg-white p-2 customMd:flex-1">
+      <ProductCardStyle href="/" className="w-[162px] shrink-0 rounded-10 bg-white p-2 customMd:w-[250px]">
          <div
             className={`relative mb-5 flex h-[140px] items-center justify-center rounded-xl customMd:h-[230px] ${
                discount ? 'bg-[#FCF7F7]' : 'bg-[#F5F8FC]'
@@ -54,17 +54,19 @@ function ProductCard({ isLiked = false, discount = false }) {
          <Link href="/">
             <div className="flex items-center justify-between gap-1">
                <p className="h-5 overflow-hidden text-sm font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box] customMd:text-base">
-                  کیف دیبا دیبا
+                  کیف دیبا
                </p>
-               <p className="whitespace-nowrap text-10 text-[#7E95B0] line-through customMd:text-xs">
-                  {Number(128000).toLocaleString()} {t('Toman')}
-               </p>
+               {discount && (
+                  <p className="whitespace-nowrap text-10 text-[#7E95B0] line-through customMd:text-xs">
+                     {Number(128000).toLocaleString()} {t('Toman')}
+                  </p>
+               )}
             </div>
             <div className="mt-3 flex items-center justify-between gap-1">
                <p className="h-5 overflow-hidden text-xs text-[#7E95B0] [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box] customMd:text-sm">
                   ساک دستی
                </p>
-               <p className="whitespace-nowrap text-sm text-customPinkHigh customMd:text-base">
+               <p className="whitespace-nowrap text-[13px] text-customPinkHigh customMd:text-base">
                   {Number(110000).toLocaleString()} {t('Toman')}
                </p>
             </div>
