@@ -1,3 +1,5 @@
+// Components
+import Footer from '../footer/footer';
 import Header from '../header/header';
 import RtlProvider from '../rtlProvider/rtlProvider';
 
@@ -7,6 +9,7 @@ function PagesLayout({ children, dir, language }) {
          <RtlProvider isRtl={language !== 'en'}>
             <Header language={language} />
             <main>{children}</main>
+            <Footer language={language} />
          </RtlProvider>
       </div>
    );

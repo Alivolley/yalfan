@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
@@ -28,7 +29,6 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 // Assets
-import Link from 'next/link';
 import fakeLogo from '@/assets/images/fake-logo.png';
 import searchIcon from '@/assets/icons/search-icon.svg';
 import categoriesIcon from '@/assets/icons/menu-categories-icon.svg';
