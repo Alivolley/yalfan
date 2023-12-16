@@ -24,9 +24,11 @@ import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlin
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+
+// hooks
+import useOnClickOutside from '@/hooks/useOnclickOutside';
 
 // Assets
 import fakeLogo from '@/assets/images/fake-logo.png';
@@ -35,12 +37,13 @@ import categoriesIcon from '@/assets/icons/menu-categories-icon.svg';
 import discountIcon from '@/assets/icons/discount-icon.svg';
 import callIcon from '@/assets/icons/call-icon.svg';
 
-// hooks
-import useOnClickOutside from '@/hooks/useOnclickOutside';
+// Components
+import MobileMenu from '../mobile-menu/mobile-menu';
 
 function Header({ language }) {
    const [showLanguageSelector, setShowLanguageSelector] = useState(false);
    const [showLanguageDropDown, setShowLanguageDropDown] = useState(false);
+   const [showMobileMenu, setShowMobileMenu] = useState(false);
    const languageDropDownRef = useRef();
 
    const t = useTranslations('header');
@@ -70,7 +73,7 @@ function Header({ language }) {
       <header className="sticky top-0 z-10 bg-white px-8 pt-5 customMd:px-16 customMd:pt-10">
          <div className="flex items-center justify-between border-solid border-borderColor pb-6 customMd:border-b">
             <div className="flex items-center gap-2 customMd:gap-11">
-               <IconButton className="!p-0 customMd:!hidden">
+               <IconButton className="!p-0 customMd:!hidden" onClick={() => setShowMobileMenu(true)}>
                   <MenuOutlinedIcon />
                </IconButton>
                <div className="flex items-center gap-2 customMd:gap-3">
@@ -89,6 +92,10 @@ function Header({ language }) {
                         placeholder={t('search')}
                         className="customLg:w-[300px]"
                         color="customPink"
+                        sx={{
+                           bgcolor: '#F5F8FC',
+                           borderRadius: '10px',
+                        }}
                         {...register('searchInput', {
                            required: {
                               value: true,
@@ -164,7 +171,6 @@ function Header({ language }) {
                         border: '1px solid #E4EAF0',
                      }}
                      color="white"
-                     // onClick={() => setShowSearch(true)}
                   >
                      <ShoppingBasketOutlinedIcon />
                   </Fab>
@@ -241,17 +247,17 @@ function Header({ language }) {
                   )}
                </Popper>
 
-               <div className="me-3 h-10 w-[1px] bg-[#E4EAF0]" />
+               <div className="me-2 h-10 w-[1px] bg-[#E4EAF0]" />
                <Fab
                   sx={{
-                     width: '44px',
-                     height: '44px',
+                     width: '38px',
+                     height: '38px',
                      borderRadius: '8px',
                      color: '#D14F4D',
                   }}
                   color="customPinkLow"
                >
-                  <PersonOutlineOutlinedIcon />
+                  <ShoppingBasketOutlinedIcon />
                </Fab>
             </div>
          </div>
@@ -295,6 +301,7 @@ function Header({ language }) {
                </a>
             </div>
          </div>
+         <MobileMenu open={showMobileMenu} onClose={() => setShowMobileMenu(false)} locale={router.locale} />
       </header>
    );
 }
