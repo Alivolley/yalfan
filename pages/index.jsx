@@ -9,7 +9,7 @@ import OffersBanner from '@/components/pages/home/offers-banner/offers-banner';
 
 export default function Home() {
    return (
-      <main>
+      <div>
          <Banner />
          <Categories />
          <OffersBanner />
@@ -17,7 +17,7 @@ export default function Home() {
          <Newest />
          <BoldProducts />
          <BestSellers />
-      </main>
+      </div>
    );
 }
 
