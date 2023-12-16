@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -39,17 +39,27 @@ import callIcon from '@/assets/icons/call-icon.svg';
 
 // Components
 import MobileMenu from '../mobile-menu/mobile-menu';
+import SearchSection from '@/components/templates/search-section/search-section';
 
 function Header({ language }) {
    const [showLanguageSelector, setShowLanguageSelector] = useState(false);
    const [showLanguageDropDown, setShowLanguageDropDown] = useState(false);
    const [showMobileMenu, setShowMobileMenu] = useState(false);
+   const [showSearchSection, setShowSearchSection] = useState(false);
    const languageDropDownRef = useRef();
 
    const t = useTranslations('header');
    const router = useRouter();
    const { pathname, asPath, query } = router;
    const [languageRef] = useOnClickOutside(() => setShowLanguageSelector(false));
+
+   useEffect(() => {
+      if (showSearchSection) {
+         document.body.style.overflow = 'hidden';
+      } else {
+         document.body.style.overflow = 'visible';
+      }
+   }, [showSearchSection]);
 
    const { register, handleSubmit } = useForm({
       defaultValues: {
@@ -86,7 +96,7 @@ function Header({ language }) {
                   </div>
                </div>
 
-               <form onSubmit={handleSubmit(formSubmit)} className="hidden customMd:block">
+               <form onSubmit={handleSubmit(formSubmit)} className="relative hidden customMd:block">
                   <FormControl variant="outlined">
                      <TextField
                         placeholder={t('search')}
@@ -96,6 +106,7 @@ function Header({ language }) {
                            bgcolor: '#F5F8FC',
                            borderRadius: '10px',
                         }}
+                        autoComplete="off"
                         {...register('searchInput', {
                            required: {
                               value: true,
@@ -109,9 +120,20 @@ function Header({ language }) {
                                  </IconButton>
                               </InputAdornment>
                            ),
+                           onFocus: () => setShowSearchSection(true),
                         }}
                      />
                   </FormControl>
+                  <div
+                     className={`absolute start-0 top-full z-[1] w-[500px] rounded-2xl bg-white p-5 transition-all duration-300 customLg:w-[800px] ${
+                        showSearchSection ? 'visible opacity-100' : 'invisible opacity-0'
+                     }`}
+                     style={{
+                        boxShadow: '0px 11px 44px 23px #7E8AAB14',
+                     }}
+                  >
+                     <SearchSection onClose={() => setShowSearchSection(false)} />
+                  </div>
                </form>
             </div>
 
@@ -301,6 +323,11 @@ function Header({ language }) {
                </a>
             </div>
          </div>
+         <div
+            className={`fixed inset-x-0 bottom-0 top-[185px] bg-[#0000004D] transition-all duration-300 ${
+               showSearchSection ? 'visible opacity-100' : 'invisible opacity-0'
+            }`}
+         />
          <MobileMenu open={showMobileMenu} onClose={() => setShowMobileMenu(false)} locale={router.locale} />
       </header>
    );
