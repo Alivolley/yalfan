@@ -88,7 +88,7 @@ function Header({ language }) {
                <IconButton className="!p-0 customMd:!hidden" onClick={() => setShowMobileMenu(true)}>
                   <MenuOutlinedIcon />
                </IconButton>
-               <div className="flex items-center gap-2 customMd:gap-3">
+               <Link href="/" className="flex items-center gap-2 customMd:gap-3">
                   <div className="w-[40px] shrink-0 customMd:h-16 customMd:w-[73px]">
                      <Image src={fakeLogo} alt="logo" className="h-full w-full" />
                   </div>
@@ -96,7 +96,7 @@ function Header({ language }) {
                      <p className="text-sm font-bold customMd:text-xl">{t('yalfan')}</p>
                      <p className="text-[8px] text-[#58595B] customMd:text-xs">{t('online shop for bags')}</p>
                   </div>
-               </div>
+               </Link>
 
                <form onSubmit={handleSubmit(formSubmit)} className="relative hidden customMd:block">
                   <FormControl variant="outlined">

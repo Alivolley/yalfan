@@ -38,5 +38,27 @@
         "developers": "Designed and developed by",
         "neuro code": "neuro code",
         "team": "team"
+    },
+    "categoryDetail": {
+        "Sorting": "Sorting",
+        "All": "All",
+        "Newest": "Newest",
+        "Cheapest": "Cheapest",
+        "Most expensive": "Most expensive",
+        "Best sellers": "Best sellers",
+        "Products count": "Products count",
+        "Filter products": "Filter products",
+        "To register the filters": "To register the filters, press the apply filter buttons",
+        "Filters applied": "Filters applied",
+        "Remove all filters": "Remove all filters",
+        "Price range (toman)": "Price range (toman)",
+        "From": "From",
+        "To": "To",
+        "Unit": "$",
+        "Has discount": "Has discount",
+        "Display available products": "Display available products",
+        "Filter results": "Filter results",
+        "Apply filter": "Apply filter",
+        "Product": "Product"
     }
 }

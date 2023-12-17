@@ -38,5 +38,27 @@
         "developers": "تم تصميمه وتطويره بواسطة فريق",
         "neuro code": "neuro code",
         "team": "."
+    },
+    "categoryDetail": {
+        "Sorting": "فرز",
+        "All": "الجميع",
+        "Newest": "الأحدث",
+        "Cheapest": "أرخص",
+        "Most expensive": "الأغلى",
+        "Best sellers": "الأكثر مبيعا",
+        "Products count": "عدد المنتجات",
+        "Filter products": "تصفية المنتجات",
+        "To register the filters": "لتسجيل المرشحات، اضغط على أزرار تطبيق المرشح",
+        "Filters applied": "تم تطبيق المرشحات",
+        "Remove all filters": "قم بإزالة جميع المرشحات",
+        "Price range (toman)": "نطاق السعر (تومان)",
+        "From": "من",
+        "To": "الی",
+        "Unit": "$",
+        "Has discount": "لديه خصم",
+        "Display available products": "عرض المنتجات المتوفرة",
+        "Filter results": "تصفية النتائج",
+        "Apply filter": "تطبيق الفلتر",
+        "Product": "منتج"
     }
 }

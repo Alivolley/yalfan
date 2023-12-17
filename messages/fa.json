@@ -38,5 +38,27 @@
         "developers": "طراحی و توسعه این سایت توسط تیم",
         "neuro code": "نورو کد",
         "team": "میباشد"
+    },
+    "categoryDetail": {
+        "Sorting": "مرتب سازی",
+        "All": "همه",
+        "Newest": "جدیدترین",
+        "Cheapest": "ارزان ترین",
+        "Most expensive": "گران ترین",
+        "Best sellers": "پرفروش ترین",
+        "Products count": "تعداد کالاها",
+        "Filter products": "فیلتر محصولات",
+        "To register the filters": "برای ثبت فیلتر ها دکمه های اعمال فیلتر را بزنید",
+        "Filters applied": "فیلتر های اعمال شده",
+        "Remove all filters": "حذف همه فیلتر ها",
+        "Price range (toman)": "محدوده قیمت (تومان)",
+        "From": "از",
+        "To": "تا",
+        "Unit": "تومان",
+        "Has discount": "تخفیف دار",
+        "Display available products": "نمایش محصولات موجود",
+        "Filter results": "نتیجه فیلترها",
+        "Apply filter": "اعمال فیلتر",
+        "Product": "محصول"
     }
 }

@@ -11,6 +11,9 @@ const getDesignTokens = (mode, direction, language) => ({
       customPink: {
          main: '#FFA3A1',
       },
+      customPink2: {
+         main: '#FFD7D6',
+      },
       customPinkLow: {
          main: '#FFEEED',
       },
@@ -19,6 +22,9 @@ const getDesignTokens = (mode, direction, language) => ({
       },
       white: {
          main: '#ffffff',
+      },
+      black: {
+         main: '#000000',
       },
       borderColor: {
          main: '#BDCEDE',
@@ -52,9 +58,6 @@ const getDesignTokens = (mode, direction, language) => ({
                   boxShadow: '0px 4px 7px 0px #C2C2C236',
                },
                textTransform: 'none',
-               // ...((props.ownerState.color === 'customOrange' || props.ownerState.color === 'customOrange2') && {
-               //    color: 'white',
-               // }),
             }),
          },
       },
@@ -63,9 +66,8 @@ const getDesignTokens = (mode, direction, language) => ({
          styleOverrides: {
             root: props => ({
                ...(props['aria-selected'] &&
-                  props.customOrange &&
-                  {
-                     // color: '#FB9B40 !important',
+                  props.custompinkhigh && {
+                     color: '#B1302E !important',
                   }),
             }),
          },
