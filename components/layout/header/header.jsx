@@ -82,7 +82,12 @@ function Header({ language }) {
    };
 
    return (
-      <header className="sticky top-0 z-10 bg-white px-8 pt-5 customMd:px-16 customMd:pt-10">
+      <header
+         className="sticky top-0 z-10 bg-white px-8 pt-5 customMd:px-16 customMd:pt-10"
+         style={{
+            boxShadow: '0px 11px 44px 23px #7e8aaba',
+         }}
+      >
          <div className="flex items-center justify-between border-solid border-borderColor pb-6 customMd:border-b">
             <div className="flex items-center gap-2 customMd:gap-11">
                <IconButton className="!p-0 customMd:!hidden" onClick={() => setShowMobileMenu(true)}>
@@ -292,7 +297,11 @@ function Header({ language }) {
                   size="small"
                   color="textColor"
                   startIcon={<Image src={categoriesIcon} alt="categories" />}
-                  endIcon={<KeyboardArrowDownIcon />}
+                  endIcon={
+                     <KeyboardArrowDownIcon
+                        className={`!transition-all !duration-300 ${showCategoriesMenu ? 'rotate-180' : ''}`}
+                     />
+                  }
                   onMouseEnter={() => setShowCategoriesMenu(true)}
                   onMouseLeave={() => setShowCategoriesMenu(false)}
                >
@@ -330,7 +339,7 @@ function Header({ language }) {
             </div>
 
             <div className="flex items-center gap-4 text-xs text-textColor customLg:gap-6">
-               <Link href="/" className="hidden lg:block">
+               <Link href="/faqs" className="hidden lg:block">
                   {t('any question')}
                </Link>
                <Link href="/">{t('about us')}</Link>

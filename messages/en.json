@@ -60,5 +60,10 @@
         "Filter results": "Filter results",
         "Apply filter": "Apply filter",
         "Product": "Product"
+    },
+    "faqs": {
+        "Didn't find your answer": "Didn't find your answer ?",
+        "Contact Our backup team": "Contact Our backup team",
+        "Contact us": "Contact us"
     }
 }

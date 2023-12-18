@@ -18,14 +18,17 @@ function ProductCard({ isLiked = false, discount = false }) {
    const t = useTranslations('home');
 
    return (
-      <ProductCardStyle href="/" className="w-[162px] shrink-0 rounded-10 bg-white p-2 customMd:w-[250px]">
+      <ProductCardStyle
+         href="/productDetail/کیف"
+         className="w-[162px] shrink-0 rounded-10 bg-white p-2 customMd:w-[250px]"
+      >
          <div
             className={`relative mb-5 flex h-[140px] items-center justify-center rounded-xl customMd:h-[230px] ${
                discount ? 'bg-[#FCF7F7]' : 'bg-[#F5F8FC]'
             }`}
             id="categoryImage"
          >
-            <Link href="/" className="h-full w-full">
+            <Link href="/productDetail/کیف" className="h-full w-full">
                <Image src={productSample} alt="product" className="h-full w-full object-contain" />
             </Link>
             <div className="absolute end-1.5 top-1.5 customMd:end-2 customMd:top-2">
@@ -51,7 +54,7 @@ function ProductCard({ isLiked = false, discount = false }) {
                4.1 <StarIcon fontSize="small" color="customGold" />
             </p>
          </div>
-         <Link href="/">
+         <Link href="/productDetail/کیف">
             <div className="flex items-center justify-between gap-1">
                <p className="h-5 overflow-hidden text-sm font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box] customMd:text-base">
                   کیف دیبا

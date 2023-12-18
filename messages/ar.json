@@ -60,5 +60,10 @@
         "Filter results": "تصفية النتائج",
         "Apply filter": "تطبيق الفلتر",
         "Product": "منتج"
+    },
+    "faqs": {
+        "Didn't find your answer": "لم تجد إجابتك",
+        "Contact Our backup team": "اتصل بفريق النسخ الاحتياطي لدينا",
+        "Contact us": "اتصل بنا"
     }
 }

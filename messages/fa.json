@@ -60,5 +60,10 @@
         "Filter results": "نتیجه فیلترها",
         "Apply filter": "اعمال فیلتر",
         "Product": "محصول"
+    },
+    "faqs": {
+        "Didn't find your answer": "پاسخ سوال خود را پیدا نکردید ؟",
+        "Contact Our backup team": "با پشتیبانی ما ارتباط بگیرید",
+        "Contact us": "تماس با ما"
     }
 }
