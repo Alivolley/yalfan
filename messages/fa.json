@@ -24,7 +24,7 @@
         "Show all": "مشاهده همه",
         "see all products": "دیدن همه محصولات",
         "newest": "جدید ترین ها",
-        "Toman": "تومان",
+        "unit": "تومان",
         "Best sellers": "پرفروش ترین محصولات"
     },
     "footer": {
@@ -51,7 +51,7 @@
         "To register the filters": "برای ثبت فیلتر ها دکمه های اعمال فیلتر را بزنید",
         "Filters applied": "فیلتر های اعمال شده",
         "Remove all filters": "حذف همه فیلتر ها",
-        "Price range (toman)": "محدوده قیمت (تومان)",
+        "Price range (unit)": "محدوده قیمت (تومان)",
         "From": "از",
         "To": "تا",
         "Unit": "تومان",
@@ -59,7 +59,8 @@
         "Display available products": "نمایش محصولات موجود",
         "Filter results": "نتیجه فیلترها",
         "Apply filter": "اعمال فیلتر",
-        "Product": "محصول"
+        "Product": "محصول",
+        "Filter based on": "فیلتر بر اساس"
     },
     "faqs": {
         "Didn't find your answer": "پاسخ سوال خود را پیدا نکردید ؟",

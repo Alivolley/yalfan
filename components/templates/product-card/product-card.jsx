@@ -61,7 +61,7 @@ function ProductCard({ isLiked = false, discount = false }) {
                </p>
                {discount && (
                   <p className="whitespace-nowrap text-10 text-[#7E95B0] line-through customMd:text-xs">
-                     {Number(128000).toLocaleString()} {t('Toman')}
+                     {Number(128000).toLocaleString()} {t('unit')}
                   </p>
                )}
             </div>
@@ -70,7 +70,7 @@ function ProductCard({ isLiked = false, discount = false }) {
                   ساک دستی
                </p>
                <p className="whitespace-nowrap text-[13px] text-customPinkHigh customMd:text-base">
-                  {Number(110000).toLocaleString()} {t('Toman')}
+                  {Number(110000).toLocaleString()} {t('unit')}
                </p>
             </div>
          </Link>

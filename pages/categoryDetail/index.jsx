@@ -20,12 +20,14 @@ import filterIconBold from '@/assets/icons/filterIcon-bold.svg';
 // Components
 import ProductCard from '@/components/templates/product-card/product-card';
 import FilterMobile from '@/components/pages/categoryDetail/filter-mobile/filter-mobile';
+import SortingMobile from '@/components/pages/categoryDetail/sorting-mobile/sorting-mobile';
 
 function CategoryDetail() {
    const [priceRange, setPriceRange] = useState([0, 128000]);
    const [showAvailableProducts, setShowAvailableProducts] = useState(false);
    const [showDiscountProducts, setShowDiscountProducts] = useState(false);
    const [showFilterMobile, setShowFilterMobile] = useState(false);
+   const [showSortingMobile, setShowSortingMobile] = useState(false);
    const [sortingValue, setSortingValue] = useState('all');
    const t = useTranslations('categoryDetail');
 
@@ -88,7 +90,7 @@ function CategoryDetail() {
                </div>
 
                <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
-                  <p>{t('Price range (toman)')}</p>
+                  <p>{t('Price range (unit)')}</p>
                   <div className="my-5 flex items-center gap-4">
                      <p>{t('From')}</p>
                      <TextField
@@ -216,6 +218,7 @@ function CategoryDetail() {
                      startIcon={<FilterListIcon color="customPinkHigh" fontSize="small" />}
                      className="!text-xs !font-bold customSm:!text-sm"
                      color="black"
+                     onClick={() => setShowSortingMobile(true)}
                   >
                      {t('Cheapest')}
                   </Button>
@@ -231,6 +234,8 @@ function CategoryDetail() {
                   showDiscountProducts={showDiscountProducts}
                   setShowDiscountProducts={setShowDiscountProducts}
                />
+
+               <SortingMobile open={showSortingMobile} onClose={() => setShowSortingMobile(false)} />
 
                <div className="mt-6">
                   <div className="flex flex-wrap justify-center gap-4 customMd:gap-8">

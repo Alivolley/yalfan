@@ -24,7 +24,7 @@
         "Show all": "عرض الكل",
         "see all products": "رؤية جميع المنتجات",
         "newest": "الأحدث",
-        "Toman": "تومان",
+        "unit": "$",
         "Best sellers": "المنتجات الأكثر مبيعا"
     },
     "footer": {
@@ -51,7 +51,7 @@
         "To register the filters": "لتسجيل المرشحات، اضغط على أزرار تطبيق المرشح",
         "Filters applied": "تم تطبيق المرشحات",
         "Remove all filters": "قم بإزالة جميع المرشحات",
-        "Price range (toman)": "نطاق السعر (تومان)",
+        "Price range (unit)": "نطاق السعر ($)",
         "From": "من",
         "To": "الی",
         "Unit": "$",
@@ -59,7 +59,8 @@
         "Display available products": "عرض المنتجات المتوفرة",
         "Filter results": "تصفية النتائج",
         "Apply filter": "تطبيق الفلتر",
-        "Product": "منتج"
+        "Product": "منتج",
+        "Filter based on": "تصفية على أساس"
     },
     "faqs": {
         "Didn't find your answer": "لم تجد إجابتك",

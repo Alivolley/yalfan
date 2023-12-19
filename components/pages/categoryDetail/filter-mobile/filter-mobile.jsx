@@ -48,9 +48,15 @@ function FilterMobile({
    };
 
    return (
-      <Drawer anchor="left" open={open} onClose={onClose} dir={router.locale === 'en' ? 'ltr' : 'rtl'}>
+      <Drawer
+         anchor="bottom"
+         open={open}
+         onClose={onClose}
+         dir={router.locale === 'en' ? 'ltr' : 'rtl'}
+         transitionDuration={500}
+      >
          <div
-            className={`bg-white p-5 ${
+            className={`max-h-[500px] bg-white p-5 ${
                router.locale === 'en' ? 'font-poppins' : router.locale === 'fa' ? 'font-dana' : 'font-rubik'
             }`}
          >
@@ -96,7 +102,7 @@ function FilterMobile({
             </div>
 
             <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
-               <p>{t('Price range (toman)')}</p>
+               <p>{t('Price range (unit)')}</p>
                <div className="my-5 flex items-center gap-4">
                   <p>{t('From')}</p>
                   <TextField

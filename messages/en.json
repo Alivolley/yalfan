@@ -24,7 +24,7 @@
         "Show all": "Show all",
         "see all products": "See all products",
         "newest": "newest",
-        "Toman": "Toman",
+        "unit": "$",
         "Best sellers": "Best sellers"
     },
     "footer": {
@@ -51,7 +51,7 @@
         "To register the filters": "To register the filters, press the apply filter buttons",
         "Filters applied": "Filters applied",
         "Remove all filters": "Remove all filters",
-        "Price range (toman)": "Price range (toman)",
+        "Price range (unit)": "Price range ($)",
         "From": "From",
         "To": "To",
         "Unit": "$",
@@ -59,7 +59,8 @@
         "Display available products": "Display available products",
         "Filter results": "Filter results",
         "Apply filter": "Apply filter",
-        "Product": "Product"
+        "Product": "Product",
+        "Filter based on": "Filter based on"
     },
     "faqs": {
         "Didn't find your answer": "Didn't find your answer ?",
