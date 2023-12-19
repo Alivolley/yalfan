@@ -64,6 +64,29 @@
     "faqs": {
         "Didn't find your answer": "پاسخ سوال خود را پیدا نکردید ؟",
         "Contact Our backup team": "با پشتیبانی ما ارتباط بگیرید",
-        "Contact us": "تماس با ما"
+        "Contact us": "تماس با ما",
+        "how": "چگونه می توانم سفارش خود را بازگردانم؟",
+        "when": "نحوه ارسال به چه صورت است و چه مقدار زمان میبرد به دست ما برسد؟",
+        "lorem": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی"
+    },
+    "contactUs": {
+        "Send message to yalfan team": "ارسال پیفام به تیم یلفان",
+        "Send us the text of your message": "متن پیام و اطلاعات خود را برای ما ارسال کنید تا در کوتاه ترین زمان پاسخگو باشیم",
+        "Name": "نام",
+        "Enter your name": "نام خود را وارد کنید",
+        "Family name": "نام خانوادگی",
+        "Enter your family name": "نام خانوادگی خود را وارد کنید",
+        "Email": "ایمیل",
+        "Enter your email": "ایمیل خود را وارد کنید",
+        "Phone number": "شماره تماس",
+        "Enter your phone number": "شماره تماس خود را وارد کنید",
+        "Text": "متن",
+        "Enter your text": "متن پیغام خود را وارد کنید",
+        "Send message": "ارسال پیام",
+        "We are waiting for your warm voice": "منتظر صدای گرمتان هستیم",
+        "You can contact us through the following ways": "از طریق راه های زیر میتوانید با ما در ارتباط باشید",
+        "Social medias": "شبکه های اجتماعی",
+        "Address": "Address",
+        "address": "همدان همدان شهرک شیر خورشید پلاک ۴"
     }
 }

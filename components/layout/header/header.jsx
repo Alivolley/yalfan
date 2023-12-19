@@ -343,7 +343,7 @@ function Header({ language }) {
                   {t('any question')}
                </Link>
                <Link href="/">{t('about us')}</Link>
-               <Link href="/">{t('contact us')}</Link>
+               <Link href="/contactUs">{t('contact us')}</Link>
                <a href="tel:02152687469" className="flex items-center gap-1">
                   <p>021-52687469</p>
                   <Image src={callIcon} alt="phone number" />

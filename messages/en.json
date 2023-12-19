@@ -64,6 +64,29 @@
     "faqs": {
         "Didn't find your answer": "Didn't find your answer ?",
         "Contact Our backup team": "Contact Our backup team",
-        "Contact us": "Contact us"
+        "Contact us": "Contact us",
+        "how": "How can I return my order?",
+        "when": "What is the shipping method and how long does it take to reach us?",
+        "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+    },
+    "contactUs": {
+        "Send message to yalfan team": "Send message to yalfan team",
+        "Send us the text of your message": "Send us the text of your message and information so that we can respond as soon as possible",
+        "Name": "Name",
+        "Enter your name": "Enter your name",
+        "Family name": "Family name",
+        "Enter your family name": "Enter family your name",
+        "Email": "Email",
+        "Enter your email": "Enter your email",
+        "Phone number": "Phone number",
+        "Enter your phone number": "Enter your phone number",
+        "Text": "Text",
+        "Enter your text": "Enter your text",
+        "Send message": "Send message",
+        "We are waiting for your warm voice": "We are waiting for your warm voice",
+        "You can contact us through the following ways": "You can contact us through the following ways",
+        "Social medias": "social medias",
+        "Address": "Address",
+        "address": "Iran hamedan hamedan city shir khorshid"
     }
 }
