@@ -4,7 +4,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 // MUI
-import { Button, Slider, Switch, Tab, Tabs, TextField } from '@mui/material';
+import {
+   Accordion,
+   AccordionDetails,
+   AccordionSummary,
+   Button,
+   Fab,
+   Pagination,
+   Slider,
+   Switch,
+   Tab,
+   Tabs,
+   TextField,
+} from '@mui/material';
 
 // Icons
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -12,6 +24,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
 import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // Assets
 import filterIcon from '@/assets/icons/filter-icon.svg';
@@ -87,6 +100,76 @@ function CategoryDetail() {
                   >
                      کیف دستی
                   </Button>
+               </div>
+
+               <div className="mt-10">
+                  <Accordion
+                     sx={{
+                        boxShadow: 'none',
+                     }}
+                  >
+                     <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        sx={{
+                           padding: '0 !important',
+                        }}
+                     >
+                        <div>
+                           {t('Categories')}
+
+                           <div className="mt-3 flex flex-wrap gap-3">
+                              <Button
+                                 color="customPinkLow"
+                                 size="small"
+                                 variant="contained"
+                                 className="!text-xs !text-[#B1302E]"
+                                 endIcon={<CloseIcon />}
+                              >
+                                 کیف دستی
+                              </Button>
+                              <Button
+                                 color="customPinkLow"
+                                 size="small"
+                                 variant="contained"
+                                 className="!text-xs !text-[#B1302E]"
+                                 endIcon={<CloseIcon />}
+                              >
+                                 کیف دستی
+                              </Button>
+                           </div>
+                        </div>
+                     </AccordionSummary>
+                     <AccordionDetails>
+                        <div className="-mt-4 flex flex-col items-start">
+                           <Button color="textColor" size="small">
+                              کیف
+                           </Button>
+                           <Button color="textColor" size="small">
+                              کیف
+                           </Button>
+                           <Button color="textColor" size="small">
+                              کیف
+                           </Button>
+                           <Button color="textColor" size="small">
+                              کیف
+                           </Button>
+                           <Button color="textColor" size="small">
+                              کیف
+                           </Button>
+                        </div>
+                     </AccordionDetails>
+                  </Accordion>
+               </div>
+
+               <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
+                  <p>{t('Color')} :</p>
+                  <div className="mt-5 flex flex-wrap items-center gap-6">
+                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-red-500" />
+                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-yellow-500" />
+                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-purple-500" />
+                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-green-500" />
+                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-blue-500" />
+                  </div>
                </div>
 
                <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
@@ -252,6 +335,18 @@ function CategoryDetail() {
                      <ProductCard discount />
                      <ProductCard />
                   </div>
+               </div>
+
+               <div className="mt-10 flex items-center justify-center">
+                  <Pagination
+                     count={10}
+                     color="customPinkHigh"
+                     sx={{
+                        '& .Mui-selected': {
+                           color: 'white !important',
+                        },
+                     }}
+                  />
                </div>
             </div>
          </div>

@@ -60,7 +60,9 @@
         "Filter results": "تصفية النتائج",
         "Apply filter": "تطبيق الفلتر",
         "Product": "منتج",
-        "Filter based on": "تصفية على أساس"
+        "Filter based on": "تصفية على أساس",
+        "Categories": "الفئات على أساس",
+        "Color": "لون"
     },
     "faqs": {
         "Didn't find your answer": "لم تجد إجابتك",

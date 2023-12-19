@@ -60,7 +60,9 @@
         "Filter results": "نتیجه فیلترها",
         "Apply filter": "اعمال فیلتر",
         "Product": "محصول",
-        "Filter based on": "فیلتر بر اساس"
+        "Filter based on": "فیلتر بر اساس",
+        "Categories": "دسته بندی ها",
+        "Color": "رنگ"
     },
     "faqs": {
         "Didn't find your answer": "پاسخ سوال خود را پیدا نکردید ؟",
