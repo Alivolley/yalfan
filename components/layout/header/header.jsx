@@ -190,7 +190,7 @@ function Header({ language }) {
                   {language}
                </Fab>
 
-               <Link href="/">
+               <Link href="/cart">
                   <Fab
                      sx={{
                         width: '60px',
@@ -277,17 +277,19 @@ function Header({ language }) {
                </Popper>
 
                <div className="me-2 h-10 w-[1px] bg-[#E4EAF0]" />
-               <Fab
-                  sx={{
-                     width: '38px',
-                     height: '38px',
-                     borderRadius: '8px',
-                     color: '#D14F4D',
-                  }}
-                  color="customPinkLow"
-               >
-                  <ShoppingBasketOutlinedIcon />
-               </Fab>
+               <Link href="/cart">
+                  <Fab
+                     sx={{
+                        width: '38px',
+                        height: '38px',
+                        borderRadius: '8px',
+                        color: '#D14F4D',
+                     }}
+                     color="customPinkLow"
+                  >
+                     <ShoppingBasketOutlinedIcon />
+                  </Fab>
+               </Link>
             </div>
          </div>
 
