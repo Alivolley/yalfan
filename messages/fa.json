@@ -91,5 +91,18 @@
         "Social medias": "شبکه های اجتماعی",
         "Address": "Address",
         "address": "همدان همدان شهرک شیر خورشید پلاک ۴"
+    },
+    "login": {
+        "yalfan": "یـلفـــان",
+        "online shop for bags": "فروشگاه آنلاین کیف و ساک",
+        "signup": "ورود / ثبت نام",
+        "To login yalfan enter your number first": "برای ورود به یلفان ابتدا شماره خود را وارد کنید",
+        "Login with one time password": "ورود با رمز یکبار مصرف",
+        "Please enter the verification code sent to": "لطفا کد تایید ارسال شده به شماره",
+        "number": "را وارد کنید",
+        "Edit phone number": "ویرایش شماره",
+        "Until resend the code": "تا ارسال مجدد کد",
+        "Resend the code": "دریافت مجدد کد تایید",
+        "Proceed": "ادامه"
     }
 }

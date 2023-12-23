@@ -205,7 +205,7 @@ function Header({ language }) {
                   </Fab>
                </Link>
 
-               <Link href="/">
+               <Link href="/login">
                   <Button
                      variant="contained"
                      color="customPink"

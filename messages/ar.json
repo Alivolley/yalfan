@@ -91,5 +91,18 @@
         "Social medias": "وسائل الاعلام الاجتماعية",
         "Address": "Address",
         "address": "ایران همدان همدان شهرک شیر خورشید پلاک ۴"
+    },
+    "login": {
+        "yalfan": "یـلفـــان",
+        "online shop for bags": "متجر على الانترنت للحقائب",
+        "signup": "تسجيل الدخول / اشتراك",
+        "To login yalfan enter your number first": "لتسجيل الدخول یلفان أدخل رقمك أولا",
+        "Login with one time password": "تسجيل الدخول بكلمة مرور لمرة واحدة",
+        "Please enter the verification code sent to": "الرجاء إدخال رمز التحقق المرسل إلى",
+        "number": ".",
+        "Edit phone number": "تحرير رقم",
+        "Until resend the code": "حتى إعادة إرسال الرمز",
+        "Resend the code": "احصل على رمز التأكيد مرة أخرى",
+        "Proceed": "يتابع"
     }
 }

@@ -91,5 +91,18 @@
         "Social medias": "social medias",
         "Address": "Address",
         "address": "Iran hamedan hamedan city shir khorshid"
+    },
+    "login": {
+        "yalfan": "Yalfan",
+        "online shop for bags": "Online shop for bags",
+        "signup": "Login / SignUp",
+        "To login yalfan enter your number first": "To login to yalfan enter your number first",
+        "Login with one time password": "Login with one time password",
+        "Please enter the verification code sent to": "Please enter the verification code sent to",
+        "number": ".",
+        "Edit phone number": "Edit phone number",
+        "Until resend the code": "Until resend the code",
+        "Resend the code": "Resend the code",
+        "Proceed": "Proceed"
     }
 }
