@@ -9,7 +9,11 @@ function PagesLayout({ children, dir, language }) {
    const router = useRouter();
 
    return (
-      <div dir={dir} className={language === 'en' ? 'font-poppins' : language === 'fa' ? 'font-dana' : 'font-rubik'}>
+      <div
+         dir={dir}
+         className={language === 'en' ? 'font-poppins' : language === 'fa' ? 'font-dana' : 'font-rubik'}
+         id="pageLayout"
+      >
          <RtlProvider isRtl={language !== 'en'}>
             {router.pathname !== '/login' && <Header language={language} />}
             <main>{children}</main>

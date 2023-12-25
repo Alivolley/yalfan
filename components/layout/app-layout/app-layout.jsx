@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 
@@ -19,6 +21,10 @@ function AppLayout({ children }) {
    const router = useRouter();
    const direction = router.locale === 'en' ? 'ltr' : 'rtl';
    const themeConfig = createTheme(getDesignTokens('light', direction, router.locale));
+
+   useEffect(() => {
+      Cookies.set('NEXT_LOCALE', router.locale, { expires: 365 });
+   }, [router.locale]);
 
    return (
       <Provider store={store}>

@@ -4,17 +4,22 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
-   baseURL: 'https://test-restaurant.iran.liara.run/api/',
+   baseURL: 'http://109.122.199.96:8000/api/',
 });
 
 axiosInstance.interceptors.request.use(
    config => {
-      const accessToken = Cookies.get('madar_accessToken');
+      const accessToken = Cookies.get('yalfan_accessToken');
+      const lang = Cookies.get('NEXT_LOCALE');
 
       if (accessToken) {
          // eslint-disable-next-line no-param-reassign
          config.headers.Authorization = `Bearer ${accessToken}`;
       }
+
+      // eslint-disable-next-line no-param-reassign
+      config.params = { ...config.params, lang };
+
       return config;
    },
    error => Promise.reject(error)
@@ -23,10 +28,12 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
    res => {
       if (res?.data?.detail) {
+         const lang = Cookies.get('NEXT_LOCALE');
+
          toast.success(res?.data?.detail, {
             style: {
-               direction: 'rtl',
-               fontFamily: 'rokhRegular',
+               direction: lang === 'en' ? 'ltr' : 'rtl',
+               fontFamily: lang === 'en' ? 'poppins' : lang === 'fa' ? 'dana' : lang === 'ar' ? 'rubik' : 'poppins',
                lineHeight: '25px',
             },
             theme: 'colored',
@@ -38,7 +45,7 @@ axiosInstance.interceptors.response.use(
    },
    async error => {
       console.log(error);
-      const refreshToken = Cookies.get('madar_refreshToken');
+      const refreshToken = Cookies.get('yalfan_refreshToken');
       const originalReq = error.config;
 
       if (error?.response?.status === 401) {
@@ -47,25 +54,27 @@ axiosInstance.interceptors.response.use(
             const res = await axiosInstance.post('accounts/token/refresh/', {
                refresh: refreshToken,
             });
-            Cookies.set('madar_accessToken', res.data.access, { expires: 7 });
+            Cookies.set('yalfan_accessToken', res.data.access, { expires: 7 });
             originalReq.headers.Authorization = `Bearer ${res.data.access}`;
             return axiosInstance(originalReq);
          }
-         Cookies.remove('madar_accessToken');
-         Cookies.remove('madar_refreshToken');
-         Cookies.remove('madar_isLogin');
+         Cookies.remove('yalfan_accessToken');
+         Cookies.remove('yalfan_refreshToken');
+         Cookies.remove('yalfan_isLogin');
          location.href = '/login';
       } else if (error?.response?.status === 410) {
          // refresh expired
-         Cookies.remove('madar_accessToken');
-         Cookies.remove('madar_refreshToken');
-         Cookies.remove('madar_isLogin');
+         Cookies.remove('yalfan_accessToken');
+         Cookies.remove('yalfan_refreshToken');
+         Cookies.remove('yalfan_isLogin');
          location.href = '/login';
       } else if (error?.response?.data?.detail) {
+         const lang = Cookies.get('NEXT_LOCALE');
+
          toast.error(error?.response?.data?.detail, {
             style: {
-               direction: 'rtl',
-               fontFamily: 'rokhRegular',
+               direction: lang === 'en' ? 'ltr' : 'rtl',
+               fontFamily: lang === 'en' ? 'poppins' : lang === 'fa' ? 'dana' : lang === 'ar' ? 'rubik' : 'poppins',
                lineHeight: '25px',
             },
             theme: 'colored',

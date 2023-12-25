@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -21,23 +22,37 @@ import fakeLogo from '@/assets/images/fake-logo.png';
 // Components
 import CountdownLogin from '@/components/templates/countdown-Login/countdown-Login';
 
+// Apis
+import useVerificationCode from '@/apis/login/useVerificationCode';
+
 function Login() {
    const [loginStep, setLoginStep] = useState(1);
    const [phoneNumber, setPhoneNumber] = useState('');
    const [codeValue, setCodeValue] = useState('');
    const [disableResend, setDisableResend] = useState(true);
+   const router = useRouter();
+
+   const { trigger: verificationCodeTrigger, isMutating: verificationCodeIsMutating } = useVerificationCode();
 
    const t = useTranslations('login');
 
    const sendPhoneNumber = () => {
       if (phoneNumber) {
-         setLoginStep(2);
-         console.log(phoneNumber);
+         // setLoginStep(2);
+         // console.log(phoneNumber);
+         verificationCodeTrigger(
+            { phone_number: phoneNumber },
+            {
+               onSuccess: () => {
+                  router.back();
+               },
+            }
+         );
       }
    };
 
    const sendCode = () => {
-      console.log(codeValue);
+      // console.log(codeValue);
    };
 
    return (
@@ -140,11 +155,12 @@ function Login() {
 
                <LoadingButton
                   fullWidth
-                  className="!rounded-10 !py-3.5 !text-white"
+                  className={`!rounded-10 !py-3.5 ${verificationCodeIsMutating ? '' : '!text-white'}`}
                   variant="contained"
                   size="large"
                   color="customPink"
                   onClick={loginStep === 1 ? sendPhoneNumber : sendCode}
+                  loading={verificationCodeIsMutating}
                >
                   {t('Proceed')}
                </LoadingButton>
