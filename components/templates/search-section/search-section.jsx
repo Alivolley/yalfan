@@ -17,7 +17,7 @@ import starIcon from '@/assets/icons/top-search.svg';
 import ProductCard from '../product-card/product-card';
 import useOnClickOutside from '@/hooks/useOnclickOutside';
 
-function SearchSection({ onClose }) {
+function SearchSection({ onClose, isUserLogin }) {
    const t = useTranslations('header');
    const router = useRouter();
    const productsRef = useRef();
@@ -34,25 +34,27 @@ function SearchSection({ onClose }) {
 
    return (
       <div ref={sectionRef}>
-         <div className="mb-4 border-b border-solid border-[#E4EAF0] pb-4">
-            <p className="flex items-center gap-2 text-sm">
-               <HistoryIcon color="customPinkHigh" />
-               {t('your last search')}
-            </p>
-            <div className="mt-6 flex items-center gap-4">
-               <Link href="/" className="rounded-2xl bg-[#F5F8FC] px-4 py-2 text-sm text-[#626E94]">
-                  کیف دستی
-               </Link>
-               <Link href="/" className="rounded-2xl bg-[#F5F8FC] px-4 py-2 text-sm text-[#626E94]">
-                  کیف دستی
-               </Link>
-               <Link href="/" className="rounded-2xl bg-[#F5F8FC] px-4 py-2 text-sm text-[#626E94]">
-                  کیف دستی
-               </Link>
+         {isUserLogin && (
+            <div className="mb-4">
+               <p className="flex items-center gap-2 text-sm">
+                  <HistoryIcon color="customPinkHigh" />
+                  {t('your last search')}
+               </p>
+               <div className="mt-6 flex items-center gap-4">
+                  <Link href="/" className="rounded-2xl bg-[#F5F8FC] px-4 py-2 text-sm text-[#626E94]">
+                     کیف دستی
+                  </Link>
+                  <Link href="/" className="rounded-2xl bg-[#F5F8FC] px-4 py-2 text-sm text-[#626E94]">
+                     کیف دستی
+                  </Link>
+                  <Link href="/" className="rounded-2xl bg-[#F5F8FC] px-4 py-2 text-sm text-[#626E94]">
+                     کیف دستی
+                  </Link>
+               </div>
             </div>
-         </div>
+         )}
 
-         <div className="">
+         <div className="border-t border-solid border-[#E4EAF0] pt-4">
             <p className="flex items-center gap-2 text-sm">
                <Image src={starIcon} alt="favorite" />
                {t('popular search')}

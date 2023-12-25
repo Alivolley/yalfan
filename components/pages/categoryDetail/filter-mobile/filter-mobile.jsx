@@ -67,11 +67,7 @@ function FilterMobile({
          dir={router.locale === 'en' ? 'ltr' : 'rtl'}
          transitionDuration={500}
       >
-         <div
-            className={`max-h-[500px] bg-white p-5 ${
-               router.locale === 'en' ? 'font-poppins' : router.locale === 'fa' ? 'font-dana' : 'font-rubik'
-            }`}
-         >
+         <div className="max-h-[500px] bg-white p-5">
             <div className="flex items-start justify-between">
                <div>
                   <p className="flex items-center gap-1 text-base font-bold text-[#385E8A]">

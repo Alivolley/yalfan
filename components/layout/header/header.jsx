@@ -26,6 +26,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 
 // hooks
 import useOnClickOutside from '@/hooks/useOnclickOutside';
@@ -41,19 +42,27 @@ import callIcon from '@/assets/icons/call-icon.svg';
 import MobileMenu from '../mobile-menu/mobile-menu';
 import SearchSection from '@/components/templates/search-section/search-section';
 import HeaderCategories from '@/components/templates/header-categories/header-categories';
+import ProfileDropdown from '@/components/templates/profile-dropdown/profile-dropdown';
 
-function Header({ language }) {
+function Header({ language, isLogin }) {
    const [showLanguageSelector, setShowLanguageSelector] = useState(false);
    const [showLanguageDropDown, setShowLanguageDropDown] = useState(false);
    const [showMobileMenu, setShowMobileMenu] = useState(false);
    const [showSearchSection, setShowSearchSection] = useState(false);
    const [showCategoriesMenu, setShowCategoriesMenu] = useState(false);
+   const [isUserLogin, setIsUserLogin] = useState();
+   const [profileDropDown, setProfileDropDown] = useState(false);
    const languageDropDownRef = useRef();
+   const profileRef = useRef();
 
    const t = useTranslations('header');
    const router = useRouter();
    const { pathname, asPath, query } = router;
    const [languageRef] = useOnClickOutside(() => setShowLanguageSelector(false));
+
+   useEffect(() => {
+      setIsUserLogin(isLogin);
+   }, [isLogin]);
 
    useEffect(() => {
       if (showSearchSection) {
@@ -139,7 +148,7 @@ function Header({ language }) {
                         boxShadow: '0px 11px 44px 23px #7E8AAB14',
                      }}
                   >
-                     <SearchSection onClose={() => setShowSearchSection(false)} />
+                     <SearchSection onClose={() => setShowSearchSection(false)} isUserLogin={isUserLogin} />
                   </div>
                </form>
             </div>
@@ -205,16 +214,47 @@ function Header({ language }) {
                   </Fab>
                </Link>
 
-               <Link href="/login">
-                  <Button
-                     variant="contained"
-                     color="customPink"
-                     className="!h-full !rounded-10 !text-white"
-                     size="large"
-                  >
-                     {t('signup')}
-                  </Button>
-               </Link>
+               {!isUserLogin ? (
+                  <Link href="/login">
+                     <Button
+                        variant="contained"
+                        color="customPink"
+                        className="!h-full !rounded-10 !text-white"
+                        size="large"
+                     >
+                        {t('signup')}
+                     </Button>
+                  </Link>
+               ) : (
+                  <>
+                     <div>
+                        <Button
+                           variant="contained"
+                           color="customPink"
+                           className="!h-full !rounded-10 !text-white"
+                           size="large"
+                           ref={profileRef}
+                           onMouseEnter={() => setProfileDropDown(true)}
+                           onMouseLeave={() => setProfileDropDown(false)}
+                        >
+                           <p className="flex items-center gap-1">
+                              <PersonOutlinedIcon fontSize="small" />
+                              {/* {userInfo?.name || userInfo?.phone_number} */}
+                              علی ازقندی
+                              <KeyboardArrowDownIcon
+                                 className={`!transition-all !duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
+                              />
+                           </p>
+                        </Button>
+                     </div>
+
+                     <ProfileDropdown
+                        profileDropDown={profileDropDown}
+                        setProfileDropDown={setProfileDropDown}
+                        profileRef={profileRef}
+                     />
+                  </>
+               )}
             </div>
 
             <div className="flex items-center customMd:hidden">
@@ -277,19 +317,35 @@ function Header({ language }) {
                </Popper>
 
                <div className="me-2 h-10 w-[1px] bg-[#E4EAF0]" />
-               <Link href="/cart">
-                  <Fab
-                     sx={{
-                        width: '38px',
-                        height: '38px',
-                        borderRadius: '8px',
-                        color: '#D14F4D',
-                     }}
-                     color="customPinkLow"
-                  >
-                     <ShoppingBasketOutlinedIcon />
-                  </Fab>
-               </Link>
+               {!isUserLogin ? (
+                  <Link href="/login">
+                     <Fab
+                        sx={{
+                           width: '38px',
+                           height: '38px',
+                           borderRadius: '8px',
+                           color: '#D14F4D',
+                        }}
+                        color="customPinkLow"
+                     >
+                        <PersonOutlinedIcon />
+                     </Fab>
+                  </Link>
+               ) : (
+                  <Link href="/cart">
+                     <Fab
+                        sx={{
+                           width: '38px',
+                           height: '38px',
+                           borderRadius: '8px',
+                           color: '#D14F4D',
+                        }}
+                        color="customPinkLow"
+                     >
+                        <ShoppingBasketOutlinedIcon />
+                     </Fab>
+                  </Link>
+               )}
             </div>
          </div>
 
@@ -357,7 +413,12 @@ function Header({ language }) {
                showSearchSection || showCategoriesMenu ? 'visible opacity-100' : 'invisible opacity-0'
             }`}
          />
-         <MobileMenu open={showMobileMenu} onClose={() => setShowMobileMenu(false)} locale={router.locale} />
+         <MobileMenu
+            open={showMobileMenu}
+            onClose={() => setShowMobileMenu(false)}
+            locale={router.locale}
+            isUserLogin={isUserLogin}
+         />
       </header>
    );
 }

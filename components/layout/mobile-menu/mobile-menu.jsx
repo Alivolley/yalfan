@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
@@ -17,6 +18,12 @@ import {
 } from '@mui/material';
 
 // Icons
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+
+// Icons
 import CloseIcon from '@mui/icons-material/Close';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
@@ -29,7 +36,11 @@ import discountIcon from '@/assets/icons/discount-icon.svg';
 import fakeLogo from '@/assets/images/fake-logo.png';
 import searchIcon from '@/assets/icons/search-icon.svg';
 
-function MobileMenu({ open, onClose, locale }) {
+// Components
+import LogoutModal from '@/components/templates/logout-modal/logout-modal';
+
+function MobileMenu({ open, onClose, locale, isUserLogin }) {
+   const [showLogoutModal, setShowLogoutModal] = useState(false);
    const t = useTranslations('header');
 
    const { register, handleSubmit } = useForm({
@@ -46,9 +57,7 @@ function MobileMenu({ open, onClose, locale }) {
 
    return (
       <Drawer anchor="left" open={open} onClose={onClose} dir={locale === 'en' ? 'ltr' : 'rtl'}>
-         <div
-            className={`w-[300px] ${locale === 'en' ? 'font-poppins' : locale === 'fa' ? 'font-dana' : 'font-rubik'}`}
-         >
+         <div className="w-[300px]">
             <div className="flex items-start justify-between">
                <div className="flex items-center gap-2 p-5 customMd:gap-3">
                   <div className="w-[40px] shrink-0 customMd:h-16 customMd:w-[73px]">
@@ -92,11 +101,53 @@ function MobileMenu({ open, onClose, locale }) {
                      </FormControl>
                   </form>
 
-                  <Link href="/" className="mb-2 mt-5 block">
-                     <Button startIcon={<PersonOutlineOutlinedIcon />} color="textColor">
-                        {t('Profile')}
-                     </Button>
-                  </Link>
+                  <br />
+                  {isUserLogin && (
+                     <Accordion sx={{ boxShadow: 'none' }}>
+                        <AccordionSummary
+                           expandIcon={<ExpandMoreIcon color="customBlue" />}
+                           sx={{ padding: '0 !important' }}
+                        >
+                           <div className="flex items-center gap-2 text-sm text-customBlue">
+                              <PersonOutlineOutlinedIcon />
+                              {t('Profile')}
+                           </div>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                           <div className="-mt-4 flex flex-col items-start">
+                              <Link
+                                 href="/profile/information"
+                                 className="flex w-full items-center gap-1 border-b border-solid border-[#E4EAF0] p-3 text-sm text-textColor"
+                              >
+                                 <PersonOutlinedIcon fontSize="small" />
+                                 اطلاعات حساب
+                              </Link>
+                              <Link
+                                 href="/profile/address"
+                                 className="flex w-full items-center gap-1 border-b border-solid border-[#E4EAF0] p-3 text-sm text-textColor"
+                              >
+                                 <LocationOnOutlinedIcon fontSize="small" />
+                                 آدرس های من
+                              </Link>
+                              <Link
+                                 href="/profile/orders"
+                                 className="flex w-full items-center gap-1 border-b border-solid border-[#E4EAF0] p-3 text-sm text-textColor"
+                              >
+                                 <AccountBalanceWalletOutlinedIcon fontSize="small" />
+                                 پیگیری سفارش ها
+                              </Link>
+                              <Button
+                                 className="!p-3 text-sm"
+                                 color="textColor"
+                                 startIcon={<LogoutOutlinedIcon fontSize="small" className="rotate-180" />}
+                                 onClick={() => setShowLogoutModal(true)}
+                              >
+                                 خروج از حساب کاربری
+                              </Button>
+                           </div>
+                        </AccordionDetails>
+                     </Accordion>
+                  )}
 
                   <div>
                      <Accordion
@@ -214,6 +265,13 @@ function MobileMenu({ open, onClose, locale }) {
                      </Accordion>
 
                      <div className="mt-1 flex flex-col items-start gap-3 text-sm">
+                        {!isUserLogin && (
+                           <Link href="/login">
+                              <Button size="small" color="customBlue" startIcon={<PersonOutlineOutlinedIcon />}>
+                                 {t('signup')}
+                              </Button>
+                           </Link>
+                        )}
                         <Link href="/">
                            <Button size="small" color="customBlue" startIcon={<WhatshotIcon />}>
                               {t('top sellers')}
@@ -244,6 +302,7 @@ function MobileMenu({ open, onClose, locale }) {
                </div>
             </div>
          </div>
+         <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} />
       </Drawer>
    );
 }

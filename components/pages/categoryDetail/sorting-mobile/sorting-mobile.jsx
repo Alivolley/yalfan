@@ -19,11 +19,7 @@ function SortingMobile({ open, onClose }) {
          dir={router.locale === 'en' ? 'ltr' : 'rtl'}
          transitionDuration={500}
       >
-         <div
-            className={`max-h-[500px] bg-white p-5 ${
-               router.locale === 'en' ? 'font-poppins' : router.locale === 'fa' ? 'font-dana' : 'font-rubik'
-            }`}
-         >
+         <div className="max-h-[500px] bg-white p-5">
             <div className="flex items-center justify-between">
                <div>
                   <p className="text-base font-bold text-[#385E8A]">{t('Filter based on')}</p>

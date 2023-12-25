@@ -80,6 +80,22 @@ const getDesignTokens = (mode, direction, language) => ({
             },
          },
       },
+
+      MuiDialog: {
+         styleOverrides: {
+            root: {
+               fontFamily: language === 'en' ? 'poppins' : language === 'fa' ? 'dana' : 'rubik',
+            },
+         },
+      },
+
+      MuiDrawer: {
+         styleOverrides: {
+            root: {
+               fontFamily: language === 'en' ? 'poppins' : language === 'fa' ? 'dana' : 'rubik',
+            },
+         },
+      },
    },
 });
 
