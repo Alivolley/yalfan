@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
-   baseURL: 'http://109.122.199.96:8000/api/',
+   baseURL: 'https://109.122.199.96:8000/api/',
 });
 
 axiosInstance.interceptors.request.use(
