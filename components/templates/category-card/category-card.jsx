@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 // MUI
 import { Button } from '@mui/material';
@@ -10,10 +9,9 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import EastIcon from '@mui/icons-material/East';
 
 // Assets
-import productSample from '@/assets/images/product-sample.png';
 import CategoryCardStyle from './category-card.style';
 
-function CategoryCard() {
+function CategoryCard({ detail }) {
    const router = useRouter();
 
    return (
@@ -22,7 +20,7 @@ function CategoryCard() {
             className="mb-5 flex h-[100px] items-center justify-center rounded-xl bg-[#F5F8FC] customMd:h-[180px]"
             id="categoryImage"
          >
-            <Image src={productSample} alt="product" className="h-full w-full object-contain" />
+            <img src={detail?.cover} alt="product" className="h-full w-full object-contain" />
          </div>
 
          <Button

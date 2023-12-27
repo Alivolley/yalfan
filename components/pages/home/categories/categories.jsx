@@ -15,7 +15,7 @@ import Link from 'next/link';
 import categoriesIcon from '@/assets/icons/categories-icon.svg';
 import CategoryCard from '@/components/templates/category-card/category-card';
 
-function Categories() {
+function Categories({ detail }) {
    const t = useTranslations('home');
    const router = useRouter();
 
@@ -37,11 +37,7 @@ function Categories() {
          </div>
 
          <div className="mt-10 flex items-center gap-5 overflow-auto pb-5">
-            <CategoryCard />
-            <CategoryCard />
-            <CategoryCard />
-            <CategoryCard />
-            <CategoryCard />
+            {detail?.map((item, index) => index < 5 && <CategoryCard key={item?.id} detail={item} />)}
          </div>
 
          <Link href="/" className="mt-8 block customMd:hidden">
