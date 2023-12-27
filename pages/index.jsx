@@ -13,7 +13,6 @@ import OffersBanner from '@/components/pages/home/offers-banner/offers-banner';
 
 export default function Home({ categoryList, error }) {
    const router = useRouter();
-   console.log(categoryList);
 
    if (error) {
       toast.error(error, {

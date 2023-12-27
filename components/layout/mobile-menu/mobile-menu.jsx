@@ -39,9 +39,14 @@ import searchIcon from '@/assets/icons/search-icon.svg';
 // Components
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
+// Apis
+import useCategories from '@/apis/categories/useCategories';
+
 function MobileMenu({ open, onClose, locale, isUserLogin }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
    const t = useTranslations('header');
+
+   const { data: categoryList } = useCategories();
 
    const { register, handleSubmit } = useForm({
       defaultValues: {
@@ -168,98 +173,49 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                         </AccordionSummary>
                         <AccordionDetails>
                            <div className="ms-[-15px] border-s border-solid border-[#B1302E] pe-8 ps-3">
-                              <Accordion
-                                 sx={{
-                                    boxShadow: 'none',
-                                 }}
-                              >
-                                 <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon color="customBlue" />}
-                                    sx={{
-                                       padding: '0 !important',
-                                    }}
-                                 >
-                                    <div className="flex items-center gap-2 text-sm text-customBlue">
-                                       <div className="h-1 w-1 rounded-full bg-customBlue" />
-                                       {t('categories')}
-                                    </div>
-                                 </AccordionSummary>
-                                 <AccordionDetails>
-                                    <p>
-                                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-                                       lacus ex, sit amet blandit leo lobortis eget.
-                                    </p>
-                                 </AccordionDetails>
-                              </Accordion>
-                              <Accordion
-                                 sx={{
-                                    boxShadow: 'none',
-                                 }}
-                              >
-                                 <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon color="customBlue" />}
-                                    sx={{
-                                       padding: '0 !important',
-                                    }}
-                                 >
-                                    <div className="flex items-center gap-2 text-sm text-customBlue">
-                                       <div className="h-1 w-1 rounded-full bg-customBlue" />
-                                       {t('categories')}
-                                    </div>
-                                 </AccordionSummary>
-                                 <AccordionDetails>
-                                    <p>
-                                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-                                       lacus ex, sit amet blandit leo lobortis eget.
-                                    </p>
-                                 </AccordionDetails>
-                              </Accordion>
-                              <Accordion
-                                 sx={{
-                                    boxShadow: 'none',
-                                 }}
-                              >
-                                 <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon color="customBlue" />}
-                                    sx={{
-                                       padding: '0 !important',
-                                    }}
-                                 >
-                                    <div className="flex items-center gap-2 text-sm text-customBlue">
-                                       <div className="h-1 w-1 rounded-full bg-customBlue" />
-                                       {t('categories')}
-                                    </div>
-                                 </AccordionSummary>
-                                 <AccordionDetails>
-                                    <p>
-                                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-                                       lacus ex, sit amet blandit leo lobortis eget.
-                                    </p>
-                                 </AccordionDetails>
-                              </Accordion>
-                              <Accordion
-                                 sx={{
-                                    boxShadow: 'none',
-                                 }}
-                              >
-                                 <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon color="customBlue" />}
-                                    sx={{
-                                       padding: '0 !important',
-                                    }}
-                                 >
-                                    <div className="flex items-center gap-2 text-sm text-customBlue">
-                                       <div className="h-1 w-1 rounded-full bg-customBlue" />
-                                       {t('categories')}
-                                    </div>
-                                 </AccordionSummary>
-                                 <AccordionDetails>
-                                    <p>
-                                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-                                       lacus ex, sit amet blandit leo lobortis eget.
-                                    </p>
-                                 </AccordionDetails>
-                              </Accordion>
+                              {categoryList?.map(
+                                 item =>
+                                    item?.sub_cats && (
+                                       <Accordion key={item.id} sx={{ boxShadow: 'none' }}>
+                                          <AccordionSummary
+                                             expandIcon={<ExpandMoreIcon color="customBlue" />}
+                                             sx={{ padding: '0 !important' }}
+                                          >
+                                             <div className="flex items-center gap-2 text-sm text-customBlue">
+                                                <div className="h-1 w-1 rounded-full bg-customBlue" />
+                                                {item?.title}
+                                             </div>
+                                          </AccordionSummary>
+                                          <AccordionDetails>
+                                             {item?.sub_cats?.map(innerItem => (
+                                                <Link
+                                                   href="/"
+                                                   className="flex items-center gap-2 py-2 text-sm text-customBlue"
+                                                   id="arrowIcon"
+                                                   key={innerItem.id}
+                                                >
+                                                   <div className="h-1 w-1 rounded-full bg-customBlue" />
+                                                   {innerItem?.title}
+                                                </Link>
+                                             ))}
+                                          </AccordionDetails>
+                                       </Accordion>
+                                    )
+                              )}
+                              {categoryList?.map(
+                                 item =>
+                                    !item?.sub_cats && (
+                                       <Link
+                                          href="/"
+                                          className="flex items-center gap-2 py-2 text-sm text-customBlue"
+                                          id="arrowIcon"
+                                          key={item.id}
+                                       >
+                                          <div className="h-1 w-1 rounded-full bg-customBlue" />
+                                          {item?.title}
+                                       </Link>
+                                    )
+                              )}
                            </div>
                         </AccordionDetails>
                      </Accordion>

@@ -15,22 +15,24 @@ function CategoryCard({ detail }) {
    const router = useRouter();
 
    return (
-      <CategoryCardStyle href="/" className="w-[162px] shrink-0 rounded-2xl bg-white p-5 customMd:flex-1">
+      <CategoryCardStyle
+         href={`/productDetail/${detail?.title}`}
+         className="w-[162px] shrink-0 rounded-2xl bg-white p-5 customMd:flex-1"
+      >
          <div
             className="mb-5 flex h-[100px] items-center justify-center rounded-xl bg-[#F5F8FC] customMd:h-[180px]"
             id="categoryImage"
          >
-            <img src={detail?.cover} alt="product" className="h-full w-full object-contain" />
+            <img src={detail?.cover} alt={detail?.title} className="h-full w-full object-contain" />
          </div>
 
          <Button
-            className="!whitespace-nowrap"
             fullWidth
             color="customBlue"
             startIcon={<LocalMallOutlinedIcon />}
             endIcon={router.locale === 'en' ? <EastIcon /> : <KeyboardBackspaceIcon />}
          >
-            کیف دستی
+            {detail?.title}
          </Button>
       </CategoryCardStyle>
    );

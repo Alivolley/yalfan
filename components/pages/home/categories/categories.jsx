@@ -15,7 +15,7 @@ import Link from 'next/link';
 import categoriesIcon from '@/assets/icons/categories-icon.svg';
 import CategoryCard from '@/components/templates/category-card/category-card';
 
-function Categories({ detail }) {
+function Categories({ detail = [] }) {
    const t = useTranslations('home');
    const router = useRouter();
 
@@ -36,7 +36,7 @@ function Categories({ detail }) {
             </Link>
          </div>
 
-         <div className="mt-10 flex items-center gap-5 overflow-auto pb-5">
+         <div className="mt-10 flex items-stretch gap-5 overflow-auto pb-5">
             {detail?.map((item, index) => index < 5 && <CategoryCard key={item?.id} detail={item} />)}
          </div>
 
