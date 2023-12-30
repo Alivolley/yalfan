@@ -64,7 +64,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
       <Drawer anchor="left" open={open} onClose={onClose} dir={locale === 'en' ? 'ltr' : 'rtl'}>
          <div className="w-[300px]">
             <div className="flex items-start justify-between">
-               <div className="flex items-center gap-2 p-5 customMd:gap-3">
+               <Link href="/" className="flex items-center gap-2 p-5 customMd:gap-3">
                   <div className="w-[40px] shrink-0 customMd:h-16 customMd:w-[73px]">
                      <Image src={fakeLogo} alt="logo" className="h-full w-full" />
                   </div>
@@ -72,7 +72,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                      <p className="text-sm font-bold customMd:text-xl">{t('yalfan')}</p>
                      <p className="text-[8px] text-[#58595B] customMd:text-xs">{t('online shop for bags')}</p>
                   </div>
-               </div>
+               </Link>
                <IconButton onClick={onClose}>
                   <CloseIcon />
                </IconButton>
@@ -155,16 +155,10 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                   )}
 
                   <div>
-                     <Accordion
-                        sx={{
-                           boxShadow: 'none',
-                        }}
-                     >
+                     <Accordion sx={{ boxShadow: 'none' }}>
                         <AccordionSummary
                            expandIcon={<ExpandMoreIcon color="customBlue" />}
-                           sx={{
-                              padding: '0 !important',
-                           }}
+                           sx={{ padding: '0 !important' }}
                         >
                            <div className="flex items-center gap-2 text-sm text-customBlue">
                               <Image src={categoriesIcon} alt="categories" />
@@ -189,7 +183,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                                           <AccordionDetails>
                                              {item?.sub_cats?.map(innerItem => (
                                                 <Link
-                                                   href="/"
+                                                   href={`/categoryDetail?category=${innerItem?.title}`}
                                                    className="flex items-center gap-2 py-2 text-sm text-customBlue"
                                                    id="arrowIcon"
                                                    key={innerItem.id}
@@ -206,7 +200,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                                  item =>
                                     !item?.sub_cats && (
                                        <Link
-                                          href="/"
+                                          href={`/categoryDetail?category=${item?.title}`}
                                           className="flex items-center gap-2 py-2 text-sm text-customBlue"
                                           id="arrowIcon"
                                           key={item.id}
@@ -228,17 +222,17 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                               </Button>
                            </Link>
                         )}
-                        <Link href="/">
+                        <Link href="/categoryDetail?ordering=sales">
                            <Button size="small" color="customBlue" startIcon={<WhatshotIcon />}>
                               {t('top sellers')}
                            </Button>
                         </Link>
-                        <Link href="/">
+                        <Link href="/categoryDetail?ordering=created">
                            <Button size="small" color="customBlue" startIcon={<FiberNewIcon />}>
                               {t('newest')}
                            </Button>
                         </Link>
-                        <Link href="/">
+                        <Link href="/categoryDetail?has_discount=true">
                            <Button
                               size="small"
                               color="customBlue"

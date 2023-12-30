@@ -23,7 +23,7 @@ function HeaderCategories({ language }) {
                item =>
                   item?.sub_cats && (
                      <Link
-                        href="/"
+                        href={`/categoryDetail?category=${item?.title}`}
                         className="flex items-center justify-between gap-2 py-3.5 transition-all duration-150 hover:text-[#FF817E]"
                         id="arrowIcon"
                         key={item.id}
@@ -43,7 +43,7 @@ function HeaderCategories({ language }) {
                item =>
                   !item?.sub_cats && (
                      <Link
-                        href="/"
+                        href={`/categoryDetail?category=${item?.title}`}
                         className="py-3.5 transition-all duration-150 hover:text-[#FF817E]"
                         id="arrowIcon"
                         key={item.id}
@@ -58,7 +58,10 @@ function HeaderCategories({ language }) {
             <Grid container>
                {activeCategory?.sub_cats?.map(item => (
                   <Grid item xs={6} key={item.id}>
-                     <Link href="/" className="block py-3 transition-all duration-200 hover:text-[#FF817E]">
+                     <Link
+                        href={`/categoryDetail?category=${item?.title}`}
+                        className="block py-3 transition-all duration-200 hover:text-[#FF817E]"
+                     >
                         {item.title}
                      </Link>
                   </Grid>

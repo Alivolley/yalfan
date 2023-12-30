@@ -65,6 +65,10 @@ function Header({ language, isLogin }) {
    }, [isLogin]);
 
    useEffect(() => {
+      setShowMobileMenu(false);
+   }, [pathname, query]);
+
+   useEffect(() => {
       if (showSearchSection) {
          document.body.style.overflow = 'hidden';
       } else {
@@ -379,17 +383,17 @@ function Header({ language, isLogin }) {
                   <HeaderCategories language={language} />
                </div>
 
-               <Link href="/">
+               <Link href="/categoryDetail?ordering=sales">
                   <Button size="small" color="textColor" startIcon={<WhatshotIcon />}>
                      {t('top sellers')}
                   </Button>
                </Link>
-               <Link href="/">
+               <Link href="/categoryDetail?ordering=created">
                   <Button size="small" color="textColor" startIcon={<FiberNewIcon />}>
                      {t('newest')}
                   </Button>
                </Link>
-               <Link href="/">
+               <Link href="/categoryDetail?has_discount=true">
                   <Button size="small" color="textColor" startIcon={<Image src={discountIcon} alt="discount" />}>
                      {t('discounts and offers')}
                   </Button>
