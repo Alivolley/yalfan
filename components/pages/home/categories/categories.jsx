@@ -26,7 +26,7 @@ function Categories({ detail = [] }) {
                <Image src={categoriesIcon} alt="categories" />
                <p className="text-lg font-bold">{t('Categories')}</p>
             </div>
-            <Link href="/" className="hidden customMd:block">
+            <Link href="/categoryDetail" className="hidden customMd:block">
                <Button
                   endIcon={router.locale === 'en' ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
                   color="textColor"
@@ -40,7 +40,7 @@ function Categories({ detail = [] }) {
             {detail?.map((item, index) => index < 5 && <CategoryCard key={item?.id} detail={item} />)}
          </div>
 
-         <Link href="/" className="mt-8 block customMd:hidden">
+         <Link href="/categoryDetail" className="mt-8 block customMd:hidden">
             <Button
                color="white"
                variant="contained"

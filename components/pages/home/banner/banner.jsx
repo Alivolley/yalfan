@@ -29,7 +29,7 @@ function Banner() {
                      </p>
                      <p className="mt-8 hidden leading-[30px] customMd:block">{t('lorem')}</p>
 
-                     <Link href="/" className="mt-11 hidden w-fit customMd:block">
+                     <Link href="/categoryDetail" className="mt-11 hidden w-fit customMd:block">
                         <Button
                            color="customPinkHigh"
                            variant="contained"
@@ -58,7 +58,7 @@ function Banner() {
          <div className="px-8 customMd:px-16">
             <p className="mt-8 text-sm leading-[30px] text-[#62768C] customMd:hidden">{t('lorem')}</p>
 
-            <Link href="/" className="mt-10 block customMd:hidden">
+            <Link href="/categoryDetail" className="mt-10 block customMd:hidden">
                <Button
                   fullWidth
                   color="customPinkHigh"

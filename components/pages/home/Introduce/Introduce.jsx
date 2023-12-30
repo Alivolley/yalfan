@@ -46,7 +46,7 @@ function Introduce() {
                      {t('lorem')} {t('lorem')}
                   </p>
                   <div className="flex flex-col-reverse gap-5 customMd:flex-row customMd:items-center customMd:gap-8">
-                     <Link href="/">
+                     <Link href="/categoryDetail">
                         <Button
                            color="customPinkLow"
                            variant="contained"
@@ -57,7 +57,7 @@ function Introduce() {
                            {t('shop now')}
                         </Button>
                      </Link>
-                     <Link href="/" className="hidden customMd:block">
+                     <Link href="/categoryDetail" className="hidden customMd:block">
                         <Button
                            color="customPinkHigh"
                            className="!w-full !font-bold"
@@ -67,7 +67,7 @@ function Introduce() {
                            {t('see all products')}
                         </Button>
                      </Link>
-                     <Link href="/" className="block customMd:hidden">
+                     <Link href="/categoryDetail" className="block customMd:hidden">
                         <Button
                            color="customPinkHigh"
                            className="!w-full !rounded-10 !py-3"

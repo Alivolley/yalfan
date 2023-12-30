@@ -15,7 +15,7 @@ import Link from 'next/link';
 import categoriesIcon from '@/assets/icons/categories-icon.svg';
 import ProductCard from '@/components/templates/product-card/product-card';
 
-function Newest() {
+function Newest({ detail }) {
    const t = useTranslations('home');
    const router = useRouter();
 
@@ -26,7 +26,7 @@ function Newest() {
                <Image src={categoriesIcon} alt="categories" />
                <p className="text-lg font-bold text-textColor">{t('newest')}</p>
             </div>
-            <Link href="/" className="hidden customMd:block">
+            <Link href="/categoryDetail?ordering=created" className="hidden customMd:block">
                <Button
                   endIcon={router.locale === 'en' ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />}
                   color="textColor"
@@ -37,17 +37,12 @@ function Newest() {
          </div>
 
          <div className="mt-10 flex items-center gap-4 overflow-auto pb-5">
-            <ProductCard discount />
-            <ProductCard isLiked />
-            <ProductCard discount />
-            <ProductCard isLiked />
-            <ProductCard />
-            <ProductCard discount />
-            <ProductCard isLiked />
-            <ProductCard />
+            {detail?.result?.map(item => (
+               <ProductCard key={item.id} detail={item} />
+            ))}
          </div>
 
-         <Link href="/" className="mt-8 block customMd:hidden">
+         <Link href="/categoryDetail?ordering=created" className="mt-8 block customMd:hidden">
             <Button
                color="white"
                variant="contained"

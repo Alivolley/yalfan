@@ -11,7 +11,7 @@ import Categories from '@/components/pages/home/categories/categories';
 import Newest from '@/components/pages/home/newest/newest';
 import OffersBanner from '@/components/pages/home/offers-banner/offers-banner';
 
-export default function Home({ categoryList, error }) {
+export default function Home({ categoryList, error, newestList, bestSellersList }) {
    const router = useRouter();
 
    if (error) {
@@ -39,9 +39,9 @@ export default function Home({ categoryList, error }) {
          <Categories detail={categoryList} />
          <OffersBanner />
          <Introduce />
-         <Newest />
+         <Newest detail={newestList} />
          <BoldProducts />
-         <BestSellers />
+         <BestSellers detail={bestSellersList} />
       </div>
    );
 }
@@ -53,14 +53,27 @@ export async function getStaticProps(context) {
             lang: context.locale,
          },
       }).then(res => res.data);
-      // const foodPartyList = await axiosInstance('restaurant/foods/discounted/').then(res => res.data);
-      // const dailyMenuList = await axiosInstance('restaurant/today-menu/get_update_delete/').then(res => res.data);
-      // const lastComments = await axiosInstance('restaurant/comments/list_create/?last_five=true').then(res => res.data);
+
+      const newestList = await axios('https://yalfantest.pythonanywhere.com/api/store/products/list_create/', {
+         params: {
+            lang: context.locale,
+            ordering: 'created',
+         },
+      }).then(res => res.data);
+
+      const bestSellersList = await axios('https://yalfantest.pythonanywhere.com/api/store/products/list_create/', {
+         params: {
+            lang: context.locale,
+            ordering: 'sales',
+         },
+      }).then(res => res.data);
 
       return {
          props: {
             messages: (await import(`../messages/${context.locale}.json`)).default,
             categoryList,
+            newestList,
+            bestSellersList,
          },
          revalidate: 300,
       };

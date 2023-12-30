@@ -340,7 +340,15 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
                      color="black"
                      onClick={() => setShowSortingMobile(true)}
                   >
-                     {t('Cheapest')}
+                     {sortingValue === 'created'
+                        ? t('Newest')
+                        : sortingValue === 'price'
+                          ? t('Cheapest')
+                          : sortingValue === '-price'
+                            ? t('Most expensive')
+                            : sortingValue === 'sales'
+                              ? t('Best sellers')
+                              : t('All')}
                   </Button>
                </div>
 

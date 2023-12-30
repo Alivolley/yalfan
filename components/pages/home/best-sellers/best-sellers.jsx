@@ -17,7 +17,7 @@ import bestSellersPic from '@/assets/images/bestSellersTest.png';
 // Components
 import ProductCard from '@/components/templates/product-card/product-card';
 
-function BestSellers() {
+function BestSellers({ detail }) {
    const t = useTranslations('home');
    const router = useRouter();
 
@@ -42,7 +42,7 @@ function BestSellers() {
                   <Image src={bestSellersPic} alt="best sellers" className="h-full w-full" />
                </div>
 
-               <Link href="/" className="mt-8 hidden customMd:block">
+               <Link href="/categoryDetail?ordering=sales" className="mt-8 hidden customMd:block">
                   <Button
                      color="white"
                      variant="contained"
@@ -57,14 +57,9 @@ function BestSellers() {
             </div>
 
             <div className="mt-10 flex items-center gap-4 overflow-auto scroll-smooth pb-5" ref={productsRef}>
-               <ProductCard discount />
-               <ProductCard isLiked />
-               <ProductCard discount />
-               <ProductCard isLiked />
-               <ProductCard />
-               <ProductCard discount />
-               <ProductCard isLiked />
-               <ProductCard />
+               {detail?.result?.map(item => (
+                  <ProductCard key={item.id} detail={item} />
+               ))}
             </div>
             <div
                className={`absolute hidden customMd:block ${router.locale === 'en' ? 'start-[355px]' : 'end-[-20px]'}`}
@@ -95,7 +90,7 @@ function BestSellers() {
                </IconButton>
             </div>
          </div>
-         <Link href="/" className="customMd:hidden">
+         <Link href="/categoryDetail?ordering=sales" className="customMd:hidden">
             <Button
                color="white"
                variant="contained"

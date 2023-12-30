@@ -16,7 +16,7 @@ function CategoryCard({ detail }) {
 
    return (
       <CategoryCardStyle
-         href={`/productDetail/${detail?.title}`}
+         href={`/categoryDetail?category=${detail?.title}`}
          className="w-[162px] shrink-0 rounded-2xl bg-white p-5 customMd:flex-1"
       >
          <div
