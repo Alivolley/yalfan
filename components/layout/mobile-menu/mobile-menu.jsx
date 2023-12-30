@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
@@ -44,21 +45,29 @@ import useCategories from '@/apis/categories/useCategories';
 
 function MobileMenu({ open, onClose, locale, isUserLogin }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
+   const router = useRouter();
    const t = useTranslations('header');
 
    const { data: categoryList } = useCategories();
 
-   const { register, handleSubmit } = useForm({
+   const { register, handleSubmit, setValue } = useForm({
       defaultValues: {
          searchInput: '',
       },
    });
 
    const formSubmit = data => {
-      console.log(data);
-      // router.push(`/search?food_name=${data.searchInput}&page=1`);
-      // closeModalHandler();
+      router.push(`/search?productName=${data.searchInput}&page=1`);
+      onClose();
    };
+
+   useEffect(() => {
+      if (router.query?.productName) {
+         setValue('searchInput', router.query.productName);
+      } else {
+         setValue('searchInput', '');
+      }
+   }, [router.query]);
 
    return (
       <Drawer anchor="left" open={open} onClose={onClose} dir={locale === 'en' ? 'ltr' : 'rtl'}>

@@ -15,8 +15,6 @@ import ProductCardStyle from './product-card.style';
 function ProductCard({ isLiked = false, detail }) {
    const t = useTranslations('home');
 
-   // console.log(detail);
-
    return (
       <ProductCardStyle
          href={`/productDetail/${detail?.title}`}

@@ -85,16 +85,23 @@ function Header({ language, isLogin }) {
       }
    }, [showSearchSection]);
 
-   const { register, handleSubmit } = useForm({
+   const { register, handleSubmit, setValue } = useForm({
       defaultValues: {
          searchInput: '',
       },
    });
 
+   useEffect(() => {
+      if (router.query?.productName) {
+         setValue('searchInput', router.query.productName);
+      } else {
+         setValue('searchInput', '');
+      }
+   }, [router.query]);
+
    const formSubmit = data => {
-      console.log(data);
-      // router.push(`/search?food_name=${data.searchInput}&page=1`);
-      // closeModalHandler();
+      router.push(`/search?productName=${data.searchInput}&page=1`);
+      setShowSearchSection(false);
    };
 
    const changeLanguage = lang => {

@@ -415,8 +415,6 @@ export default CategoryDetail;
 export async function getServerSideProps(context) {
    const { query } = context;
 
-   console.log(query);
-
    try {
       const categoryList = await axios('https://yalfantest.pythonanywhere.com/api/store/categories/list_create/', {
          params: {
