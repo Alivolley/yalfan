@@ -7,16 +7,28 @@ import { Button, Drawer, IconButton } from '@mui/material';
 // Icons
 import CloseIcon from '@mui/icons-material/Close';
 
-function SortingMobile({ open, onClose }) {
-   const router = useRouter();
+function SortingMobile({ open, onClose, setSortingValue }) {
+   const { query, push, locale } = useRouter();
    const t = useTranslations('categoryDetail');
+
+   const changeSortHandler = newValue => {
+      setSortingValue(newValue);
+
+      push({
+         query: {
+            ...query,
+            ordering: newValue,
+         },
+      });
+      onClose();
+   };
 
    return (
       <Drawer
          anchor="bottom"
          open={open}
          onClose={onClose}
-         dir={router.locale === 'en' ? 'ltr' : 'rtl'}
+         dir={locale === 'en' ? 'ltr' : 'rtl'}
          transitionDuration={500}
       >
          <div className="max-h-[500px] bg-white p-5">
@@ -29,11 +41,21 @@ function SortingMobile({ open, onClose }) {
                </IconButton>
             </div>
             <div className="mt-8 flex flex-col items-start gap-3">
-               <Button color="textColor">{t('All')}</Button>
-               <Button color="textColor">{t('Newest')}</Button>
-               <Button color="textColor">{t('Cheapest')}</Button>
-               <Button color="textColor">{t('Most expensive')}</Button>
-               <Button color="textColor">{t('Best sellers')}</Button>
+               <Button color="textColor" onClick={() => changeSortHandler('')}>
+                  {t('All')}
+               </Button>
+               <Button color="textColor" onClick={() => changeSortHandler('created')}>
+                  {t('Newest')}
+               </Button>
+               <Button color="textColor" onClick={() => changeSortHandler('price')}>
+                  {t('Cheapest')}
+               </Button>
+               <Button color="textColor" onClick={() => changeSortHandler('-price')}>
+                  {t('Most expensive')}
+               </Button>
+               <Button color="textColor" onClick={() => changeSortHandler('sales')}>
+                  {t('Best sellers')}
+               </Button>
             </div>
          </div>
       </Drawer>

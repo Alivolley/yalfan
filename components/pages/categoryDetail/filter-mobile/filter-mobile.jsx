@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import Image from 'next/image';
 
 // MUI
@@ -11,6 +10,7 @@ import {
    Button,
    Drawer,
    Fab,
+   Grid,
    IconButton,
    Slider,
    Switch,
@@ -28,6 +28,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import filterIcon from '@/assets/icons/filter-icon.svg';
 import filterIconBold from '@/assets/icons/filterIcon-bold.svg';
 
+// Components
+import AppliedFilters from '../applied-filters/applied-filters';
+
 function FilterMobile({
    open,
    onClose,
@@ -37,6 +40,11 @@ function FilterMobile({
    setShowAvailableProducts,
    showDiscountProducts,
    setShowDiscountProducts,
+   chosenCategories,
+   toggleCategory,
+   categoryList,
+   productsList,
+   applyFilterHandler,
 }) {
    const router = useRouter();
    const t = useTranslations('categoryDetail');
@@ -83,89 +91,62 @@ function FilterMobile({
 
             <div className="mb-3 mt-8 flex items-center justify-between border-b border-solid border-[#E4EAF0] pb-2">
                <p>{t('Filters applied')}:</p>
-               <Button color="customPinkHigh" size="small" startIcon={<DeleteOutlineOutlinedIcon />}>
+               <Button
+                  color="customPinkHigh"
+                  size="small"
+                  startIcon={<DeleteOutlineOutlinedIcon />}
+                  onClick={() => {
+                     router.push('/categoryDetail');
+                     onClose();
+                  }}
+               >
                   {t('Remove all filters')}
                </Button>
             </div>
 
-            <div className="flex flex-wrap gap-3">
-               <Button
-                  color="customPinkLow"
-                  size="small"
-                  variant="contained"
-                  className="!text-xs !text-[#B1302E]"
-                  endIcon={<CloseIcon />}
-               >
-                  کیف دستی
-               </Button>
-               <Button
-                  color="customPinkLow"
-                  size="small"
-                  variant="contained"
-                  className="!text-xs !text-[#B1302E]"
-                  endIcon={<CloseIcon />}
-               >
-                  کیف دستی
-               </Button>
-            </div>
+            <AppliedFilters />
 
             <div className="mt-10">
-               <Accordion
-                  sx={{
-                     boxShadow: 'none',
-                  }}
-               >
-                  <AccordionSummary
-                     expandIcon={<ExpandMoreIcon />}
-                     sx={{
-                        padding: '0 !important',
-                     }}
-                  >
-                     <div>
-                        <div>{t('Categories')}</div>
-
-                        <div className="mt-3 flex flex-wrap gap-3">
-                           <Button
-                              color="customPinkLow"
-                              size="small"
-                              variant="contained"
-                              className="!text-xs !text-[#B1302E]"
-                              endIcon={<CloseIcon />}
-                           >
-                              کیف دستی
-                           </Button>
-                           <Button
-                              color="customPinkLow"
-                              size="small"
-                              variant="contained"
-                              className="!text-xs !text-[#B1302E]"
-                              endIcon={<CloseIcon />}
-                           >
-                              کیف دستی
-                           </Button>
-                        </div>
-                     </div>
+               <Accordion sx={{ boxShadow: 'none' }}>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ padding: '0 !important' }}>
+                     {t('Categories')}
                   </AccordionSummary>
                   <AccordionDetails>
-                     <div className="-mt-4 flex flex-col items-start">
-                        <Button color="textColor" size="small">
-                           کیف
-                        </Button>
-                        <Button color="textColor" size="small">
-                           کیف
-                        </Button>
-                        <Button color="textColor" size="small">
-                           کیف
-                        </Button>
-                        <Button color="textColor" size="small">
-                           کیف
-                        </Button>
-                        <Button color="textColor" size="small">
-                           کیف
-                        </Button>
+                     <div className="-mt-3">
+                        <Grid container>
+                           {categoryList?.map(
+                              item =>
+                                 !chosenCategories.some(cat => cat === item.title) && (
+                                    <Grid item key={item.id} xs={6}>
+                                       <Button
+                                          color="textColor"
+                                          size="small"
+                                          onClick={() => toggleCategory(item.title)}
+                                       >
+                                          {item?.title}
+                                       </Button>
+                                    </Grid>
+                                 )
+                           )}
+                        </Grid>
                      </div>
                   </AccordionDetails>
                </Accordion>
+               <div className="mt-3 flex flex-wrap gap-3">
+                  {chosenCategories?.map(item => (
+                     <Button
+                        key={item}
+                        color="customPinkLow"
+                        size="small"
+                        variant="contained"
+                        className="!text-xs !text-[#B1302E]"
+                        endIcon={<CloseIcon />}
+                        onClick={() => toggleCategory(item)}
+                     >
+                        {item}
+                     </Button>
+                  ))}
+               </div>
             </div>
 
             <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
@@ -242,19 +223,26 @@ function FilterMobile({
                      <WidgetsOutlinedIcon fontSize="small" /> {t('Filter results')}:
                   </p>
                   <p className="flex items-center gap-1 text-sm text-customPinkHigh">
-                     438 {t('Product')} <PlayArrowOutlinedIcon fontSize="small" className="rotate-[270deg]" />
+                     {productsList?.total_objects} {t('Product')}
+                     <PlayArrowOutlinedIcon fontSize="small" className="rotate-[270deg]" />
                   </p>
                </div>
             </div>
 
-            <Link href="/categoryDetail" className="mt-10 block">
-               <Button variant="contained" color="customPink2" className="!rounded-10 !py-3 !text-[#B1302E]" fullWidth>
+            <div className="mt-10 pb-10">
+               <Button
+                  variant="contained"
+                  color="customPink2"
+                  className="!rounded-10 !py-3 !text-[#B1302E]"
+                  fullWidth
+                  onClick={applyFilterHandler}
+               >
                   <div className="flex w-full items-center justify-between px-2">
                      <Image src={filterIconBold} alt="filter" />
                      {t('Apply filter')}
                   </div>
                </Button>
-            </Link>
+            </div>
          </div>
       </Drawer>
    );

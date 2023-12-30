@@ -1,7 +1,9 @@
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import Image from 'next/image';
+import axios from 'axios';
 
 // MUI
 import {
@@ -10,6 +12,7 @@ import {
    AccordionSummary,
    Button,
    Fab,
+   Grid,
    Pagination,
    Slider,
    Switch,
@@ -34,15 +37,38 @@ import filterIconBold from '@/assets/icons/filterIcon-bold.svg';
 import ProductCard from '@/components/templates/product-card/product-card';
 import FilterMobile from '@/components/pages/categoryDetail/filter-mobile/filter-mobile';
 import SortingMobile from '@/components/pages/categoryDetail/sorting-mobile/sorting-mobile';
+import AppliedFilters from '@/components/pages/categoryDetail/applied-filters/applied-filters';
 
-function CategoryDetail() {
-   const [priceRange, setPriceRange] = useState([0, 128000]);
+function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList }) {
+   const { query, locale, push } = useRouter();
+   const [priceRange, setPriceRange] = useState([0, mostExpensivePrice]);
    const [showAvailableProducts, setShowAvailableProducts] = useState(false);
    const [showDiscountProducts, setShowDiscountProducts] = useState(false);
+   const [sortingValue, setSortingValue] = useState('');
+   const [chosenCategories, setChosenCategories] = useState([]);
    const [showFilterMobile, setShowFilterMobile] = useState(false);
    const [showSortingMobile, setShowSortingMobile] = useState(false);
-   const [sortingValue, setSortingValue] = useState('all');
    const t = useTranslations('categoryDetail');
+
+   useEffect(() => {
+      setPriceRange(query?.price ? query?.price?.split('-').map(item => Number(item)) : [0, mostExpensivePrice]);
+      setShowAvailableProducts(Boolean(query?.available) || false);
+      setShowDiscountProducts(Boolean(query?.has_discount) || false);
+      setSortingValue(query.ordering || '');
+      setChosenCategories(query?.category?.split('|') || []);
+   }, [query]);
+
+   if (error) {
+      toast.error(error, {
+         style: {
+            direction: locale === 'en' ? 'ltr' : 'rtl',
+            fontFamily: locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+            lineHeight: '25px',
+         },
+         theme: 'colored',
+         autoClose: 5000,
+      });
+   }
 
    const changePriceRange = (event, newValue, activeThumb) => {
       if (!Array.isArray(newValue)) {
@@ -62,6 +88,47 @@ function CategoryDetail() {
       }
    };
 
+   const filters = `${
+      priceRange[0] !== 0 || priceRange[1] !== mostExpensivePrice ? `price=${priceRange[0]}-${priceRange[1]}&` : ''
+   }${showAvailableProducts ? 'available=true&' : ''}${showDiscountProducts ? 'has_discount=true&' : ''}${
+      chosenCategories.length ? `category=${chosenCategories.join('|')}` : ''
+   }`;
+
+   const applyFilterHandler = () => {
+      push(`/categoryDetail?ordering=${sortingValue}&${filters}`);
+      setShowFilterMobile(false);
+   };
+
+   const changePageHandler = (e, newValue) => {
+      push({
+         query: {
+            ...query,
+            page: newValue,
+         },
+      });
+   };
+
+   const toggleCategory = title => {
+      const isSelected = chosenCategories.some(item => item === title);
+
+      if (isSelected) {
+         setChosenCategories(prev => prev.filter(item => item !== title));
+      } else {
+         setChosenCategories(prev => [...prev, title]);
+      }
+   };
+
+   const changeTabHandler = (e, newValue) => {
+      setSortingValue(newValue);
+
+      push({
+         query: {
+            ...query,
+            ordering: newValue,
+         },
+      });
+   };
+
    return (
       <div className="bg-[#f6f2f3] p-8 customMd:px-16 customLg:py-16">
          <div className="flex gap-8">
@@ -76,89 +143,59 @@ function CategoryDetail() {
 
                <div className="mb-3 mt-8 flex items-center justify-between border-b border-solid border-[#E4EAF0] pb-2">
                   <p>{t('Filters applied')}:</p>
-                  <Button color="customPinkHigh" size="small" startIcon={<DeleteOutlineOutlinedIcon />}>
+                  <Button
+                     color="customPinkHigh"
+                     size="small"
+                     startIcon={<DeleteOutlineOutlinedIcon />}
+                     onClick={() => push('/categoryDetail')}
+                  >
                      {t('Remove all filters')}
                   </Button>
                </div>
 
-               <div className="flex flex-wrap gap-3">
-                  <Button
-                     color="customPinkLow"
-                     size="small"
-                     variant="contained"
-                     className="!text-xs !text-[#B1302E]"
-                     endIcon={<CloseIcon />}
-                  >
-                     کیف دستی
-                  </Button>
-                  <Button
-                     color="customPinkLow"
-                     size="small"
-                     variant="contained"
-                     className="!text-xs !text-[#B1302E]"
-                     endIcon={<CloseIcon />}
-                  >
-                     کیف دستی
-                  </Button>
-               </div>
+               <AppliedFilters />
 
                <div className="mt-10">
-                  <Accordion
-                     sx={{
-                        boxShadow: 'none',
-                     }}
-                  >
-                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        sx={{
-                           padding: '0 !important',
-                        }}
-                     >
-                        <div>
-                           {t('Categories')}
-
-                           <div className="mt-3 flex flex-wrap gap-3">
-                              <Button
-                                 color="customPinkLow"
-                                 size="small"
-                                 variant="contained"
-                                 className="!text-xs !text-[#B1302E]"
-                                 endIcon={<CloseIcon />}
-                              >
-                                 کیف دستی
-                              </Button>
-                              <Button
-                                 color="customPinkLow"
-                                 size="small"
-                                 variant="contained"
-                                 className="!text-xs !text-[#B1302E]"
-                                 endIcon={<CloseIcon />}
-                              >
-                                 کیف دستی
-                              </Button>
-                           </div>
-                        </div>
+                  <Accordion sx={{ boxShadow: 'none' }}>
+                     <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ padding: '0 !important' }}>
+                        {t('Categories')}
                      </AccordionSummary>
                      <AccordionDetails>
-                        <div className="-mt-4 flex flex-col items-start">
-                           <Button color="textColor" size="small">
-                              کیف
-                           </Button>
-                           <Button color="textColor" size="small">
-                              کیف
-                           </Button>
-                           <Button color="textColor" size="small">
-                              کیف
-                           </Button>
-                           <Button color="textColor" size="small">
-                              کیف
-                           </Button>
-                           <Button color="textColor" size="small">
-                              کیف
-                           </Button>
+                        <div className="-mt-3">
+                           <Grid container>
+                              {categoryList?.map(
+                                 item =>
+                                    !chosenCategories.some(cat => cat === item.title) && (
+                                       <Grid item key={item.id} xs={6}>
+                                          <Button
+                                             color="textColor"
+                                             size="small"
+                                             onClick={() => toggleCategory(item.title)}
+                                          >
+                                             {item?.title}
+                                          </Button>
+                                       </Grid>
+                                    )
+                              )}
+                           </Grid>
                         </div>
                      </AccordionDetails>
                   </Accordion>
+                  <div className="mt-3 flex flex-wrap gap-3">
+                     {chosenCategories?.map(item => (
+                        <Button
+                           key={item}
+                           color="customPinkLow"
+                           size="small"
+                           variant="contained"
+                           className="!text-xs !text-[#B1302E]"
+                           endIcon={<CloseIcon />}
+                           onClick={() => toggleCategory(item)}
+                        >
+                           {item}
+                        </Button>
+                     ))}
+                  </div>
                </div>
 
                <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
@@ -200,7 +237,7 @@ function CategoryDetail() {
                      color="customPinkHigh"
                      valueLabelDisplay="auto"
                      min={0}
-                     max={128000}
+                     max={mostExpensivePrice}
                      value={priceRange}
                      onChange={changePriceRange}
                      valueLabelFormat={value => `${value.toLocaleString()} ${t('Unit')}`}
@@ -234,24 +271,26 @@ function CategoryDetail() {
                         <WidgetsOutlinedIcon fontSize="small" /> {t('Filter results')}:
                      </p>
                      <p className="flex items-center gap-1 text-sm text-customPinkHigh">
-                        438 {t('Product')} <PlayArrowOutlinedIcon fontSize="small" className="rotate-[270deg]" />
+                        {productsList?.total_objects} {t('Product')}
+                        <PlayArrowOutlinedIcon fontSize="small" className="rotate-[270deg]" />
                      </p>
                   </div>
                </div>
 
-               <Link href="/categoryDetail" className="mt-10 block">
+               <div className="mt-10">
                   <Button
                      variant="contained"
                      color="customPink2"
                      className="!rounded-10 !py-3 !text-[#B1302E]"
                      fullWidth
+                     onClick={applyFilterHandler}
                   >
                      <div className="flex w-full items-center justify-between px-2">
                         <Image src={filterIconBold} alt="filter" />
                         {t('Apply filter')}
                      </div>
                   </Button>
-               </Link>
+               </div>
             </div>
 
             <div className="grow">
@@ -264,28 +303,26 @@ function CategoryDetail() {
                   <div>
                      <Tabs
                         value={sortingValue}
-                        onChange={(e, newValue) => setSortingValue(newValue)}
+                        onChange={changeTabHandler}
                         indicatorColor="secondary"
-                        TabIndicatorProps={{
-                           sx: {
-                              backgroundColor: '#B1302E',
-                           },
-                        }}
+                        TabIndicatorProps={{ sx: { backgroundColor: '#B1302E' } }}
                         variant="scrollable"
                      >
-                        <Tab label={t('All')} value="all" className="!normal-case" custompinkhigh="true" />
-                        <Tab label={t('Newest')} value="newest" className="!normal-case" custompinkhigh="true" />
-                        <Tab label={t('Cheapest')} value="cheap" className="!normal-case" custompinkhigh="true" />
+                        <Tab label={t('All')} value="" className="!normal-case" custompinkhigh="true" />
+                        <Tab label={t('Newest')} value="created" className="!normal-case" custompinkhigh="true" />
+                        <Tab label={t('Cheapest')} value="price" className="!normal-case" custompinkhigh="true" />
                         <Tab
                            label={t('Most expensive')}
-                           value="expensive"
+                           value="-price"
                            className="!normal-case"
                            custompinkhigh="true"
                         />
-                        <Tab label={t('Best sellers')} value="top" className="!normal-case" custompinkhigh="true" />
+                        <Tab label={t('Best sellers')} value="sales" className="!normal-case" custompinkhigh="true" />
                      </Tabs>
                   </div>
-                  <p>{t('Products count')} : 355</p>
+                  <p>
+                     {t('Products count')} : {productsList?.total_objects}
+                  </p>
                </div>
                <div className="flex flex-wrap items-center justify-between rounded-2xl bg-white px-5 py-3 customLg:hidden">
                   <Button
@@ -316,38 +353,46 @@ function CategoryDetail() {
                   setShowAvailableProducts={setShowAvailableProducts}
                   showDiscountProducts={showDiscountProducts}
                   setShowDiscountProducts={setShowDiscountProducts}
+                  chosenCategories={chosenCategories}
+                  toggleCategory={toggleCategory}
+                  categoryList={categoryList}
+                  productsList={productsList}
+                  applyFilterHandler={applyFilterHandler}
                />
 
-               <SortingMobile open={showSortingMobile} onClose={() => setShowSortingMobile(false)} />
+               <SortingMobile
+                  open={showSortingMobile}
+                  onClose={() => setShowSortingMobile(false)}
+                  setSortingValue={setSortingValue}
+               />
 
                <div className="mt-6">
-                  <div className="flex flex-wrap justify-center gap-4 customMd:gap-8">
-                     <ProductCard discount />
-                     <ProductCard isLiked />
-                     <ProductCard discount />
-                     <ProductCard />
-                     <ProductCard discount />
-                     <ProductCard isLiked />
-                     <ProductCard discount />
-                     <ProductCard />
-                     <ProductCard discount />
-                     <ProductCard isLiked />
-                     <ProductCard discount />
-                     <ProductCard />
-                  </div>
+                  {productsList?.result?.length ? (
+                     <div className="flex flex-wrap justify-center gap-4 customMd:gap-8">
+                        {productsList?.result?.map(item => (
+                           <ProductCard key={item.id} detail={item} />
+                        ))}
+                     </div>
+                  ) : (
+                     <p className="mt-14 text-center">محصولی با این فیلتر ها وجود ندارد</p>
+                  )}
                </div>
 
-               <div className="mt-10 flex items-center justify-center">
-                  <Pagination
-                     count={10}
-                     color="customPinkHigh"
-                     sx={{
-                        '& .Mui-selected': {
-                           color: 'white !important',
-                        },
-                     }}
-                  />
-               </div>
+               {productsList?.result?.length ? (
+                  <div className="mt-10 flex items-center justify-center">
+                     <Pagination
+                        count={productsList?.total_pages}
+                        color="customPinkHigh"
+                        onChange={changePageHandler}
+                        page={Number(query?.page) || 1}
+                        sx={{
+                           '& .Mui-selected': {
+                              color: 'white !important',
+                           },
+                        }}
+                     />
+                  </div>
+               ) : null}
             </div>
          </div>
       </div>
@@ -357,9 +402,53 @@ function CategoryDetail() {
 export default CategoryDetail;
 
 export async function getServerSideProps(context) {
-   return {
-      props: {
-         messages: (await import(`../../messages/${context.locale}.json`)).default,
-      },
-   };
+   const { query } = context;
+
+   console.log(query);
+
+   try {
+      const categoryList = await axios('https://yalfantest.pythonanywhere.com/api/store/categories/list_create/', {
+         params: {
+            lang: context.locale,
+         },
+      }).then(res => res.data);
+
+      const productsList = await axios('https://yalfantest.pythonanywhere.com/api/store/products/list_create/', {
+         params: {
+            lang: context.locale,
+            highest_price: true,
+            ...(query?.available && {
+               available: true,
+            }),
+            ...(query?.has_discount && {
+               has_discount: true,
+            }),
+            ...(query?.price && {
+               price: query?.price,
+            }),
+            ...(query?.category && {
+               category: query?.category,
+            }),
+            ...(query?.ordering && {
+               ordering: query?.ordering,
+            }),
+         },
+      }).then(res => res.data);
+
+      return {
+         props: {
+            messages: (await import(`../../messages/${context.locale}.json`)).default,
+            productsList,
+            categoryList,
+            mostExpensivePrice: productsList.highest_price,
+         },
+      };
+   } catch (error) {
+      return {
+         props: {
+            messages: (await import(`../../messages/${context.locale}.json`)).default,
+            error: error?.message,
+         },
+      };
+   }
 }
