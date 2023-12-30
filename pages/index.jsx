@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -12,26 +13,22 @@ import Newest from '@/components/pages/home/newest/newest';
 import OffersBanner from '@/components/pages/home/offers-banner/offers-banner';
 
 export default function Home({ categoryList, error, newestList, bestSellersList }) {
-   const router = useRouter();
+   const { locale } = useRouter();
 
-   if (error) {
-      toast.error(error, {
-         style: {
-            direction: router.locale === 'en' ? 'ltr' : 'rtl',
-            fontFamily:
-               router.locale === 'en'
-                  ? 'poppins'
-                  : router.locale === 'fa'
-                    ? 'dana'
-                    : router.locale === 'ar'
-                      ? 'rubik'
-                      : 'poppins',
-            lineHeight: '25px',
-         },
-         theme: 'colored',
-         autoClose: 5000,
-      });
-   }
+   useEffect(() => {
+      if (error) {
+         toast.error(error, {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [error]);
 
    return (
       <div>

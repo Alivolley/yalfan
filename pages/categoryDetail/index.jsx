@@ -58,17 +58,20 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
       setChosenCategories(query?.category?.split('|') || []);
    }, [query]);
 
-   if (error) {
-      toast.error(error, {
-         style: {
-            direction: locale === 'en' ? 'ltr' : 'rtl',
-            fontFamily: locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
-            lineHeight: '25px',
-         },
-         theme: 'colored',
-         autoClose: 5000,
-      });
-   }
+   useEffect(() => {
+      if (error) {
+         toast.error(error, {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [error]);
 
    const changePriceRange = (event, newValue, activeThumb) => {
       if (!Array.isArray(newValue)) {

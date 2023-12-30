@@ -5,6 +5,9 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import {
    Button,
@@ -44,6 +47,9 @@ import SearchSection from '@/components/templates/search-section/search-section'
 import HeaderCategories from '@/components/templates/header-categories/header-categories';
 import ProfileDropdown from '@/components/templates/profile-dropdown/profile-dropdown';
 
+// Apis
+import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
+
 function Header({ language, isLogin }) {
    const [showLanguageSelector, setShowLanguageSelector] = useState(false);
    const [showLanguageDropDown, setShowLanguageDropDown] = useState(false);
@@ -54,6 +60,9 @@ function Header({ language, isLogin }) {
    const [profileDropDown, setProfileDropDown] = useState(false);
    const languageDropDownRef = useRef();
    const profileRef = useRef();
+   const userInfo = useSelector(state => state?.userInfoReducer);
+   // eslint-disable-next-line no-unused-vars
+   const getUserInfo = useGetUserInfo(isUserLogin);
 
    const t = useTranslations('header');
    const router = useRouter();
@@ -243,8 +252,7 @@ function Header({ language, isLogin }) {
                         >
                            <p className="flex items-center gap-1">
                               <PersonOutlinedIcon fontSize="small" />
-                              {/* {userInfo?.name || userInfo?.phone_number} */}
-                              علی ازقندی
+                              {userInfo?.name || userInfo?.phone_number}
                               <KeyboardArrowDownIcon
                                  className={`!transition-all !duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
                               />
