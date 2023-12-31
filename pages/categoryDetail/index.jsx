@@ -11,7 +11,6 @@ import {
    AccordionDetails,
    AccordionSummary,
    Button,
-   Fab,
    Grid,
    Pagination,
    Slider,
@@ -38,6 +37,7 @@ import ProductCard from '@/components/templates/product-card/product-card';
 import FilterMobile from '@/components/pages/categoryDetail/filter-mobile/filter-mobile';
 import SortingMobile from '@/components/pages/categoryDetail/sorting-mobile/sorting-mobile';
 import AppliedFilters from '@/components/pages/categoryDetail/applied-filters/applied-filters';
+import ColorsFilter from '@/components/pages/categoryDetail/colors-filter/colors-filter';
 
 function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList }) {
    const { query, locale, push } = useRouter();
@@ -46,6 +46,7 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
    const [showDiscountProducts, setShowDiscountProducts] = useState(false);
    const [sortingValue, setSortingValue] = useState('');
    const [chosenCategories, setChosenCategories] = useState([]);
+   const [chosenColor, setChosenColor] = useState('');
    const [showFilterMobile, setShowFilterMobile] = useState(false);
    const [showSortingMobile, setShowSortingMobile] = useState(false);
    const t = useTranslations('categoryDetail');
@@ -54,7 +55,8 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
       setPriceRange(query?.price ? query?.price?.split('-').map(item => Number(item)) : [0, mostExpensivePrice]);
       setShowAvailableProducts(Boolean(query?.available) || false);
       setShowDiscountProducts(Boolean(query?.has_discount) || false);
-      setSortingValue(query.ordering || '');
+      setSortingValue(query?.ordering || '');
+      setChosenColor(query?.color || '');
       setChosenCategories(query?.category?.split('|') || []);
    }, [query]);
 
@@ -94,8 +96,8 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
    const filters = `${
       priceRange[0] !== 0 || priceRange[1] !== mostExpensivePrice ? `price=${priceRange[0]}-${priceRange[1]}&` : ''
    }${showAvailableProducts ? 'available=true&' : ''}${showDiscountProducts ? 'has_discount=true&' : ''}${
-      chosenCategories.length ? `category=${chosenCategories.join('|')}` : ''
-   }`;
+      chosenCategories.length ? `category=${chosenCategories.join('|')}&` : ''
+   }${chosenColor ? `color=${chosenColor}&` : ''}`;
 
    const applyFilterHandler = () => {
       push(`/categoryDetail?ordering=${sortingValue}&${filters}`);
@@ -201,16 +203,7 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
                   </div>
                </div>
 
-               <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
-                  <p>{t('Color')} :</p>
-                  <div className="mt-5 flex flex-wrap items-center gap-6">
-                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-red-500" />
-                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-yellow-500" />
-                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-purple-500" />
-                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-green-500" />
-                     <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-blue-500" />
-                  </div>
-               </div>
+               <ColorsFilter chosenColor={chosenColor} setChosenColor={setChosenColor} />
 
                <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
                   <p>{t('Price range (unit)')}</p>
@@ -369,6 +362,8 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
                   categoryList={categoryList}
                   productsList={productsList}
                   applyFilterHandler={applyFilterHandler}
+                  chosenColor={chosenColor}
+                  setChosenColor={setChosenColor}
                />
 
                <SortingMobile
@@ -440,6 +435,9 @@ export async function getServerSideProps(context) {
             }),
             ...(query?.ordering && {
                ordering: query?.ordering,
+            }),
+            ...(query?.color && {
+               color: `#${query?.color}`,
             }),
          },
       }).then(res => res.data);

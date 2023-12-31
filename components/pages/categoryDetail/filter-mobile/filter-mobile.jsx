@@ -9,7 +9,6 @@ import {
    AccordionSummary,
    Button,
    Drawer,
-   Fab,
    Grid,
    IconButton,
    Slider,
@@ -30,6 +29,7 @@ import filterIconBold from '@/assets/icons/filterIcon-bold.svg';
 
 // Components
 import AppliedFilters from '../applied-filters/applied-filters';
+import ColorsFilter from '../colors-filter/colors-filter';
 
 function FilterMobile({
    open,
@@ -45,6 +45,8 @@ function FilterMobile({
    categoryList,
    productsList,
    applyFilterHandler,
+   chosenColor,
+   setChosenColor,
 }) {
    const router = useRouter();
    const t = useTranslations('categoryDetail');
@@ -149,17 +151,7 @@ function FilterMobile({
                </div>
             </div>
 
-            <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
-               <p>{t('Color')} :</p>
-
-               <div className="mt-5 flex flex-wrap items-center gap-6">
-                  <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-red-500" />
-                  <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-yellow-500" />
-                  <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-purple-500" />
-                  <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-green-500" />
-                  <Fab className="!h-10 !w-10 shrink-0 !rounded-full !bg-blue-500" />
-               </div>
-            </div>
+            <ColorsFilter chosenColor={chosenColor} setChosenColor={setChosenColor} />
 
             <div className="mt-6 border-t border-solid border-[#E4EAF0] pt-6">
                <p>{t('Price range (unit)')}</p>

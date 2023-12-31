@@ -83,6 +83,18 @@ function AppliedFilters() {
                {t('Has discount')}
             </Button>
          )}
+         {query?.color && (
+            <Button
+               color="customPinkLow"
+               size="small"
+               variant="contained"
+               className="!text-xs !text-[#B1302E]"
+               endIcon={<CloseIcon />}
+               onClick={() => removeFilter('color')}
+            >
+               {t('Color')}
+            </Button>
+         )}
       </div>
    );
 }
