@@ -17,6 +17,7 @@
         "Account information": "معلومات الحساب",
         "My address": "عنواني",
         "Track orders": "تتبع الطلبات",
+        "Favorites": "المفضلة",
         "Log out": "تسجيل خروج"
     },
     "home": {
@@ -117,5 +118,15 @@
         "No product with this title": "لا يوجد منتج بهذا العنوان",
         "Our suggestion": "اقتراحنا",
         "Show all": "اظهار الكل"
+    },
+    "profile": {
+        "Account information": "معلومات الحساب",
+        "My address": "عنواني",
+        "Track orders": "تتبع الطلبات",
+        "Favorites": "المفضلة",
+        "Log out": "تسجيل خروج",
+        "Are you sure about logging out ?": "هل أنت متأكد من تسجيل الخروج؟",
+        "Yes": "نعم",
+        "No": "لا"
     }
 }

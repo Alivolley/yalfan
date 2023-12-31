@@ -17,6 +17,7 @@
         "Account information": "اطلاعات حساب",
         "My address": "آدرس های من",
         "Track orders": "پیگیری سفارش ها",
+        "Favorites": "علاقه مندی ها",
         "Log out": "خروج از حساب کاربری"
     },
     "home": {
@@ -117,5 +118,15 @@
         "No product with this title": "محصول مورد نظر یافت نشد",
         "Our suggestion": "پیشنهادات ما",
         "Show all": "مشاهده همه"
+    },
+    "profile": {
+        "Account information": "اطلاعات حساب",
+        "My address": "آدرس های من",
+        "Track orders": "پیگیری سفارش ها",
+        "Favorites": "علاقه مندی ها",
+        "Log out": "خروج از حساب کاربری",
+        "Are you sure about logging out ?": "آیا از خروج از حساب کاربری مطمئن هستید ؟",
+        "Yes": "بله",
+        "No": "خیر"
     }
 }

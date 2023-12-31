@@ -17,6 +17,7 @@
         "Account information": "Account information",
         "My address": "My address",
         "Track orders": "Track orders",
+        "Favorites": "Favorites",
         "Log out": "Log out"
     },
     "home": {
@@ -117,5 +118,15 @@
         "Our suggestion": "Our suggestion",
         "No product with this title": "No product with this title",
         "Show all": "See all"
+    },
+    "profile": {
+        "Account information": "Account information",
+        "My address": "My address",
+        "Track orders": "Track orders",
+        "Favorites": "Favorites",
+        "Log out": "Log out",
+        "Are you sure about logging out ?": "Are you sure about logout ?",
+        "Yes": "Yes",
+        "No": "No"
     }
 }

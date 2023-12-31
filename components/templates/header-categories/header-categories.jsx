@@ -24,7 +24,7 @@ function HeaderCategories({ language }) {
                   item?.sub_cats && (
                      <Link
                         href={`/categoryDetail?category=${item?.title}`}
-                        className="flex items-center justify-between gap-2 py-3.5 transition-all duration-150 hover:text-[#FF817E]"
+                        className="flex items-center justify-between gap-2 rounded-10 px-3 py-5 transition-all duration-150 hover:bg-[#F5F8FC] hover:text-[#FF817E]"
                         id="arrowIcon"
                         key={item.id}
                         onMouseEnter={() => setActiveCategory(item)}
@@ -44,7 +44,7 @@ function HeaderCategories({ language }) {
                   !item?.sub_cats && (
                      <Link
                         href={`/categoryDetail?category=${item?.title}`}
-                        className="py-3.5 transition-all duration-150 hover:text-[#FF817E]"
+                        className="px-3 py-5 transition-all duration-150 hover:text-[#FF817E]"
                         id="arrowIcon"
                         key={item.id}
                         onMouseEnter={() => setActiveCategory(item)}

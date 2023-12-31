@@ -10,6 +10,7 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 // Components
 import LogoutModal from '../logout-modal/logout-modal';
@@ -62,6 +63,15 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef }) {
                         >
                            <AccountBalanceWalletOutlinedIcon fontSize="small" />
                            {t('Track orders')}
+                        </Link>
+                        <Link
+                           href="/profile/favorites"
+                           className="flex items-center gap-1 border-t border-solid border-[#E4EAF0] p-3 text-sm text-white transition-all
+                                      duration-150 hover:bg-customPink2 hover:text-black"
+                           onClick={() => setProfileDropDown(false)}
+                        >
+                           <FavoriteBorderIcon fontSize="small" />
+                           {t('Favorites')}
                         </Link>
                         <Button
                            className="flex items-center justify-start gap-1 !border-t !border-solid !border-[#E4EAF0] !p-3 text-sm !text-white transition-all
