@@ -1,10 +1,12 @@
 import { useTranslations } from 'next-intl';
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import Image from 'next/image';
 
 // MUI
-import { Button, Grid, TextField } from '@mui/material';
+import { Button, FormHelperText, Grid, TextField } from '@mui/material';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/material.css';
 
 // Icons
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
@@ -26,6 +28,7 @@ function ContactUs() {
    const {
       register,
       handleSubmit,
+      control,
       formState: { errors },
    } = useForm({
       defaultValues: {
@@ -115,7 +118,6 @@ function ContactUs() {
                            <p className="text-sm font-bold text-[#713802]">{t('Name')}</p>
                            <TextField
                               placeholder={t('Enter your name')}
-                              color="textColor"
                               fullWidth
                               {...register('firstName', {
                                  required: {
@@ -131,7 +133,6 @@ function ContactUs() {
                            <p className="text-sm font-bold text-[#713802]">{t('Family name')}</p>
                            <TextField
                               placeholder={t('Enter your family name')}
-                              color="textColor"
                               fullWidth
                               {...register('familyName', {
                                  required: {
@@ -147,26 +148,42 @@ function ContactUs() {
                      <div className="flex flex-col justify-between gap-8 customMd:flex-row customMd:items-start">
                         <div className="flex-1 space-y-3" id="inputNumber">
                            <p className="text-sm font-bold text-[#713802]">{t('Phone number')}</p>
-                           <TextField
-                              placeholder={t('Enter your phone number')}
-                              color="textColor"
-                              fullWidth
-                              type="number"
-                              {...register('phoneNumber', {
-                                 required: {
-                                    value: true,
-                                    message: t('This filed is required'),
-                                 },
-                              })}
-                              error={!!errors?.phoneNumber}
-                              helperText={errors?.phoneNumber?.message}
-                           />
+
+                           <div dir="ltr" className="mt-14">
+                              <Controller
+                                 control={control}
+                                 name="phoneNumber"
+                                 rules={{ required: t('This filed is required') }}
+                                 render={({ field: { onChange, value }, fieldState }) => (
+                                    <>
+                                       <PhoneInput
+                                          country="ir"
+                                          inputClass="!w-full"
+                                          specialLabel=""
+                                          inputStyle={{
+                                             borderRadius: '10px',
+                                             ...(errors?.phoneNumber?.message && {
+                                                borderColor: 'red',
+                                             }),
+                                          }}
+                                          value={value}
+                                          onChange={onChange}
+                                       />
+
+                                       {fieldState.invalid
+                                          ? errors?.phoneNumber?.message && (
+                                               <FormHelperText error>{errors?.phoneNumber?.message}</FormHelperText>
+                                            )
+                                          : null}
+                                    </>
+                                 )}
+                              />
+                           </div>
                         </div>
                         <div className="flex-1 space-y-3">
                            <p className="text-sm font-bold text-[#713802]">{t('Email')}</p>
                            <TextField
                               placeholder={t('Enter your email')}
-                              color="textColor"
                               fullWidth
                               {...register('email', {
                                  pattern: {
@@ -182,7 +199,6 @@ function ContactUs() {
                      <div className="flex-1 space-y-3">
                         <p className="text-sm font-bold text-[#713802]">{t('Text')}</p>
                         <TextField
-                           color="textColor"
                            placeholder={t('Enter your text')}
                            multiline
                            fullWidth
