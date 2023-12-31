@@ -175,7 +175,7 @@ function ProfileLayout({ children }) {
                </div>
             </Button>
          </aside>
-         <section className="grow rounded-2xl bg-white px-11 py-7">{children}</section>
+         <section className="grow">{children}</section>
 
          <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} />
       </div>

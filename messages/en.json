@@ -98,7 +98,9 @@
         "You can contact us through the following ways": "You can contact us through the following ways",
         "Social medias": "social medias",
         "Address": "Address",
-        "address": "Iran hamedan hamedan city shir khorshid"
+        "address": "Iran hamedan hamedan city shir khorshid",
+        "This filed is required": "This filed is required",
+        "Please enter a valid email": "Please enter a valid email"
     },
     "login": {
         "yalfan": "Yalfan",
@@ -127,6 +129,11 @@
         "Log out": "Log out",
         "Are you sure about logging out ?": "Are you sure about logout ?",
         "Yes": "Yes",
-        "No": "No"
+        "No": "No",
+        "FullName": "FullName",
+        "Enter your name": "Enter your name",
+        "This filed is required": "This filed is required",
+        "Phone number": "Phone number",
+        "Edit information": "Edit information"
     }
 }

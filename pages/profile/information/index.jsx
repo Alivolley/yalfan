@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
@@ -6,14 +7,12 @@ import Image from 'next/image';
 import { useSelector } from 'react-redux';
 
 // MUI
-import { Backdrop, CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Backdrop, CircularProgress, IconButton, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // Icons
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import PublishIcon from '@mui/icons-material/Publish';
+import PhotoCameraBackOutlinedIcon from '@mui/icons-material/PhotoCameraBackOutlined';
 
 // Assets
 import userProfilePic from '../../../assets/images/userProfile.png';
@@ -31,6 +30,7 @@ function Information() {
 
    const { trigger: changeProfileTrigger, isMutating: changeProfileIsMutating } = useChangeProfileImage();
    const { trigger: changeProfileInfoTrigger, isMutating: changeProfileInfoIsMutating } = useChangeProfileInfo();
+   const t = useTranslations('profile');
 
    const {
       register,
@@ -69,11 +69,11 @@ function Information() {
    return (
       <ProfileLayout>
          <div>
-            <p className="border-b border-solid border-[#E4EAF0] pb-4 font-bold">اطلاعات کاربری</p>
+            <p className="rounded-2xl bg-white p-7 text-lg font-bold text-[#050F2C]">{t('Account information')}</p>
 
             {Object.keys(userInfo).length > 0 ? (
-               <>
-                  <div className="relative mx-auto mt-14 w-fit cursor-pointer customMd:mx-0">
+               <div className="mt-6 rounded-2xl bg-white p-7">
+                  <div className="relative mx-auto w-fit cursor-pointer customMd:mx-0">
                      <div className="h-28 w-28 cursor-pointer">
                         {userInfo?.image ? (
                            <img
@@ -90,10 +90,10 @@ function Information() {
                         )}
                      </div>
                      <IconButton
-                        className="absolute bottom-0 left-0 cursor-pointer bg-customPink"
+                        className="!absolute !bottom-[-15px] !start-1 !cursor-pointer !bg-customPink2"
                         sx={{ width: '33px', height: '33px' }}
                      >
-                        <BorderColorIcon fontSize="small" />
+                        <PhotoCameraBackOutlinedIcon fontSize="small" />
                      </IconButton>
 
                      <input
@@ -104,27 +104,21 @@ function Information() {
                      />
                   </div>
 
-                  <form onSubmit={handleSubmit(formSubmit)} className="mt-10">
+                  <form onSubmit={handleSubmit(formSubmit)} className="mt-12">
                      <RtlProvider>
                         <div className="mb-12 flex flex-col gap-6 customLg:flex-row">
-                           <div className="flex flex-1 flex-col gap-1">
-                              <p className="text-sm text-[#7E8AAB]">نام و نام خانوادگی</p>
+                           <div className="flex flex-1 flex-col gap-2">
+                              <p className="text-sm text-[#713802]">{t('FullName')}</p>
 
                               <TextField
                                  variant="outlined"
                                  fullWidth
                                  color="customPink"
-                                 InputProps={{
-                                    startAdornment: (
-                                       <InputAdornment position="start">
-                                          <DriveFileRenameOutlineIcon />
-                                       </InputAdornment>
-                                    ),
-                                 }}
+                                 placeholder={t('Enter your name')}
                                  {...register('fullName', {
                                     required: {
                                        value: true,
-                                       message: 'این فیلد اجباری است',
+                                       message: t('This filed is required'),
                                     },
                                  })}
                                  error={!!errors?.fullName}
@@ -133,36 +127,12 @@ function Information() {
                               />
                            </div>
 
-                           <div className="flex flex-1 flex-col gap-1">
-                              <p className="text-sm text-[#7E8AAB]">شماره تلفن همراه</p>
+                           <div className="flex flex-1 flex-col gap-2">
+                              <p className="text-sm text-[#713802]">{t('Phone number')}</p>
                               <TextField
                                  variant="outlined"
                                  fullWidth
-                                 color="customPink"
-                                 type="number"
-                                 InputProps={{
-                                    startAdornment: (
-                                       <InputAdornment position="start">
-                                          <PhoneAndroidIcon />
-                                       </InputAdornment>
-                                    ),
-                                 }}
-                                 sx={{
-                                    input: {
-                                       MozAppearance: 'textfield',
-                                       appearance: 'textfield',
-                                       '&::-webkit-inner-spin-button': {
-                                          WebkitAppearance: 'none',
-                                          appearance: 'none',
-                                       },
-                                    },
-                                 }}
-                                 {...register('phoneNumber', {
-                                    required: {
-                                       value: true,
-                                       message: 'این فیلد اجباری است',
-                                    },
-                                 })}
+                                 {...register('phoneNumber')}
                                  error={!!errors?.phoneNumber}
                                  helperText={errors?.phoneNumber?.message}
                                  disabled
@@ -175,17 +145,16 @@ function Information() {
                         variant="contained"
                         type="submit"
                         size="large"
-                        color="customPink"
+                        color="customPink2"
                         loading={changeProfileInfoIsMutating}
-                        className="w-full !rounded-10 !p-2 customLg:w-auto"
+                        className="!rounded-10 !py-3 !text-[#B1302E]"
+                        fullWidth
+                        startIcon={<PublishIcon className="rotate-180" />}
                      >
-                        <div className="flex w-full items-center justify-between customLg:w-[330px]">
-                           <KeyboardTabIcon className="rotate-90 rounded-xl bg-white p-2 text-customPink" />
-                           <p>ثبت اطلاعات</p>
-                        </div>
+                        {t('Edit information')}
                      </LoadingButton>
                   </form>
-               </>
+               </div>
             ) : (
                <div className="mt-10 flex items-center justify-center">
                   <CircularProgress color="customPink" />

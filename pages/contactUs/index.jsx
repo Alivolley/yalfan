@@ -120,7 +120,7 @@ function ContactUs() {
                               {...register('firstName', {
                                  required: {
                                     value: true,
-                                    message: 'این فیلد اجباری است',
+                                    message: t('This filed is required'),
                                  },
                               })}
                               error={!!errors?.firstName}
@@ -136,7 +136,7 @@ function ContactUs() {
                               {...register('familyName', {
                                  required: {
                                     value: true,
-                                    message: 'این فیلد اجباری است',
+                                    message: t('This filed is required'),
                                  },
                               })}
                               error={!!errors?.familyName}
@@ -155,11 +155,7 @@ function ContactUs() {
                               {...register('phoneNumber', {
                                  required: {
                                     value: true,
-                                    message: 'این فیلد اجباری است',
-                                 },
-                                 pattern: {
-                                    value: /^09\d{9}$/,
-                                    message: 'لطفا یک شماره تلفن معتبر ۱۱ رقمی وارد کنید',
+                                    message: t('This filed is required'),
                                  },
                               })}
                               error={!!errors?.phoneNumber}
@@ -175,7 +171,7 @@ function ContactUs() {
                               {...register('email', {
                                  pattern: {
                                     value: /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/,
-                                    message: 'لطفا یک ایمیل معتبر وارد کنید',
+                                    message: t('Please enter a valid email'),
                                  },
                               })}
                               error={!!errors?.email}
@@ -194,7 +190,7 @@ function ContactUs() {
                            {...register('message', {
                               required: {
                                  value: true,
-                                 message: 'این فیلد اجباری است',
+                                 message: t('This filed is required'),
                               },
                            })}
                            error={!!errors?.message}
