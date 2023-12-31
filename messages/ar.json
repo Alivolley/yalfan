@@ -13,7 +13,11 @@
         "contact us": "اتصل بنا",
         "Profile": "حساب تعريفي",
         "your last search": "آخر هذا هو ما تبحث عنه",
-        "popular search": "عمليات البحث الشعبية"
+        "popular search": "عمليات البحث الشعبية",
+        "Account information": "معلومات الحساب",
+        "My address": "عنواني",
+        "Track orders": "تتبع الطلبات",
+        "Log out": "تسجيل خروج"
     },
     "home": {
         "with yalfan": "مع يالفان",

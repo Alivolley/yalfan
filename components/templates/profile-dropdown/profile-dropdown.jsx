@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -15,6 +16,7 @@ import LogoutModal from '../logout-modal/logout-modal';
 
 function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
+   const t = useTranslations('header');
 
    return (
       <>
@@ -41,7 +43,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef }) {
                            onClick={() => setProfileDropDown(false)}
                         >
                            <PersonOutlinedIcon fontSize="small" />
-                           اطلاعات حساب
+                           {t('Account information')}
                         </Link>
                         <Link
                            href="/profile/address"
@@ -50,7 +52,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef }) {
                            onClick={() => setProfileDropDown(false)}
                         >
                            <LocationOnOutlinedIcon fontSize="small" />
-                           آدرس های من
+                           {t('My address')}
                         </Link>
                         <Link
                            href="/profile/orders"
@@ -59,15 +61,15 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef }) {
                            onClick={() => setProfileDropDown(false)}
                         >
                            <AccountBalanceWalletOutlinedIcon fontSize="small" />
-                           پیگیری سفارش ها
+                           {t('Track orders')}
                         </Link>
                         <Button
-                           className="flex items-center gap-1 !border-t !border-solid !border-[#E4EAF0] !p-3 text-sm !text-white transition-all
+                           className="flex items-center justify-start gap-1 !border-t !border-solid !border-[#E4EAF0] !p-3 text-sm !text-white transition-all
                                       duration-150 hover:!bg-customPink2 hover:!text-black"
                            onClick={() => setShowLogoutModal(true)}
                         >
                            <LogoutOutlinedIcon fontSize="small" className="rotate-180" />
-                           خروج از حساب کاربری
+                           {t('Log out')}
                         </Button>
                      </div>
                   </Paper>

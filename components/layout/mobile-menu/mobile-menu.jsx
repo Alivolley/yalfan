@@ -134,21 +134,21 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                                  className="flex w-full items-center gap-1 border-b border-solid border-[#E4EAF0] p-3 text-sm text-textColor"
                               >
                                  <PersonOutlinedIcon fontSize="small" />
-                                 اطلاعات حساب
+                                 {t('Account information')}
                               </Link>
                               <Link
                                  href="/profile/address"
                                  className="flex w-full items-center gap-1 border-b border-solid border-[#E4EAF0] p-3 text-sm text-textColor"
                               >
                                  <LocationOnOutlinedIcon fontSize="small" />
-                                 آدرس های من
+                                 {t('My address')}
                               </Link>
                               <Link
                                  href="/profile/orders"
                                  className="flex w-full items-center gap-1 border-b border-solid border-[#E4EAF0] p-3 text-sm text-textColor"
                               >
                                  <AccountBalanceWalletOutlinedIcon fontSize="small" />
-                                 پیگیری سفارش ها
+                                 {t('Track orders')}
                               </Link>
                               <Button
                                  className="!p-3 text-sm"
@@ -156,7 +156,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                                  startIcon={<LogoutOutlinedIcon fontSize="small" className="rotate-180" />}
                                  onClick={() => setShowLogoutModal(true)}
                               >
-                                 خروج از حساب کاربری
+                                 {t('Log out')}
                               </Button>
                            </div>
                         </AccordionDetails>
