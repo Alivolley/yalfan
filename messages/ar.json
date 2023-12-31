@@ -107,5 +107,11 @@
         "Until resend the code": "حتى إعادة إرسال الرمز",
         "Resend the code": "احصل على رمز التأكيد مرة أخرى",
         "Proceed": "يتابع"
+    },
+    "search": {
+        "Results for :": "نتائج ل :",
+        "No product with this title": "لا يوجد منتج بهذا العنوان",
+        "Our suggestion": "اقتراحنا",
+        "Show all": "اظهار الكل"
     }
 }

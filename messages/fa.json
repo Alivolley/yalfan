@@ -107,5 +107,11 @@
         "Until resend the code": "تا ارسال مجدد کد",
         "Resend the code": "دریافت مجدد کد تایید",
         "Proceed": "ادامه"
+    },
+    "search": {
+        "Results for :": "نتایج جستجو برای :",
+        "No product with this title": "محصول مورد نظر یافت نشد",
+        "Our suggestion": "پیشنهادات ما",
+        "Show all": "مشاهده همه"
     }
 }

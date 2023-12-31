@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // MUI
 import { Button } from '@mui/material';
@@ -11,8 +12,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 // Assets
-import Link from 'next/link';
 import categoriesIcon from '@/assets/icons/categories-icon.svg';
+
+// Components
 import ProductCard from '@/components/templates/product-card/product-card';
 
 function Newest({ detail }) {

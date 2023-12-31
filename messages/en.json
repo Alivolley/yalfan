@@ -107,5 +107,11 @@
         "Until resend the code": "Until resend the code",
         "Resend the code": "Resend the code",
         "Proceed": "Proceed"
+    },
+    "search": {
+        "Results for :": "Results for :",
+        "Our suggestion": "Our suggestion",
+        "No product with this title": "No product with this title",
+        "Show all": "See all"
     }
 }
