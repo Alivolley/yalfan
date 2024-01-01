@@ -12,9 +12,6 @@ import 'react-phone-input-2/lib/material.css';
 // Icons
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-// Components
-import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
-
 // Apis
 import useAddAddress from '@/apis/profile/useAddAddress';
 import useEditAddress from '@/apis/profile/useEditAddress';
@@ -34,7 +31,6 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
       control,
    } = useForm({
       defaultValues: {
-         fullName: '',
          postCode: '',
          fullAddress: '',
          transfereeFullName: '',
@@ -51,37 +47,37 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
    };
 
    const formSubmit = data => {
-      console.log(data);
+      const newAddress = {
+         address: data?.fullAddress,
+         recipient_name: data?.transfereeFullName,
+         phone_number: data?.transfereePhoneNumber,
+         postal_code: data?.postCode,
+      };
 
-      // const newAddress = {
-      //    address: data?.fullAddress,
-      //    recipient_name: data?.fullName,
-      //    phone_number: data?.phoneNumber,
-      // };
-
-      // if (isEdit) {
-      //    editAddressTrigger(
-      //       { newAddress, addressId: detail?.id },
-      //       {
-      //          onSuccess: () => {
-      //             closeModalHandler();
-      //          },
-      //       }
-      //    );
-      // } else {
-      //    addAddressTrigger(newAddress, {
-      //       onSuccess: () => {
-      //          closeModalHandler();
-      //       },
-      //    });
-      // }
+      if (isEdit) {
+         editAddressTrigger(
+            { newAddress, addressId: detail?.id },
+            {
+               onSuccess: () => {
+                  closeModalHandler();
+               },
+            }
+         );
+      } else {
+         addAddressTrigger(newAddress, {
+            onSuccess: () => {
+               closeModalHandler();
+            },
+         });
+      }
    };
 
    useEffect(() => {
       if (isEdit) {
-         // setValue('fullAddress', detail?.address);
-         // setValue('fullName', detail?.recipient_name);
-         // setValue('phoneNumber', detail?.phone_number);
+         setValue('fullAddress', detail?.address);
+         setValue('postCode', detail?.postal_code);
+         setValue('transfereeFullName', detail?.recipient_name);
+         setValue('transfereePhoneNumber', detail?.phone_number);
       }
    }, [detail, detail?.id]);
 
@@ -97,167 +93,143 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
 
             <p className="my-6 rounded-10 bg-[#F5F8FC] p-4 font-bold">{t('Address information')}</p>
 
-            <RtlProvider>
-               <form onSubmit={handleSubmit(formSubmit)} className="space-y-6">
-                  <div className="flex flex-col gap-3 customSm:flex-row">
-                     <div className="flex flex-1 flex-col gap-1">
-                        <p className="text-sm text-[#7E8AAB]">{t('FullName')}</p>
-                        <TextField
-                           variant="outlined"
-                           fullWidth
-                           color="customPink"
-                           {...register('fullName', {
-                              required: {
-                                 value: true,
-                                 message: t('This filed is required'),
-                              },
-                           })}
-                           error={!!errors?.fullName}
-                           helperText={errors?.fullName?.message}
-                           disabled={addAddressIsMutating || editAddressIsMutating}
-                        />
-                     </div>
+            <form onSubmit={handleSubmit(formSubmit)} className="space-y-6">
+               <div className="flex flex-1 flex-col gap-1">
+                  <p className="text-sm text-[#7E8AAB]">{t('Post code')}</p>
+                  <TextField
+                     variant="outlined"
+                     fullWidth
+                     color="customPink"
+                     type="number"
+                     sx={{
+                        input: {
+                           MozAppearance: 'textfield',
+                           appearance: 'textfield',
+                           '&::-webkit-inner-spin-button': {
+                              WebkitAppearance: 'none',
+                              appearance: 'none',
+                           },
+                        },
+                     }}
+                     {...register('postCode', {
+                        required: {
+                           value: true,
+                           message: t('This filed is required'),
+                        },
+                     })}
+                     error={!!errors?.postCode}
+                     helperText={errors?.postCode?.message}
+                     disabled={addAddressIsMutating || editAddressIsMutating}
+                  />
+               </div>
 
-                     <div className="flex flex-1 flex-col gap-1">
-                        <p className="text-sm text-[#7E8AAB]">{t('Post code')}</p>
-                        <TextField
-                           variant="outlined"
-                           fullWidth
-                           color="customPink"
-                           type="number"
-                           sx={{
-                              input: {
-                                 MozAppearance: 'textfield',
-                                 appearance: 'textfield',
-                                 '&::-webkit-inner-spin-button': {
-                                    WebkitAppearance: 'none',
-                                    appearance: 'none',
-                                 },
-                              },
-                           }}
-                           {...register('postCode', {
-                              required: {
-                                 value: true,
-                                 message: t('This filed is required'),
-                              },
-                           })}
-                           error={!!errors?.postCode}
-                           helperText={errors?.postCode?.message}
-                           disabled={addAddressIsMutating || editAddressIsMutating}
-                        />
-                     </div>
-                  </div>
+               <div className="flex flex-col gap-1">
+                  <p className="text-sm text-[#7E8AAB]">{t('Your accurate address')}</p>
+                  <TextField
+                     variant="outlined"
+                     fullWidth
+                     multiline
+                     rows={5}
+                     color="customPink"
+                     {...register('fullAddress', {
+                        required: {
+                           value: true,
+                           message: t('This filed is required'),
+                        },
+                     })}
+                     error={!!errors?.fullAddress}
+                     helperText={errors?.fullAddress?.message}
+                     disabled={addAddressIsMutating || editAddressIsMutating}
+                  />
+               </div>
 
-                  <div className="flex flex-col gap-1">
-                     <p className="text-sm text-[#7E8AAB]">{t('Your accurate address')}</p>
+               <p className="my-6 rounded-10 bg-[#F5F8FC] p-4 font-bold">{t('Transferee information')}</p>
+
+               <div className="flex flex-col gap-3 customSm:flex-row">
+                  <div className="flex flex-1 flex-col gap-1">
+                     <p className="text-sm text-[#7E8AAB]">{t('Transferee fullName')}</p>
                      <TextField
                         variant="outlined"
                         fullWidth
-                        multiline
-                        rows={5}
                         color="customPink"
-                        {...register('fullAddress', {
+                        {...register('transfereeFullName', {
                            required: {
                               value: true,
                               message: t('This filed is required'),
                            },
                         })}
-                        error={!!errors?.fullAddress}
-                        helperText={errors?.fullAddress?.message}
+                        error={!!errors?.transfereeFullName}
+                        helperText={errors?.transfereeFullName?.message}
                         disabled={addAddressIsMutating || editAddressIsMutating}
                      />
                   </div>
 
-                  <p className="my-6 rounded-10 bg-[#F5F8FC] p-4 font-bold">{t('Transferee information')}</p>
+                  <div className="flex flex-1 flex-col gap-1">
+                     <p className="text-sm text-[#7E8AAB]">{t('Transferee phoneNumber')}</p>
 
-                  <div className="flex flex-col gap-3 customSm:flex-row">
-                     <div className="flex flex-1 flex-col gap-1">
-                        <p className="text-sm text-[#7E8AAB]">{t('Transferee fullName')}</p>
-                        <TextField
-                           variant="outlined"
-                           fullWidth
-                           color="customPink"
-                           {...register('transfereeFullName', {
-                              required: {
-                                 value: true,
-                                 message: t('This filed is required'),
-                              },
-                           })}
-                           error={!!errors?.transfereeFullName}
-                           helperText={errors?.transfereeFullName?.message}
-                           disabled={addAddressIsMutating || editAddressIsMutating}
+                     <div dir="ltr">
+                        <Controller
+                           control={control}
+                           name="transfereePhoneNumber"
+                           rules={{ required: t('This filed is required') }}
+                           render={({ field: { onChange, value }, fieldState }) => (
+                              <>
+                                 <PhoneInput
+                                    country="ir"
+                                    inputClass="!w-full"
+                                    specialLabel=""
+                                    inputStyle={{
+                                       borderRadius: '10px',
+                                       ...(errors?.transfereePhoneNumber?.message && {
+                                          borderColor: 'red',
+                                       }),
+                                    }}
+                                    value={value}
+                                    onChange={onChange}
+                                    disabled={addAddressIsMutating || editAddressIsMutating}
+                                 />
+
+                                 {fieldState.invalid
+                                    ? errors?.transfereePhoneNumber?.message && (
+                                         <FormHelperText error>{errors?.transfereePhoneNumber?.message}</FormHelperText>
+                                      )
+                                    : null}
+                              </>
+                           )}
                         />
                      </div>
+                  </div>
+               </div>
 
-                     <div className="flex flex-1 flex-col gap-1">
-                        <p className="text-sm text-[#7E8AAB]">{t('Transferee phoneNumber')}</p>
-
-                        <div dir="ltr">
-                           <Controller
-                              control={control}
-                              name="transfereePhoneNumber"
-                              rules={{ required: t('This filed is required') }}
-                              render={({ field: { onChange, value }, fieldState }) => (
-                                 <>
-                                    <PhoneInput
-                                       country="ir"
-                                       inputClass="!w-full"
-                                       specialLabel=""
-                                       inputStyle={{
-                                          borderRadius: '10px',
-                                          ...(errors?.transfereePhoneNumber?.message && {
-                                             borderColor: 'red',
-                                          }),
-                                       }}
-                                       value={value}
-                                       onChange={onChange}
-                                       disabled={addAddressIsMutating || editAddressIsMutating}
-                                    />
-
-                                    {fieldState.invalid
-                                       ? errors?.transfereePhoneNumber?.message && (
-                                            <FormHelperText error>
-                                               {errors?.transfereePhoneNumber?.message}
-                                            </FormHelperText>
-                                         )
-                                       : null}
-                                 </>
-                              )}
-                           />
-                        </div>
-                     </div>
+               <div className="flex flex-col gap-3 customSm:flex-row customSm:items-stretch">
+                  <div className="grow-[2]">
+                     <LoadingButton
+                        variant="contained"
+                        type="submit"
+                        size="large"
+                        color="customPink2"
+                        loading={addAddressIsMutating || editAddressIsMutating}
+                        fullWidth
+                        className="!rounded-10 !p-3 !text-[#B1302E]"
+                     >
+                        {isEdit ? t('Edit address') : t('Add address')}
+                     </LoadingButton>
                   </div>
 
-                  <div className="flex flex-col gap-3 customSm:flex-row customSm:items-stretch">
-                     <div className="grow-[2]">
-                        <LoadingButton
-                           variant="contained"
-                           type="submit"
-                           size="large"
-                           color="customPink2"
-                           loading={addAddressIsMutating || editAddressIsMutating}
-                           fullWidth
-                           className="!rounded-10 !p-3 !text-[#B1302E]"
-                        >
-                           {isEdit ? t('Edit address') : t('Add address')}
-                        </LoadingButton>
-                     </div>
-
-                     <div className="grow-[1]">
-                        <Button
-                           onClick={closeModalHandler}
-                           variant="contained"
-                           fullWidth
-                           className="!h-full !rounded-10 !py-3 !font-bold !text-[#626E94]"
-                           color="borderColor"
-                           disabled={addAddressIsMutating || editAddressIsMutating}
-                        >
-                           {t('Cancel')}
-                        </Button>
-                     </div>
+                  <div className="grow-[1]">
+                     <Button
+                        onClick={closeModalHandler}
+                        variant="contained"
+                        fullWidth
+                        className="!h-full !rounded-10 !py-3 !font-bold !text-[#626E94]"
+                        color="borderColor"
+                        disabled={addAddressIsMutating || editAddressIsMutating}
+                     >
+                        {t('Cancel')}
+                     </Button>
                   </div>
-               </form>
-            </RtlProvider>
+               </div>
+            </form>
          </div>
       </Dialog>
    );

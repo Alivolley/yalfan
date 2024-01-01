@@ -19,7 +19,6 @@ import userProfilePic from '../../../assets/images/userProfile.png';
 
 // Components
 import ProfileLayout from '@/components/layout/profile-layout/profile-layout';
-import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 
 // Apis
 import useChangeProfileImage from '@/apis/profile/useChangeProfileImage';
@@ -105,41 +104,39 @@ function Information() {
                   </div>
 
                   <form onSubmit={handleSubmit(formSubmit)} className="mt-12">
-                     <RtlProvider>
-                        <div className="mb-12 flex flex-col gap-6 customLg:flex-row">
-                           <div className="flex flex-1 flex-col gap-2">
-                              <p className="text-sm text-[#713802]">{t('FullName')}</p>
+                     <div className="mb-12 flex flex-col gap-6 customLg:flex-row">
+                        <div className="flex flex-1 flex-col gap-2">
+                           <p className="text-sm text-[#713802]">{t('FullName')}</p>
 
-                              <TextField
-                                 variant="outlined"
-                                 fullWidth
-                                 color="customPink"
-                                 placeholder={t('Enter your name')}
-                                 {...register('fullName', {
-                                    required: {
-                                       value: true,
-                                       message: t('This filed is required'),
-                                    },
-                                 })}
-                                 error={!!errors?.fullName}
-                                 helperText={errors?.fullName?.message}
-                                 disabled={changeProfileInfoIsMutating}
-                              />
-                           </div>
-
-                           <div className="flex flex-1 flex-col gap-2">
-                              <p className="text-sm text-[#713802]">{t('Phone number')}</p>
-                              <TextField
-                                 variant="outlined"
-                                 fullWidth
-                                 {...register('phoneNumber')}
-                                 error={!!errors?.phoneNumber}
-                                 helperText={errors?.phoneNumber?.message}
-                                 disabled
-                              />
-                           </div>
+                           <TextField
+                              variant="outlined"
+                              fullWidth
+                              color="customPink"
+                              placeholder={t('Enter your name')}
+                              {...register('fullName', {
+                                 required: {
+                                    value: true,
+                                    message: t('This filed is required'),
+                                 },
+                              })}
+                              error={!!errors?.fullName}
+                              helperText={errors?.fullName?.message}
+                              disabled={changeProfileInfoIsMutating}
+                           />
                         </div>
-                     </RtlProvider>
+
+                        <div className="flex flex-1 flex-col gap-2">
+                           <p className="text-sm text-[#713802]">{t('Phone number')}</p>
+                           <TextField
+                              variant="outlined"
+                              fullWidth
+                              {...register('phoneNumber')}
+                              error={!!errors?.phoneNumber}
+                              helperText={errors?.phoneNumber?.message}
+                              disabled
+                           />
+                        </div>
+                     </div>
 
                      <LoadingButton
                         variant="contained"

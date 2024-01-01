@@ -24,16 +24,14 @@ function Address() {
    const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
    const t = useTranslations('addresses');
 
-   console.log(addressData);
-
    return (
       <ProfileLayout>
          <div>
             <div className="flex items-center gap-2 rounded-2xl bg-white p-7">
                <p className="text-lg font-bold text-[#050F2C]">{t('List of your addresses')}</p>
-               {!addressIsLoading && addressData?.total_objects ? (
+               {!addressIsLoading && addressData?.length ? (
                   <p className="flex h-6 w-6 items-center justify-center rounded-full bg-[#D14F4D] text-white">
-                     {addressData?.total_objects}
+                     {addressData?.length}
                   </p>
                ) : null}
             </div>
@@ -44,9 +42,9 @@ function Address() {
                </div>
             ) : (
                <div className="mt-6">
-                  {addressData?.result?.length ? (
+                  {addressData?.length ? (
                      <div className="flex flex-col gap-3">
-                        {addressData?.result?.map(item => (
+                        {addressData?.map(item => (
                            <BasketAddressCard key={item?.id} detail={item} />
                         ))}
                         <Button

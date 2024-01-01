@@ -9,7 +9,6 @@ import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 
 // Components
 import ProfileLayout from '@/components/layout/profile-layout/profile-layout';
-import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 // import OrderCard from '@/components/pages/profile/order-card/order-card';
 
 function Orders() {
@@ -17,10 +16,10 @@ function Orders() {
 
    return (
       <ProfileLayout>
-         <p className="border-b border-solid border-[#E4EAF0] pb-4 font-bold">پیگیری سفارش</p>
+         <div className="rounded-2xl bg-white p-7">
+            <p className="text-lg font-bold text-[#050F2C]">پیگیری سفارش ها</p>
 
-         <div>
-            <RtlProvider>
+            <div className="mt-6 rounded-2xl bg-[#F5F8FC] px-5">
                <Tabs
                   value={tabsValue}
                   onChange={(e, newValue) => setTabsValue(newValue)}
@@ -43,13 +42,13 @@ function Orders() {
                      custompinkhigh="true"
                   />
                </Tabs>
-            </RtlProvider>
-         </div>
+            </div>
 
-         <div className="mt-10 flex flex-wrap items-center gap-5">
-            {/* <OrderCard className="w-[200px]" />
+            <div className="mt-10 flex flex-wrap items-center gap-5">
+               {/* <OrderCard className="w-[200px]" />
             <OrderCard className="w-[200px]" />
             <OrderCard className="w-[200px]" /> */}
+            </div>
          </div>
       </ProfileLayout>
    );
