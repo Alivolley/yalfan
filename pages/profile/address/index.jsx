@@ -1,11 +1,15 @@
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 // MUI
 import { Button, CircularProgress } from '@mui/material';
 
 // Icons
-import AddIcon from '@mui/icons-material/Add';
-import MyLocationIcon from '@mui/icons-material/MyLocation';
+import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
+
+// Assets
+import noAddressPic from '@/assets/images/no-address.png';
 
 // Components
 import ProfileLayout from '@/components/layout/profile-layout/profile-layout';
@@ -18,63 +22,71 @@ import useGetAddress from '@/apis/profile/useGetAddress';
 function Address() {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
    const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
+   const t = useTranslations('addresses');
+
+   console.log(addressData);
 
    return (
       <ProfileLayout>
          <div>
+            <div className="flex items-center gap-2 rounded-2xl bg-white p-7">
+               <p className="text-lg font-bold text-[#050F2C]">{t('List of your addresses')}</p>
+               {!addressIsLoading && addressData?.total_objects ? (
+                  <p className="flex h-6 w-6 items-center justify-center rounded-full bg-[#D14F4D] text-white">
+                     {addressData?.total_objects}
+                  </p>
+               ) : null}
+            </div>
+
             {addressIsLoading ? (
-               <div className="flex items-center justify-center">
+               <div className="mt-6 flex items-center justify-center">
                   <CircularProgress color="customPink" />
                </div>
             ) : (
-               <>
-                  <div className="flex items-center justify-between rounded-2xl bg-[#F5F8FC] px-3 py-2">
-                     <div className="flex items-center gap-2 font-bold">
-                        <MyLocationIcon fontSize="small" />
-                        <p>لیست آدرس های شما</p>
-                     </div>
-                     <div className="hidden customMd:block">
-                        <Button
-                           className="!text-customPink"
-                           startIcon={<AddIcon />}
-                           onClick={() => setShowBasketAddressModal(true)}
-                        >
-                           افزودن آدرس جدید
-                        </Button>
-                     </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                     {addressData?.length ? (
-                        addressData?.map(item => <BasketAddressCard key={item?.id} detail={item} />)
-                     ) : (
-                        <div className="my-10 space-y-3 text-center">
-                           <p className="text-xl font-bold">شما در حال حاضر آدرسی ثبت نکرده اید </p>
-                           <p className="text-sm">
-                              آدرس خود را به لیست آدرس ها اضافه کنید تا در زمان سفارش به راحتی، همیشه از آن استفاده کنید
-                           </p>
-                        </div>
-                     )}
-
-                     <div className="mt-4 customMd:hidden">
+               <div className="mt-6">
+                  {addressData?.result?.length ? (
+                     <div className="flex flex-col gap-3">
+                        {addressData?.result?.map(item => (
+                           <BasketAddressCard key={item?.id} detail={item} />
+                        ))}
                         <Button
                            variant="contained"
                            type="submit"
                            size="large"
-                           color="customPink"
-                           fullWidth
-                           className="!rounded-10 !p-2"
+                           color="customPink2"
+                           className="!mt-3 !rounded-10 !py-3 !text-[#B1302E]"
                            onClick={() => setShowBasketAddressModal(true)}
+                           startIcon={<AddLocationAltOutlinedIcon />}
                         >
-                           <div className="flex w-full items-center justify-between text-[#626E94]">
-                              <p>افزودن آدرس جدید</p>
-
-                              <AddIcon className="rounded-xl bg-[#BDCEDE] p-2 text-[#626E94]" />
-                           </div>
+                           {t('Add new address')}
                         </Button>
                      </div>
-                  </div>
-               </>
+                  ) : (
+                     <div className="mx-auto my-10 flex max-w-[370px] flex-col gap-4 text-center">
+                        <p className="text-xl font-bold">{t('You have not registered an address yet')}</p>
+                        <p className="text-sm text-textColor">
+                           {t(
+                              'Add your address to the list of addresses so that you can always use it easily when ordering'
+                           )}
+                        </p>
+                        <div>
+                           <Image src={noAddressPic} alt="no address" className="h-full w-full object-cover" />
+                        </div>
+                        <Button
+                           variant="contained"
+                           type="submit"
+                           size="large"
+                           color="customPink2"
+                           className="!rounded-10 !py-3 !text-[#B1302E]"
+                           onClick={() => setShowBasketAddressModal(true)}
+                           startIcon={<AddLocationAltOutlinedIcon />}
+                           fullWidth
+                        >
+                           {t('Add new address')}
+                        </Button>
+                     </div>
+                  )}
+               </div>
             )}
          </div>
 

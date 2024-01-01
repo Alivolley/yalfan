@@ -135,5 +135,25 @@
         "This filed is required": "هذه الخانة مطلوبه",
         "Phone number": "رقم التليفون",
         "Edit information": "تعديل المعلومات"
+    },
+    "addresses": {
+        "Add new address": "أضف عنوانًا جديدًا",
+        "Edit address": "تعديل العنوان",
+        "Address information": "معلومات العنوان",
+        "FullName": "الاسم الكامل",
+        "This filed is required": "هذه الخانة مطلوبه",
+        "Post code": "شفرة البريد",
+        "Your accurate address": "عنوانك الدقيق",
+        "Transferee information": "معلومات المنقول إليه",
+        "Transferee fullName": "الاسم الكامل للمحول إليه",
+        "Transferee phoneNumber": "نقل رقم الهاتف",
+        "Add address": "اضف عنوان",
+        "Cancel": "يلغي",
+        "Yes": "نعم",
+        "No": "لا",
+        "Are you sure about deleting this address ?": "هل أنت متأكد من حذف هذا العنوان؟",
+        "List of your addresses": "قائمة العناوين الخاصة بك",
+        "You have not registered an address yet": "لم تقم بتسجيل عنوان بعد",
+        "Add your address to the list of addresses so that you can always use it easily when ordering": "أضف عنوانك إلى قائمة العناوين حتى تتمكن دائمًا من استخدامه بسهولة عند الطلب"
     }
 }

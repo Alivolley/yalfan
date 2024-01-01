@@ -1,13 +1,13 @@
-/* eslint-disable no-self-compare */
-/* eslint-disable no-constant-condition */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react';
 
 // MUI
 import { IconButton } from '@mui/material';
 
 // Icons
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 // Components
 import BasketAddressModal from '../basket-address-modal/basket-address-modal';
@@ -18,12 +18,8 @@ function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, is
    const [showDeleteAddressModal, setShowDeleteAddressModal] = useState(false);
 
    return (
-      <div className="flex items-center justify-between rounded bg-white py-4 customMd:px-8">
-         <button
-            type="button"
-            className="cursor-pointer border-none bg-transparent font-rokhRegular outline-none"
-            onClick={onClick}
-         >
+      <div className="flex items-center justify-between rounded-2xl bg-white p-4 customMd:px-8">
+         <div className="cursor-pointer" onClick={onClick}>
             <div
                className={`flex items-center gap-2 text-base customMd:text-lg ${
                   isActive ? 'font-bold' : 'text-[#626E94]'
@@ -38,17 +34,17 @@ function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, is
                )}
                {detail?.recipient_name}
             </div>
-            <p className={`font-rokhFaNum text-xs customMd:text-sm ${isActive ? '' : 'text-[#626E94]'}`}>
+            <p className={`text-xs customMd:text-sm ${isActive ? '' : 'text-[#626E94]'}`}>
                {detail?.address} - {detail?.phone_number}
             </p>
-         </button>
+         </div>
 
          <div className="flex items-center">
             <IconButton onClick={() => setShowBasketAddressModal(true)}>
-               <BorderColorIcon className="text-sm" />
+               <BorderColorRoundedIcon color="customBlue" className="!text-base" />
             </IconButton>
             <IconButton onClick={() => setShowDeleteAddressModal(true)}>
-               <DeleteForeverOutlinedIcon className="text-base" />
+               <DeleteOutlineIcon className="!text-xl" color="customPinkHigh" />
             </IconButton>
          </div>
 

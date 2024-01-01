@@ -135,5 +135,25 @@
         "This filed is required": "This filed is required",
         "Phone number": "Phone number",
         "Edit information": "Edit information"
+    },
+    "addresses": {
+        "Add new address": "Add new address",
+        "Edit address": "Edit address",
+        "Address information": "Address information",
+        "FullName": "FullName",
+        "This filed is required": "This filed is required",
+        "Post code": "Post code",
+        "Your accurate address": "Your accurate address",
+        "Transferee information": "Transferee information",
+        "Transferee fullName": "Transferee fullName",
+        "Transferee phoneNumber": "Transferee phoneNumber",
+        "Add address": "Add address",
+        "Cancel": "Cancel",
+        "Yes": "Yes",
+        "No": "No",
+        "Are you sure about deleting this address ?": "Are you sure about deleting this address ?",
+        "List of your addresses": "List of your addresses",
+        "You have not registered an address yet": "You have not registered an address yet",
+        "Add your address to the list of addresses so that you can always use it easily when ordering": "Add your address to the list of addresses so that you can always use it easily when ordering"
     }
 }

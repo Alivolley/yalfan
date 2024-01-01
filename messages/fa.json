@@ -135,5 +135,25 @@
         "This filed is required": "این فیلد اجباری است",
         "Phone number": "شماره تلفن همراه",
         "Edit information": "ویرایش اطلاعات"
+    },
+    "addresses": {
+        "Add new address": "اضافه کردن آدرس",
+        "Edit address": "ویرایش آدرس",
+        "Address information": "اطلاعات آدرس",
+        "FullName": "نام و نام خانوادگی",
+        "This filed is required": "این فیلد اجباری است",
+        "Post code": "کد پستی",
+        "Your accurate address": "آدرس دقیق شما",
+        "Transferee information": "اطلاعات تحویل گیرنده",
+        "Transferee fullName": "نام و نام خانوادگی تحویل گیرنده",
+        "Transferee phoneNumber": "شماره موبایل تحویل گیرنده",
+        "Add address": "افزودن آدرس",
+        "Cancel": "بازگشت",
+        "Yes": "بله",
+        "No": "خیر",
+        "Are you sure about deleting this address ?": "آیا از حذف این آدرس مطمئن هستید ؟",
+        "List of your addresses": "لیست آدرس های شما",
+        "You have not registered an address yet": "شما در حال حاضر آدرسی ثبت نکرده اید",
+        "Add your address to the list of addresses so that you can always use it easily when ordering": "آدرس خود را به لیست آدرس ها اضافه کنید تا در زمان سفارش به راحتی، همیشه از آن استفاده کنید"
     }
 }

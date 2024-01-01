@@ -20,7 +20,6 @@ import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 
 // Assets
 import contactUsPic from '@/assets/images/contactUs-vector.png';
-import ContactUsStyle from './contactUs.style';
 
 function ContactUs() {
    const t = useTranslations('contactUs');
@@ -46,7 +45,7 @@ function ContactUs() {
    };
 
    return (
-      <ContactUsStyle className="bg-[#fcf7f7] px-8 py-[60px] customMd:px-16">
+      <div className="bg-[#fcf7f7] px-8 py-[60px] customMd:px-16">
          <Grid container columnSpacing={4}>
             <Grid item xs={12} md={5} lg={3.5}>
                <div className="rounded-2xl bg-white p-5">
@@ -146,7 +145,7 @@ function ContactUs() {
                         </div>
                      </div>
                      <div className="flex flex-col justify-between gap-8 customMd:flex-row customMd:items-start">
-                        <div className="flex-1 space-y-3" id="inputNumber">
+                        <div className="flex-1 space-y-3">
                            <p className="text-sm font-bold text-[#713802]">{t('Phone number')}</p>
 
                            <div dir="ltr" className="mt-14">
@@ -229,7 +228,7 @@ function ContactUs() {
                </div>
             </Grid>
          </Grid>
-      </ContactUsStyle>
+      </div>
    );
 }
 
