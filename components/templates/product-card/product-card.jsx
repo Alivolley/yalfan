@@ -1,5 +1,10 @@
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // MUI
 import { LoadingButton } from '@mui/lab';
@@ -12,8 +17,36 @@ import StarIcon from '@mui/icons-material/Star';
 // Assets
 import ProductCardStyle from './product-card.style';
 
-function ProductCard({ isLiked = false, detail }) {
+// Apis
+import useToggleFavorites from '@/apis/favorites/useToggleFavorites';
+import useGetFavorites from '@/apis/favorites/useGetFavorites';
+
+function ProductCard({ detail }) {
    const t = useTranslations('home');
+   const { locale } = useRouter();
+   const isLogin = useSelector(state => state?.loginStatusReducer);
+
+   const { trigger: toggleFavoriteTrigger, isMutating: toggleFavoriteIsMutating } = useToggleFavorites();
+   const { data: favoritesData } = useGetFavorites(isLogin);
+   const isLiked = favoritesData?.find(item => item?.id === detail?.id);
+
+   const toggleLike = () => {
+      if (isLogin) {
+         toggleFavoriteTrigger(detail?.id);
+      } else {
+         toast.info(t('To add to your favorites , you need to login first'), {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+               fontSize: '14px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   };
 
    return (
       <ProductCardStyle
@@ -34,6 +67,8 @@ function ProductCard({ isLiked = false, detail }) {
                   className="!h-[25px] !w-[25px] !min-w-0 !p-0 customMd:!h-[30px] customMd:!w-[30px]"
                   variant="contained"
                   color="white"
+                  onClick={toggleLike}
+                  loading={toggleFavoriteIsMutating}
                >
                   {isLiked ? <FavoriteIcon color="customPink" /> : <FavoriteBorderIcon color="customPink" />}
                </LoadingButton>

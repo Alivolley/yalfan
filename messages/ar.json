@@ -30,7 +30,8 @@
         "see all products": "رؤية جميع المنتجات",
         "newest": "الأحدث",
         "unit": "$",
-        "Best sellers": "المنتجات الأكثر مبيعا"
+        "Best sellers": "المنتجات الأكثر مبيعا",
+        "To add to your favorites , you need to login first": "للإضافة إلى المفضلة لديك، يجب عليك تسجيل الدخول أولا"
     },
     "footer": {
         "yalfan": "یـلفـــان",
@@ -134,7 +135,9 @@
         "Enter your name": "أدخل أسمك",
         "This filed is required": "هذه الخانة مطلوبه",
         "Phone number": "رقم التليفون",
-        "Edit information": "تعديل المعلومات"
+        "Edit information": "تعديل المعلومات",
+        "Your favorites list": "قائمة المفضلة لديك",
+        "Your favorites list is empty": "قائمة المفضلة الخاصة بك فارغة"
     },
     "addresses": {
         "Add new address": "أضف عنوانًا جديدًا",

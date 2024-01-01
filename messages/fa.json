@@ -30,7 +30,8 @@
         "see all products": "دیدن همه محصولات",
         "newest": "جدید ترین ها",
         "unit": "تومان",
-        "Best sellers": "پرفروش ترین محصولات"
+        "Best sellers": "پرفروش ترین محصولات",
+        "To add to your favorites , you need to login first": "برای افزودن به علاقه مندی ها ، ابتدا وارد حساب کاربری خود شوید"
     },
     "footer": {
         "yalfan": "یـلفـــان",
@@ -134,7 +135,9 @@
         "Enter your name": "نام خود را وارد کنید",
         "This filed is required": "این فیلد اجباری است",
         "Phone number": "شماره تلفن همراه",
-        "Edit information": "ویرایش اطلاعات"
+        "Edit information": "ویرایش اطلاعات",
+        "Your favorites list": "لیست علاقه مندی های شما",
+        "Your favorites list is empty": "لیست علاقه مندی های شما خالی است"
     },
     "addresses": {
         "Add new address": "اضافه کردن آدرس",

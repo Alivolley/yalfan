@@ -30,7 +30,8 @@
         "see all products": "See all products",
         "newest": "newest",
         "unit": "$",
-        "Best sellers": "Best sellers"
+        "Best sellers": "Best sellers",
+        "To add to your favorites , you need to login first": "To add to your favorites , you need to login first"
     },
     "footer": {
         "yalfan": "Yalfan",
@@ -134,7 +135,9 @@
         "Enter your name": "Enter your name",
         "This filed is required": "This filed is required",
         "Phone number": "Phone number",
-        "Edit information": "Edit information"
+        "Edit information": "Edit information",
+        "Your favorites list": "Your favorites list",
+        "Your favorites list is empty": "Your favorites list is empty"
     },
     "addresses": {
         "Add new address": "Add new address",
