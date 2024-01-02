@@ -4,7 +4,8 @@ import { Controller, useForm } from 'react-hook-form';
 import Image from 'next/image';
 
 // MUI
-import { Button, FormHelperText, Grid, TextField } from '@mui/material';
+import { FormHelperText, Grid, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/material.css';
 
@@ -21,14 +22,19 @@ import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 // Assets
 import contactUsPic from '@/assets/images/contactUs-vector.png';
 
+// Apis
+import useContactUs from '@/apis/useContactUs';
+
 function ContactUs() {
    const t = useTranslations('contactUs');
+   const { trigger: contactUsTrigger, isMutating: contactUsIsMutating } = useContactUs();
 
    const {
       register,
       handleSubmit,
       control,
       formState: { errors },
+      reset,
    } = useForm({
       defaultValues: {
          firstName: '',
@@ -41,7 +47,19 @@ function ContactUs() {
    });
 
    const formSubmit = data => {
-      console.log(data);
+      const newMessage = {
+         first_name: data?.firstName,
+         last_name: data?.familyName,
+         phone_number: data?.phoneNumber,
+         email: data?.email,
+         text: data?.message,
+      };
+
+      contactUsTrigger(newMessage, {
+         onSuccess: () => {
+            reset();
+         },
+      });
    };
 
    return (
@@ -213,7 +231,7 @@ function ContactUs() {
                         />
                      </div>
 
-                     <Button
+                     <LoadingButton
                         variant="contained"
                         fullWidth
                         type="submit"
@@ -221,9 +239,10 @@ function ContactUs() {
                         color="customPink2"
                         className="!mt-14 !text-customPinkHigh"
                         startIcon={<ForwardToInboxIcon />}
+                        loading={contactUsIsMutating}
                      >
                         {t('Send message')}
-                     </Button>
+                     </LoadingButton>
                   </form>
                </div>
             </Grid>
