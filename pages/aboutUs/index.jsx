@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -12,11 +15,28 @@ import EastIcon from '@mui/icons-material/East';
 
 // Assets
 import contactUsPic1 from '@/assets/images/contactUsPic1.png';
+import contactUsPic2 from '@/assets/images/contactUsPic2.png';
 import bagIcon from '@/assets/icons/introduce-bag.svg';
+import CategoryCard from '@/components/templates/category-card/category-card';
 
-function AboutUs() {
+function AboutUs({ categoryList, error }) {
    const t = useTranslations('home');
    const { locale } = useRouter();
+
+   useEffect(() => {
+      if (error) {
+         toast.error(error, {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [error]);
 
    return (
       <div className="">
@@ -78,6 +98,42 @@ function AboutUs() {
                </Grid>
             </Grid>
          </div>
+
+         <div className="bg-[#F5F8FC] px-8 py-[70px] customMd:px-16">
+            <div className="space-y-5 text-center">
+               <p className="text-2xl font-bold">محصولات فروشگاه یلفان</p>
+               <p className="text-base leading-[30px] text-[#626E94]">
+                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک{' '}
+               </p>
+            </div>
+            <div className="mt-10 flex items-stretch gap-5 overflow-auto">
+               {categoryList?.map((item, index) => index < 5 && <CategoryCard key={item?.id} detail={item} />)}
+            </div>
+         </div>
+
+         <div className="bg-[#fcf7f7] px-8 py-16 customMd:px-16">
+            <Grid container spacing={{ md: 8 }}>
+               <Grid item xs={12} md={5}>
+                  <div className="h-full w-full">
+                     <Image
+                        src={contactUsPic2}
+                        alt="introduce"
+                        className="h-[250px] w-full object-contain customMd:h-full"
+                     />
+                  </div>
+               </Grid>
+               <Grid item xs={12} md={7}>
+                  <div className="mt-7 flex h-full flex-col justify-center customMd:mt-0">
+                     <p className="text-xl font-bold text-[#000B2C] customMd:text-4xl">
+                        {t('with yalfan')} {t('make great styles')}
+                     </p>
+                     <p className="my-8 text-sm leading-[30px] customMd:text-lg customMd:leading-[40px]">
+                        {t('lorem')} {t('lorem')} {t('lorem')}
+                     </p>
+                  </div>
+               </Grid>
+            </Grid>
+         </div>
       </div>
    );
 }
@@ -85,9 +141,26 @@ function AboutUs() {
 export default AboutUs;
 
 export async function getStaticProps(context) {
-   return {
-      props: {
-         messages: (await import(`../../messages/${context.locale}.json`)).default,
-      },
-   };
+   try {
+      const categoryList = await axios('https://yalfantest.pythonanywhere.com/api/store/categories/list_create/', {
+         params: {
+            lang: context.locale,
+         },
+      }).then(res => res.data);
+
+      return {
+         props: {
+            messages: (await import(`../../messages/${context.locale}.json`)).default,
+            categoryList,
+         },
+         revalidate: 600,
+      };
+   } catch (error) {
+      return {
+         props: {
+            messages: (await import(`../../messages/${context.locale}.json`)).default,
+            error: error?.message,
+         },
+      };
+   }
 }
