@@ -256,7 +256,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
 
                <div className="mt-5 flex flex-col items-start gap-4 pb-5 text-sm text-textColor">
                   <Link href="/faqs">{t('any question')}</Link>
-                  <Link href="/">{t('about us')}</Link>
+                  <Link href="/aboutUs">{t('about us')}</Link>
                   <Link href="/contactUs">{t('contact us')}</Link>
                </div>
             </div>
