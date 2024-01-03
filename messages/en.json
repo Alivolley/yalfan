@@ -158,5 +158,27 @@
         "List of your addresses": "List of your addresses",
         "You have not registered an address yet": "You have not registered an address yet",
         "Add your address to the list of addresses so that you can always use it easily when ordering": "Add your address to the list of addresses so that you can always use it easily when ordering"
+    },
+    "orders": {
+        "Track orders": "Track orders",
+        "All": "All",
+        "Sending": "Sending",
+        "Delivered": "Delivered",
+        "Returned": "Returned",
+        "Your order list is empty": "Your order list is empty",
+        "Place your first order now": "Place your first order now",
+        "Products count": "Products count",
+        "Order registration date": "Order registration date",
+        "The total amount": "The total amount",
+        "Show order detail": "Show order detail",
+        "unit": "$",
+        "Order detail": "Order detail",
+        "Order status": "Order status",
+        "Order code": "Order code",
+        "Receiver": "Receiver",
+        "Phone number": "Phone number",
+        "Receiver address": "Receiver Address",
+        "Order description": "Order description",
+        "Products": "Products"
     }
 }

@@ -158,5 +158,27 @@
         "List of your addresses": "قائمة العناوين الخاصة بك",
         "You have not registered an address yet": "لم تقم بتسجيل عنوان بعد",
         "Add your address to the list of addresses so that you can always use it easily when ordering": "أضف عنوانك إلى قائمة العناوين حتى تتمكن دائمًا من استخدامه بسهولة عند الطلب"
+    },
+    "orders": {
+        "Track orders": "تتبع الطلبات",
+        "All": "الجميع",
+        "Sending": "إرسال",
+        "Delivered": "تم التوصيل",
+        "Returned": "عاد",
+        "Your order list is empty": "قائمة الطلبات الخاصة بك فارغة",
+        "Place your first order now": "ضع طلبك الأول الآن",
+        "Products count": "عدد المنتجات",
+        "Order registration date": "تاريخ تسجيل الطلب",
+        "The total amount": "المبلغ الإجمالي للطلب",
+        "Show order detail": "عرض تفاصيل الطلب",
+        "unit": "$",
+        "Order detail": "تفاصيل الطلب",
+        "Order status": "حالة الطلب",
+        "Order code": "رمز الطلب",
+        "Receiver": "المتلقي",
+        "Phone number": "رقم التليفون",
+        "Receiver address": "عنوان المستلم",
+        "Order description": "وصف الطلب",
+        "Products": "منتجات"
     }
 }

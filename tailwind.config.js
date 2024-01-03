@@ -18,6 +18,7 @@ module.exports = {
             customXs: '350px',
             customSm: '600px',
             customMd: '900px',
+            custom1100: '1100px',
             customLg: '1200px',
             customXl: '1400px',
          },

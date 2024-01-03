@@ -158,5 +158,27 @@
         "List of your addresses": "لیست آدرس های شما",
         "You have not registered an address yet": "شما در حال حاضر آدرسی ثبت نکرده اید",
         "Add your address to the list of addresses so that you can always use it easily when ordering": "آدرس خود را به لیست آدرس ها اضافه کنید تا در زمان سفارش به راحتی، همیشه از آن استفاده کنید"
+    },
+    "orders": {
+        "Track orders": "پیگیری سفارش ها",
+        "All": "همه",
+        "Sending": "در حال ارسال",
+        "Delivered": "تحویل داده شده",
+        "Returned": "مرجوعی",
+        "Your order list is empty": "لیست سفارش های شما خالی است",
+        "Place your first order now": "برای ثبت اولین سفارش خود همین الان اقدام کن",
+        "Products count": "تعداد کالاها",
+        "Order registration date": "تاریخ ثبت سفارش",
+        "The total amount": "مبلغ کل سفارش",
+        "Show order detail": "نمایش جزییات سفارش",
+        "unit": "تومان",
+        "Order detail": "جزییات سفارش",
+        "Order status": "وضعیت سفارش",
+        "Order code": "کد سفارش",
+        "Receiver": "گیرنده",
+        "Phone number": "شماره تماس",
+        "Receiver address": "آدرس گیرنده",
+        "Order description": "توضیحات سفارش",
+        "Products": "محصولات"
     }
 }
