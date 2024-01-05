@@ -72,8 +72,6 @@ function ProductDetail({ error, productDetail, categoryItems }) {
    const isInCart = basketData?.orders?.find(item => item?.product_color_id === chosenColor?.id);
    const chosenColorStock = productDetail?.colors?.find(item => item?.id === chosenColor?.id)?.stock;
 
-   console.log(productDetail);
-
    useEffect(() => {
       if (error) {
          toast.error(error, {

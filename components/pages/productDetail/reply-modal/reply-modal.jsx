@@ -79,7 +79,7 @@ function ReplyModal({ closeModal, open, detail, commentsMutate }) {
                      },
                   })}
                   error={!!errors?.replyMessage}
-                  helperText={t('Example: Thank you for your opinion and...')}
+                  helperText={t('Example reply')}
                />
 
                <div className="mt-8 flex items-stretch gap-2">

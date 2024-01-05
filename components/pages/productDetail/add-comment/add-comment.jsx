@@ -89,7 +89,7 @@ function AddComment({ productDetail, commentsMutate }) {
                },
             })}
             error={!!errors?.comment}
-            helperText={t('Example: quality and price, order items, order packaging, etc.')}
+            helperText={t('Example add comment')}
          />
 
          <div className="mt-8 customSm:max-w-[300px]">

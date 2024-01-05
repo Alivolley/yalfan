@@ -28,8 +28,6 @@ function Comment({ detail, commentsMutate }) {
    const userInfo = useSelector(state => state?.userInfoReducer);
    const t = useTranslations('productDetail');
 
-   console.log(userInfo);
-
    const { trigger: deleteCommentTrigger, isMutating: deleteCommentIsMutating } = useDeleteComment();
 
    const deleteCommentHandler = () => {
