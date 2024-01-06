@@ -1,4 +1,6 @@
 /* eslint-disable no-restricted-globals */
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 import { useTranslations } from 'next-intl';
 
 // MUI
@@ -7,10 +9,46 @@ import { LoadingButton } from '@mui/lab';
 // Icons
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
-function PaymentSummery({ detail }) {
+// Apis
+import useSendAddress from '@/apis/basket/useSendAddress';
+
+function PaymentSummery({ detail, setBasketStep, basketStep, chosenAddress, orderDescription }) {
    const t = useTranslations('basket');
+   const { locale } = useRouter();
+   const { trigger: sendAddressTrigger, isMutating: sendAddressIsMutating } = useSendAddress();
 
    console.log(detail);
+
+   const processHandler = () => {
+      if (basketStep === 1) {
+         setBasketStep(2);
+         window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+         });
+      }
+
+      if (basketStep === 2 && chosenAddress) {
+         console.log('payment');
+         const addressDetail = {
+            address: chosenAddress?.id,
+            order_description: orderDescription,
+         };
+
+         sendAddressTrigger(addressDetail);
+      } else if (basketStep === 2) {
+         toast.info('آدرس خود را وارد و انتخاب کنید', {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   };
 
    return (
       <div>
@@ -57,7 +95,9 @@ function PaymentSummery({ detail }) {
             <p className="text-sm text-textColor">{t('Final price')}</p>
             <div className="flex items-center gap-1">
                <p className="font-bold">
-                  {(Number(detail?.final_price) + Number(detail?.shipping_cost)).toLocaleString()}
+                  {isNaN(detail?.shipping_cost)
+                     ? detail?.final_price
+                     : (Number(detail?.final_price) + Number(detail?.shipping_cost)).toLocaleString()}
                </p>
                <p className="text-textColor">{t('unit')}</p>
             </div>
@@ -69,6 +109,8 @@ function PaymentSummery({ detail }) {
             fullWidth
             size="large"
             className="!rounded-10 !py-3 !text-white"
+            onClick={processHandler}
+            loading={sendAddressIsMutating}
          >
             {t('Continue the payment process')}
          </LoadingButton>

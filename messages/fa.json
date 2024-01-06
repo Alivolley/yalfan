@@ -31,7 +31,8 @@
         "newest": "جدید ترین ها",
         "unit": "تومان",
         "Best sellers": "پرفروش ترین محصولات",
-        "To add to your favorites , you need to login first": "برای افزودن به علاقه مندی ها ، ابتدا وارد حساب کاربری خود شوید"
+        "To add to your favorites , you need to login first": "برای افزودن به علاقه مندی ها ، ابتدا وارد حساب کاربری خود شوید",
+        "Unavailable": "ناموجود"
     },
     "footer": {
         "yalfan": "یـلفـــان",
@@ -243,6 +244,15 @@
         "Final price": "مبلغ نهایی",
         "Continue the payment process": "ادامه فرایند پرداخت",
         "Chosen color": "رنگ انتخاب شده",
-        "Max": "حداکثر"
+        "Max": "حداکثر",
+        "Add discount code": "اضافه کردن کد تخفیف",
+        "Discount code": "کد تخفیف",
+        "Apply the code": "اعمال کد",
+        "Cancel": "بازگشت",
+        "Your addresses list": "لیست آدرس های شما",
+        "Add new address": "اضافه کردن آدرس جدید",
+        "You have not registered an address yet": "شما در حال حاضر آدرسی ثبت نکرده اید",
+        "Add your address to the list of addresses": "آدرس خود را به لیست آدرس ها اضافه کنید",
+        "Order description ( optional )": "توضیحات سفارش ( اختیاری )"
     }
 }

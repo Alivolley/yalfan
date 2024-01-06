@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 import { ToastContainer } from 'react-toastify';
 
 // MUI
@@ -42,20 +43,23 @@ function Loading() {
 }
 
 function AppLayout({ children }) {
-   const router = useRouter();
-   const direction = router.locale === 'en' ? 'ltr' : 'rtl';
-   const themeConfig = createTheme(getDesignTokens('light', direction, router.locale));
+   const { mutate } = useSWRConfig();
+   const { locale } = useRouter();
+   const direction = locale === 'en' ? 'ltr' : 'rtl';
+   const themeConfig = createTheme(getDesignTokens('light', direction, locale));
 
    useEffect(() => {
-      Cookies.set('NEXT_LOCALE', router.locale, { expires: 365 });
-   }, [router.locale]);
+      Cookies.set('NEXT_LOCALE', locale, { expires: 365 });
+
+      mutate(() => true);
+   }, [locale]);
 
    return (
       <Provider store={store}>
          <ThemeProvider theme={themeConfig}>
             <ToastContainer />
             <Loading />
-            <PagesLayout dir={direction} language={router.locale}>
+            <PagesLayout dir={direction} language={locale}>
                {children}
             </PagesLayout>
          </ThemeProvider>

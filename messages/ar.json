@@ -31,7 +31,8 @@
         "newest": "الأحدث",
         "unit": "$",
         "Best sellers": "المنتجات الأكثر مبيعا",
-        "To add to your favorites , you need to login first": "للإضافة إلى المفضلة لديك، يجب عليك تسجيل الدخول أولا"
+        "To add to your favorites , you need to login first": "للإضافة إلى المفضلة لديك، يجب عليك تسجيل الدخول أولا",
+        "Unavailable": "غير متوفره"
     },
     "footer": {
         "yalfan": "یـلفـــان",
@@ -243,6 +244,15 @@
         "Final price": "السعر النهائي",
         "Continue the payment process": "مواصلة عملية الدفع",
         "Chosen color": "اللون المختار",
-        "Max": "الأعلى"
+        "Max": "الأعلى",
+        "Add discount code": "إضافة رمز الخصم",
+        "Discount code": "الرقم التسلسلي للخصم",
+        "Apply the code": "قم بتطبيق الكود",
+        "Cancel": "يلغي",
+        "Your addresses list": "قائمة العناوين الخاصة بك",
+        "Add new address": "أضف عنوانًا جديدًا",
+        "You have not registered an address yet": "لم تقم بتسجيل عنوان بعد",
+        "Add your address to the list of addresses": "أضف عنوانك إلى قائمة العناوين",
+        "Order description ( optional )": "وصف الطلب ( خياري )"
     }
 }

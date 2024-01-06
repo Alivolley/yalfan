@@ -92,7 +92,7 @@ function ProductCard({ detail }) {
                <p className="h-[22px] overflow-hidden text-sm font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box] customMd:text-base">
                   {detail?.title}
                </p>
-               {detail?.percentage ? (
+               {detail?.colors && detail?.percentage ? (
                   <p className="whitespace-nowrap text-10 text-[#7E95B0] line-through customMd:text-xs">
                      {Number(detail?.before_discount_price).toLocaleString()} {t('unit')}
                   </p>
@@ -103,7 +103,7 @@ function ProductCard({ detail }) {
                   {detail?.category}
                </p>
                <p className="whitespace-nowrap text-[13px] text-customPinkHigh customMd:text-base">
-                  {Number(detail?.price).toLocaleString()} {t('unit')}
+                  {detail?.colors ? `${Number(detail?.price).toLocaleString()} ${t('unit')}` : t('Unavailable')}
                </p>
             </div>
          </Link>

@@ -31,7 +31,8 @@
         "newest": "newest",
         "unit": "$",
         "Best sellers": "Best sellers",
-        "To add to your favorites , you need to login first": "To add to your favorites , you need to login first"
+        "To add to your favorites , you need to login first": "To add to your favorites , you need to login first",
+        "Unavailable": "Unavailable"
     },
     "footer": {
         "yalfan": "Yalfan",
@@ -243,6 +244,15 @@
         "Final price": "Final price",
         "Continue the payment process": "Continue the payment process",
         "Chosen color": "Chosen color",
-        "Max": "Max"
+        "Max": "Max",
+        "Add discount code": "Add discount code",
+        "Discount code": "Discount code",
+        "Apply the code": "Apply the code",
+        "Cancel": "Cancel",
+        "Your addresses list": "Your addresses list",
+        "Add new address": "Add new address",
+        "You have not registered an address yet": "You have not registered an address yet",
+        "Add your address to the list of addresses": "Add your address to the list of addresses",
+        "Order description ( optional )": "Order description ( optional )"
     }
 }

@@ -2,7 +2,7 @@ import useSWRMutation from 'swr/mutation';
 import { useSWRConfig } from 'swr';
 import axiosInstance from '@/configs/axiosInstance';
 
-const useChangeDelivery = () => {
+const useSendAddress = () => {
    const { mutate } = useSWRConfig();
    return useSWRMutation('store/cart/get_update/', (url, data) =>
       axiosInstance.patch(url, data.arg).then(res => {
@@ -12,4 +12,4 @@ const useChangeDelivery = () => {
    );
 };
 
-export default useChangeDelivery;
+export default useSendAddress;
