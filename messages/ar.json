@@ -225,5 +225,24 @@
         "Similar products": "منتجات مماثلة",
         "Show all": "عرض الكل",
         "The product is not available": "المنتج غير متوفر"
+    },
+    "basket": {
+        "Basket": "سلة",
+        "Your basket is empty": "سلتك فارغة",
+        "Proceed to buy now": "المضي قدما في الشراء الآن",
+        "Shop": "محل",
+        "Are you sure to delete the entire shopping cart?": "هل أنت متأكد من حذف سلة التسوق بأكملها؟",
+        "Payment info": "معلومات الدفع",
+        "Products count": "عدد المنتجات",
+        "Product": "منتج",
+        "Products Price": "أسعار المنتجات",
+        "unit": "$",
+        "Discount price": "سعر الخصم",
+        "Price after discount": "السعر بعد الخصم",
+        "Shipping cost": "تكلفة الشحن",
+        "Final price": "السعر النهائي",
+        "Continue the payment process": "مواصلة عملية الدفع",
+        "Chosen color": "اللون المختار",
+        "Max": "الأعلى"
     }
 }

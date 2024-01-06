@@ -27,6 +27,8 @@ function Orders() {
 
    const { data: cardsData, isLoading: cardsIsLoading } = useGetCards(tabsValue);
 
+   // console.log(cardsData);
+
    return (
       <ProfileLayout>
          <div className="rounded-2xl bg-white p-7">

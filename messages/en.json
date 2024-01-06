@@ -225,5 +225,24 @@
         "Similar products": "Similar products",
         "Show all": "Show all",
         "The product is not available": "The product is not available"
+    },
+    "basket": {
+        "Basket": "Basket",
+        "Your basket is empty": "Your basket is empty",
+        "Proceed to buy now": "Proceed to buy now",
+        "Shop": "Shop",
+        "Are you sure to delete the entire shopping cart?": "Are you sure to delete the entire shopping cart?",
+        "Payment info": "Payment info",
+        "Products count": "Products count",
+        "Product": "Product",
+        "Products Price": "Products Price",
+        "unit": "$",
+        "Discount price": "Discount price",
+        "Price after discount": "Price after discount",
+        "Shipping cost": "Shipping cost",
+        "Final price": "Final price",
+        "Continue the payment process": "Continue the payment process",
+        "Chosen color": "Chosen color",
+        "Max": "Max"
     }
 }

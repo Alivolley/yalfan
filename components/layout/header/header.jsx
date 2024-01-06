@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 
 // MUI
 import {
+   Badge,
    Button,
    ClickAwayListener,
    Fab,
@@ -49,6 +50,7 @@ import ProfileDropdown from '@/components/templates/profile-dropdown/profile-dro
 
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
+import useGetBasket from '@/apis/basket/useGetBasket';
 
 function Header({ language, isLogin }) {
    const [showLanguageSelector, setShowLanguageSelector] = useState(false);
@@ -63,6 +65,7 @@ function Header({ language, isLogin }) {
    const userInfo = useSelector(state => state?.userInfoReducer);
    // eslint-disable-next-line no-unused-vars
    const getUserInfo = useGetUserInfo(isUserLogin);
+   const { data: basketData } = useGetBasket(isUserLogin);
 
    const t = useTranslations('header');
    const router = useRouter();
@@ -230,7 +233,24 @@ function Header({ language, isLogin }) {
                      }}
                      color="white"
                   >
-                     <ShoppingBasketOutlinedIcon />
+                     <Badge
+                        badgeContent={basketData?.all_orders_count}
+                        color="error"
+                        anchorOrigin={{
+                           vertical: 'bottom',
+                           horizontal: 'left',
+                        }}
+                        sx={{
+                           '& .MuiBadge-badge': {
+                              fontSize: 10,
+                              width: 16,
+                              height: 16,
+                              minWidth: 16,
+                           },
+                        }}
+                     >
+                        <ShoppingBasketOutlinedIcon />
+                     </Badge>
                   </Fab>
                </Link>
 
@@ -361,7 +381,24 @@ function Header({ language, isLogin }) {
                         }}
                         color="customPinkLow"
                      >
-                        <ShoppingBasketOutlinedIcon />
+                        <Badge
+                           badgeContent={basketData?.all_orders_count}
+                           color="error"
+                           anchorOrigin={{
+                              vertical: 'bottom',
+                              horizontal: 'left',
+                           }}
+                           sx={{
+                              '& .MuiBadge-badge': {
+                                 fontSize: 10,
+                                 width: 16,
+                                 height: 16,
+                                 minWidth: 16,
+                              },
+                           }}
+                        >
+                           <ShoppingBasketOutlinedIcon />
+                        </Badge>
                      </Fab>
                   </Link>
                )}

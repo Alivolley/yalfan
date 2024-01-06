@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 
 // MUI
-import { Backdrop, CircularProgress, ThemeProvider, createTheme } from '@mui/material';
+import { Backdrop, ThemeProvider, createTheme } from '@mui/material';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -12,6 +12,7 @@ import store from '@/store/store';
 
 // Components
 import PagesLayout from '../pages-layout/pages-layout';
+import LoadingComponent from '@/components/templates/loading-component/loading-component';
 
 // Styles
 import getDesignTokens from '@/configs/theme';
@@ -35,7 +36,7 @@ function Loading() {
 
    return (
       <Backdrop sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }} open={loading}>
-         <CircularProgress color="inherit" />
+         <LoadingComponent />
       </Backdrop>
    );
 }

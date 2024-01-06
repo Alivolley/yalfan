@@ -225,5 +225,24 @@
         "Similar products": "محصولات مشابه",
         "Show all": "مشاهده همه",
         "The product is not available": "محصول موجود نیست"
+    },
+    "basket": {
+        "Basket": "سبد خرید",
+        "Your basket is empty": "سبد خرید شما خالی است",
+        "Proceed to buy now": "برای خرید همین حالا اقدام کن",
+        "Shop": "فروشگاه",
+        "Are you sure to delete the entire shopping cart?": "آیا از حذف کل سبد خرید مطمئن هستید ؟",
+        "Payment info": "اطلاعات پرداخت",
+        "Products count": "تعداد کالاها",
+        "Product": "محصول",
+        "Products Price": "قیمت محصولات",
+        "unit": "تومان",
+        "Discount price": "میزان تخفیف",
+        "Price after discount": "مبلغ بعد از تخفیف",
+        "Shipping cost": "هزینه ارسال",
+        "Final price": "مبلغ نهایی",
+        "Continue the payment process": "ادامه فرایند پرداخت",
+        "Chosen color": "رنگ انتخاب شده",
+        "Max": "حداکثر"
     }
 }
