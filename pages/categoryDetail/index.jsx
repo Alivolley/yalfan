@@ -306,10 +306,15 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
                      >
                         <Tab label={t('All')} value="" className="!normal-case" custompinkhigh="true" />
                         <Tab label={t('Newest')} value="created" className="!normal-case" custompinkhigh="true" />
-                        <Tab label={t('Cheapest')} value="price" className="!normal-case" custompinkhigh="true" />
+                        <Tab
+                           label={t('Cheapest')}
+                           value={`${locale === 'fa' ? 'rial_price' : 'dollar_price'}`}
+                           className="!normal-case"
+                           custompinkhigh="true"
+                        />
                         <Tab
                            label={t('Most expensive')}
-                           value="-price"
+                           value={`${locale === 'fa' ? '-rial_price' : '-dollar_price'}`}
                            className="!normal-case"
                            custompinkhigh="true"
                         />
@@ -338,9 +343,9 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
                   >
                      {sortingValue === 'created'
                         ? t('Newest')
-                        : sortingValue === 'price'
+                        : sortingValue === `${locale === 'fa' ? 'rial_price' : 'dollar_price'}`
                           ? t('Cheapest')
-                          : sortingValue === '-price'
+                          : sortingValue === `${locale === 'fa' ? '-rial_price' : '-dollar_price'}`
                             ? t('Most expensive')
                             : sortingValue === 'sales'
                               ? t('Best sellers')

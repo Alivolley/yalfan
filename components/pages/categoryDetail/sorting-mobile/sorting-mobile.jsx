@@ -47,10 +47,16 @@ function SortingMobile({ open, onClose, setSortingValue }) {
                <Button color="textColor" onClick={() => changeSortHandler('created')}>
                   {t('Newest')}
                </Button>
-               <Button color="textColor" onClick={() => changeSortHandler('price')}>
+               <Button
+                  color="textColor"
+                  onClick={() => changeSortHandler(locale === 'fa' ? 'rial_price' : 'dollar_price')}
+               >
                   {t('Cheapest')}
                </Button>
-               <Button color="textColor" onClick={() => changeSortHandler('-price')}>
+               <Button
+                  color="textColor"
+                  onClick={() => changeSortHandler(locale === 'fa' ? '-rial_price' : '-dollar_price')}
+               >
                   {t('Most expensive')}
                </Button>
                <Button color="textColor" onClick={() => changeSortHandler('sales')}>
