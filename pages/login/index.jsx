@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // MUI
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import PhoneInput from 'react-phone-input-2';
@@ -24,27 +24,30 @@ import CountdownLogin from '@/components/templates/countdown-Login/countdown-Log
 
 // Apis
 import useVerificationCode from '@/apis/login/useVerificationCode';
+import useSendCode from '@/apis/login/useSendCode';
+import useSendPassword from '@/apis/login/useSendPassword';
 
 function Login() {
    const [loginStep, setLoginStep] = useState(1);
    const [phoneNumber, setPhoneNumber] = useState('');
    const [codeValue, setCodeValue] = useState('');
+   const [passwordValue, setPasswordValue] = useState('');
    const [disableResend, setDisableResend] = useState(true);
    const router = useRouter();
 
    const { trigger: verificationCodeTrigger, isMutating: verificationCodeIsMutating } = useVerificationCode();
+   const { trigger: sendCodeTrigger, isMutating: sendCodeIsMutating } = useSendCode();
+   const { trigger: sendPasswordTrigger, isMutating: sendPasswordIsMutating } = useSendPassword();
 
    const t = useTranslations('login');
 
    const sendPhoneNumber = () => {
       if (phoneNumber) {
-         // setLoginStep(2);
-         // console.log(phoneNumber);
          verificationCodeTrigger(
             { phone_number: phoneNumber },
             {
                onSuccess: () => {
-                  router.back();
+                  setLoginStep(2);
                },
             }
          );
@@ -52,7 +55,35 @@ function Login() {
    };
 
    const sendCode = () => {
-      // console.log(codeValue);
+      const newData = {
+         phone_number: phoneNumber,
+         code: codeValue,
+      };
+
+      sendCodeTrigger(newData, {
+         onSuccess: res => {
+            console.log(res);
+            if (!res.is_admin) {
+               router.back();
+            } else {
+               setLoginStep(3);
+            }
+         },
+      });
+   };
+
+   const sendPassword = () => {
+      const newData = {
+         phone_number: phoneNumber,
+         code: codeValue,
+         password: passwordValue,
+      };
+
+      sendPasswordTrigger(newData, {
+         onSuccess: () => {
+            router.back();
+         },
+      });
    };
 
    return (
@@ -93,7 +124,7 @@ function Login() {
                      />
                   </div>
                </>
-            ) : (
+            ) : loginStep === 2 ? (
                <>
                   <div className="mt-10">
                      <p className="text-xl font-bold customMd:text-2xl">{t('Login with one time password')}</p>
@@ -104,8 +135,8 @@ function Login() {
                         startIcon={<BorderColorIcon className="!text-sm" />}
                         size="small"
                         onClick={() => {
-                           setCodeValue('');
                            setLoginStep(1);
+                           setCodeValue('');
                         }}
                      >
                         {t('Edit phone number')}
@@ -115,7 +146,7 @@ function Login() {
                      <MuiOtpInput
                         value={codeValue}
                         onChange={e => setCodeValue(e)}
-                        length={6}
+                        length={4}
                         dir="ltr"
                         TextFieldsProps={{
                            type: 'number',
@@ -135,7 +166,42 @@ function Login() {
                      <CountdownLogin initialCount={130} onComplete={() => setDisableResend(false)} />
                   </div>
                </>
-            )}
+            ) : loginStep === 3 ? (
+               <>
+                  <div className="mt-10">
+                     <p className="text-xl font-bold customMd:text-2xl">
+                        {/* {t('signup')} */}
+                        شماره شما یک ادمین است
+                     </p>
+                     <p className="mb-3 mt-5 text-sm text-textColor customMd:text-base">
+                        {/* {t('To login yalfan enter your number first')} */}
+                        لطفا رمز عبور خود را وارد کنید
+                     </p>
+                     <Button
+                        startIcon={<BorderColorIcon className="!text-sm" />}
+                        size="small"
+                        onClick={() => {
+                           setLoginStep(1);
+                           setCodeValue('');
+                           setPasswordValue('');
+                        }}
+                     >
+                        {t('Edit phone number')}
+                     </Button>
+                  </div>
+
+                  <div className="mt-14">
+                     <TextField
+                        variant="outlined"
+                        fullWidth
+                        color="customPink"
+                        label="رمز عبور"
+                        value={passwordValue}
+                        onChange={e => setPasswordValue(e.target.value)}
+                     />
+                  </div>
+               </>
+            ) : null}
 
             <div className="space-y-4 self-end">
                {loginStep === 2 && (
@@ -148,6 +214,8 @@ function Login() {
                      type="submit"
                      endIcon={<CachedIcon />}
                      disabled={disableResend}
+                     onClick={sendPhoneNumber}
+                     loading={verificationCodeIsMutating}
                   >
                      {t('Resend the code')}
                   </LoadingButton>
@@ -159,8 +227,16 @@ function Login() {
                   variant="contained"
                   size="large"
                   color="customPink"
-                  onClick={loginStep === 1 ? sendPhoneNumber : sendCode}
-                  loading={verificationCodeIsMutating}
+                  onClick={
+                     loginStep === 1
+                        ? sendPhoneNumber
+                        : loginStep === 2
+                          ? sendCode
+                          : loginStep === 3
+                            ? sendPassword
+                            : null
+                  }
+                  loading={verificationCodeIsMutating || sendCodeIsMutating || sendPasswordIsMutating}
                >
                   {t('Proceed')}
                </LoadingButton>

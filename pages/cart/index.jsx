@@ -25,6 +25,7 @@ import AddAddressSection from '@/components/pages/basket/add-address-section/add
 // Apis
 import useGetBasket from '@/apis/basket/useGetBasket';
 import useDeleteBasket from '@/apis/basket/useDeleteBasket';
+import useApplyCode from '@/apis/basket/useApplyCode';
 
 function Cart() {
    const [basketStep, setBasketStep] = useState(1);
@@ -39,6 +40,7 @@ function Cart() {
    const { locale } = useRouter();
    const { data: basketData } = useGetBasket(isLogin);
    const { trigger: deleteBasketTrigger, isMutating: deleteBasketIsMutating } = useDeleteBasket();
+   const { trigger: applyCodeTrigger, isMutating: applyCodeIsMutating } = useApplyCode();
 
    const t = useTranslations('basket');
 
@@ -56,14 +58,19 @@ function Cart() {
       });
    };
 
-   const enableDiscountHandler = () => {
-      if (discountValue.trim()) {
-         //
-      }
+   const closeDiscountModalHandler = () => {
+      setDiscountValue('');
+      setShowDiscountModal(false);
    };
 
-   const closeDiscountModalHandler = () => {
-      setShowDiscountModal(false);
+   const enableDiscountHandler = () => {
+      if (discountValue.trim()) {
+         applyCodeTrigger(discountValue, {
+            onSuccess: () => {
+               closeDiscountModalHandler();
+            },
+         });
+      }
    };
 
    return (
@@ -172,8 +179,10 @@ function Cart() {
                      color="customPink2"
                      fullWidth
                      onClick={enableDiscountHandler}
-                     //  loading={deleteAddressIsMutating}
-                     className="!flex-[2] !whitespace-nowrap !rounded-10 !text-[#B1302E]"
+                     loading={applyCodeIsMutating}
+                     className={`!flex-[2] !whitespace-nowrap !rounded-10 !text-[#B1302E] ${
+                        applyCodeIsMutating ? '!text-transparent' : ''
+                     }`}
                   >
                      {t('Apply the code')}
                   </LoadingButton>
@@ -184,7 +193,7 @@ function Cart() {
                      fullWidth
                      className="!flex-[1] !rounded-10"
                      onClick={closeDiscountModalHandler}
-                     //  disabled={deleteAddressIsMutating}
+                     disabled={applyCodeIsMutating}
                   >
                      {t('Cancel')}
                   </Button>
