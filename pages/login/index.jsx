@@ -154,6 +154,13 @@ function Login() {
                         TextFieldsProps={{
                            type: 'number',
                         }}
+                        onKeyDown={e => {
+                           if (e.key === 'Enter') {
+                              if (codeValue.length === 4) {
+                                 sendCode();
+                              }
+                           }
+                        }}
                         sx={{
                            input: {
                               MozAppearance: 'textfield',
