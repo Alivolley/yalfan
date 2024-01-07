@@ -115,7 +115,10 @@
         "Edit phone number": "Edit phone number",
         "Until resend the code": "Until resend the code",
         "Resend the code": "Resend the code",
-        "Proceed": "Proceed"
+        "Proceed": "Proceed",
+        "Your number is an admin number": "Your number is an admin number",
+        "Please enter your password": "Please enter your password",
+        "Password": "Password"
     },
     "search": {
         "Results for :": "Results for :",

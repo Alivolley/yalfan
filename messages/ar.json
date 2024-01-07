@@ -115,7 +115,10 @@
         "Edit phone number": "تحرير رقم",
         "Until resend the code": "حتى إعادة إرسال الرمز",
         "Resend the code": "احصل على رمز التأكيد مرة أخرى",
-        "Proceed": "يتابع"
+        "Proceed": "يتابع",
+        "Your number is an admin number": "رقمك هو رقم المشرف",
+        "Please enter your password": "من فضلك أدخل رقمك السري",
+        "Password": "كلمة المرور"
     },
     "search": {
         "Results for :": "نتائج ل :",

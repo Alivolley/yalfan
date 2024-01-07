@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // MUI
-import { Button, TextField } from '@mui/material';
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import PhoneInput from 'react-phone-input-2';
@@ -14,6 +14,8 @@ import 'react-phone-input-2/lib/material.css';
 // Icons
 import CachedIcon from '@mui/icons-material/Cached';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // Assets
 import LoginStyle from './login.style';
@@ -33,6 +35,7 @@ function Login() {
    const [codeValue, setCodeValue] = useState('');
    const [passwordValue, setPasswordValue] = useState('');
    const [disableResend, setDisableResend] = useState(true);
+   const [showPassword, setShowPassword] = useState(false);
    const router = useRouter();
 
    const { trigger: verificationCodeTrigger, isMutating: verificationCodeIsMutating } = useVerificationCode();
@@ -169,13 +172,9 @@ function Login() {
             ) : loginStep === 3 ? (
                <>
                   <div className="mt-10">
-                     <p className="text-xl font-bold customMd:text-2xl">
-                        {/* {t('signup')} */}
-                        شماره شما یک ادمین است
-                     </p>
+                     <p className="text-xl font-bold customMd:text-2xl">{t('Your number is an admin number')}</p>
                      <p className="mb-3 mt-5 text-sm text-textColor customMd:text-base">
-                        {/* {t('To login yalfan enter your number first')} */}
-                        لطفا رمز عبور خود را وارد کنید
+                        {t('Please enter your password')}
                      </p>
                      <Button
                         startIcon={<BorderColorIcon className="!text-sm" />}
@@ -190,15 +189,32 @@ function Login() {
                      </Button>
                   </div>
 
-                  <div className="mt-14">
-                     <TextField
-                        variant="outlined"
-                        fullWidth
-                        color="customPink"
-                        label="رمز عبور"
-                        value={passwordValue}
-                        onChange={e => setPasswordValue(e.target.value)}
-                     />
+                  <div className="mt-10">
+                     <FormControl variant="outlined" fullWidth>
+                        <InputLabel color="customPink">{t('Password')}</InputLabel>
+                        <OutlinedInput
+                           type={showPassword ? 'text' : 'password'}
+                           color="customPink"
+                           autoComplete="off"
+                           value={passwordValue}
+                           onChange={e => setPasswordValue(e.target.value)}
+                           onKeyDown={e => {
+                              if (e.key === 'Enter') {
+                                 if (passwordValue) {
+                                    sendPassword();
+                                 }
+                              }
+                           }}
+                           endAdornment={
+                              <InputAdornment position="end">
+                                 <IconButton onClick={() => setShowPassword(prev => !prev)} edge="end">
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                 </IconButton>
+                              </InputAdornment>
+                           }
+                           label={t('Password')}
+                        />
+                     </FormControl>
                   </div>
                </>
             ) : null}

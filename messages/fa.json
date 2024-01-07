@@ -115,7 +115,10 @@
         "Edit phone number": "ویرایش شماره",
         "Until resend the code": "تا ارسال مجدد کد",
         "Resend the code": "دریافت مجدد کد تایید",
-        "Proceed": "ادامه"
+        "Proceed": "ادامه",
+        "Your number is an admin number": "شماره شما یه ادمین است",
+        "Please enter your password": "لطفا رمز عبور خود را وارد کنید",
+        "Password": "رمز عبور"
     },
     "search": {
         "Results for :": "نتایج جستجو برای :",
