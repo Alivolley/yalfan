@@ -259,7 +259,9 @@
         "Add your address to the list of addresses": "أضف عنوانك إلى قائمة العناوين",
         "Order description ( optional )": "وصف الطلب ( خياري )",
         "Enter or select your address": "أدخل أو حدد عنوانك",
-        "Discount code percent": "رمز الخصم في المئة"
+        "Discount code percent": "رمز الخصم في المئة",
+        "Code registered successfully": "تم تسجيل الكود بنجاح",
+        "Code is not valid": "الرمز غير صالح"
     },
     "adminPanel": {
         "Products": "منتجات",

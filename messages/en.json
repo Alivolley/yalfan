@@ -259,7 +259,9 @@
         "Add your address to the list of addresses": "Add your address to the list of addresses",
         "Order description ( optional )": "Order description ( optional )",
         "Enter or select your address": "Enter or select your address",
-        "Discount code percent": "Discount code percent"
+        "Discount code percent": "Discount code percent",
+        "Code registered successfully": "Code registered successfully",
+        "Code is not valid": "Code is not valid"
     },
     "adminPanel": {
         "Products": "Products",

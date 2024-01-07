@@ -40,7 +40,12 @@ function Cart() {
    const { locale } = useRouter();
    const { data: basketData } = useGetBasket(isLogin);
    const { trigger: deleteBasketTrigger, isMutating: deleteBasketIsMutating } = useDeleteBasket();
-   const { trigger: applyCodeTrigger, isMutating: applyCodeIsMutating } = useApplyCode();
+
+   const closeDiscountModalHandler = () => {
+      setDiscountValue('');
+      setShowDiscountModal(false);
+   };
+   const { trigger: applyCodeTrigger, isMutating: applyCodeIsMutating } = useApplyCode(closeDiscountModalHandler);
 
    const t = useTranslations('basket');
 
@@ -58,18 +63,9 @@ function Cart() {
       });
    };
 
-   const closeDiscountModalHandler = () => {
-      setDiscountValue('');
-      setShowDiscountModal(false);
-   };
-
    const enableDiscountHandler = () => {
       if (discountValue.trim()) {
-         applyCodeTrigger(discountValue, {
-            onSuccess: () => {
-               closeDiscountModalHandler();
-            },
-         });
+         applyCodeTrigger(discountValue);
       }
    };
 

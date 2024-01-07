@@ -259,7 +259,9 @@
         "Add your address to the list of addresses": "آدرس خود را به لیست آدرس ها اضافه کنید",
         "Order description ( optional )": "توضیحات سفارش ( اختیاری )",
         "Enter or select your address": "آدرس خود را وارد یا انتخاب کنید",
-        "Discount code percent": "درصد کد تخفیف"
+        "Discount code percent": "درصد کد تخفیف",
+        "Code registered successfully": "کد با موفقیت اعمال شد",
+        "Code is not valid": "کد وارد شده معتبر نیست"
     },
     "adminPanel": {
         "Products": "محصولات",
