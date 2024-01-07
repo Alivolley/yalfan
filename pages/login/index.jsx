@@ -65,7 +65,6 @@ function Login() {
 
       sendCodeTrigger(newData, {
          onSuccess: res => {
-            console.log(res);
             if (!res.is_admin) {
                router.back();
             } else {

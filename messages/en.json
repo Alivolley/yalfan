@@ -18,7 +18,8 @@
         "My address": "My address",
         "Track orders": "Track orders",
         "Favorites": "Favorites",
-        "Log out": "Log out"
+        "Log out": "Log out",
+        "Admin panel": "Admin panel"
     },
     "home": {
         "with yalfan": "with yalfan",
@@ -259,5 +260,10 @@
         "Order description ( optional )": "Order description ( optional )",
         "Enter or select your address": "Enter or select your address",
         "Discount code percent": "Discount code percent"
+    },
+    "adminPanel": {
+        "Products": "Products",
+        "Orders": "Orders",
+        "Log out": "Log out"
     }
 }

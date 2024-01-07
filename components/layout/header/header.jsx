@@ -68,8 +68,7 @@ function Header({ language, isLogin }) {
    const { data: basketData } = useGetBasket(isUserLogin);
 
    const t = useTranslations('header');
-   const router = useRouter();
-   const { pathname, asPath, query } = router;
+   const { pathname, asPath, query, push, locale } = useRouter();
    const [languageRef] = useOnClickOutside(() => setShowLanguageSelector(false));
 
    useEffect(() => {
@@ -95,20 +94,20 @@ function Header({ language, isLogin }) {
    });
 
    useEffect(() => {
-      if (router.query?.productName) {
-         setValue('searchInput', router.query.productName);
+      if (query?.productName) {
+         setValue('searchInput', query.productName);
       } else {
          setValue('searchInput', '');
       }
-   }, [router.query]);
+   }, [query]);
 
    const formSubmit = data => {
-      router.push(`/search?productName=${data.searchInput}&page=1`);
+      push(`/search?productName=${data.searchInput}&page=1`);
       setShowSearchSection(false);
    };
 
    const changeLanguage = lang => {
-      router.push({ pathname, query }, asPath, { locale: lang });
+      push({ pathname, query }, asPath, { locale: lang });
       setShowLanguageSelector(false);
       setShowLanguageDropDown(false);
    };
@@ -291,6 +290,7 @@ function Header({ language, isLogin }) {
                         profileDropDown={profileDropDown}
                         setProfileDropDown={setProfileDropDown}
                         profileRef={profileRef}
+                        isAdmin={userInfo?.is_admin}
                      />
                   </>
                )}
@@ -472,7 +472,7 @@ function Header({ language, isLogin }) {
          <MobileMenu
             open={showMobileMenu}
             onClose={() => setShowMobileMenu(false)}
-            locale={router.locale}
+            locale={locale}
             isUserLogin={isUserLogin}
          />
       </header>

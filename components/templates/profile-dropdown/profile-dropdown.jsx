@@ -11,11 +11,12 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import IsoIcon from '@mui/icons-material/Iso';
 
 // Components
 import LogoutModal from '../logout-modal/logout-modal';
 
-function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef }) {
+function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAdmin }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
    const t = useTranslations('header');
 
@@ -38,9 +39,20 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef }) {
                >
                   <Paper>
                      <div className="flex flex-col rounded-md bg-customPink">
+                        {isAdmin && (
+                           <Link
+                              href="/adminPanel/products"
+                              className="flex items-center gap-1 p-3 text-sm text-white transition-all duration-150 hover:bg-customPink2 hover:text-black"
+                              onClick={() => setProfileDropDown(false)}
+                           >
+                              <IsoIcon fontSize="small" />
+                              {t('Admin panel')}
+                           </Link>
+                        )}
                         <Link
                            href="/profile/information"
-                           className="flex items-center gap-1 p-3 text-sm text-white transition-all duration-150 hover:bg-customPink2 hover:text-black"
+                           className="flex items-center gap-1 border-t border-solid border-[#E4EAF0] p-3 text-sm text-white transition-all
+                            duration-150 hover:bg-customPink2 hover:text-black"
                            onClick={() => setProfileDropDown(false)}
                         >
                            <PersonOutlinedIcon fontSize="small" />

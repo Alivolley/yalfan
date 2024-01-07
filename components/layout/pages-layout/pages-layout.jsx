@@ -9,7 +9,7 @@ import Header from '../header/header';
 import RtlProvider from '../rtlProvider/rtlProvider';
 
 function PagesLayout({ children, dir, language }) {
-   const router = useRouter();
+   const { pathname } = useRouter();
    const isLogin = useSelector(state => state?.loginStatusReducer);
 
    return (
@@ -19,9 +19,11 @@ function PagesLayout({ children, dir, language }) {
          id="pageLayout"
       >
          <RtlProvider isRtl={language !== 'en'}>
-            {router.pathname !== '/login' && <Header language={language} isLogin={isLogin} />}
+            {pathname !== '/login' && !pathname.startsWith('/adminPanel') && (
+               <Header language={language} isLogin={isLogin} />
+            )}
             <main>{children}</main>
-            {router.pathname !== '/login' && <Footer language={language} />}
+            {pathname !== '/login' && !pathname.startsWith('/adminPanel') && <Footer language={language} />}
          </RtlProvider>
       </div>
    );

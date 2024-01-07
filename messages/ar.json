@@ -18,7 +18,8 @@
         "My address": "عنواني",
         "Track orders": "تتبع الطلبات",
         "Favorites": "المفضلة",
-        "Log out": "تسجيل خروج"
+        "Log out": "تسجيل خروج",
+        "Admin panel": "لوحة الادارة"
     },
     "home": {
         "with yalfan": "مع يالفان",
@@ -259,5 +260,10 @@
         "Order description ( optional )": "وصف الطلب ( خياري )",
         "Enter or select your address": "أدخل أو حدد عنوانك",
         "Discount code percent": "رمز الخصم في المئة"
+    },
+    "adminPanel": {
+        "Products": "منتجات",
+        "Orders": "طلبات",
+        "Log out": "تسجيل خروج"
     }
 }

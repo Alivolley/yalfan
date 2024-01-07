@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import {
    Accordion,
@@ -23,6 +26,7 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import IsoIcon from '@mui/icons-material/Iso';
 
 // Icons
 import CloseIcon from '@mui/icons-material/Close';
@@ -46,6 +50,8 @@ import useCategories from '@/apis/categories/useCategories';
 function MobileMenu({ open, onClose, locale, isUserLogin }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
    const router = useRouter();
+   const userInfo = useSelector(state => state?.userInfoReducer);
+
    const t = useTranslations('header');
 
    const { data: categoryList } = useCategories();
@@ -129,6 +135,15 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                         </AccordionSummary>
                         <AccordionDetails>
                            <div className="-mt-4 flex flex-col items-start">
+                              {userInfo?.is_admin && (
+                                 <Link
+                                    href="/adminPanel/products"
+                                    className="flex w-full items-center gap-1 border-b border-solid border-[#E4EAF0] p-3 text-sm text-textColor"
+                                 >
+                                    <IsoIcon fontSize="small" />
+                                    {t('Admin panel')}
+                                 </Link>
+                              )}
                               <Link
                                  href="/profile/information"
                                  className="flex w-full items-center gap-1 border-b border-solid border-[#E4EAF0] p-3 text-sm text-textColor"

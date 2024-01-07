@@ -17,8 +17,6 @@ function PaymentSummery({ detail, setBasketStep, basketStep, chosenAddress, orde
    const { locale } = useRouter();
    const { trigger: sendAddressTrigger, isMutating: sendAddressIsMutating } = useSendAddress();
 
-   console.log(detail);
-
    const processHandler = () => {
       if (basketStep === 1) {
          setBasketStep(2);

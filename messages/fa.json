@@ -18,7 +18,8 @@
         "My address": "آدرس های من",
         "Track orders": "پیگیری سفارش ها",
         "Favorites": "علاقه مندی ها",
-        "Log out": "خروج از حساب کاربری"
+        "Log out": "خروج از حساب کاربری",
+        "Admin panel": "پنل ادمین"
     },
     "home": {
         "with yalfan": "با یــلفـان",
@@ -259,5 +260,10 @@
         "Order description ( optional )": "توضیحات سفارش ( اختیاری )",
         "Enter or select your address": "آدرس خود را وارد یا انتخاب کنید",
         "Discount code percent": "درصد کد تخفیف"
+    },
+    "adminPanel": {
+        "Products": "محصولات",
+        "Orders": "سفارش ها",
+        "Log out": "خروج از حساب کاربری"
     }
 }
