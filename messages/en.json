@@ -256,6 +256,8 @@
         "Add new address": "Add new address",
         "You have not registered an address yet": "You have not registered an address yet",
         "Add your address to the list of addresses": "Add your address to the list of addresses",
-        "Order description ( optional )": "Order description ( optional )"
+        "Order description ( optional )": "Order description ( optional )",
+        "Enter or select your address": "Enter or select your address",
+        "Discount code percent": "Discount code percent"
     }
 }

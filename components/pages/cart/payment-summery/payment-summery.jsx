@@ -37,7 +37,7 @@ function PaymentSummery({ detail, setBasketStep, basketStep, chosenAddress, orde
 
          sendAddressTrigger(addressDetail);
       } else if (basketStep === 2) {
-         toast.info('آدرس خود را وارد و انتخاب کنید', {
+         toast.info(t('Enter or select your address'), {
             style: {
                direction: locale === 'en' ? 'ltr' : 'rtl',
                fontFamily:
@@ -69,6 +69,12 @@ function PaymentSummery({ detail, setBasketStep, basketStep, chosenAddress, orde
                   <p className="text-textColor">{t('unit')}</p>
                </div>
             </div>
+            {detail?.percentage_discount_code > 0 && (
+               <div className="flex items-center justify-between text-[#F2485D]">
+                  <p className="text-sm">{t('Discount code percent')}</p>
+                  <p>% {detail?.percentage_discount_code}</p>
+               </div>
+            )}
             <div className="flex items-center justify-between text-[#F2485D]">
                <p className="text-sm">{t('Discount price')}</p>
                <p>

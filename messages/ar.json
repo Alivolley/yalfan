@@ -256,6 +256,8 @@
         "Add new address": "أضف عنوانًا جديدًا",
         "You have not registered an address yet": "لم تقم بتسجيل عنوان بعد",
         "Add your address to the list of addresses": "أضف عنوانك إلى قائمة العناوين",
-        "Order description ( optional )": "وصف الطلب ( خياري )"
+        "Order description ( optional )": "وصف الطلب ( خياري )",
+        "Enter or select your address": "أدخل أو حدد عنوانك",
+        "Discount code percent": "رمز الخصم في المئة"
     }
 }

@@ -170,6 +170,13 @@ function Cart() {
                      color="customPink"
                      value={discountValue}
                      onChange={e => setDiscountValue(e.target.value)}
+                     onKeyDown={e => {
+                        if (e.key === 'Enter') {
+                           if (discountValue) {
+                              enableDiscountHandler();
+                           }
+                        }
+                     }}
                   />
                </div>
 

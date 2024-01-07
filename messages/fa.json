@@ -256,6 +256,8 @@
         "Add new address": "اضافه کردن آدرس جدید",
         "You have not registered an address yet": "شما در حال حاضر آدرسی ثبت نکرده اید",
         "Add your address to the list of addresses": "آدرس خود را به لیست آدرس ها اضافه کنید",
-        "Order description ( optional )": "توضیحات سفارش ( اختیاری )"
+        "Order description ( optional )": "توضیحات سفارش ( اختیاری )",
+        "Enter or select your address": "آدرس خود را وارد یا انتخاب کنید",
+        "Discount code percent": "درصد کد تخفیف"
     }
 }
