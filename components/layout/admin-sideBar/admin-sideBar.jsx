@@ -51,7 +51,7 @@ function AdminSideBar({ isMobile, onClose }) {
       <aside
          className={`h-fit shrink-0 rounded-b-2xl bg-white px-8 py-4 transition-all duration-500 customMd:p-8 ${
             isSideBarOpen ? 'customXs:w-[330px]' : 'w-[137px]'
-         } ${isMobile ? 'customMd:hidden' : 'hidden customMd:block'}`}
+         } ${isMobile ? 'customMd:hidden' : 'sticky top-0 z-[2] hidden customMd:block'}`}
       >
          <div className="flex justify-end customMd:hidden">
             <IconButton onClick={onClose}>

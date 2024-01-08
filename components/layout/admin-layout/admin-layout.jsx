@@ -34,7 +34,7 @@ function AdminLayout({ children }) {
    };
 
    return (
-      <div className="flex bg-[#f5f8fc]">
+      <div className="relative flex bg-[#f5f8fc]">
          <AdminSideBar />
 
          <Drawer
@@ -46,8 +46,8 @@ function AdminLayout({ children }) {
             <AdminSideBar isMobile onClose={() => setShowMobileMenu(false)} />
          </Drawer>
 
-         <div className="grow">
-            <div className="flex items-center justify-between bg-white p-8 customMd:px-16">
+         <div className="w-full customMd:grow">
+            <div className="sticky top-0 z-[2] flex w-full items-center justify-between bg-white px-8 py-4 customMd:px-16 customMd:py-8">
                <div className="hidden customMd:block">
                   <IconButton onClick={() => dispatch(toggleStatusStatus())}>
                      {isSideBarOpen ? (
@@ -142,7 +142,7 @@ function AdminLayout({ children }) {
                   </Popper>
                </div>
             </div>
-            <div className="p-8 py-6 customMd:px-16">{children}</div>
+            <div className="w-full p-8">{children}</div>
          </div>
       </div>
    );
