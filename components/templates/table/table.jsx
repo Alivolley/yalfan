@@ -1,7 +1,5 @@
-import { useRouter } from 'next/router';
-
 // MUI
-import { CircularProgress, FormControl, MenuItem, Pagination, Select, Tooltip } from '@mui/material';
+import { CircularProgress, FormControl, MenuItem, Pagination, Select } from '@mui/material';
 
 // Assets
 import TableStyle from './table.style';
@@ -17,8 +15,6 @@ function Table({
    countValue,
    setCountValue,
 }) {
-   const { locale } = useRouter();
-
    const tableRowCalculator = (limit, page, index) => limit * page - (limit - 1) + index;
 
    return (
@@ -41,33 +37,19 @@ function Table({
                   </thead>
                   <tbody>
                      {rows?.map((row, rowIndex) => (
-                        <Tooltip
-                           key={row?.id}
-                           followCursor
-                           title={
-                              <div
-                                 className="hidden items-center gap-2 px-1 customMd:flex"
-                                 dir={locale === 'en' ? 'ltr' : 'rtl'}
-                              >
-                                 <p className="text-xs text-customBlue">زمان ثبت :</p>
-                                 <p className="text-10 text-black">{row?.created}</p>
-                              </div>
-                           }
-                        >
-                           <tr>
-                              {columns?.map((column, colIndex) =>
-                                 colIndex === 0 ? (
-                                    <td key={column?.id} className="text-center text-sm">
-                                       {tableRowCalculator(countValue, pageStatus, rowIndex)}
-                                    </td>
-                                 ) : (
-                                    <td key={column?.id} className="text-center text-sm">
-                                       {!column?.renderCell ? row?.[column?.key] : column?.renderCell(row)}
-                                    </td>
-                                 )
-                              )}
-                           </tr>
-                        </Tooltip>
+                        <tr key={row?.id}>
+                           {columns?.map((column, colIndex) =>
+                              colIndex === 0 ? (
+                                 <td key={column?.id} className="text-center text-sm">
+                                    {tableRowCalculator(countValue, pageStatus, rowIndex)}
+                                 </td>
+                              ) : (
+                                 <td key={column?.id} className="text-center text-sm">
+                                    {!column?.renderCell ? row?.[column?.key] : column?.renderCell(row)}
+                                 </td>
+                              )
+                           )}
+                        </tr>
                      ))}
                   </tbody>
                </table>

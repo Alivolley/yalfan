@@ -103,10 +103,10 @@ const getDesignTokens = (mode, direction, language) => ({
       MuiTooltip: {
          styleOverrides: {
             tooltip: {
-               backgroundColor: 'white',
-               borderRadius: '5px',
+               backgroundColor: '#F5F8FC',
                padding: '5px',
-               boxShadow: '0px 0px 5px 5px #C2C2C2',
+               border: '1px solid #DFEBF1',
+               boxShadow: '0px 5px 20px 0px #B0C3D31A',
             },
          },
       },
