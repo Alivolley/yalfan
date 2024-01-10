@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -16,18 +17,44 @@ import PercentIcon from '@mui/icons-material/Percent';
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
+import ConfirmModal from '@/components/templates/confirm-modal/confirm-modal';
+import AddEditProductModal from '@/components/pages/adminPanel/addEditProductModal/addEditProductModal';
 
 // Apis
 import useGetProducts from '@/apis/pAdmin/products/useGetProducts';
+import useDeleteProduct from '@/apis/pAdmin/products/useDeleteProduct';
 
 function Products() {
    const { locale } = useRouter();
+   const [showDeleteProductModal, setShowDeleteProductModal] = useState(false);
+   const [showAddEditProductModal, setShowAddEditProductModal] = useState(false);
+   const [chosenProductForDelete, setChosenProductForDelete] = useState();
    const [pageStatus, setPageStatus] = useState(1);
    const [countValue, setCountValue] = useState(6);
+   const t = useTranslations('productDetail');
 
    const { data: productsData, isLoading: productIsLoading } = useGetProducts(pageStatus, countValue);
+   const { trigger: deleteProductTrigger, isMutating: deleteProductIsMutating } = useDeleteProduct(
+      pageStatus,
+      countValue
+   );
 
    // console.log(productsData);
+
+   const closeAddEditProductModalHandler = () => {
+      setShowAddEditProductModal(false);
+   };
+
+   const closeDeleteProductModalHandler = () => {
+      setShowDeleteProductModal(false);
+      setChosenProductForDelete();
+   };
+
+   const deleteProductHandler = () => {
+      deleteProductTrigger(chosenProductForDelete, {
+         onSuccess: () => closeDeleteProductModalHandler(),
+      });
+   };
 
    const columns = [
       { id: 1, title: 'ردیف', key: 'index' },
@@ -124,7 +151,13 @@ function Products() {
                      <MoreVertOutlinedIcon fontSize="small" />
                   </IconButton>
                </Tooltip>
-               <IconButton size="small">
+               <IconButton
+                  size="small"
+                  onClick={() => {
+                     setChosenProductForDelete(data?.title);
+                     setShowDeleteProductModal(true);
+                  }}
+               >
                   <DeleteOutlineOutlinedIcon fontSize="small" />
                </IconButton>
             </div>
@@ -142,7 +175,11 @@ function Products() {
                   <p className="font-bold">لیست محصولات</p>
                </div>
 
-               <Button startIcon={<AddCircleOutlinedIcon />} color="customPinkHigh">
+               <Button
+                  startIcon={<AddCircleOutlinedIcon />}
+                  color="customPinkHigh"
+                  onClick={() => setShowAddEditProductModal(true)}
+               >
                   افزودن محصول
                </Button>
             </div>
@@ -164,6 +201,16 @@ function Products() {
                />
             </div>
          </div>
+
+         <ConfirmModal
+            open={showDeleteProductModal}
+            closeModal={closeDeleteProductModalHandler}
+            title={t('Are you sure to delete this comment?')}
+            confirmHandler={deleteProductHandler}
+            confirmLoading={deleteProductIsMutating}
+         />
+
+         <AddEditProductModal show={showAddEditProductModal} onClose={closeAddEditProductModalHandler} />
       </AdminLayout>
    );
 }

@@ -423,7 +423,7 @@ function Header({ language, isLogin }) {
                </Button>
 
                <div
-                  className={`absolute start-0 top-full z-[1] max-h-[350px] w-[700px] overflow-auto rounded-2xl bg-white p-5 transition-all duration-300 ${
+                  className={`absolute start-0 top-full z-[1] w-[700px] rounded-2xl bg-white p-5 transition-all duration-300 ${
                      showCategoriesMenu ? 'visible opacity-100' : 'invisible opacity-0'
                   }`}
                   style={{

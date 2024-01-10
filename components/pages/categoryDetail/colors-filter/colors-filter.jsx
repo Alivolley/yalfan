@@ -88,7 +88,7 @@ function ColorsFilter({ chosenColor, setChosenColor }) {
                            }
                         >
                            <Fab
-                              className="!h-full !min-h-0 !w-full !rounded-full"
+                              className="!h-full !min-h-0 !w-full !rounded-full !border !border-solid !border-[#00000048]"
                               sx={{ backgroundColor: item.color, ':hover': { backgroundColor: item.color } }}
                               onClick={() =>
                                  setChosenColor(prev => (prev === item.color.slice(1) ? '' : item.color.slice(1)))

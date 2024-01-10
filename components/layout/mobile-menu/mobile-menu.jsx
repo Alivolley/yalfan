@@ -14,6 +14,7 @@ import {
    AccordionDetails,
    AccordionSummary,
    Button,
+   CircularProgress,
    Drawer,
    FormControl,
    IconButton,
@@ -46,15 +47,19 @@ import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
 // Apis
 import useCategories from '@/apis/categories/useCategories';
+import useGetProductsCategory from '@/apis/categories/useGetProductsCategory';
 
 function MobileMenu({ open, onClose, locale, isUserLogin }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
+   const [expanded, setExpanded] = useState(false);
+
    const router = useRouter();
    const userInfo = useSelector(state => state?.userInfoReducer);
 
    const t = useTranslations('header');
 
    const { data: categoryList } = useCategories();
+   const { data: productsCategoryList, isLoading: productsCategoryIsLoading } = useGetProductsCategory(expanded);
 
    const { register, handleSubmit, setValue } = useForm({
       defaultValues: {
@@ -74,6 +79,10 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
          setValue('searchInput', '');
       }
    }, [router.query]);
+
+   const handleAccordionChange = panel => (event, isExpanded) => {
+      setExpanded(isExpanded ? panel : false);
+   };
 
    return (
       <Drawer anchor="left" open={open} onClose={onClose} dir={locale === 'en' ? 'ltr' : 'rtl'}>
@@ -190,50 +199,47 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                            </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                           <div className="ms-[-15px] border-s border-solid border-[#B1302E] pe-8 ps-3">
-                              {categoryList?.map(
-                                 item =>
-                                    item?.sub_cats && (
-                                       <Accordion key={item.id} sx={{ boxShadow: 'none' }}>
-                                          <AccordionSummary
-                                             expandIcon={<ExpandMoreIcon color="customBlue" />}
-                                             sx={{ padding: '0 !important' }}
-                                          >
-                                             <div className="flex items-center gap-2 text-sm text-customBlue">
-                                                <div className="h-1 w-1 rounded-full bg-customBlue" />
-                                                {item?.title}
-                                             </div>
-                                          </AccordionSummary>
-                                          <AccordionDetails>
-                                             {item?.sub_cats?.map(innerItem => (
-                                                <Link
-                                                   href={`/categoryDetail?category=${innerItem?.title}`}
-                                                   className="flex items-center gap-2 py-2 text-sm text-customBlue"
-                                                   id="arrowIcon"
-                                                   key={innerItem.id}
-                                                >
-                                                   <div className="h-1 w-1 rounded-full bg-customBlue" />
-                                                   {innerItem?.title}
-                                                </Link>
-                                             ))}
-                                          </AccordionDetails>
-                                       </Accordion>
-                                    )
-                              )}
-                              {categoryList?.map(
-                                 item =>
-                                    !item?.sub_cats && (
-                                       <Link
-                                          href={`/categoryDetail?category=${item?.title}`}
-                                          className="flex items-center gap-2 py-2 text-sm text-customBlue"
-                                          id="arrowIcon"
-                                          key={item.id}
-                                       >
+                           <div className="ms-[-15px] border-s border-solid border-customPink pe-8 ps-3">
+                              {categoryList?.map(item => (
+                                 <Accordion
+                                    key={item.id}
+                                    sx={{ boxShadow: 'none' }}
+                                    expanded={expanded === item.title}
+                                    onChange={handleAccordionChange(item.title)}
+                                 >
+                                    <AccordionSummary
+                                       expandIcon={<ExpandMoreIcon color="customBlue" />}
+                                       sx={{ padding: '0 !important' }}
+                                    >
+                                       <div className="flex items-center gap-2 text-sm text-customBlue">
                                           <div className="h-1 w-1 rounded-full bg-customBlue" />
                                           {item?.title}
-                                       </Link>
-                                    )
-                              )}
+                                       </div>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                       {productsCategoryIsLoading ? (
+                                          <div className="flex w-full items-center justify-center">
+                                             <CircularProgress
+                                                color="customPink"
+                                                sx={{ width: '25px !important', height: '25px !important' }}
+                                             />
+                                          </div>
+                                       ) : (
+                                          productsCategoryList?.result?.map(innerItem => (
+                                             <Link
+                                                href={`/productDetail/${innerItem?.title}`}
+                                                className="flex items-center gap-2 py-2 text-sm text-customBlue"
+                                                id="arrowIcon"
+                                                key={innerItem.id}
+                                             >
+                                                <div className="h-1 w-1 rounded-full bg-customBlue" />
+                                                {innerItem?.title}
+                                             </Link>
+                                          ))
+                                       )}
+                                    </AccordionDetails>
+                                 </Accordion>
+                              ))}
                            </div>
                         </AccordionDetails>
                      </Accordion>
