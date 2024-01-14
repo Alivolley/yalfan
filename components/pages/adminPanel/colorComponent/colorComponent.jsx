@@ -17,7 +17,7 @@ function ColorComponent({ colorsAndCount, setColorsAndCount, detail }) {
             style={{ backgroundColor: detail?.color }}
             className="h-5 w-5 rounded-full border border-solid border-[#00000048]"
          />
-         {checkValue && (
+         {(checkValue || !!matchItem) && (
             <div className="mt-2 flex h-6 w-9 items-center justify-center">
                <input
                   type="number"
@@ -32,7 +32,7 @@ function ColorComponent({ colorsAndCount, setColorsAndCount, detail }) {
             </div>
          )}
          <Checkbox
-            value={checkValue}
+            value={checkValue || !!matchItem}
             onChange={(e, newValue) => {
                if (newValue) {
                   setColorsAndCount(prev => [...prev, { color: detail?.color, stock: 0 }]);
@@ -44,7 +44,7 @@ function ColorComponent({ colorsAndCount, setColorsAndCount, detail }) {
                }
                setCheckValue(newValue);
             }}
-            checked={checkValue}
+            checked={checkValue || !!matchItem}
             size="small"
          />
       </ColorComponentStyle>

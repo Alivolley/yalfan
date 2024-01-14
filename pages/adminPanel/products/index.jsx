@@ -29,6 +29,7 @@ function Products() {
    const [showDeleteProductModal, setShowDeleteProductModal] = useState(false);
    const [showAddEditProductModal, setShowAddEditProductModal] = useState(false);
    const [chosenProductForDelete, setChosenProductForDelete] = useState();
+   const [chosenProductForEdit, setChosenProductForEdit] = useState();
    const [pageStatus, setPageStatus] = useState(1);
    const [countValue, setCountValue] = useState(6);
    const t = useTranslations('productDetail');
@@ -43,6 +44,7 @@ function Products() {
 
    const closeAddEditProductModalHandler = () => {
       setShowAddEditProductModal(false);
+      setChosenProductForEdit();
    };
 
    const closeDeleteProductModalHandler = () => {
@@ -133,29 +135,33 @@ function Products() {
          title: 'عملیات',
          key: 'actions',
          renderCell: data => (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
                <Tooltip
                   title={
-                     <div className="flex items-center gap-3" dir={locale === 'en' ? 'ltr' : 'rtl'}>
-                        <p
-                           className={`flex items-center justify-center ${
-                              data?.discount_percent
-                                 ? 'rounded-full bg-green-500 p-0.5 text-sm'
-                                 : 'text-base text-black'
-                           }`}
-                        >
-                           <PercentIcon fontSize="inherit" />
-                        </p>
-                        <IconButton size="small">
-                           <BorderColorOutlinedIcon fontSize="inherit" />
-                        </IconButton>
-                     </div>
+                     <p
+                        className={`flex items-center justify-center ${
+                           data?.discount_percent ? 'rounded-full bg-green-500 p-0.5 text-sm' : 'text-base text-black'
+                        }`}
+                        dir={locale === 'en' ? 'ltr' : 'rtl'}
+                     >
+                        <PercentIcon fontSize="inherit" />
+                     </p>
                   }
                >
                   <IconButton size="small">
                      <MoreVertOutlinedIcon fontSize="small" />
                   </IconButton>
                </Tooltip>
+
+               <IconButton
+                  size="small"
+                  onClick={() => {
+                     setChosenProductForEdit(data);
+                     setShowAddEditProductModal(true);
+                  }}
+               >
+                  <BorderColorOutlinedIcon fontSize="inherit" />
+               </IconButton>
                <IconButton
                   size="small"
                   onClick={() => {
@@ -220,6 +226,8 @@ function Products() {
             onClose={closeAddEditProductModalHandler}
             pageStatus={pageStatus}
             countValue={countValue}
+            isEdit={!!chosenProductForEdit}
+            detail={chosenProductForEdit}
          />
       </AdminLayout>
    );
