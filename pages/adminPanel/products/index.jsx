@@ -122,7 +122,12 @@ function Products() {
       },
       { id: 5, title: 'دسته بندی', key: 'category' },
       { id: 6, title: 'ابعاد', key: 'dimensions' },
-      { id: 7, title: 'قیمت', key: 'before_discount_price' },
+      {
+         id: 7,
+         title: 'قیمت',
+         key: 'before_discount_price',
+         renderCell: data => <p>{Number(data.before_discount_price).toLocaleString()} تومان</p>,
+      },
       {
          id: 8,
          title: 'عملیات',
@@ -210,7 +215,12 @@ function Products() {
             confirmLoading={deleteProductIsMutating}
          />
 
-         <AddEditProductModal show={showAddEditProductModal} onClose={closeAddEditProductModalHandler} />
+         <AddEditProductModal
+            show={showAddEditProductModal}
+            onClose={closeAddEditProductModalHandler}
+            pageStatus={pageStatus}
+            countValue={countValue}
+         />
       </AdminLayout>
    );
 }

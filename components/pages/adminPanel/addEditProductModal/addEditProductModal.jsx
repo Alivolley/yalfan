@@ -1,3 +1,4 @@
+import { useSWRConfig } from 'swr';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
@@ -5,6 +6,8 @@ import { Controller, useForm } from 'react-hook-form';
 
 // MUI
 import {
+   Backdrop,
+   Box,
    Button,
    Checkbox,
    Dialog,
@@ -13,6 +16,7 @@ import {
    FormHelperText,
    Grid,
    IconButton,
+   LinearProgress,
    MenuItem,
    Select,
    TextField,
@@ -25,20 +29,30 @@ import CloseIcon from '@mui/icons-material/Close';
 import { toast } from 'react-toastify';
 import colorPallet from '@/data/color-pallet';
 
-// Apis
-import useGetAllCategories from '@/apis/pAdmin/products/useGetAllCategories';
+// Components
 import ColorComponent from '../colorComponent/colorComponent';
 
-function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
+// Apis
+import useGetAllCategories from '@/apis/pAdmin/products/useGetAllCategories';
+import useAddProduct from '@/apis/pAdmin/products/useAddProduct';
+
+function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus, countValue }) {
    const [coverImage, setCoverImage] = useState();
    const [coverImageURL, setCoverImageURL] = useState();
    const [pictures, setPictures] = useState([]);
    const [picturesURL, setPicturesURL] = useState([]);
    const [colorsAndCount, setColorsAndCount] = useState([]);
+   const [uploadPercent, setUploadPercent] = useState(0);
    const { locale } = useRouter();
+   const { mutate } = useSWRConfig();
    const t = useTranslations('addresses');
 
    const { data: categoryList } = useGetAllCategories();
+   const { trigger: addProductTrigger, isMutating: addProductIsMutating } = useAddProduct(
+      pictures,
+      colorsAndCount,
+      setUploadPercent
+   );
 
    const {
       register,
@@ -54,9 +68,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
          productNameAR: '',
          priceRial: '',
          priceDollar: '',
-         categoryFA: '',
-         categoryEN: '',
-         categoryAR: '',
+         categoryId: '',
          dimensions: '',
          descriptionFA: '',
          descriptionEN: '',
@@ -102,8 +114,56 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
             theme: 'colored',
             autoClose: 5000,
          });
+      } else if (!colorsAndCount?.length) {
+         toast.info('لطفا رنگ های مد نظر خود را انتخاب کنید', {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
       } else {
-         console.log(data);
+         setUploadPercent(0);
+
+         const newProduct = new FormData();
+         newProduct.append('category', data.categoryId);
+         newProduct.append('cover', coverImage);
+         newProduct.append('title_fa', data.productNameFA);
+         newProduct.append('title_en', data.productNameEN);
+         newProduct.append('title_ar', data.productNameAR);
+         newProduct.append('description_fa', data.descriptionFA);
+         newProduct.append('description_en', data.descriptionEN);
+         newProduct.append('description_ar', data.descriptionAR);
+         newProduct.append('description_ar', data.descriptionAR);
+         newProduct.append('dimensions', data.dimensions);
+         newProduct.append('rial_price', data.priceRial);
+         newProduct.append('dollar_price', data.priceDollar);
+         newProduct.append('public', data.showProduct);
+         if (data.discountType === 'percent') {
+            newProduct.append('discount_percent', data.discount);
+         } else if (data.discountType === 'amount') {
+            newProduct.append('discount_amount', data.discount);
+         }
+
+         addProductTrigger(newProduct, {
+            onSuccess: () => {
+               mutate(`store/products/list_create/?page=${pageStatus}&page_size=${countValue}`);
+               closeModalHandler();
+               toast.success('محصول جدید ایجاد شد', {
+                  style: {
+                     direction: locale === 'en' ? 'ltr' : 'rtl',
+                     fontFamily:
+                        locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+                     lineHeight: '25px',
+                  },
+                  theme: 'colored',
+                  autoClose: 5000,
+               });
+            },
+         });
       }
    };
 
@@ -336,10 +396,10 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
 
                         <Controller
                            control={control}
-                           name="categoryEN"
+                           name="categoryId"
                            rules={{ required: t('This filed is required') }}
                            render={({ field: { onChange, value }, fieldState }) => (
-                              <FormControl error={!!errors?.categoryEN}>
+                              <FormControl error={!!errors?.categoryId}>
                                  <Select value={value} onChange={onChange}>
                                     {categoryList?.map(item => (
                                        <MenuItem
@@ -353,8 +413,8 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
                                     ))}
                                  </Select>
                                  {fieldState.invalid
-                                    ? errors?.categoryEN?.message && (
-                                         <FormHelperText error>{errors?.categoryEN?.message}</FormHelperText>
+                                    ? errors?.categoryId?.message && (
+                                         <FormHelperText error>{errors?.categoryId?.message}</FormHelperText>
                                       )
                                     : null}
                               </FormControl>
@@ -368,10 +428,10 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
 
                         <Controller
                            control={control}
-                           name="categoryFA"
+                           name="categoryId"
                            rules={{ required: t('This filed is required') }}
                            render={({ field: { onChange, value }, fieldState }) => (
-                              <FormControl error={!!errors?.categoryFA}>
+                              <FormControl error={!!errors?.categoryId}>
                                  <Select value={value} onChange={onChange}>
                                     {categoryList?.map(item => (
                                        <MenuItem
@@ -385,8 +445,8 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
                                     ))}
                                  </Select>
                                  {fieldState.invalid
-                                    ? errors?.categoryFA?.message && (
-                                         <FormHelperText error>{errors?.categoryFA?.message}</FormHelperText>
+                                    ? errors?.categoryId?.message && (
+                                         <FormHelperText error>{errors?.categoryId?.message}</FormHelperText>
                                       )
                                     : null}
                               </FormControl>
@@ -400,10 +460,10 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
 
                         <Controller
                            control={control}
-                           name="categoryAR"
+                           name="categoryId"
                            rules={{ required: t('This filed is required') }}
                            render={({ field: { onChange, value }, fieldState }) => (
-                              <FormControl error={!!errors?.categoryAR}>
+                              <FormControl error={!!errors?.categoryId}>
                                  <Select value={value} onChange={onChange}>
                                     {categoryList?.map(item => (
                                        <MenuItem
@@ -417,8 +477,8 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
                                     ))}
                                  </Select>
                                  {fieldState.invalid
-                                    ? errors?.categoryAR?.message && (
-                                         <FormHelperText error>{errors?.categoryAR?.message}</FormHelperText>
+                                    ? errors?.categoryId?.message && (
+                                         <FormHelperText error>{errors?.categoryId?.message}</FormHelperText>
                                       )
                                     : null}
                               </FormControl>
@@ -647,6 +707,22 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail }) {
                </div>
             </form>
          </div>
+
+         <Backdrop sx={{ zIndex: 2 }} open={addProductIsMutating}>
+            <div className="flex w-full max-w-[200px] flex-col items-center justify-center gap-7 customMd:max-w-[300px]">
+               <p className="text-lg font-bold">درحال ارسال اطلاعات ...</p>
+               <div className="flex w-full items-center justify-between gap-3">
+                  <p className="font-bold">{uploadPercent}%</p>
+                  <Box sx={{ width: '100%' }}>
+                     <LinearProgress
+                        variant={uploadPercent > 0 ? 'determinate' : 'indeterminate'}
+                        value={uploadPercent}
+                        color="customPink"
+                     />
+                  </Box>
+               </div>
+            </div>
+         </Backdrop>
       </Dialog>
    );
 }
