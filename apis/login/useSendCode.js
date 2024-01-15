@@ -13,9 +13,9 @@ const useSendCode = () => {
    return useSWRMutation('accounts/login/', (url, data) =>
       axiosInstance.post(url, data.arg).then(res => {
          if (!res.data?.is_admin) {
-            Cookies.set('yalfan_accessToken', res?.data?.access, { expires: 7 });
-            Cookies.set('yalfan_refreshToken', res?.data?.refresh, { expires: 7 });
-            Cookies.set('yalfan_isLogin', true, { expires: 7 });
+            Cookies.set('yalfan_accessToken', res?.data?.access, { expires: 365 });
+            Cookies.set('yalfan_refreshToken', res?.data?.refresh, { expires: 365 });
+            Cookies.set('yalfan_isLogin', true, { expires: 365 });
             dispatch(changeToLoginTrue());
          }
          return res.data;

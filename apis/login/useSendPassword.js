@@ -12,9 +12,9 @@ const useSendPassword = () => {
 
    return useSWRMutation('accounts/login-by-password/', (url, data) =>
       axiosInstance.post(url, data.arg).then(res => {
-         Cookies.set('yalfan_accessToken', res?.data?.access, { expires: 7 });
-         Cookies.set('yalfan_refreshToken', res?.data?.refresh, { expires: 7 });
-         Cookies.set('yalfan_isLogin', true, { expires: 7 });
+         Cookies.set('yalfan_accessToken', res?.data?.access, { expires: 365 });
+         Cookies.set('yalfan_refreshToken', res?.data?.refresh, { expires: 365 });
+         Cookies.set('yalfan_isLogin', true, { expires: 365 });
          dispatch(changeToLoginTrue());
       })
    );

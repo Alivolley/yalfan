@@ -54,7 +54,7 @@ axiosInstance.interceptors.response.use(
             const res = await axiosInstance.post('accounts/token/refresh/', {
                refresh: refreshToken,
             });
-            Cookies.set('yalfan_accessToken', res.data.access, { expires: 7 });
+            Cookies.set('yalfan_accessToken', res.data.access, { expires: 365 });
             originalReq.headers.Authorization = `Bearer ${res.data.access}`;
             return axiosInstance(originalReq);
          }
