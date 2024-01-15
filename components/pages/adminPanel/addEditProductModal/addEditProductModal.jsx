@@ -37,8 +37,9 @@ import ColorComponent from '../colorComponent/colorComponent';
 import useGetAllCategories from '@/apis/pAdmin/products/useGetAllCategories';
 import useAddProduct from '@/apis/pAdmin/products/useAddProduct';
 import useGetProductDetail from '@/apis/pAdmin/products/useGetProductDetail';
+import useEditProduct from '@/apis/pAdmin/products/useEditProduct';
 
-function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus, countValue }) {
+function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus, countValue, categoryTitle }) {
    const [coverImage, setCoverImage] = useState();
    const [coverImageURL, setCoverImageURL] = useState();
    const [pictures, setPictures] = useState([]);
@@ -55,6 +56,13 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
       pictures,
       colorsAndCount,
       setUploadPercent
+   );
+   const { trigger: editProductTrigger, isMutating: editProductIsMutating } = useEditProduct(
+      pictures,
+      colorsAndCount,
+      setUploadPercent,
+      productDetail?.title,
+      productDetail?.id
    );
 
    const {
@@ -116,6 +124,25 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
          setCoverImageURL(productDetail?.cover);
          setPictures(productDetail?.images);
          setPicturesURL(productDetail?.images);
+
+         // ////////////////
+
+         const fetchImages = async () => {
+            const images = productDetail?.images;
+
+            const filePromises = images.map(async imageUrl => {
+               const response = await fetch(imageUrl);
+               const blob = await response.blob();
+               const file = new File([blob], `image_${Date.now()}`, { type: blob.type });
+               return file;
+            });
+
+            Promise.all(filePromises)
+               .then(files => console.log(files))
+               .catch(error => console.error('Error fetching images:', error));
+         };
+
+         fetchImages();
       }
    }, [detail, productDetail]);
 
@@ -187,22 +214,57 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
             newProduct.append('discount_amount', data.discount);
          }
 
-         addProductTrigger(newProduct, {
-            onSuccess: () => {
-               mutate(`store/products/list_create/?page=${pageStatus}&page_size=${countValue}`);
-               closeModalHandler();
-               toast.success('محصول جدید ایجاد شد', {
-                  style: {
-                     direction: locale === 'en' ? 'ltr' : 'rtl',
-                     fontFamily:
-                        locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
-                     lineHeight: '25px',
-                  },
-                  theme: 'colored',
-                  autoClose: 5000,
-               });
-            },
-         });
+         if (isEdit) {
+            editProductTrigger(newProduct, {
+               onSuccess: () => {
+                  mutate(
+                     `store/products/list_create/?page=${pageStatus}&page_size=${countValue}&category=${categoryTitle}`
+                  );
+                  closeModalHandler();
+                  toast.success('محصول ویرایش شد', {
+                     style: {
+                        direction: locale === 'en' ? 'ltr' : 'rtl',
+                        fontFamily:
+                           locale === 'en'
+                              ? 'poppins'
+                              : locale === 'fa'
+                                ? 'dana'
+                                : locale === 'ar'
+                                  ? 'rubik'
+                                  : 'poppins',
+                        lineHeight: '25px',
+                     },
+                     theme: 'colored',
+                     autoClose: 5000,
+                  });
+               },
+            });
+         } else {
+            addProductTrigger(newProduct, {
+               onSuccess: () => {
+                  mutate(
+                     `store/products/list_create/?page=${pageStatus}&page_size=${countValue}&category=${categoryTitle}`
+                  );
+                  closeModalHandler();
+                  toast.success('محصول جدید ایجاد شد', {
+                     style: {
+                        direction: locale === 'en' ? 'ltr' : 'rtl',
+                        fontFamily:
+                           locale === 'en'
+                              ? 'poppins'
+                              : locale === 'fa'
+                                ? 'dana'
+                                : locale === 'ar'
+                                  ? 'rubik'
+                                  : 'poppins',
+                        lineHeight: '25px',
+                     },
+                     theme: 'colored',
+                     autoClose: 5000,
+                  });
+               },
+            });
+         }
       }
    };
 
@@ -761,7 +823,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
             )}
          </div>
 
-         <Backdrop sx={{ zIndex: 2 }} open={addProductIsMutating}>
+         <Backdrop sx={{ zIndex: 2 }} open={addProductIsMutating || editProductIsMutating}>
             <div className="flex w-full max-w-[200px] flex-col items-center justify-center gap-7 customMd:max-w-[300px]">
                <p className="text-lg font-bold">درحال ارسال اطلاعات ...</p>
                <div className="flex w-full items-center justify-between gap-3">

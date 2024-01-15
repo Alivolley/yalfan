@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 // MUI
-import { Button, IconButton, Tooltip } from '@mui/material';
+import { Button, CircularProgress, Grid, IconButton, Tooltip } from '@mui/material';
 
 // Icons
 import QrCodeOutlinedIcon from '@mui/icons-material/QrCodeOutlined';
@@ -13,31 +13,38 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import PercentIcon from '@mui/icons-material/Percent';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
 import ConfirmModal from '@/components/templates/confirm-modal/confirm-modal';
 import AddEditProductModal from '@/components/pages/adminPanel/addEditProductModal/addEditProductModal';
+import AddEditCategoryModalList from '@/components/pages/adminPanel/addEditCategoryModalList/addEditCategoryModalList';
 
 // Apis
 import useGetProducts from '@/apis/pAdmin/products/useGetProducts';
 import useDeleteProduct from '@/apis/pAdmin/products/useDeleteProduct';
+import useCategories from '@/apis/categories/useCategories';
 
 function Products() {
    const { locale } = useRouter();
    const [showDeleteProductModal, setShowDeleteProductModal] = useState(false);
    const [showAddEditProductModal, setShowAddEditProductModal] = useState(false);
+   const [showAddEditCategoryModal, setShowAddEditCategoryModal] = useState(false);
    const [chosenProductForDelete, setChosenProductForDelete] = useState();
    const [chosenProductForEdit, setChosenProductForEdit] = useState();
+   const [chosenCategory, setChosenCategory] = useState('');
    const [pageStatus, setPageStatus] = useState(1);
    const [countValue, setCountValue] = useState(6);
    const t = useTranslations('productDetail');
 
-   const { data: productsData, isLoading: productIsLoading } = useGetProducts(pageStatus, countValue);
+   const { data: categoryList, isLoading: categoryIsLoading } = useCategories();
+   const { data: productsData, isLoading: productIsLoading } = useGetProducts(pageStatus, countValue, chosenCategory);
    const { trigger: deleteProductTrigger, isMutating: deleteProductIsMutating } = useDeleteProduct(
       pageStatus,
-      countValue
+      countValue,
+      chosenCategory
    );
 
    // console.log(productsData);
@@ -178,7 +185,67 @@ function Products() {
 
    return (
       <AdminLayout>
-         <div className="bg-white p-5">Products</div>
+         <div className="bg-white p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+               <div className="flex items-center gap-1.5">
+                  <ListAltOutlinedIcon color="textColor" fontSize="small" />
+                  <p className="font-bold">دسته بندی محصولات</p>
+               </div>
+
+               <Button
+                  startIcon={<AddCircleOutlinedIcon />}
+                  color="customPinkHigh"
+                  onClick={() => setShowAddEditCategoryModal(true)}
+               >
+                  مدیریت دسته بندی ها
+               </Button>
+            </div>
+
+            {categoryIsLoading ? (
+               <div className="mt-10 flex w-full items-center justify-center">
+                  <CircularProgress color="customPink" />
+               </div>
+            ) : (
+               <div className="mt-10">
+                  <Grid container rowSpacing={{ xs: 2, md: 4 }} columnSpacing={1}>
+                     <Grid item xs={6} sm={4} md={3} lg={2}>
+                        <Button
+                           className="!flex !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
+                           color="black"
+                           onClick={() => setChosenCategory('')}
+                        >
+                           <div
+                              className={`h-4 w-4 shrink-0 rounded-full ${
+                                 !chosenCategory
+                                    ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
+                                    : 'bg-[#E4EAF0]'
+                              }`}
+                           />
+                           <p>همه محصولات</p>
+                        </Button>
+                     </Grid>
+                     {categoryList?.map(item => (
+                        <Grid item xs={6} sm={4} md={3} lg={2} key={item?.id}>
+                           <Button
+                              className="!flex !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
+                              color="black"
+                              onClick={() => setChosenCategory(item.title)}
+                           >
+                              <div
+                                 className={`h-4 w-4 shrink-0 rounded-full ${
+                                    chosenCategory === item.title
+                                       ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
+                                       : 'bg-[#E4EAF0]'
+                                 }`}
+                              />
+                              <p>{item?.title}</p>
+                           </Button>
+                        </Grid>
+                     ))}
+                  </Grid>
+               </div>
+            )}
+         </div>
          <div className="mt-6 w-full bg-white p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
                <div className="flex items-center gap-1.5">
@@ -228,7 +295,10 @@ function Products() {
             countValue={countValue}
             isEdit={!!chosenProductForEdit}
             detail={chosenProductForEdit}
+            categoryTitle={chosenCategory}
          />
+
+         <AddEditCategoryModalList show={showAddEditCategoryModal} onClose={() => setShowAddEditCategoryModal(false)} />
       </AdminLayout>
    );
 }

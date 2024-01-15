@@ -2,21 +2,21 @@ import useSWRMutation from 'swr/mutation';
 import { useSWRConfig } from 'swr';
 import axiosInstance from '@/configs/axiosInstance';
 
-const useDeleteProduct = (pageStatus, countValue, categoryTitle) => {
+const useDeleteCategory = () => {
    const { mutate } = useSWRConfig();
 
-   return useSWRMutation('store/products/get_update_destroy/', (url, data) =>
+   return useSWRMutation('store/categories/get_update_delete/?confirmation=True', (url, data) =>
       axiosInstance
          .delete(url, {
             params: {
-               title: data.arg,
+               pk: data.arg,
             },
          })
          .then(res => {
-            mutate(`store/products/list_create/?page=${pageStatus}&page_size=${countValue}&category=${categoryTitle}`);
+            mutate(`store/categories/list_create/`);
             return res.data;
          })
    );
 };
 
-export default useDeleteProduct;
+export default useDeleteCategory;

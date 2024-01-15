@@ -11,7 +11,6 @@ const useAddProduct = (pictures, colorsAndCount, setUploadPercent) =>
 
          await axiosInstance.post(`store/product-image/create_update/?product_id=${res.data?.id}`, newPictures, {
             onUploadProgress: progressEvent => {
-               console.log(Math.floor(progressEvent.progress * 100));
                setUploadPercent(Math.floor(progressEvent.progress * 100));
             },
          });

@@ -23,7 +23,6 @@ const useApplyCode = closeDiscountModalHandler => {
          )
          .then(res => {
             mutate('store/cart/get_update/', res.data);
-            console.log('res', res);
             if (res.status === 200) {
                closeDiscountModalHandler();
                toast.success(t('Code registered successfully'), {
@@ -40,7 +39,6 @@ const useApplyCode = closeDiscountModalHandler => {
             return res.data;
          })
          .catch(err => {
-            console.log('err', err);
             if (err?.response?.status === 400) {
                toast.error(t('Code is not valid'), {
                   style: {
