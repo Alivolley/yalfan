@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 // MUI
-import { Dialog, IconButton } from '@mui/material';
+import { Dialog, Grid, IconButton } from '@mui/material';
 
 // Icons
 import CloseIcon from '@mui/icons-material/Close';
@@ -16,8 +16,8 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
 
    return (
       <Dialog open={show} onClose={onClose} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'}>
-         <div className="p-3 customMd:p-5">
-            <div className="mb-2 flex items-center justify-between border-b border-solid border-[#E4EAF0] pb-2">
+         <div className="relative p-3 pt-0 customMd:p-5">
+            <div className="sticky top-0 mb-2 flex items-center justify-between border-b border-solid border-[#E4EAF0] bg-white py-2">
                <div className="flex items-center gap-1 font-bold">
                   <TopicOutlinedIcon fontSize="small" />
                   <p>{t('Order detail')}</p>
@@ -57,28 +57,71 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
                   </div>
                   <div className="flex items-center justify-between gap-1">
                      <p className="text-textColor">{t('Products count')} :</p>
-                     <p>{detail?.orders?.length}</p>
+                     <p>{detail?.all_orders_count}</p>
                   </div>
                </div>
+
                <div className="space-y-4 rounded-sm bg-[#F5F8FC] p-4 text-sm">
                   <div className="flex items-center justify-between gap-1">
-                     <p className="text-textColor">{t('Receiver')} :</p>
-                     <p>علی ازقندی</p>
+                     <p className="text-textColor">{t("Orderer's name")} :</p>
+                     <p>{detail?.user?.name}</p>
                   </div>
                   <div className="flex items-center justify-between gap-1">
-                     <p className="text-textColor">{t('Phone number')} :</p>
-                     <p>098386565165</p>
+                     <p className="text-textColor">{t("Orderer's phone number")} :</p>
+                     <p>{detail?.user?.phone_number}</p>
+                  </div>
+               </div>
+
+               <div className="space-y-4 rounded-sm bg-[#F5F8FC] p-4 text-sm">
+                  <div className="flex items-center justify-between gap-1">
+                     <p className="text-textColor">{t('Receiver name')} :</p>
+                     <p>{detail?.address?.recipient_name}</p>
+                  </div>
+                  <div className="flex items-center justify-between gap-1">
+                     <p className="text-textColor">{t('Post code')} :</p>
+                     <p>{detail?.address?.postal_code}</p>
+                  </div>
+                  <div className="flex items-center justify-between gap-1">
+                     <p className="text-textColor">{t('Receiver phone number')} :</p>
+                     <p>{detail?.address?.phone_number}</p>
                   </div>
                   <div className="flex flex-wrap items-center justify-between gap-1">
                      <p className="text-textColor">{t('Receiver address')} :</p>
-                     <p>مشهد بلوار سرافرازان سرفرازان ۱۰ پلاک ۴</p>
+                     <p>{detail?.address?.address}</p>
+                  </div>
+               </div>
+
+               <div className="space-y-4 rounded-sm bg-[#F5F8FC] p-4 text-sm">
+                  <div className="flex items-center justify-between gap-1">
+                     <p className="text-textColor">{t('Discount code')} :</p>
+                     <p>{detail?.percentage_discount_code || t('None')}</p>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-1">
+                     <p className="text-textColor">{t('Price without discount')} :</p>
+                     <p>
+                        {Number(detail?.before_discount_price).toLocaleString()} {t('unit')}
+                     </p>
+                  </div>
+                  <div className="flex items-center justify-between gap-1">
+                     <p className="text-textColor">{t('Shipping cost')} :</p>
+                     <p>
+                        {
+                           // eslint-disable-next-line no-restricted-globals
+                           isNaN(detail?.shipping_cost) ? t('Handled') : Number(detail?.shipping_cost).toLocaleString()
+                        }{' '}
+                        {t('unit')}
+                     </p>
                   </div>
                   <div className="!mt-6 flex items-center justify-between gap-1">
-                     <p className="text-textColor">{t('The total amount')} :</p>
+                     <p className="text-textColor">{t('Final price')} :</p>
                      <p className="text-base font-bold text-[#B1302E]">
                         {Number(detail?.final_price).toLocaleString()} {t('unit')}
                      </p>
                   </div>
+               </div>
+
+               <div className="space-y-4 rounded-sm bg-[#F5F8FC] p-4 text-sm">
                   <div className="flex flex-wrap items-center justify-between gap-1">
                      <p className="text-textColor">{t('Order description')} :</p>
                      <p>{detail?.order_description}</p>
@@ -86,22 +129,48 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
                </div>
 
                <div className="rounded-sm px-4 py-2 text-sm">
-                  <div className="space-y-2">
+                  <div className="space-y-5">
                      <p className="text-textColor">{t('Products')} :</p>
                      <div className="flex flex-wrap items-center justify-end gap-3">
-                        {detail?.orders?.map(item => (
-                           <Link
-                              href={`/productDetail/${item?.product_color?.product_title}`}
-                              className="aspect-square w-16 rounded-md bg-[#F5F8FC] p-1 customMd:w-24"
-                              key={item?.product_color?.product_id}
-                           >
-                              <img
-                                 src={item?.product_color?.cover}
-                                 alt="order"
-                                 className="h-full w-full object-cover"
-                              />
-                           </Link>
-                        ))}
+                        <Grid container spacing={2}>
+                           {detail?.orders?.map(item => (
+                              <Grid item xs={12} sm={6} key={item?.product_color?.product_id}>
+                                 <Link
+                                    href={`/productDetail/${item?.product_color?.product_title}`}
+                                    className="flex gap-1.5 rounded-md bg-[#F5F8FC] p-1.5"
+                                 >
+                                    <div className="my-auto h-[60px] w-[60px] rounded-md bg-[#F5F8FC]">
+                                       <img
+                                          src={item?.product_color?.cover}
+                                          alt="order"
+                                          className="h-full w-full rounded-md object-cover"
+                                       />
+                                    </div>
+
+                                    <div className="grow">
+                                       <p className="text-xs font-bold">{item?.product_color?.product_title}</p>
+                                       <div className="mt-0.5 flex flex-wrap items-center justify-between">
+                                          <p className="text-[11px] text-textColor">{t('Count')} :</p>
+                                          <p className="text-[11px]">{item?.count}</p>
+                                       </div>
+                                       <div className="mt-0.5 flex flex-wrap items-center justify-between">
+                                          <p className="text-[11px] text-textColor">{t('Color')} :</p>
+                                          <div
+                                             className="h-4 w-4 rounded-full"
+                                             style={{ backgroundColor: item?.product_color?.product_color }}
+                                          />
+                                       </div>
+                                       <div className="mt-0.5 flex flex-wrap items-center justify-between">
+                                          <p className="text-[11px] text-textColor">{t('Total price')} :</p>
+                                          <p className="text-[11px]">
+                                             {Number(item?.total_price).toLocaleString()} {t('unit')}
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </Link>
+                              </Grid>
+                           ))}
+                        </Grid>
                      </div>
                   </div>
                </div>

@@ -184,7 +184,21 @@
         "Phone number": "شماره تماس",
         "Receiver address": "آدرس گیرنده",
         "Order description": "توضیحات سفارش",
-        "Products": "محصولات"
+        "Products": "محصولات",
+        "Orderer's name": "نام سفارش دهنده",
+        "Orderer's phone number": "شماره تلفن سفارش دهنده",
+        "Receiver name": "نام گیرنده",
+        "Post code": "کد پستی",
+        "Receiver phone number": "شماره تلفن تحویل گیرنده",
+        "Discount code": "کد تخفیف",
+        "Price without discount": "قیمت بدون تخفیف",
+        "Shipping cost": "هزینه ارسال",
+        "Final price": "قیمت نهایی",
+        "Count": "تعداد",
+        "Color": "رنگ",
+        "Total price": "قیمت کل",
+        "None": "ندارد",
+        "Handled": "مدیریت شد"
     },
     "productDetail": {
         "Comments": "دیدگاه",

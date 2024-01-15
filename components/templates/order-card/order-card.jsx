@@ -65,7 +65,11 @@ function OrderCard({ detail }) {
                      className="aspect-square w-16 rounded-md bg-[#F5F8FC] p-1 customMd:w-24"
                      key={crypto.randomUUID()}
                   >
-                     <img src={item?.product_color?.cover} alt="order" className="h-full w-full object-cover" />
+                     <img
+                        src={item?.product_color?.cover}
+                        alt="order"
+                        className="h-full w-full rounded-md object-cover"
+                     />
                   </Link>
                ))}
             </div>

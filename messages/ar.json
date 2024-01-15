@@ -184,7 +184,21 @@
         "Phone number": "رقم التليفون",
         "Receiver address": "عنوان المستلم",
         "Order description": "وصف الطلب",
-        "Products": "منتجات"
+        "Products": "منتجات",
+        "Orderer's name": "اسم الطلب",
+        "Orderer's phone number": "رقم هاتف الطلب",
+        "Receiver name": "اسم المتلقي",
+        "Post code": "شفرة البريد",
+        "Receiver phone number": "رقم هاتف المتلقي",
+        "Discount code": "الرقم التسلسلي للخصم",
+        "Price without discount": "السعر بدون خصم",
+        "Shipping cost": "تكلفة الشحن",
+        "Final price": "السعر النهائي",
+        "Count": "عدد",
+        "Color": "لون",
+        "Total price": "السعر الكلي",
+        "None": "لا يمتلك",
+        "Handled": "التعامل معها"
     },
     "productDetail": {
         "Comments": "تعليقات",

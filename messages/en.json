@@ -184,7 +184,21 @@
         "Phone number": "Phone number",
         "Receiver address": "Receiver Address",
         "Order description": "Order description",
-        "Products": "Products"
+        "Products": "Products",
+        "Orderer's name": "Orderer's name",
+        "Orderer's phone number": "Orderer's phone number",
+        "Receiver name": "Receiver name",
+        "Post code": "Post code",
+        "Receiver phone number": "Receiver phone number",
+        "Discount code": "Discount code",
+        "Price without discount": "Price without discount",
+        "Shipping cost": "Shipping cost",
+        "Final price": "Final price",
+        "Count": "Count",
+        "Color": "Color",
+        "Total price": "Total price",
+        "None": "None",
+        "Handled": "Handled"
     },
     "productDetail": {
         "Comments": "Comments",

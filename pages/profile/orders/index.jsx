@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 // MUI
-import { CircularProgress, Tab, Tabs } from '@mui/material';
+import { CircularProgress, Pagination, Tab, Tabs } from '@mui/material';
 
 // Icon
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
@@ -22,12 +22,11 @@ import useGetCards from '@/apis/profile/useGetCards';
 
 function Orders() {
    const [tabsValue, setTabsValue] = useState('');
+   const [page, setPage] = useState(1);
 
    const t = useTranslations('orders');
 
-   const { data: cardsData, isLoading: cardsIsLoading } = useGetCards(tabsValue);
-
-   // console.log(cardsData);
+   const { data: cardsData, isLoading: cardsIsLoading } = useGetCards(tabsValue, page);
 
    return (
       <ProfileLayout>
@@ -37,7 +36,10 @@ function Orders() {
             <div className="mt-6 rounded-2xl bg-[#F5F8FC] px-5 customMd:hidden custom1100:block">
                <Tabs
                   value={tabsValue}
-                  onChange={(e, newValue) => setTabsValue(newValue)}
+                  onChange={(e, newValue) => {
+                     setPage(1);
+                     setTabsValue(newValue);
+                  }}
                   TabIndicatorProps={{ sx: { backgroundColor: '#B1302E' } }}
                   variant="scrollable"
                >
@@ -67,11 +69,11 @@ function Orders() {
             </div>
 
             {cardsIsLoading ? (
-               <div className="mt-6 flex items-center justify-center">
+               <div className="mt-16 flex items-center justify-center">
                   <CircularProgress color="customPink" />
                </div>
             ) : (
-               <div className="">
+               <div>
                   {cardsData?.total_objects ? (
                      <div className="mt-10 flex flex-col gap-5">
                         {cardsData?.result?.map(item => (
@@ -85,6 +87,20 @@ function Orders() {
                         <div>
                            <Image src={ordersEmptyPic} alt="no address" className="h-full w-full object-cover" />
                         </div>
+                     </div>
+                  )}
+
+                  {cardsData?.total_objects !== 0 && (
+                     <div className="flex items-center justify-center py-16">
+                        <Pagination
+                           count={cardsData?.total_pages}
+                           color="customPinkHigh"
+                           page={page}
+                           onChange={(e, newValue) => setPage(newValue)}
+                           sx={{
+                              '& .Mui-selected': { color: 'white !important' },
+                           }}
+                        />
                      </div>
                   )}
                </div>
