@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -12,11 +13,11 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 
 // Components
 import ConfirmModal from '@/components/templates/confirm-modal/confirm-modal';
+import AddEditCategoryModal from '../addEditCategoryModal/addEditCategoryModal';
 
 // Apis
 import useCategories from '@/apis/categories/useCategories';
 import useDeleteCategory from '@/apis/pAdmin/categories/useDeleteCategory';
-import AddEditCategoryModal from '../addEditCategoryModal/addEditCategoryModal';
 
 function AddEditCategoryModalList({ show, onClose }) {
    const [showDeleteCategoryModal, setShowDeleteCategoryModal] = useState(false);
@@ -24,6 +25,7 @@ function AddEditCategoryModalList({ show, onClose }) {
    const [chosenCategoryForDelete, setChosenCategoryForDelete] = useState();
    const [chosenCategoryForEdit, setChosenCategoryForEdit] = useState();
    const { locale } = useRouter();
+   const t = useTranslations('adminPanelProducts');
 
    const { data: categoryList, isLoading: categoryIsLoading } = useCategories();
    const { trigger: deleteCategoryTrigger, isMutating: deleteCategoryIsMutating } = useDeleteCategory();
@@ -49,7 +51,7 @@ function AddEditCategoryModalList({ show, onClose }) {
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] border-b border-solid border-[#E4EAF0] bg-white">
                <div className="flex items-center justify-between pt-3">
-                  <p className="text-lg font-bold">مدیریت دسته بندی ها</p>
+                  <p className="text-lg font-bold">{t('Manage categories')}</p>
                   <IconButton onClick={onClose}>
                      <CloseIcon />
                   </IconButton>
@@ -60,7 +62,7 @@ function AddEditCategoryModalList({ show, onClose }) {
                      color="customPinkHigh"
                      onClick={() => setShowAddEditModal(true)}
                   >
-                     افزودن دسته بندی
+                     {t('Add category')}
                   </Button>
                </div>
             </div>
@@ -110,9 +112,9 @@ function AddEditCategoryModalList({ show, onClose }) {
             closeModal={closeDeleteCategoryModalHandler}
             title={
                <span className="flex max-w-sm flex-col gap-5">
-                  <span>از حذف این دسته بندی مطمئن هستید ؟</span>
+                  <span>{t('Are you sure about delete this category ?')}</span>
                   <span className="leading-[30px] text-customPinkHigh">
-                     ! توجه داشته باشید که تمام محصولات مربوط به این دسته بندی نیز حذف خواهند شد !!
+                     {t('! Note that all products related to this category will be removed!!')}
                   </span>
                </span>
             }

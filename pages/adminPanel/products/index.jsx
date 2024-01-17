@@ -37,7 +37,7 @@ function Products() {
    const [chosenCategory, setChosenCategory] = useState('');
    const [pageStatus, setPageStatus] = useState(1);
    const [countValue, setCountValue] = useState(6);
-   const t = useTranslations('productDetail');
+   const t = useTranslations('adminPanelProducts');
 
    const { data: categoryList, isLoading: categoryIsLoading } = useCategories();
    const { data: productsData, isLoading: productIsLoading } = useGetProducts(pageStatus, countValue, chosenCategory);
@@ -64,10 +64,10 @@ function Products() {
    };
 
    const columns = [
-      { id: 1, title: 'ردیف', key: 'index' },
+      { id: 1, title: t('Row'), key: 'index' },
       {
          id: 2,
-         title: 'نام',
+         title: t('Name'),
          key: 'title',
          renderCell: data => (
             <div className="flex items-center gap-1">
@@ -78,7 +78,7 @@ function Products() {
       },
       {
          id: 3,
-         title: 'رنگ',
+         title: t('Color'),
          key: 'colors',
          renderCell: data =>
             data?.colors?.length ? (
@@ -118,26 +118,33 @@ function Products() {
                   )}
                </div>
             ) : (
-               <p>ناموجود</p>
+               <p>{t('Unavailable')}</p>
             ),
       },
       {
          id: 4,
-         title: 'موجودی (کل رنگ ها)',
+         title: t('Available (all colors)'),
          key: 'stock',
-         renderCell: data => <p>{data?.colors?.reduce((sum, item) => sum + item.stock, 0) || 0} عدد</p>,
+         renderCell: data => (
+            <p>
+               {data?.colors?.reduce((sum, item) => sum + item.stock, 0) || 0} {t('Count')}
+            </p>
+         ),
       },
-      { id: 5, title: 'دسته بندی', key: 'category' },
-      { id: 6, title: 'ابعاد', key: 'dimensions' },
+      { id: 5, title: t('Category'), key: 'category' },
+      {
+         id: 6,
+         title: t('Price'),
+         key: 'before_discount_price',
+         renderCell: data => (
+            <p>
+               {Number(data.before_discount_price).toLocaleString()} {t('unit')}
+            </p>
+         ),
+      },
       {
          id: 7,
-         title: 'قیمت',
-         key: 'before_discount_price',
-         renderCell: data => <p>{Number(data.before_discount_price).toLocaleString()} تومان</p>,
-      },
-      {
-         id: 8,
-         title: 'عملیات',
+         title: t('Actions'),
          key: 'actions',
          renderCell: data => (
             <div className="flex items-center gap-2">
@@ -187,7 +194,7 @@ function Products() {
             <div className="flex flex-wrap items-center justify-between gap-3">
                <div className="flex items-center gap-1.5">
                   <ListAltOutlinedIcon color="textColor" fontSize="small" />
-                  <p className="font-bold">دسته بندی محصولات</p>
+                  <p className="font-bold">{t('Products categories')}</p>
                </div>
 
                <Button
@@ -195,7 +202,7 @@ function Products() {
                   color="customPinkHigh"
                   onClick={() => setShowAddEditCategoryModal(true)}
                >
-                  مدیریت دسته بندی ها
+                  {t('Manage categories')}
                </Button>
             </div>
 
@@ -219,7 +226,7 @@ function Products() {
                                     : 'bg-[#E4EAF0]'
                               }`}
                            />
-                           <p>همه محصولات</p>
+                           <p>{t('All products')}</p>
                         </Button>
                      </Grid>
                      {categoryList?.map(item => (
@@ -248,7 +255,7 @@ function Products() {
             <div className="flex flex-wrap items-center justify-between gap-3">
                <div className="flex items-center gap-1.5">
                   <QrCodeOutlinedIcon color="textColor" fontSize="small" />
-                  <p className="font-bold">لیست محصولات</p>
+                  <p className="font-bold">{t('Products list')}</p>
                </div>
 
                <Button
@@ -256,7 +263,7 @@ function Products() {
                   color="customPinkHigh"
                   onClick={() => setShowAddEditProductModal(true)}
                >
-                  افزودن محصول
+                  {t('Add product')}
                </Button>
             </div>
 
@@ -278,7 +285,7 @@ function Products() {
          <ConfirmModal
             open={showDeleteProductModal}
             closeModal={closeDeleteProductModalHandler}
-            title={t('Are you sure to delete this comment?')}
+            title={t('Are you sure to delete this product?')}
             confirmHandler={deleteProductHandler}
             confirmLoading={deleteProductIsMutating}
          />

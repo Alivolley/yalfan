@@ -25,7 +25,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
    const { data: categoryDetail, isLoading: categoryDetailIsLoading } = useGetCategoryDetail(detail);
 
    const { locale } = useRouter();
-   const t = useTranslations('addresses');
+   const t = useTranslations('adminPanelProducts');
 
    const {
       register,
@@ -51,7 +51,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
 
    const formSubmit = data => {
       if (!coverImage) {
-         toast.info('لطفا کاور دسته بندی را انتخاب کنید', {
+         toast.info(t('Please select a cover for your category'), {
             style: {
                direction: locale === 'en' ? 'ltr' : 'rtl',
                fontFamily:
@@ -118,7 +118,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] border-b border-solid border-[#E4EAF0] bg-white">
                <div className="flex items-center justify-between pt-3">
-                  <p className="text-lg font-bold">افزودن دسته بندی</p>
+                  <p className="text-lg font-bold">{t('Add category')}</p>
                   <IconButton onClick={closeModalHandler}>
                      <CloseIcon />
                   </IconButton>
@@ -132,7 +132,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
             ) : (
                <>
                   <div className="mt-8 border-b border-solid border-[#E4EAF0] pb-6">
-                     <p className="mb-3 text-sm font-bold text-[#626E94]">عکس کاور</p>
+                     <p className="mb-3 text-sm font-bold text-[#626E94]">{t('Cover picture')}</p>
 
                      <div className="flex flex-wrap items-end gap-4">
                         <div className="flex flex-wrap items-center gap-5">
@@ -175,7 +175,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
                            className="!relative !cursor-pointer !rounded-10 !text-white"
                            size="small"
                         >
-                           افزودن عکس جدید
+                           {t('Add new picture')}
                            <input
                               type="file"
                               className="absolute inset-0 cursor-pointer opacity-0"
@@ -190,7 +190,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
                      <Grid container spacing={3}>
                         <Grid item xs={12} md={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">نام دسته بندی به فارسی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Category name in fa')}</p>
                               <TextField
                                  fullWidth
                                  {...register('categoryFA', {
@@ -206,7 +206,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
                         </Grid>
                         <Grid item xs={12} md={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">نام دسته بندی به انگلیسی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Category name in en')}</p>
                               <TextField
                                  fullWidth
                                  {...register('categoryEN', {
@@ -222,7 +222,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
                         </Grid>
                         <Grid item xs={12} md={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">نام دسته بندی به عربی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Category name in ar')}</p>
                               <TextField
                                  fullWidth
                                  {...register('categoryAR', {
@@ -248,7 +248,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
                            type="submit"
                            loading={addCategoryIsMutating || editCategoryIsMutating}
                         >
-                           ایجاد دسته بندی
+                           {t('Add category')}
                         </LoadingButton>
                      </div>
                   </form>

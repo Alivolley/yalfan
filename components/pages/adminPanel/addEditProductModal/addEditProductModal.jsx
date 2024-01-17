@@ -51,7 +51,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
    const [uploadPercent, setUploadPercent] = useState(0);
    const { locale } = useRouter();
    const { mutate } = useSWRConfig();
-   const t = useTranslations('addresses');
+   const t = useTranslations('adminPanelProducts');
 
    const { data: productDetail, isLoading: productDetailIsLoading } = useGetProductDetail(detail?.title);
    const { data: categoryList } = useGetAllCategories();
@@ -145,7 +145,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
    };
    const formSubmit = data => {
       if (!coverImage) {
-         toast.info('لطفا کاور محصول خود را انتخاب کنید', {
+         toast.info(t('Please select a cover for your product'), {
             style: {
                direction: locale === 'en' ? 'ltr' : 'rtl',
                fontFamily:
@@ -156,7 +156,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
             autoClose: 5000,
          });
       } else if (!pictures?.length && !EditPictures?.length) {
-         toast.info('لطفا عکس برای محصول خود انتخاب کنید', {
+         toast.info(t('Please select picture for your product"'), {
             style: {
                direction: locale === 'en' ? 'ltr' : 'rtl',
                fontFamily:
@@ -167,7 +167,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
             autoClose: 5000,
          });
       } else if (!colorsAndCount?.length) {
-         toast.info('لطفا رنگ های مد نظر خود را انتخاب کنید', {
+         toast.info(t('Please choose your desire colors'), {
             style: {
                direction: locale === 'en' ? 'ltr' : 'rtl',
                fontFamily:
@@ -209,7 +209,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                      `store/products/list_create/?page=${pageStatus}&page_size=${countValue}&category=${categoryTitle}`
                   );
                   closeModalHandler();
-                  toast.success('محصول ویرایش شد', {
+                  toast.success(t('Product edited'), {
                      style: {
                         direction: locale === 'en' ? 'ltr' : 'rtl',
                         fontFamily:
@@ -234,7 +234,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                      `store/products/list_create/?page=${pageStatus}&page_size=${countValue}&category=${categoryTitle}`
                   );
                   closeModalHandler();
-                  toast.success('محصول جدید ایجاد شد', {
+                  toast.success(t('Product added'), {
                      style: {
                         direction: locale === 'en' ? 'ltr' : 'rtl',
                         fontFamily:
@@ -275,8 +275,6 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
          }
       }
    };
-
-   console.log(deletedIds);
 
    const removePictureHandler = pic => {
       if (isEdit) {
@@ -335,7 +333,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'} maxWidth="xl">
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-solid border-[#E4EAF0] bg-white pb-2 pt-3">
-               <p className="text-lg font-bold">افزودن محصول</p>
+               <p className="text-lg font-bold">{!isEdit ? t('Add product') : t('Edit product')}</p>
                <IconButton onClick={closeModalHandler}>
                   <CloseIcon />
                </IconButton>
@@ -348,7 +346,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
             ) : (
                <>
                   <div className="mt-5 border-b border-solid border-[#E4EAF0] pb-6">
-                     <p className="mb-3 text-sm font-bold text-[#626E94]">عکس کاور</p>
+                     <p className="mb-3 text-sm font-bold text-[#626E94]">{t('Cover picture')}</p>
 
                      <div className="flex flex-wrap items-end gap-4">
                         <div className="flex flex-wrap items-center gap-5">
@@ -391,7 +389,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                            className="!relative !cursor-pointer !rounded-10 !text-white"
                            size="small"
                         >
-                           افزودن عکس جدید
+                           {t('Add new picture')}
                            <input
                               type="file"
                               className="absolute inset-0 cursor-pointer opacity-0"
@@ -403,7 +401,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                   </div>
 
                   <div className="my-8 mt-5">
-                     <p className="mb-3 text-sm font-bold text-[#626E94]">عکس محصول</p>
+                     <p className="mb-3 text-sm font-bold text-[#626E94]">{t('Product picture')}</p>
                      <div className="flex flex-wrap items-end gap-4">
                         <div className="flex flex-wrap items-center gap-5">
                            {picturesURL?.map(item => (
@@ -474,7 +472,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                            className="!relative !cursor-pointer !rounded-10 !text-white"
                            size="small"
                         >
-                           افزودن عکس جدید
+                           {t('Add new picture')}
                            <input
                               type="file"
                               className="absolute inset-0 cursor-pointer opacity-0"
@@ -487,7 +485,9 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                   </div>
 
                   <div className="my-5 border-y border-solid border-[#E4EAF0] pb-5 pt-8">
-                     <p className="mb-8 text-sm font-bold text-[#626E94]">رنگ و تعداد هر محصول را انتخاب کنید</p>
+                     <p className="mb-8 text-sm font-bold text-[#626E94]">
+                        {t('Select the color and stock of the product')}
+                     </p>
 
                      <div className="flex flex-wrap items-start gap-3">
                         {colorPallet?.map(item => (
@@ -505,7 +505,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                      <Grid container spacing={4}>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">نام محصول به فارسی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Product name fa')}</p>
                               <TextField
                                  fullWidth
                                  {...register('productNameFA', {
@@ -521,7 +521,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         </Grid>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">نام محصول به انگلیسی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Product name en')}</p>
                               <TextField
                                  fullWidth
                                  {...register('productNameEN', {
@@ -537,7 +537,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         </Grid>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">نام محصول به عربی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Product name ar')}</p>
                               <TextField
                                  fullWidth
                                  {...register('productNameAR', {
@@ -557,7 +557,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                      <Grid container spacing={4}>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">دسته بندی به فارسی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Category fa')}</p>
 
                               <Controller
                                  control={control}
@@ -589,7 +589,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         </Grid>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">دسته بندی به انگلیسی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Category en')}</p>
 
                               <Controller
                                  control={control}
@@ -621,7 +621,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         </Grid>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">دسته بندی به عربی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Category ar')}</p>
 
                               <Controller
                                  control={control}
@@ -657,7 +657,9 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                      <Grid container spacing={4}>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">قیمت ( تومان )</p>
+                              <p className="mb-2 text-sm text-[#626E94]">
+                                 {t('Price')} ( {t('Toman')} )
+                              </p>
                               <TextField
                                  fullWidth
                                  type="number"
@@ -684,7 +686,9 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         </Grid>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">قیمت ( دلار )</p>
+                              <p className="mb-2 text-sm text-[#626E94]">
+                                 {t('Price')} ( {t('Dollar')} )
+                              </p>
                               <TextField
                                  fullWidth
                                  type="number"
@@ -711,7 +715,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         </Grid>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">ابعاد</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Dimensions')}</p>
                               <TextField
                                  fullWidth
                                  {...register('dimensions', {
@@ -731,7 +735,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                      <Grid container spacing={4}>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">توضیح محصول به فارسی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Description fa')}</p>
                               <TextField
                                  fullWidth
                                  multiline
@@ -749,7 +753,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         </Grid>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">توضیح محصول به انگلیسی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Description en')}</p>
                               <TextField
                                  fullWidth
                                  multiline
@@ -767,7 +771,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         </Grid>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">توضیح محصول به عربی</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Description ar')}</p>
                               <TextField
                                  fullWidth
                                  multiline
@@ -789,7 +793,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                      <Grid container spacing={4}>
                         <Grid item xs={12} md={6} lg={4}>
                            <div className="flex flex-1 flex-col gap-1">
-                              <p className="mb-2 text-sm text-[#626E94]">تخفیف</p>
+                              <p className="mb-2 text-sm text-[#626E94]">{t('Discount')}</p>
                               <div className="flex">
                                  <div className="shrink-0">
                                     <Controller
@@ -804,14 +808,14 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                                                    value="percent"
                                                    dir={locale === 'en' ? 'ltr' : 'rtl'}
                                                 >
-                                                   درصدی
+                                                   {t('Percent')}
                                                 </MenuItem>
                                                 <MenuItem
                                                    className="!text-sm"
                                                    value="amount"
                                                    dir={locale === 'en' ? 'ltr' : 'rtl'}
                                                 >
-                                                   مقداری
+                                                   {t('Amount')}
                                                 </MenuItem>
                                              </Select>
                                           </FormControl>
@@ -848,7 +852,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                                  render={({ field: { onChange, value } }) => (
                                     <FormControlLabel
                                        control={<Checkbox checked={value} />}
-                                       label="نمایش محصول به کاربر"
+                                       label={t('Show product to users')}
                                        value={value}
                                        onChange={onChange}
                                     />
@@ -867,7 +871,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                            size="large"
                            type="submit"
                         >
-                           ایجاد محصول
+                           {!isEdit ? t('Add product') : t('Edit product')}
                         </Button>
                      </div>
                   </form>
@@ -877,7 +881,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
 
          <Backdrop sx={{ zIndex: 2 }} open={addProductIsMutating || editProductIsMutating}>
             <div className="flex w-full max-w-[200px] flex-col items-center justify-center gap-7 customMd:max-w-[300px]">
-               <p className="text-lg font-bold">درحال ارسال اطلاعات ...</p>
+               <p className="text-lg font-bold">{t('Sending info')} ...</p>
                <div className="flex w-full items-center justify-between gap-3">
                   <p className="font-bold">{uploadPercent}%</p>
                   <Box sx={{ width: '100%' }}>
