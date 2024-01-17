@@ -44,7 +44,10 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
    const [coverImageURL, setCoverImageURL] = useState();
    const [pictures, setPictures] = useState([]);
    const [picturesURL, setPicturesURL] = useState([]);
+   const [EditPictures, setEditPictures] = useState([]);
+   const [editPicturesURL, setEditPicturesURL] = useState([]);
    const [colorsAndCount, setColorsAndCount] = useState([]);
+   const [deletedIds, setDeletedIds] = useState([]);
    const [uploadPercent, setUploadPercent] = useState(0);
    const { locale } = useRouter();
    const { mutate } = useSWRConfig();
@@ -58,7 +61,8 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
       setUploadPercent
    );
    const { trigger: editProductTrigger, isMutating: editProductIsMutating } = useEditProduct(
-      pictures,
+      EditPictures,
+      deletedIds,
       colorsAndCount,
       setUploadPercent,
       productDetail?.title,
@@ -92,8 +96,6 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
    });
 
    useEffect(() => {
-      console.log(productDetail);
-
       if (isEdit && productDetail) {
          setValue('productNameFA', productDetail?.title_fa);
          setValue('productNameEN', productDetail?.title_en);
@@ -131,9 +133,12 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
       onClose();
       setPictures([]);
       setPicturesURL([]);
+      setEditPictures([]);
+      setEditPicturesURL([]);
       setCoverImage();
       setCoverImageURL();
       setColorsAndCount([]);
+      setDeletedIds([]);
       if (!isEdit) {
          reset();
       }
@@ -150,7 +155,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
             theme: 'colored',
             autoClose: 5000,
          });
-      } else if (!pictures?.length) {
+      } else if (!pictures?.length && !EditPictures?.length) {
          toast.info('لطفا عکس برای محصول خود انتخاب کنید', {
             style: {
                direction: locale === 'en' ? 'ltr' : 'rtl',
@@ -177,7 +182,6 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
 
          const newProduct = new FormData();
          newProduct.append('category', data.categoryId);
-         newProduct.append('cover', coverImage);
          newProduct.append('title_fa', data.productNameFA);
          newProduct.append('title_en', data.productNameEN);
          newProduct.append('title_ar', data.productNameAR);
@@ -189,6 +193,9 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
          newProduct.append('rial_price', data.priceRial);
          newProduct.append('dollar_price', data.priceDollar);
          newProduct.append('public', data.showProduct);
+         if (productDetail?.cover !== coverImage) {
+            newProduct.append('cover', coverImage);
+         }
          if (data.discountType === 'percent') {
             newProduct.append('discount_percent', data.discount);
          } else if (data.discountType === 'amount') {
@@ -252,24 +259,62 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
    const inputPicturesChangeHandler = e => {
       if (e?.target?.files[0]) {
          const files = Array.from(e?.target?.files);
-         files?.forEach(item => {
-            setPictures(prev => [...prev, item]);
-            const itemURL = URL.createObjectURL(item);
-            setPicturesURL(prev => [...prev, { source: itemURL, wholeItem: item }]);
-         });
+
+         if (isEdit) {
+            files?.forEach(item => {
+               setEditPictures(prev => [...prev, item]);
+               const itemURL = URL.createObjectURL(item);
+               setEditPicturesURL(prev => [...prev, { source: itemURL, wholeItem: item }]);
+            });
+         } else {
+            files?.forEach(item => {
+               setPictures(prev => [...prev, item]);
+               const itemURL = URL.createObjectURL(item);
+               setPicturesURL(prev => [...prev, { source: itemURL, wholeItem: item }]);
+            });
+         }
       }
    };
 
-   const removePictureHandler = pic => {
-      setPictures(prev => {
-         const newPictures = prev?.filter(item => item !== pic?.wholeItem);
-         return newPictures;
-      });
+   console.log(deletedIds);
 
-      setPicturesURL(prev => {
-         const newPicturesURL = prev.filter(item => item !== pic);
-         return newPicturesURL;
-      });
+   const removePictureHandler = pic => {
+      if (isEdit) {
+         const isOld = pictures?.find(item => item?.id === pic?.id);
+         if (isOld) {
+            setPictures(prev => {
+               const newPictures = prev?.filter(item => item?.id !== pic?.id);
+               return newPictures;
+            });
+
+            setPicturesURL(prev => {
+               const newPicturesURL = prev.filter(item => item?.id !== pic?.id);
+               return newPicturesURL;
+            });
+
+            setDeletedIds(prev => [...prev, pic?.id]);
+         } else {
+            setEditPictures(prev => {
+               const newPictures = prev?.filter(item => item !== pic?.wholeItem);
+               return newPictures;
+            });
+
+            setEditPicturesURL(prev => {
+               const newPicturesURL = prev.filter(item => item !== pic);
+               return newPicturesURL;
+            });
+         }
+      } else {
+         setPictures(prev => {
+            const newPictures = prev?.filter(item => item !== pic?.wholeItem);
+            return newPictures;
+         });
+
+         setPicturesURL(prev => {
+            const newPicturesURL = prev.filter(item => item !== pic);
+            return newPicturesURL;
+         });
+      }
    };
 
    const inputCoverChangeHandler = e => {
@@ -363,11 +408,11 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                         <div className="flex flex-wrap items-center gap-5">
                            {picturesURL?.map(item => (
                               <div
-                                 key={item?.source || item}
+                                 key={item?.source || item?.image}
                                  className="relative flex aspect-square w-28 shrink-0 items-center justify-center rounded-2xl border border-solid border-[#9da8ba48]"
                               >
                                  <img
-                                    src={item?.source || item}
+                                    src={item?.source || item?.image}
                                     alt="pic"
                                     className="h-full w-full rounded-2xl object-cover"
                                  />
@@ -386,6 +431,32 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
                                  </div>
                               </div>
                            ))}
+                           {isEdit &&
+                              editPicturesURL?.map(item => (
+                                 <div
+                                    key={item?.source || item?.image}
+                                    className="relative flex aspect-square w-28 shrink-0 items-center justify-center rounded-2xl border border-solid border-[#9da8ba48]"
+                                 >
+                                    <img
+                                       src={item?.source || item?.image}
+                                       alt="pic"
+                                       className="h-full w-full rounded-2xl object-cover"
+                                    />
+                                    <div className="absolute end-0 top-0">
+                                       <IconButton
+                                          onClick={() => removePictureHandler(item)}
+                                          sx={{
+                                             backgroundColor: '#FB7185',
+                                             transition: 'all 0.2s',
+                                             ':hover': { backgroundColor: '#FB7185', color: 'white !important' },
+                                          }}
+                                          size="small"
+                                       >
+                                          <CloseIcon fontSize="small" color="inherit" />
+                                       </IconButton>
+                                    </div>
+                                 </div>
+                              ))}
 
                            <div className="relative aspect-square w-28 rounded-2xl border border-dashed border-[#9DA8BA] bg-[#F5F8FC]">
                               <input

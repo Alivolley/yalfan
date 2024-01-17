@@ -12,6 +12,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import AutoAwesomeMotionOutlinedIcon from '@mui/icons-material/AutoAwesomeMotionOutlined';
 import TakeoutDiningOutlinedIcon from '@mui/icons-material/TakeoutDiningOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -120,6 +122,36 @@ function AdminSideBar({ isMobile, onClose }) {
                   />
                </div>
                {isSideBarOpen && <p className="text-[15px]">{t('Orders')}</p>}
+            </Link>
+            <Link
+               href="/adminPanel/orders"
+               className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
+                  pathname === '/adminPanel/orders' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
+               }`}
+            >
+               <div
+                  className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                     pathname === '/adminPanel/orders' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+                  }`}
+               >
+                  <PeopleAltOutlinedIcon color={pathname === '/adminPanel/orders' ? 'customPinkHigh' : 'textColor'} />
+               </div>
+               {isSideBarOpen && <p className="text-[15px]">{t('Users')}</p>}
+            </Link>
+            <Link
+               href="/adminPanel/orders"
+               className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
+                  pathname === '/adminPanel/orders' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
+               }`}
+            >
+               <div
+                  className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                     pathname === '/adminPanel/orders' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+                  }`}
+               >
+                  <DescriptionOutlinedIcon color={pathname === '/adminPanel/orders' ? 'customPinkHigh' : 'textColor'} />
+               </div>
+               {isSideBarOpen && <p className="text-[15px]">{t('Reports')}</p>}
             </Link>
          </div>
 

@@ -281,6 +281,8 @@
     "adminPanel": {
         "Products": "منتجات",
         "Orders": "طلبات",
+        "Users": "المستخدمين",
+        "Reports": "التقارير",
         "Log out": "تسجيل خروج",
         "Table is empty": "الجدول فارغ",
         "Display": "عرض",

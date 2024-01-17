@@ -281,6 +281,8 @@
     "adminPanel": {
         "Products": "Products",
         "Orders": "Orders",
+        "Users": "Users",
+        "Reports": "Reports",
         "Log out": "Log out",
         "Table is empty": "Table is empty",
         "Display": "Display",

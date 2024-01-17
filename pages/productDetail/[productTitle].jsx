@@ -169,22 +169,22 @@ function ProductDetail({ error, productDetail, categoryItems }) {
                   </div>
                </div>
                <div className="h-[250px] w-full customSm:h-[500px]">
-                  <img src={chosenPicture} alt="product" className="h-full w-full rounded-2xl object-cover" />
+                  <img src={chosenPicture?.image} alt="product" className="h-full w-full rounded-2xl object-cover" />
                </div>
 
                <div className="mt-3">
                   <Grid container spacing={1}>
                      {productDetail?.images?.map(item => (
-                        <Grid item xs={2} xl={1} key={item}>
+                        <Grid item xs={2} xl={1} key={item?.id}>
                            <button
                               type="button"
                               className={`h-[40px] w-full rounded-[4px] border-none bg-none outline-none customSm:h-[80px] customMd:h-[60px] ${
-                                 item === chosenPicture ? '!border-2 !border-solid !border-customBlue' : ''
+                                 item?.id === chosenPicture?.id ? '!border-2 !border-solid !border-customBlue' : ''
                               }`}
                               onClick={() => setChosenPicture(item)}
                            >
                               <img
-                                 src={item}
+                                 src={item?.image}
                                  alt="product"
                                  className="h-full w-full cursor-pointer rounded-[4px] object-cover"
                               />
