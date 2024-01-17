@@ -21,7 +21,6 @@ module.exports = {
             custom1100: '1100px',
             customLg: '1200px',
             customXl: '1400px',
-            custom1700: '1700px',
          },
 
          colors: {

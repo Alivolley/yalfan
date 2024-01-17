@@ -262,10 +262,7 @@ function Products() {
                </Button>
             </div>
 
-            <div
-               className="mx-auto mt-6 w-full customMd:w-[460px] lg:w-[580px]
-             customLg:w-[755px] xl:w-[830px] customXl:w-[950px] 2xl:w-[1090px] custom1700:w-[1250px]"
-            >
+            <div className="mx-auto mt-6 w-full">
                <Table
                   columns={columns}
                   rows={productsData?.result}

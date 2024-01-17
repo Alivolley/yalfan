@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 // MUI
@@ -9,7 +10,7 @@ import TopicOutlinedIcon from '@mui/icons-material/TopicOutlined';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ReplayIcon from '@mui/icons-material/Replay';
-import Link from 'next/link';
+import MoneyOffCsredOutlinedIcon from '@mui/icons-material/MoneyOffCsredOutlined';
 
 function OrderDetailModal({ show, onClose, detail, locale }) {
    const t = useTranslations('orders');
@@ -44,6 +45,11 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
                         <div className="flex items-center gap-2 rounded-lg bg-[#CBB464] p-2 text-xs text-white">
                            <ReplayIcon fontSize="small" />
                            <p>{t('Returned')}</p>
+                        </div>
+                     ) : detail?.status === 'unpaid' ? (
+                        <div className="flex items-center gap-1 rounded-lg bg-[#F03A50] p-2 text-xs text-white">
+                           <MoneyOffCsredOutlinedIcon fontSize="small" />
+                           <p>{t('Unpaid')}</p>
                         </div>
                      ) : null}
                   </div>

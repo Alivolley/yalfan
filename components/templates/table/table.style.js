@@ -1,8 +1,15 @@
 import styled from '@emotion/styled';
 
-const TableStyle = styled.div(() => ({
+const TableStyle = styled.div(({ isSideBarOpen }) => ({
+   transition: 'all 0.5s',
    maxWidth: '100%',
    width: '100%',
+
+   '@media (min-width: 900px)': {
+      maxWidth: isSideBarOpen ? 'calc(100vw - 443px)' : 'calc(100vw - 253px)',
+      width: isSideBarOpen ? 'calc(100vw - 443px)' : 'calc(100vw - 253px)',
+   },
+
    overflow: 'auto',
 
    table: {

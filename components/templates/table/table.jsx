@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 // MUI
 import { CircularProgress, FormControl, MenuItem, Pagination, Select } from '@mui/material';
 
@@ -15,11 +17,12 @@ function Table({
    countValue,
    setCountValue,
 }) {
+   const isSideBarOpen = useSelector(state => state?.pAdminSideBarStatus);
    const tableRowCalculator = (limit, page, index) => limit * page - (limit - 1) + index;
 
    return (
       <>
-         <TableStyle>
+         <TableStyle isSideBarOpen={isSideBarOpen}>
             {loading ? (
                <div className="mt-10 flex items-center justify-center p-10">
                   <CircularProgress color="customPink" />
