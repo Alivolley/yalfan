@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { useSelector } from 'react-redux';
 
 // MUI
@@ -17,6 +18,7 @@ function Table({
    countValue,
    setCountValue,
 }) {
+   const t = useTranslations('adminPanel');
    const isSideBarOpen = useSelector(state => state?.pAdminSideBarStatus);
    const tableRowCalculator = (limit, page, index) => limit * page - (limit - 1) + index;
 
@@ -57,13 +59,13 @@ function Table({
                   </tbody>
                </table>
             ) : (
-               <p className="py-20 text-center font-bold">جدول خالی می باشد</p>
+               <p className="py-20 text-center font-bold">{t('Table is empty')}</p>
             )}
          </TableStyle>
          {pageStatus && setPageStatus && totalPages > 1 && (
             <div className="mt-12 flex flex-wrap items-center justify-between gap-7">
                <div className="flex items-center gap-2">
-                  <p className="text-sm text-textColor">نمایش</p>
+                  <p className="text-sm text-textColor">{t('Display')}</p>
 
                   <div className="min-w-[70px]">
                      <FormControl fullWidth size="small">
@@ -83,7 +85,9 @@ function Table({
                         </Select>
                      </FormControl>
                   </div>
-                  <p className="whitespace-nowrap text-sm text-textColor">از {totalObjects} عدد</p>
+                  <p className="whitespace-nowrap text-sm text-textColor">
+                     {t('From')} {totalObjects} {t('Count')}
+                  </p>
                </div>
                <Pagination
                   count={totalPages}

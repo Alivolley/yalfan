@@ -281,6 +281,32 @@
     "adminPanel": {
         "Products": "Products",
         "Orders": "Orders",
-        "Log out": "Log out"
+        "Log out": "Log out",
+        "Table is empty": "Table is empty",
+        "Display": "Display",
+        "From": "From",
+        "Count": "Count"
+    },
+    "adminPanelOrders": {
+        "Row": "Row",
+        "Orderer's name": "Orderer's name",
+        "Order code": "Order code",
+        "Total price": "Total price",
+        "Status": "Status",
+        "unit": "$",
+        "Sending": "Sending",
+        "Delivered": "Delivered",
+        "Returned": "Returned",
+        "Unpaid": "Unpaid",
+        "Actions": "Actions",
+        "All orders": "All orders",
+        "Orders list": "Orders list",
+        "Status changed successfully": "Status changed successfully",
+        "Change order status": "Change order status",
+        "Current status": "Current status",
+        "Change status to": "Change status to",
+        "This filed is required": "This filed is required",
+        "Change status description": "Change status description",
+        "Apply changes": "Apply changes"
     }
 }

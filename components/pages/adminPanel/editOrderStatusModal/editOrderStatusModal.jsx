@@ -22,7 +22,7 @@ import useChangeStatus from '@/apis/pAdmin/orders/useChangeStatus';
 function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, status }) {
    const { locale } = useRouter();
    const { mutate } = useSWRConfig();
-   const t = useTranslations('orders');
+   const t = useTranslations('adminPanelOrders');
 
    const { isMutating: changeStatusIsMutating, trigger: changeStatusTrigger } = useChangeStatus(detail?.order_code);
 
@@ -55,7 +55,7 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
          onSuccess: () => {
             mutate(`store/cart/list/?status=${status}&page=${pageStatus}&page_size=${countValue}&is_admin_panel=True`);
             closeModalHandler();
-            toast.success('وضعیت با موفقیت تغییر یافت', {
+            toast.success(t('Status changed successfully'), {
                style: {
                   direction: locale === 'en' ? 'ltr' : 'rtl',
                   fontFamily:
@@ -75,23 +75,18 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
       }
    }, [detail]);
 
-   console.log(detail);
-
    return (
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'}>
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-solid border-[#E4EAF0] bg-white pb-2 pt-3">
-               <p className="text-lg font-bold">تغییر وضعیت سفارش</p>
+               <p className="text-lg font-bold">{t('Change order status')}</p>
                <IconButton onClick={closeModalHandler}>
                   <CloseIcon />
                </IconButton>
             </div>
             <form onSubmit={handleSubmit(formSubmit)} className="mt-5 space-y-8">
                <div className="flex items-center justify-between gap-1">
-                  <p className="text-sm text-textColor customMd:text-base">
-                     {/* {t('Order status')} : */}
-                     وضعیت کنونی
-                  </p>
+                  <p className="text-sm text-textColor customMd:text-base">{t('Current status')} :</p>
                   {detail?.status === 'sending' ? (
                      <div className="flex items-center gap-2 rounded-lg bg-[#FF9F1C] px-2 py-1 text-xs text-white">
                         <LocalShippingOutlinedIcon fontSize="small" />
@@ -116,17 +111,13 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
                </div>
 
                <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm text-textColor customMd:text-base">
-                     {/* {t('Order status')} : */}
-                     تغییر وضعیت به حالت
-                  </p>
+                  <p className="text-sm text-textColor customMd:text-base">{t('Change status to')} :</p>
 
                   <div className="max-w-[200px] grow">
                      <Controller
                         control={control}
                         name="orderStatus"
-                        // rules={{ required: t('This filed is required') }}
-                        rules={{ required: 'این فیلد اجباری است' }}
+                        rules={{ required: t('This filed is required') }}
                         render={({ field: { onChange, value }, fieldState }) => (
                            <FormControl error={!!errors?.orderStatus} fullWidth>
                               <Select value={value} onChange={onChange} size="small" className="!text-sm">
@@ -136,7 +127,7 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
                                        value="sending"
                                        dir={locale === 'en' ? 'ltr' : 'rtl'}
                                     >
-                                       درحال ارسال
+                                       {t('Sending')}
                                     </MenuItem>
                                  )}
                                  {detail?.status !== 'delivered' && (
@@ -145,7 +136,7 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
                                        value="delivered"
                                        dir={locale === 'en' ? 'ltr' : 'rtl'}
                                     >
-                                       تحویل داده شده
+                                       {t('Delivered')}
                                     </MenuItem>
                                  )}
                                  {detail?.status !== 'returned' && (
@@ -154,12 +145,12 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
                                        value="returned"
                                        dir={locale === 'en' ? 'ltr' : 'rtl'}
                                     >
-                                       مرجوعی
+                                       {t('Returned')}
                                     </MenuItem>
                                  )}
                                  {detail?.status !== 'unpaid' && (
                                     <MenuItem className="!text-sm" value="unpaid" dir={locale === 'en' ? 'ltr' : 'rtl'}>
-                                       پرداخت نشده
+                                       {t('Unpaid')}
                                     </MenuItem>
                                  )}
                               </Select>
@@ -175,7 +166,7 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
                </div>
 
                <div className="flex flex-1 flex-col gap-1">
-                  <p className="mb-2 text-sm text-[#626E94] customMd:text-base">توضیح تغییر وضعیت</p>
+                  <p className="mb-2 text-sm text-[#626E94] customMd:text-base">{t('Change status description')}</p>
                   <TextField
                      fullWidth
                      multiline
@@ -183,8 +174,7 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
                      {...register('changeStatusDescription', {
                         required: {
                            value: true,
-                           //    message: t('This filed is required'),
-                           message: 'این فیلد اجباری است',
+                           message: t('This filed is required'),
                         },
                      })}
                      error={!!errors?.changeStatusDescription}
@@ -202,7 +192,7 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
                      type="submit"
                      loading={changeStatusIsMutating}
                   >
-                     اعمال تغییر
+                     {t('Apply changes')}
                   </LoadingButton>
                </div>
             </form>

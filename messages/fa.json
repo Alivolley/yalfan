@@ -281,6 +281,32 @@
     "adminPanel": {
         "Products": "محصولات",
         "Orders": "سفارش ها",
-        "Log out": "خروج از حساب کاربری"
+        "Log out": "خروج از حساب کاربری",
+        "Table is empty": "جدول خالی میباشد",
+        "Display": "نمایش",
+        "From": "از",
+        "Count": "عدد"
+    },
+    "adminPanelOrders": {
+        "Row": "ردیف",
+        "Orderer's name": "نام سفارش دهنده",
+        "Order code": "کد سفارش",
+        "Total price": "قیمت کل سبد خرید",
+        "Status": "وضعیت",
+        "unit": "تومان",
+        "Sending": "در حال ارسال",
+        "Delivered": "تحویل داده شده",
+        "Returned": "مرجوعی",
+        "Unpaid": "پرداخت نشده",
+        "Actions": "عمليات",
+        "All orders": "همه سفارشات",
+        "Orders list": "لیست سفارش ها",
+        "Status changed successfully": "وضعیت با موفقیت تغییر یافت",
+        "Change order status": "تغییر وضعیت سفارش",
+        "Current status": "وضعیت فعلی",
+        "Change status to": "تغییر وضعیت به حالت",
+        "This filed is required": "این فیلد اجباری است",
+        "Change status description": "توضیح تغییر وضعیت",
+        "Apply changes": "اعمال تغییرات"
     }
 }

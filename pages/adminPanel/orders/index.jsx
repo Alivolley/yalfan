@@ -32,7 +32,7 @@ function Orders() {
    const [showEditStatusModal, setShowEditStatusModal] = useState(false);
    const [chosenOrderForEdit, setChosenOrderForEdit] = useState();
 
-   const t = useTranslations('orders');
+   const t = useTranslations('adminPanelOrders');
 
    const { data: cardsData, isLoading: cardsIsLoading } = useGetAllCards(chosenFilter, pageStatus, countValue);
 
@@ -49,48 +49,45 @@ function Orders() {
    };
 
    const columns = [
-      { id: 1, title: 'ردیف', key: 'index' },
-      { id: 2, title: 'نام سفارش دهنده', key: 'title', renderCell: data => data?.user?.name },
-      { id: 3, title: 'شماره سفارش', key: 'order_code' },
+      { id: 1, title: t('Row'), key: 'index' },
+      { id: 2, title: t("Orderer's name"), key: 'title', renderCell: data => data?.user?.name },
+      { id: 3, title: t('Order code'), key: 'order_code' },
       {
          id: 4,
-         title: 'قیمت کل خرید',
-         key: 'final_price',
-         renderCell: data => `${Number(data?.final_price).toLocaleString()} تومان`,
+         title: t('Row'),
+         key: 'Total price',
+         renderCell: data => `${Number(data?.final_price).toLocaleString()} ${t('unit')}`,
       },
       {
          id: 5,
-         title: 'وضعیت',
+         title: t('Status'),
          key: 'status',
          renderCell: data =>
             data?.status === 'sending' ? (
-               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#FF9F1C] p-1 text-xs text-white">
+               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#FF9F1C] px-2 py-1 text-xs text-white">
                   <LocalShippingOutlinedIcon className="!text-base" />
                   <p>{t('Sending')}</p>
                </div>
             ) : data?.status === 'delivered' ? (
-               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#2EC4B6] p-1 text-xs text-white">
+               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#2EC4B6] px-2 py-1 text-xs text-white">
                   <CheckCircleOutlinedIcon className="!text-base" />
                   <p>{t('Delivered')}</p>
                </div>
             ) : data?.status === 'returned' ? (
-               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#CBB464] p-1 text-xs text-white">
+               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#CBB464] px-2 py-1 text-xs text-white">
                   <ReplayIcon className="!text-base" />
                   <p>{t('Returned')}</p>
                </div>
             ) : data?.status === 'unpaid' ? (
-               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#F03A50] p-1 text-xs text-white">
+               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#F03A50] px-2 py-1 text-xs text-white">
                   <MoneyOffCsredOutlinedIcon className="!text-base" />
-                  <p>
-                     {/* {t('Returned')} */}
-                     پرداخت نشده
-                  </p>
+                  <p>{t('Unpaid')}</p>
                </div>
             ) : null,
       },
       {
          id: 6,
-         title: 'عملیات',
+         title: t('Actions'),
          key: 'actions',
          renderCell: data => (
             <div className="flex items-center justify-center gap-3">
@@ -119,7 +116,7 @@ function Orders() {
 
    return (
       <AdminLayout>
-         <div className="">
+         <div>
             <Grid container spacing={2}>
                <Grid item xs={6} lg={2.4}>
                   <button
@@ -139,7 +136,7 @@ function Orders() {
                                 : null
                       }`}
                   >
-                     <p className={chosenFilter === '' ? 'text-black' : 'text-[#98A2B2]'}>همه سفارشات</p>
+                     <p className={chosenFilter === '' ? 'text-black' : 'text-[#98A2B2]'}>{t('All orders')}</p>
                      <p
                         className={`font-bold ${
                            chosenFilter === '' ? 'mt-3 text-[#D14F4D] customMd:mt-5' : 'text-[#98A2B2]'
@@ -167,7 +164,7 @@ function Orders() {
                                 : null
                       }`}
                   >
-                     <p className={chosenFilter === 'sending' ? 'text-black' : 'text-[#98A2B2]'}>درحال ارسال</p>
+                     <p className={chosenFilter === 'sending' ? 'text-black' : 'text-[#98A2B2]'}>{t('Sending')}</p>
                      <p
                         className={`font-bold ${
                            chosenFilter === 'sending' ? 'mt-3 text-[#D14F4D] customMd:mt-5' : 'text-[#98A2B2]'
@@ -196,7 +193,7 @@ function Orders() {
                                 : null
                       }`}
                   >
-                     <p className={chosenFilter === 'delivered' ? 'text-black' : 'text-[#98A2B2]'}>تحویل داده شده</p>
+                     <p className={chosenFilter === 'delivered' ? 'text-black' : 'text-[#98A2B2]'}>{t('Delivered')}</p>
                      <p
                         className={`font-bold ${
                            chosenFilter === 'delivered' ? 'mt-3 text-[#D14F4D] customMd:mt-5' : 'text-[#98A2B2]'
@@ -225,7 +222,7 @@ function Orders() {
                                 : null
                       }`}
                   >
-                     <p className={chosenFilter === 'returned' ? 'text-black' : 'text-[#98A2B2]'}>مرجوعی</p>
+                     <p className={chosenFilter === 'returned' ? 'text-black' : 'text-[#98A2B2]'}>{t('Returned')}</p>
                      <p
                         className={`font-bold ${
                            chosenFilter === 'returned' ? 'mt-3 text-[#D14F4D] customMd:mt-5' : 'text-[#98A2B2]'
@@ -254,7 +251,7 @@ function Orders() {
                                 : null
                       }`}
                   >
-                     <p className={chosenFilter === 'unpaid' ? 'text-black' : 'text-[#98A2B2]'}>پرداخت نشده</p>
+                     <p className={chosenFilter === 'unpaid' ? 'text-black' : 'text-[#98A2B2]'}>{t('Unpaid')}</p>
                      <p
                         className={`font-bold ${
                            chosenFilter === 'unpaid' ? 'mt-3 text-[#D14F4D] customMd:mt-5' : 'text-[#98A2B2]'
@@ -271,7 +268,7 @@ function Orders() {
             <div className="flex flex-wrap items-center justify-between gap-3">
                <div className="flex items-center gap-1.5">
                   <QrCodeOutlinedIcon color="textColor" fontSize="small" />
-                  <p className="font-bold">لیست سفارشات</p>
+                  <p className="font-bold">{t('Orders list')}</p>
                </div>
             </div>
 

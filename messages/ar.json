@@ -281,6 +281,32 @@
     "adminPanel": {
         "Products": "منتجات",
         "Orders": "طلبات",
-        "Log out": "تسجيل خروج"
+        "Log out": "تسجيل خروج",
+        "Table is empty": "الجدول فارغ",
+        "Display": "عرض",
+        "From": "من",
+        "Count": "رقم"
+    },
+    "adminPanelOrders": {
+        "Row": "صف",
+        "Orderer's name": "اسم الطلب",
+        "Order code": "رمز الطلب",
+        "Total price": "السعر الكلي",
+        "Status": "حالة",
+        "unit": "$",
+        "Sending": "إرسال",
+        "Delivered": "تم التوصيل",
+        "Returned": "عاد",
+        "Unpaid": "غير مدفوعة الأجر",
+        "Actions": "أجراءات",
+        "All orders": "جميع الطلبات",
+        "Orders list": "قائمة الطلبات",
+        "Status changed successfully": "تم تغيير الحالة بنجاح",
+        "Change order status": "تغيير حالة الطلب",
+        "Current status": "الحالة الحالية",
+        "Change status to": "تغيير الحالة إلى",
+        "This filed is required": "هذه الخانة مطلوبه",
+        "Change status description": "تغيير وصف الحالة",
+        "Apply changes": "تطبيق التغييرات"
     }
 }
