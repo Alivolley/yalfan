@@ -90,8 +90,6 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
    };
 
    useEffect(() => {
-      console.log(categoryDetail);
-
       if (isEdit && categoryDetail) {
          setCoverImage(categoryDetail?.cover);
          setCoverImageURL(categoryDetail?.cover);

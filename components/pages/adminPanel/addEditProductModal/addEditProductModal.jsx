@@ -124,25 +124,6 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
          setCoverImageURL(productDetail?.cover);
          setPictures(productDetail?.images);
          setPicturesURL(productDetail?.images);
-
-         // ////////////////
-
-         const fetchImages = async () => {
-            const images = productDetail?.images;
-
-            const filePromises = images.map(async imageUrl => {
-               const response = await fetch(imageUrl);
-               const blob = await response.blob();
-               const file = new File([blob], `image_${Date.now()}`, { type: blob.type });
-               return file;
-            });
-
-            Promise.all(filePromises)
-               .then(files => console.log(files))
-               .catch(error => console.error('Error fetching images:', error));
-         };
-
-         fetchImages();
       }
    }, [detail, productDetail]);
 

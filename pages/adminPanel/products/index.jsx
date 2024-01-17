@@ -47,8 +47,6 @@ function Products() {
       chosenCategory
    );
 
-   // console.log(productsData);
-
    const closeAddEditProductModalHandler = () => {
       setShowAddEditProductModal(false);
       setChosenProductForEdit();

@@ -18,6 +18,7 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
 import OrderDetailModal from '@/components/templates/order-detail-modal/order-detail-modal';
+import EditOrderStatusModal from '@/components/pages/adminPanel/editOrderStatusModal/editOrderStatusModal';
 
 // Apis
 import useGetAllCards from '@/apis/pAdmin/orders/useGetAllCards';
@@ -28,6 +29,8 @@ function Orders() {
    const [countValue, setCountValue] = useState(6);
    const [chosenOrderForDetail, setChosenOrderForDetail] = useState();
    const [showDetailModal, setShowDetailModal] = useState(false);
+   const [showEditStatusModal, setShowEditStatusModal] = useState(false);
+   const [chosenOrderForEdit, setChosenOrderForEdit] = useState();
 
    const t = useTranslations('orders');
 
@@ -40,7 +43,10 @@ function Orders() {
       setChosenOrderForDetail();
    };
 
-   console.log(cardsData);
+   const closeEditStatusModal = () => {
+      setShowEditStatusModal(false);
+      setChosenOrderForEdit();
+   };
 
    const columns = [
       { id: 1, title: 'ردیف', key: 'index' },
@@ -58,22 +64,22 @@ function Orders() {
          key: 'status',
          renderCell: data =>
             data?.status === 'sending' ? (
-               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#FF9F1C] p-2 text-xs text-white">
+               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#FF9F1C] p-1 text-xs text-white">
                   <LocalShippingOutlinedIcon className="!text-base" />
                   <p>{t('Sending')}</p>
                </div>
             ) : data?.status === 'delivered' ? (
-               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#2EC4B6] p-2 text-xs text-white">
+               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#2EC4B6] p-1 text-xs text-white">
                   <CheckCircleOutlinedIcon className="!text-base" />
                   <p>{t('Delivered')}</p>
                </div>
             ) : data?.status === 'returned' ? (
-               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#CBB464] p-2 text-xs text-white">
+               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#CBB464] p-1 text-xs text-white">
                   <ReplayIcon className="!text-base" />
                   <p>{t('Returned')}</p>
                </div>
             ) : data?.status === 'unpaid' ? (
-               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#F03A50] p-2 text-xs text-white">
+               <div className="mx-auto flex w-fit items-center gap-1 rounded-lg bg-[#F03A50] p-1 text-xs text-white">
                   <MoneyOffCsredOutlinedIcon className="!text-base" />
                   <p>
                      {/* {t('Returned')} */}
@@ -91,7 +97,8 @@ function Orders() {
                <IconButton
                   size="small"
                   onClick={() => {
-                     //
+                     setChosenOrderForEdit(data);
+                     setShowEditStatusModal(true);
                   }}
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
@@ -288,6 +295,15 @@ function Orders() {
             show={showDetailModal}
             onClose={closeDetailModal}
             detail={chosenOrderForDetail}
+         />
+
+         <EditOrderStatusModal
+            show={showEditStatusModal}
+            onClose={closeEditStatusModal}
+            detail={chosenOrderForEdit}
+            pageStatus={pageStatus}
+            countValue={countValue}
+            status={chosenFilter}
          />
       </AdminLayout>
    );
