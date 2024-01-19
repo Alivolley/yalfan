@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
-   baseURL: 'https://yalfantest.pythonanywhere.com/api/',
+   baseURL: 'http://yalfan.com/api/',
 });
 
 axiosInstance.interceptors.request.use(

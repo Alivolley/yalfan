@@ -45,20 +45,20 @@ export default function Home({ categoryList, error, newestList, bestSellersList 
 
 export async function getStaticProps(context) {
    try {
-      const categoryList = await axios('https://yalfantest.pythonanywhere.com/api/store/categories/list_create/', {
+      const categoryList = await axios('http://yalfan.com/api/store/categories/list_create/', {
          params: {
             lang: context.locale,
          },
       }).then(res => res.data);
 
-      const newestList = await axios('https://yalfantest.pythonanywhere.com/api/store/products/list_create/', {
+      const newestList = await axios('http://yalfan.com/api/store/products/list_create/', {
          params: {
             lang: context.locale,
             ordering: 'created',
          },
       }).then(res => res.data);
 
-      const bestSellersList = await axios('https://yalfantest.pythonanywhere.com/api/store/products/list_create/', {
+      const bestSellersList = await axios('http://yalfan.com/api/store/products/list_create/', {
          params: {
             lang: context.locale,
             ordering: 'sales',

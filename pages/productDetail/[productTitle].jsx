@@ -495,17 +495,14 @@ export async function getServerSideProps(context) {
    const { query, locale } = context;
 
    try {
-      const productDetail = await axios(
-         'https://yalfantest.pythonanywhere.com/api/store/products/get_update_destroy/',
-         {
-            params: {
-               lang: locale,
-               title: query?.productTitle,
-            },
-         }
-      ).then(res => res.data);
+      const productDetail = await axios('http://yalfan.com/api/store/products/get_update_destroy/', {
+         params: {
+            lang: locale,
+            title: query?.productTitle,
+         },
+      }).then(res => res.data);
 
-      const categoryItems = await axios(`https://yalfantest.pythonanywhere.com/api/store/products/list_create/`, {
+      const categoryItems = await axios(`http://yalfan.com/api/store/products/list_create/`, {
          params: {
             lang: locale,
             category: productDetail?.category,

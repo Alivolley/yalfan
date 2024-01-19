@@ -126,7 +126,7 @@ export async function getServerSideProps(context) {
    const accessToken = req?.cookies?.yalfan_accessToken;
 
    try {
-      const searchResultList = await axios('https://yalfantest.pythonanywhere.com/api/store/products/list_create/', {
+      const searchResultList = await axios('http://yalfan.com/api/store/products/list_create/', {
          params: {
             lang: locale,
             search: query?.productName,
@@ -139,7 +139,7 @@ export async function getServerSideProps(context) {
          }),
       }).then(res => res.data);
 
-      const suggestsList = await axios('https://yalfantest.pythonanywhere.com/api/store/products/list_create/', {
+      const suggestsList = await axios('http://yalfan.com/api/store/products/list_create/', {
          params: {
             lang: locale,
             suggest: true,

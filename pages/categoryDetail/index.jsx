@@ -416,13 +416,13 @@ export async function getServerSideProps(context) {
    const { query } = context;
 
    try {
-      const categoryList = await axios('https://yalfantest.pythonanywhere.com/api/store/categories/list_create/', {
+      const categoryList = await axios('http://yalfan.com/api/store/categories/list_create/', {
          params: {
             lang: context.locale,
          },
       }).then(res => res.data);
 
-      const productsList = await axios('https://yalfantest.pythonanywhere.com/api/store/products/list_create/', {
+      const productsList = await axios('http://yalfan.com/api/store/products/list_create/', {
          params: {
             lang: context.locale,
             highest_price: true,

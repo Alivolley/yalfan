@@ -142,7 +142,7 @@ export default AboutUs;
 
 export async function getStaticProps(context) {
    try {
-      const categoryList = await axios('https://yalfantest.pythonanywhere.com/api/store/categories/list_create/', {
+      const categoryList = await axios('http://yalfan.com/api/store/categories/list_create/', {
          params: {
             lang: context.locale,
          },

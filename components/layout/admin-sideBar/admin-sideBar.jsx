@@ -124,32 +124,34 @@ function AdminSideBar({ isMobile, onClose }) {
                {isSideBarOpen && <p className="text-[15px]">{t('Orders')}</p>}
             </Link>
             <Link
-               href="/adminPanel/orders"
+               href="/adminPanel/users"
                className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
-                  pathname === '/adminPanel/orders' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
+                  pathname === '/adminPanel/users' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
                }`}
             >
                <div
                   className={`flex h-11 w-11 items-center justify-center rounded-10 ${
-                     pathname === '/adminPanel/orders' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+                     pathname === '/adminPanel/users' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
                   }`}
                >
-                  <PeopleAltOutlinedIcon color={pathname === '/adminPanel/orders' ? 'customPinkHigh' : 'textColor'} />
+                  <PeopleAltOutlinedIcon color={pathname === '/adminPanel/users' ? 'customPinkHigh' : 'textColor'} />
                </div>
                {isSideBarOpen && <p className="text-[15px]">{t('Users')}</p>}
             </Link>
             <Link
-               href="/adminPanel/orders"
+               href="/adminPanel/reports"
                className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
-                  pathname === '/adminPanel/orders' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
+                  pathname === '/adminPanel/reports' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
                }`}
             >
                <div
                   className={`flex h-11 w-11 items-center justify-center rounded-10 ${
-                     pathname === '/adminPanel/orders' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+                     pathname === '/adminPanel/reports' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
                   }`}
                >
-                  <DescriptionOutlinedIcon color={pathname === '/adminPanel/orders' ? 'customPinkHigh' : 'textColor'} />
+                  <DescriptionOutlinedIcon
+                     color={pathname === '/adminPanel/reports' ? 'customPinkHigh' : 'textColor'}
+                  />
                </div>
                {isSideBarOpen && <p className="text-[15px]">{t('Reports')}</p>}
             </Link>
