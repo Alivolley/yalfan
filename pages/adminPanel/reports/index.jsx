@@ -1,19 +1,30 @@
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 // MUI
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
 
 // Icons
+import DownloadIcon from '@mui/icons-material/Download';
 
 // Components
+import { LoadingButton } from '@mui/lab';
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 
 // Apis
 import useGetReports from '@/apis/pAdmin/reports/useGetReports';
+import axiosInstance from '@/configs/axiosInstance';
 
 function Reports() {
    const todayTimestamp = Math.floor(new Date().getTime() / 1000);
    const [chosenFilter, setChosenFilter] = useState(todayTimestamp);
+   const [startDate, setStartDate] = useState();
+   const [endDate, setEndDate] = useState();
+   const [isDownloading, setIsDownloading] = useState(false);
 
    const { locale } = useRouter();
 
@@ -22,7 +33,32 @@ function Reports() {
       chosenFilter !== 1 && chosenFilter !== 13 ? chosenFilter : ''
    );
 
-   console.log(reportsData);
+   const downloadFileHandler = () => {
+      if (startDate && endDate) {
+         setIsDownloading(true);
+         axiosInstance(
+            `accounts/report/?excel=True&start=${Math.floor(startDate / 1000)}&end=${Math.floor(endDate / 1000)}`
+         )
+            .then(res => {
+               window.location.href = `http://yalfan.com/${res?.data?.link}`;
+               setTimeout(() => {
+                  setIsDownloading(false);
+               }, 1500);
+            })
+            .catch(() => setIsDownloading(false));
+      } else {
+         toast.info('Please select a cover for your category', {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   };
 
    return (
       <AdminLayout>
@@ -92,6 +128,34 @@ function Reports() {
                   فروش سالانه
                </p>
             </button>
+         </div>
+
+         <div className="mt-10 flex flex-col flex-wrap items-center justify-between gap-6 customSm:flex-row">
+            <div className="flex flex-col items-center gap-3 customSm:flex-row customSm:gap-5">
+               <p>از</p>
+               <div>
+                  <LocalizationProvider dateAdapter={locale === 'fa' ? AdapterDateFnsJalali : AdapterDayjs}>
+                     <DatePicker value={startDate} onChange={e => setStartDate(e.valueOf())} />
+                  </LocalizationProvider>
+               </div>
+               <p>تا</p>
+               <div>
+                  <LocalizationProvider dateAdapter={locale === 'fa' ? AdapterDateFnsJalali : AdapterDayjs}>
+                     <DatePicker value={endDate} onChange={e => setEndDate(e.valueOf())} />
+                  </LocalizationProvider>
+               </div>
+            </div>
+            <LoadingButton
+               startIcon={<DownloadIcon />}
+               variant="contained"
+               color="customPinkHigh"
+               className="!w-[220px] !text-white customSm:!w-auto"
+               onClick={downloadFileHandler}
+               size="large"
+               loading={isDownloading}
+            >
+               دانلود فایل
+            </LoadingButton>
          </div>
       </AdminLayout>
    );
