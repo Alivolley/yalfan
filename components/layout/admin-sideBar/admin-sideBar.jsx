@@ -155,6 +155,23 @@ function AdminSideBar({ isMobile, onClose }) {
                </div>
                {isSideBarOpen && <p className="text-[15px]">{t('Reports')}</p>}
             </Link>
+            <Link
+               href="/adminPanel/information"
+               className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
+                  pathname === '/adminPanel/information' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
+               }`}
+            >
+               <div
+                  className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                     pathname === '/adminPanel/information' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+                  }`}
+               >
+                  <DescriptionOutlinedIcon
+                     color={pathname === '/adminPanel/information' ? 'customPinkHigh' : 'textColor'}
+                  />
+               </div>
+               {isSideBarOpen && <p className="text-[15px]">{t('Information')}</p>}
+            </Link>
          </div>
 
          <Button

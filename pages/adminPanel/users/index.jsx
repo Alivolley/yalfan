@@ -10,9 +10,17 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 
+// Apis
+import useGetAllUsers from '@/apis/pAdmin/users/useGetAllUsers';
+
 function Users() {
    const [chosenCategory, setChosenCategory] = useState('');
    const t = useTranslations('adminPanelProducts');
+
+   const { data: usersData, isLoading: usersIsLoading } = useGetAllUsers();
+
+   console.log(usersData);
+   console.log(usersIsLoading);
 
    return (
       <AdminLayout>
