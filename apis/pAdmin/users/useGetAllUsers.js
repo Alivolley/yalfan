@@ -1,6 +1,9 @@
 import useSWR from 'swr';
 import axiosInstance from '@/configs/axiosInstance';
 
-const useGetAllUsers = () => useSWR('accounts/users/', url => axiosInstance(url).then(res => res.data));
+const useGetAllUsers = (pageStatus, countValue, role) =>
+   useSWR(`accounts/users/?page=${pageStatus}&page_size=${countValue}&role=${role}`, url =>
+      axiosInstance(url).then(res => res.data)
+   );
 
 export default useGetAllUsers;

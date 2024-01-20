@@ -14,6 +14,7 @@ import AutoAwesomeMotionOutlinedIcon from '@mui/icons-material/AutoAwesomeMotion
 import TakeoutDiningOutlinedIcon from '@mui/icons-material/TakeoutDiningOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -166,7 +167,7 @@ function AdminSideBar({ isMobile, onClose }) {
                      pathname === '/adminPanel/information' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
                   }`}
                >
-                  <DescriptionOutlinedIcon
+                  <RecentActorsOutlinedIcon
                      color={pathname === '/adminPanel/information' ? 'customPinkHigh' : 'textColor'}
                   />
                </div>

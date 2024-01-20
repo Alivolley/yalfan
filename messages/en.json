@@ -364,5 +364,19 @@
         "This filed is required": "This filed is required",
         "Change status description": "Change status description",
         "Apply changes": "Apply changes"
+    },
+    "adminPanelReports": {
+        "Please select both dates for download": "Please select both dates for download",
+        "Daily sell": "Daily sell",
+        "Monthly sell": "Monthly sell",
+        "Annual sell": "Annual sell",
+        "From": "From",
+        "To": "To",
+        "Download file": "Download file",
+        "Name": "Name",
+        "Count": "Count",
+        "Sell": "Sell",
+        "Day": "Day",
+        "unit": "$"
     }
 }

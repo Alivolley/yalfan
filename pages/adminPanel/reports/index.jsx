@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -20,6 +21,7 @@ import {
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { LoadingButton } from '@mui/lab';
 import { AdapterDateFnsJalali } from '@mui/x-date-pickers/AdapterDateFnsJalali';
 import { CircularProgress } from '@mui/material';
 
@@ -27,12 +29,63 @@ import { CircularProgress } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 
 // Components
-import { LoadingButton } from '@mui/lab';
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 
 // Apis
 import useGetReports from '@/apis/pAdmin/reports/useGetReports';
 import axiosInstance from '@/configs/axiosInstance';
+
+function CustomTooltipDaily({ active, payload, translator }) {
+   if (active && payload && payload.length) {
+      const data = payload[0].payload;
+
+      return (
+         <div className="flex flex-col gap-1 rounded-lg border border-solid border-textColor bg-white p-2 text-sm shadow-sm">
+            {Object.keys(data).map(key =>
+               key === 'count' ? (
+                  <p key={key} className="order-1">
+                     {`${translator('Count')}: ${data[key]}`}
+                  </p>
+               ) : key === 'title' ? (
+                  <p key={key} className="order-2">
+                     {`${translator('Name')}: ${data[key]}`}
+                  </p>
+               ) : null
+            )}
+         </div>
+      );
+   }
+
+   return null;
+}
+
+function CustomTooltipMonthly({ active, payload, translator }) {
+   if (active && payload && payload.length) {
+      const data = payload[0].payload;
+
+      return (
+         <div className="flex flex-col gap-1 rounded-lg border border-solid border-textColor bg-white p-2 text-sm shadow-sm">
+            {Object.keys(data).map(key =>
+               key === 'count' ? (
+                  <p key={key} className="order-1">
+                     {`${translator('Count')}: ${data[key]}`}
+                  </p>
+               ) : key === 'income' ? (
+                  <p key={key} className="order-2">
+                     {`${translator('Sell')}: ${Number(data[key]).toLocaleString()} ${translator('unit')}`}
+                  </p>
+               ) : key === 'day' ? (
+                  <p key={key} className="order-3">
+                     {`${translator('Day')}: ${data[key]}`}
+                  </p>
+               ) : null
+            )}
+         </div>
+      );
+   }
+
+   return null;
+}
 
 function Reports() {
    const todayTimestamp = Math.floor(new Date().getTime() / 1000);
@@ -42,11 +95,12 @@ function Reports() {
    const [endDate, setEndDate] = useState();
    const [isDownloading, setIsDownloading] = useState(false);
 
+   const t = useTranslations('adminPanelReports');
    const { locale } = useRouter();
 
    const { data: reportsData, isLoading: reportsIsLoading } = useGetReports(
-      chosenFilter === 1 || chosenFilter === 13 ? chosenFilter : '',
-      chosenFilter !== 1 && chosenFilter !== 13 ? chosenFilter : ''
+      chosenFilter === 1 || chosenFilter === 12 ? chosenFilter : '',
+      chosenFilter !== 1 && chosenFilter !== 12 ? chosenFilter : ''
    );
 
    const downloadFileHandler = () => {
@@ -63,7 +117,7 @@ function Reports() {
             })
             .catch(() => setIsDownloading(false));
       } else {
-         toast.info('Please select a cover for your category', {
+         toast.info(t('Please select both dates for download'), {
             style: {
                direction: locale === 'en' ? 'ltr' : 'rtl',
                fontFamily:
@@ -75,51 +129,6 @@ function Reports() {
          });
       }
    };
-
-   const chartData = [
-      {
-         name: 'Page A',
-         uv: 4000,
-         pv: 2400,
-         amt: 2400,
-      },
-      {
-         name: 'Page B',
-         uv: 3000,
-         pv: 1398,
-         amt: 2210,
-      },
-      {
-         name: 'Page C',
-         uv: 2000,
-         pv: 9800,
-         amt: 2290,
-      },
-      {
-         name: 'Page D',
-         uv: 2780,
-         pv: 3908,
-         amt: 2000,
-      },
-      {
-         name: 'Page E',
-         uv: 1890,
-         pv: 4800,
-         amt: 2181,
-      },
-      {
-         name: 'Page F',
-         uv: 2390,
-         pv: 3800,
-         amt: 2500,
-      },
-      {
-         name: 'Page G',
-         uv: 3490,
-         pv: 4300,
-         amt: 2100,
-      },
-   ];
 
    return (
       <AdminLayout>
@@ -148,8 +157,7 @@ function Reports() {
                         : 'text-[#98A2B2]'
                   }
                >
-                  {/* {t('All orders')} */}
-                  فروش روزانه
+                  {t('Daily sell')}
                </p>
             </button>
 
@@ -170,16 +178,13 @@ function Reports() {
                          : null
                }`}
             >
-               <p className={chosenFilter === 1 ? 'font-bold text-black' : 'text-[#98A2B2]'}>
-                  {/* {t('Sending')} */}
-                  فروش ماهانه
-               </p>
+               <p className={chosenFilter === 1 ? 'font-bold text-black' : 'text-[#98A2B2]'}>{t('Monthly sell')}</p>
             </button>
 
             <button
                type="button"
                onClick={() => {
-                  setChosenFilter(13);
+                  setChosenFilter(12);
                   setChosenPeriod('annual');
                }}
                className={`h-full flex-1 cursor-pointer rounded-sm border border-solid border-[#DFEBF1] bg-white 
@@ -193,10 +198,7 @@ function Reports() {
                          : null
                }`}
             >
-               <p className={chosenFilter === 13 ? 'font-bold text-black' : 'text-[#98A2B2]'}>
-                  {/* {t('Delivered')} */}
-                  فروش سالانه
-               </p>
+               <p className={chosenFilter === 12 ? 'font-bold text-black' : 'text-[#98A2B2]'}>{t('Annual sell')}</p>
             </button>
          </div>
 
@@ -208,38 +210,38 @@ function Reports() {
             ) : chosenPeriod === 'daily' ? (
                <div className="mx-auto h-full max-w-xl">
                   <ResponsiveContainer width="100%" height="100%">
-                     <BarChart data={chartData}>
+                     <BarChart data={reportsData?.data}>
                         <CartesianGrid />
-                        <XAxis dataKey="name" fontSize={12} />
+                        <XAxis dataKey="title" fontSize={12} />
                         <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
-                        <Tooltip />
-                        <Bar dataKey="pv" fill="#FFA3A1" activeBar={<Rectangle fill="#D14F4D" />} />
+                        <Tooltip content={<CustomTooltipDaily translator={t} />} />
+                        <Bar dataKey="count" fill="#FFA3A1" activeBar={<Rectangle fill="#D14F4D" />} />
                      </BarChart>
                   </ResponsiveContainer>
                </div>
             ) : chosenPeriod === 'monthly' ? (
                <div className="h-full">
                   <ResponsiveContainer width="100%" height="100%">
-                     <LineChart data={chartData}>
+                     <LineChart data={reportsData?.data}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" fontSize={12} />
+                        <XAxis dataKey="day" fontSize={12} />
                         <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
-                        <Tooltip />
-                        <Line type="monotone" dataKey="pv" stroke="#D14F4D" />
-                        <Line type="monotone" dataKey="uv" stroke="#385E8A" />
+                        <Tooltip content={<CustomTooltipMonthly translator={t} />} />
+                        <Line type="monotone" dataKey="count" stroke="#D14F4D" dot={false} />
+                        <Line type="monotone" dataKey="income" stroke="#385E8A" dot={false} />
                      </LineChart>
                   </ResponsiveContainer>
                </div>
             ) : chosenPeriod === 'annual' ? (
                <div className="h-full">
                   <ResponsiveContainer width="100%" height="100%">
-                     <LineChart data={chartData}>
+                     <LineChart data={reportsData?.data}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" fontSize={12} />
+                        <XAxis dataKey="day" fontSize={12} />
                         <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
-                        <Tooltip />
-                        <Line type="monotone" dataKey="pv" stroke="#51d14d" />
-                        <Line type="monotone" dataKey="uv" stroke="#57388a" />
+                        <Tooltip content={<CustomTooltipMonthly translator={t} />} />
+                        <Line type="monotone" dataKey="count" stroke="#51d14d" dot={false} />
+                        <Line type="monotone" dataKey="income" stroke="#57388a" dot={false} />
                      </LineChart>
                   </ResponsiveContainer>
                </div>
@@ -248,13 +250,13 @@ function Reports() {
 
          <div className="mt-20 flex flex-col flex-wrap items-center justify-between gap-6 customSm:flex-row">
             <div className="flex flex-col items-center gap-3 customSm:flex-row customSm:gap-5">
-               <p>از</p>
+               <p>{t('From')}</p>
                <div>
                   <LocalizationProvider dateAdapter={locale === 'fa' ? AdapterDateFnsJalali : AdapterDayjs}>
                      <DatePicker value={startDate} onChange={e => setStartDate(e.valueOf())} />
                   </LocalizationProvider>
                </div>
-               <p>تا</p>
+               <p>{t('To')}</p>
                <div>
                   <LocalizationProvider dateAdapter={locale === 'fa' ? AdapterDateFnsJalali : AdapterDayjs}>
                      <DatePicker value={endDate} onChange={e => setEndDate(e.valueOf())} />
@@ -270,7 +272,7 @@ function Reports() {
                size="large"
                loading={isDownloading}
             >
-               دانلود فایل
+               {t('Download file')}
             </LoadingButton>
          </div>
       </AdminLayout>

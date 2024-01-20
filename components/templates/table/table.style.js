@@ -24,6 +24,7 @@ const TableStyle = styled.div(({ isSideBarOpen }) => ({
       '& td, th': {
          padding: '20px',
          borderBottom: '1px solid #E4EAF0',
+         verticalAlign: 'middle',
       },
 
       'tr td:nth-of-type(odd)': {

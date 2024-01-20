@@ -364,5 +364,19 @@
         "This filed is required": "هذه الخانة مطلوبه",
         "Change status description": "تغيير وصف الحالة",
         "Apply changes": "تطبيق التغييرات"
+    },
+    "adminPanelReports": {
+        "Please select both dates for download": "الرجاء تحديد كلا التاريخين للتحميل",
+        "Daily sell": "بيع يومي",
+        "Monthly sell": "بيع شهري",
+        "Annual sell": "بيع سنوي",
+        "From": "من",
+        "To": "ل",
+        "Download file": "تحميل الملف",
+        "Name": "اسم",
+        "Count": "عدد",
+        "Sell": "يبيع",
+        "Day": "يوم",
+        "unit": "$"
     }
 }

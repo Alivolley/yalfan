@@ -364,5 +364,19 @@
         "This filed is required": "این فیلد اجباری است",
         "Change status description": "توضیح تغییر وضعیت",
         "Apply changes": "اعمال تغییرات"
+    },
+    "adminPanelReports": {
+        "Please select both dates for download": "لطفا هر دو تاریخ را برای دانلود انتخاب کنید",
+        "Daily sell": "فروش روزانه",
+        "Monthly sell": "فروش ماهانه",
+        "Annual sell": "فروش سالانه",
+        "From": "از",
+        "To": "تا",
+        "Download file": "دانلود فایل",
+        "Name": "نام",
+        "Count": "تعداد",
+        "Sell": "فروش",
+        "Day": "روز",
+        "unit": "تومان"
     }
 }

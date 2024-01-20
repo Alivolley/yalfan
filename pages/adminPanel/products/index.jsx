@@ -217,7 +217,10 @@ function Products() {
                         <Button
                            className="!flex !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
                            color="black"
-                           onClick={() => setChosenCategory('')}
+                           onClick={() => {
+                              setChosenCategory('');
+                              setPageStatus(1);
+                           }}
                         >
                            <div
                               className={`h-4 w-4 shrink-0 rounded-full ${
@@ -234,7 +237,10 @@ function Products() {
                            <Button
                               className="!flex !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
                               color="black"
-                              onClick={() => setChosenCategory(item.title)}
+                              onClick={() => {
+                                 setChosenCategory(item.title);
+                                 setPageStatus(1);
+                              }}
                            >
                               <div
                                  className={`h-4 w-4 shrink-0 rounded-full ${

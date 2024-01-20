@@ -6,7 +6,7 @@ const useAddReply = () =>
       axiosInstance
          .post(url, data.arg.newReply, {
             params: {
-               pk: data.arg.id,
+               comment_id: data.arg.id,
             },
          })
          .then(res => res.data)
