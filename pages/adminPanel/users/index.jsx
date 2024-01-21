@@ -7,8 +7,9 @@ import { Button, IconButton } from '@mui/material';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import QrCodeOutlinedIcon from '@mui/icons-material/QrCodeOutlined';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
@@ -23,12 +24,13 @@ function Users() {
    const [pageStatus, setPageStatus] = useState(1);
    const [countValue, setCountValue] = useState(6);
    const [showAddEditUserModal, setShowAddEditUserModal] = useState(false);
+   const [chosenUserForEdit, setChosenUserForEdit] = useState();
 
    const { data: usersData, isLoading: usersIsLoading } = useGetAllUsers(pageStatus, countValue, chosenCategory);
 
    const closeAddEditProductModalHandler = () => {
       setShowAddEditUserModal(false);
-      // setChosenProductForEdit();
+      setChosenUserForEdit();
    };
 
    // console.log(usersData);
@@ -73,17 +75,16 @@ function Users() {
          key: 'actions',
          renderCell: data => (
             <div className="flex items-center justify-center gap-2">
-               {data?.role === 'admin' && (
-                  <IconButton
-                     size="small"
-                     onClick={() => {
-                        // setChosenProductForEdit(data);
-                        // setShowAddEditProductModal(true);
-                     }}
-                  >
-                     <BorderColorOutlinedIcon fontSize="inherit" />
-                  </IconButton>
-               )}
+               <IconButton
+                  size="small"
+                  onClick={() => {
+                     setChosenUserForEdit(data);
+                     setShowAddEditUserModal(true);
+                  }}
+               >
+                  <PersonAddAltOutlinedIcon fontSize="inherit" />
+               </IconButton>
+
                <IconButton
                   size="small"
                   onClick={() => {
@@ -100,7 +101,7 @@ function Users() {
                      // setShowDeleteProductModal(true);
                   }}
                >
-                  <DeleteOutlineOutlinedIcon fontSize="small" />
+                  <BlockOutlinedIcon fontSize="small" />
                </IconButton>
             </div>
          ),
@@ -245,8 +246,8 @@ function Users() {
             onClose={closeAddEditProductModalHandler}
             pageStatus={pageStatus}
             countValue={countValue}
-            // isEdit={!!chosenProductForEdit}
-            // detail={chosenProductForEdit}
+            isEdit={!!chosenUserForEdit}
+            detail={chosenUserForEdit}
             categoryTitle={chosenCategory}
          />
       </AdminLayout>

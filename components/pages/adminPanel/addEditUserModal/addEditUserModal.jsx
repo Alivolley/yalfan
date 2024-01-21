@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useSWRConfig } from 'swr';
 import { useTranslations } from 'next-intl';
 import { Controller, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -13,39 +15,35 @@ import CloseIcon from '@mui/icons-material/Close';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
-const top100Films = [
-   { title: 'The Shawshank Redemption', year: 1994 },
-   { title: 'The Godfather', year: 1972 },
-   { title: 'The Godfather: Part II', year: 1974 },
-   { title: 'The Dark Knight', year: 2008 },
-   { title: '12 Angry Men', year: 1957 },
-   { title: "Schindler's List", year: 1993 },
-   { title: 'Pulp Fiction', year: 1994 },
-   {
-      title: 'The Lord of the Rings: The Return of the King',
-      year: 2003,
-   },
-   { title: 'The Good, the Bad and the Ugly', year: 1966 },
-   { title: 'Fight Club', year: 1999 },
-   {
-      title: 'The Lord of the Rings: The Fellowship of the Ring',
-      year: 2001,
-   },
-   {
-      title: 'Star Wars: Episode V - The Empire Strikes Back',
-      year: 1980,
-   },
-   { title: 'Forrest Gump', year: 1994 },
-   { title: 'Inception', year: 2010 },
-   {
-      title: 'The Lord of the Rings: The Two Towers',
-      year: 2002,
-   },
+// Apis
+import useAddUser from '@/apis/pAdmin/users/useAddUser';
+
+const permissionList = [
+   { title: 'ویرایش ارتباط با ما', code: 101 },
+   { title: 'افزودن دسته بندی', code: 102 },
+   { title: 'ویرایش دسته بندی', code: 103 },
+   { title: 'حذف دسته بندی', code: 104 },
+   { title: 'افزودن محصول', code: 105 },
+   { title: 'ویرایش محصول', code: 106 },
+   { title: 'حذف محصول', code: 107 },
+   { title: 'ویرایش هزینه ارسال', code: 108 },
+   { title: 'مشاهده کد تخفیف', code: 109 },
+   { title: 'افزودن کد تخفیف', code: 110 },
+   { title: 'ویرایش کد تخفیف', code: 111 },
+   { title: 'حذف کد تخفیف', code: 112 },
+   { title: 'تغییر وضعیت سفارش', code: 113 },
+   { title: 'پاسخ به کامنت ها', code: 114 },
+   { title: 'حذف کامنت', code: 115 },
+   { title: 'مشاهده گزارش ها', code: 116 },
+   { title: 'بلاک کردن کاربران', code: 117 },
 ];
 
 function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, countValue, categoryTitle }) {
    const { locale } = useRouter();
+   const { mutate } = useSWRConfig();
    const t = useTranslations('addresses');
+
+   const { trigger: addUserTrigger, isMutating: addUserIsMutating } = useAddUser();
 
    const {
       register,
@@ -78,8 +76,51 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, c
       reset();
    };
 
+   useEffect(() => {
+      if (isEdit && detail) {
+         setValue('phoneNumber', detail?.phone_number);
+         if (detail?.role === 'admin') {
+            setValue('isAdmin', true);
+            const selectedCodesAsNumbers = detail?.permissions.map(code => parseInt(code, 10));
+            const filteredPermissions = permissionList.filter(item => selectedCodesAsNumbers.includes(item.code));
+            setValue('permissions', filteredPermissions);
+         }
+      }
+   }, [detail, detail]);
+
    const formSubmit = data => {
-      console.log(data);
+      let newUser = null;
+      if (data?.isAdmin) {
+         const codesArray = data?.permissions?.map(item => item.code);
+
+         newUser = new FormData();
+         newUser.append('phone_number', data?.phoneNumber);
+         newUser.append('is_admin', data?.isAdmin);
+         if (data?.password) {
+            newUser.append('password', data?.password);
+         }
+         codesArray?.map(item => newUser.append('codes', item));
+
+         addUserTrigger(newUser, {
+            onSuccess: () => {
+               mutate(`accounts/users/?page=${pageStatus}&page_size=${countValue}&role=${categoryTitle}`);
+               closeModalHandler();
+            },
+         });
+      } else {
+         newUser = {
+            phone_number: data?.phoneNumber,
+            is_admin: data?.isAdmin,
+            password: null,
+         };
+
+         addUserTrigger(newUser, {
+            onSuccess: () => {
+               mutate(`accounts/users/?page=${pageStatus}&page_size=${countValue}&role=${categoryTitle}`);
+               closeModalHandler();
+            },
+         });
+      }
    };
 
    const isAdminCheckbox = watch('isAdmin');
@@ -162,7 +203,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, c
                               <>
                                  <Autocomplete
                                     multiple
-                                    options={top100Films}
+                                    options={permissionList}
                                     disableCloseOnSelect
                                     value={value}
                                     isOptionEqualToValue={(option, optValue) => option.title === optValue.title}
@@ -202,8 +243,12 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, c
                            autoComplete="off"
                            {...register('password', {
                               required: {
-                                 value: true,
+                                 value: !isEdit,
                                  message: t('This filed is required'),
+                              },
+                              minLength: {
+                                 value: 8,
+                                 message: 'رمز عبور باید از 8 کلمه بیشتر باشد',
                               },
                            })}
                            error={!!errors?.password}
@@ -219,7 +264,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, c
                      type="submit"
                      size="large"
                      color="customPinkHigh"
-                     // loading={addAddressIsMutating || editAddressIsMutating}
+                     loading={addUserIsMutating}
                      fullWidth
                      className="!rounded-10 !p-3 !text-white"
                   >

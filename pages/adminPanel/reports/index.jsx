@@ -209,41 +209,53 @@ function Reports() {
                </div>
             ) : chosenPeriod === 'daily' ? (
                <div className="mx-auto h-full max-w-xl">
-                  <ResponsiveContainer width="100%" height="100%">
-                     <BarChart data={reportsData?.data}>
-                        <CartesianGrid />
-                        <XAxis dataKey="title" fontSize={12} />
-                        <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
-                        <Tooltip content={<CustomTooltipDaily translator={t} />} />
-                        <Bar dataKey="count" fill="#FFA3A1" activeBar={<Rectangle fill="#D14F4D" />} />
-                     </BarChart>
-                  </ResponsiveContainer>
+                  {reportsData?.data?.length ? (
+                     <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={reportsData?.data}>
+                           <CartesianGrid />
+                           <XAxis dataKey="title" fontSize={12} />
+                           <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
+                           <Tooltip content={<CustomTooltipDaily translator={t} />} />
+                           <Bar dataKey="count" fill="#FFA3A1" activeBar={<Rectangle fill="#D14F4D" />} />
+                        </BarChart>
+                     </ResponsiveContainer>
+                  ) : (
+                     <p className="mt-7 text-center text-lg font-bold">{t('No data')}</p>
+                  )}
                </div>
             ) : chosenPeriod === 'monthly' ? (
                <div className="h-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                     <LineChart data={reportsData?.data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="day" fontSize={12} />
-                        <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
-                        <Tooltip content={<CustomTooltipMonthly translator={t} />} />
-                        <Line type="monotone" dataKey="count" stroke="#D14F4D" dot={false} />
-                        <Line type="monotone" dataKey="income" stroke="#385E8A" dot={false} />
-                     </LineChart>
-                  </ResponsiveContainer>
+                  {reportsData?.data?.length ? (
+                     <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={reportsData?.data}>
+                           <CartesianGrid strokeDasharray="3 3" />
+                           <XAxis dataKey="day" fontSize={12} />
+                           <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
+                           <Tooltip content={<CustomTooltipMonthly translator={t} />} />
+                           <Line type="monotone" dataKey="count" stroke="#D14F4D" dot={false} />
+                           <Line type="monotone" dataKey="income" stroke="#385E8A" dot={false} />
+                        </LineChart>
+                     </ResponsiveContainer>
+                  ) : (
+                     <p className="mt-7 text-center text-lg font-bold">{t('No data')}</p>
+                  )}
                </div>
             ) : chosenPeriod === 'annual' ? (
                <div className="h-full">
-                  <ResponsiveContainer width="100%" height="100%">
-                     <LineChart data={reportsData?.data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="day" fontSize={12} />
-                        <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
-                        <Tooltip content={<CustomTooltipMonthly translator={t} />} />
-                        <Line type="monotone" dataKey="count" stroke="#51d14d" dot={false} />
-                        <Line type="monotone" dataKey="income" stroke="#57388a" dot={false} />
-                     </LineChart>
-                  </ResponsiveContainer>
+                  {reportsData?.data?.length ? (
+                     <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={reportsData?.data}>
+                           <CartesianGrid strokeDasharray="3 3" />
+                           <XAxis dataKey="day" fontSize={12} />
+                           <YAxis tick={{ dx: locale === 'en' ? -10 : -35 }} fontSize={13} />
+                           <Tooltip content={<CustomTooltipMonthly translator={t} />} />
+                           <Line type="monotone" dataKey="count" stroke="#51d14d" dot={false} />
+                           <Line type="monotone" dataKey="income" stroke="#57388a" dot={false} />
+                        </LineChart>
+                     </ResponsiveContainer>
+                  ) : (
+                     <p className="mt-7 text-center text-lg font-bold">{t('No data')}</p>
+                  )}
                </div>
             ) : null}
          </div>

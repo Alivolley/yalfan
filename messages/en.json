@@ -377,6 +377,7 @@
         "Count": "Count",
         "Sell": "Sell",
         "Day": "Day",
-        "unit": "$"
+        "unit": "$",
+        "No data": "No data"
     }
 }
