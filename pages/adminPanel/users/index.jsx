@@ -1,3 +1,4 @@
+import { useSWRConfig } from 'swr';
 import { useState } from 'react';
 
 // MUI
@@ -10,14 +11,17 @@ import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
 import AddEditUserModal from '@/components/pages/adminPanel/addEditUserModal/addEditUserModal';
+import ConfirmModal from '@/components/templates/confirm-modal/confirm-modal';
 
 // Apis
 import useGetAllUsers from '@/apis/pAdmin/users/useGetAllUsers';
+import useBlockUser from '@/apis/pAdmin/users/useBlockUser';
 
 function Users() {
    const [chosenCategory, setChosenCategory] = useState('');
@@ -25,15 +29,37 @@ function Users() {
    const [countValue, setCountValue] = useState(6);
    const [showAddEditUserModal, setShowAddEditUserModal] = useState(false);
    const [chosenUserForEdit, setChosenUserForEdit] = useState();
+   const [showBlockUserModal, setShowBlockUserModal] = useState(false);
+   const [chosenUserForBlock, setChosenUserForBlock] = useState();
+
+   const { mutate } = useSWRConfig();
 
    const { data: usersData, isLoading: usersIsLoading } = useGetAllUsers(pageStatus, countValue, chosenCategory);
+   const { trigger: blockTrigger, isMutating: blockIsMutating } = useBlockUser();
 
    const closeAddEditProductModalHandler = () => {
       setShowAddEditUserModal(false);
       setChosenUserForEdit();
    };
 
-   // console.log(usersData);
+   const closeBlockUserModal = () => {
+      setShowBlockUserModal(false);
+      setChosenUserForBlock();
+   };
+
+   console.log(chosenUserForBlock);
+
+   const blockUnBlockHandler = () => {
+      blockTrigger(
+         { phone_number: chosenUserForBlock?.phone_number, active: chosenUserForBlock?.role === 'blocked' },
+         {
+            onSuccess: () => {
+               mutate(`accounts/users/?page=${pageStatus}&page_size=${countValue}&role=${chosenCategory}`);
+               closeBlockUserModal();
+            },
+         }
+      );
+   };
 
    const columns = [
       { id: 1, title: 'ردیف', key: 'index' },
@@ -52,7 +78,11 @@ function Users() {
          id: 3,
          title: 'شماره تماس',
          key: 'phone_number',
-         renderCell: data => <p className="text-xs tracking-[1px]">{data.phone_number}</p>,
+         renderCell: data => (
+            <p className={`text-xs tracking-[1px] ${data?.role === 'blocked' ? 'text-customPinkHigh' : ''}`}>
+               {data.phone_number}
+            </p>
+         ),
       },
 
       {
@@ -60,13 +90,15 @@ function Users() {
          title: 'ماهیت',
          key: 'role',
          renderCell: data =>
-            data?.role === 'super_admin'
-               ? 'ادمین اصلی'
-               : data?.role === 'admin'
-                 ? 'ادمین انتخاب شده'
-                 : data?.role === 'normal_user'
-                   ? 'مشتری'
-                   : null,
+            data?.role === 'super_admin' ? (
+               'ادمین اصلی'
+            ) : data?.role === 'admin' ? (
+               'ادمین انتخاب شده'
+            ) : data?.role === 'normal_user' ? (
+               'مشتری'
+            ) : data?.role === 'blocked' ? (
+               <p className="font-bold text-customPinkHigh">بلاک شده</p>
+            ) : null,
       },
 
       {
@@ -97,11 +129,15 @@ function Users() {
                <IconButton
                   size="small"
                   onClick={() => {
-                     // setChosenProductForDelete(data?.title);
-                     // setShowDeleteProductModal(true);
+                     setChosenUserForBlock(data);
+                     setShowBlockUserModal(true);
                   }}
                >
-                  <BlockOutlinedIcon fontSize="small" />
+                  {data?.role === 'blocked' ? (
+                     <RemoveCircleIcon fontSize="small" color="error" />
+                  ) : (
+                     <BlockOutlinedIcon fontSize="small" />
+                  )}
                </IconButton>
             </div>
          ),
@@ -203,6 +239,27 @@ function Users() {
                      مشتری
                   </p>
                </Button>
+
+               <Button
+                  className="!flex !min-w-0 !items-center !gap-1 !p-0 !text-xs customMd:!text-sm"
+                  color="black"
+                  onClick={() => {
+                     setChosenCategory('blocked');
+                     setPageStatus(1);
+                  }}
+               >
+                  <div
+                     className={`h-4 w-4 shrink-0 rounded-full ${
+                        chosenCategory === 'blocked'
+                           ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
+                           : 'bg-[#E4EAF0]'
+                     }`}
+                  />
+                  <p>
+                     {/* {t('All products')} */}
+                     بلاک شده ها
+                  </p>
+               </Button>
             </div>
          </div>
 
@@ -249,6 +306,18 @@ function Users() {
             isEdit={!!chosenUserForEdit}
             detail={chosenUserForEdit}
             categoryTitle={chosenCategory}
+         />
+
+         <ConfirmModal
+            open={showBlockUserModal}
+            closeModal={closeBlockUserModal}
+            title={
+               chosenUserForBlock?.role !== 'blocked'
+                  ? 'آیا از بلاک کردن کاربر مطمئن هستید ؟'
+                  : 'آیا از فعال کردن کابر مطمئن هستید ؟'
+            }
+            confirmHandler={blockUnBlockHandler}
+            confirmLoading={blockIsMutating}
          />
       </AdminLayout>
    );
