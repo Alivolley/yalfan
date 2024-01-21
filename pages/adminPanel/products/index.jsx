@@ -40,12 +40,12 @@ function Products() {
    const t = useTranslations('adminPanelProducts');
 
    const { data: categoryList, isLoading: categoryIsLoading } = useCategories();
-   const { data: productsData, isLoading: productIsLoading } = useGetProducts(pageStatus, countValue, chosenCategory);
-   const { trigger: deleteProductTrigger, isMutating: deleteProductIsMutating } = useDeleteProduct(
-      pageStatus,
-      countValue,
-      chosenCategory
-   );
+   const {
+      data: productsData,
+      isLoading: productIsLoading,
+      mutate: productsMutate,
+   } = useGetProducts(pageStatus, countValue, chosenCategory);
+   const { trigger: deleteProductTrigger, isMutating: deleteProductIsMutating } = useDeleteProduct(productsMutate);
 
    const closeAddEditProductModalHandler = () => {
       setShowAddEditProductModal(false);
@@ -299,11 +299,9 @@ function Products() {
          <AddEditProductModal
             show={showAddEditProductModal}
             onClose={closeAddEditProductModalHandler}
-            pageStatus={pageStatus}
-            countValue={countValue}
             isEdit={!!chosenProductForEdit}
             detail={chosenProductForEdit}
-            categoryTitle={chosenCategory}
+            productsMutate={productsMutate}
          />
 
          <AddEditCategoryModalList show={showAddEditCategoryModal} onClose={() => setShowAddEditCategoryModal(false)} />

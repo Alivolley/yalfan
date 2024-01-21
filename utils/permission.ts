@@ -52,8 +52,13 @@ const PERMISSION = {
    },
 
    // Block users
+   EDIT_USERS_INFO: {
+      PATCH: 118,
+   },
+
+   // Block users
    BLOCK_USERS: {
-      PATCH: 117,
+      PATCH: 118,
    },
 };
 

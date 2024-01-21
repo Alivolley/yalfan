@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useSWRConfig } from 'swr';
 import { useTranslations } from 'next-intl';
 import { Controller, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -35,12 +34,12 @@ const permissionList = [
    { title: 'پاسخ به کامنت ها', code: 114 },
    { title: 'حذف کامنت', code: 115 },
    { title: 'مشاهده گزارش ها', code: 116 },
-   { title: 'بلاک کردن کاربران', code: 117 },
+   { title: 'ادیت اطلاعات کاربران', code: 117 },
+   { title: 'بلاک کردن کاربران', code: 118 },
 ];
 
-function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, countValue, categoryTitle }) {
+function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }) {
    const { locale } = useRouter();
-   const { mutate } = useSWRConfig();
    const t = useTranslations('addresses');
 
    const { trigger: addUserTrigger, isMutating: addUserIsMutating } = useAddUser();
@@ -65,14 +64,6 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, c
 
    const closeModalHandler = () => {
       onClose();
-      //   setPictures([]);
-      //   setPicturesURL([]);
-      //   setEditPictures([]);
-      //   setEditPicturesURL([]);
-      //   setCoverImage();
-      //   setCoverImageURL();
-      //   setColorsAndCount([]);
-      //   setDeletedIds([]);
       reset();
    };
 
@@ -103,7 +94,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, c
 
          addUserTrigger(newUser, {
             onSuccess: () => {
-               mutate(`accounts/users/?page=${pageStatus}&page_size=${countValue}&role=${categoryTitle}`);
+               usersMutate();
                closeModalHandler();
             },
          });
@@ -116,7 +107,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, c
 
          addUserTrigger(newUser, {
             onSuccess: () => {
-               mutate(`accounts/users/?page=${pageStatus}&page_size=${countValue}&role=${categoryTitle}`);
+               usersMutate();
                closeModalHandler();
             },
          });
@@ -163,6 +154,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, pageStatus, c
                                  }}
                                  value={value}
                                  onChange={onChange}
+                                 disabled={isEdit}
                               />
 
                               {fieldState.invalid

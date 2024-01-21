@@ -1,4 +1,3 @@
-import { useSWRConfig } from 'swr';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
@@ -39,7 +38,7 @@ import useAddProduct from '@/apis/pAdmin/products/useAddProduct';
 import useGetProductDetail from '@/apis/pAdmin/products/useGetProductDetail';
 import useEditProduct from '@/apis/pAdmin/products/useEditProduct';
 
-function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus, countValue, categoryTitle }) {
+function AddEditProductModal({ show, onClose, isEdit = false, detail, productsMutate }) {
    const [coverImage, setCoverImage] = useState();
    const [coverImageURL, setCoverImageURL] = useState();
    const [pictures, setPictures] = useState([]);
@@ -50,7 +49,6 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
    const [deletedIds, setDeletedIds] = useState([]);
    const [uploadPercent, setUploadPercent] = useState(0);
    const { locale } = useRouter();
-   const { mutate } = useSWRConfig();
    const t = useTranslations('adminPanelProducts');
 
    const { data: productDetail, isLoading: productDetailIsLoading } = useGetProductDetail(detail?.title);
@@ -205,9 +203,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
          if (isEdit) {
             editProductTrigger(newProduct, {
                onSuccess: () => {
-                  mutate(
-                     `store/products/list_create/?page=${pageStatus}&page_size=${countValue}&category=${categoryTitle}`
-                  );
+                  productsMutate();
                   closeModalHandler();
                   toast.success(t('Product edited'), {
                      style: {
@@ -230,9 +226,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, pageStatus
          } else {
             addProductTrigger(newProduct, {
                onSuccess: () => {
-                  mutate(
-                     `store/products/list_create/?page=${pageStatus}&page_size=${countValue}&category=${categoryTitle}`
-                  );
+                  productsMutate();
                   closeModalHandler();
                   toast.success(t('Product added'), {
                      style: {

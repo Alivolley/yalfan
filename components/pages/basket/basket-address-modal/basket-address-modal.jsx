@@ -16,7 +16,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import useAddAddress from '@/apis/profile/useAddAddress';
 import useEditAddress from '@/apis/profile/useEditAddress';
 
-function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
+function BasketAddressModal({ show, onClose, isEdit = false, detail, usersMutate }) {
    const { trigger: addAddressTrigger, isMutating: addAddressIsMutating } = useAddAddress();
    const { trigger: editAddressTrigger, isMutating: editAddressIsMutating } = useEditAddress();
    const { locale } = useRouter();
@@ -60,6 +60,9 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
             {
                onSuccess: () => {
                   closeModalHandler();
+                  if (usersMutate) {
+                     usersMutate();
+                  }
                },
             }
          );
@@ -67,6 +70,9 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
          addAddressTrigger(newAddress, {
             onSuccess: () => {
                closeModalHandler();
+               if (usersMutate) {
+                  usersMutate();
+               }
             },
          });
       }

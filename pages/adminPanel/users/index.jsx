@@ -1,5 +1,4 @@
-import { useSWRConfig } from 'swr';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // MUI
 import { Button, IconButton } from '@mui/material';
@@ -18,6 +17,7 @@ import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
 import AddEditUserModal from '@/components/pages/adminPanel/addEditUserModal/addEditUserModal';
 import ConfirmModal from '@/components/templates/confirm-modal/confirm-modal';
+import UserDetailModal from '@/components/pages/adminPanel/userDetailModal/userDetailModal';
 
 // Apis
 import useGetAllUsers from '@/apis/pAdmin/users/useGetAllUsers';
@@ -31,10 +31,14 @@ function Users() {
    const [chosenUserForEdit, setChosenUserForEdit] = useState();
    const [showBlockUserModal, setShowBlockUserModal] = useState(false);
    const [chosenUserForBlock, setChosenUserForBlock] = useState();
+   const [showUserDetailModal, setShowUserDetailModal] = useState(false);
+   const [chosenUserForDetail, setChosenUserForDetail] = useState();
 
-   const { mutate } = useSWRConfig();
-
-   const { data: usersData, isLoading: usersIsLoading } = useGetAllUsers(pageStatus, countValue, chosenCategory);
+   const {
+      data: usersData,
+      isLoading: usersIsLoading,
+      mutate: usersMutate,
+   } = useGetAllUsers(pageStatus, countValue, chosenCategory);
    const { trigger: blockTrigger, isMutating: blockIsMutating } = useBlockUser();
 
    const closeAddEditProductModalHandler = () => {
@@ -47,19 +51,29 @@ function Users() {
       setChosenUserForBlock();
    };
 
-   console.log(chosenUserForBlock);
+   const closeUserDetailModal = () => {
+      setShowUserDetailModal(false);
+      setChosenUserForDetail();
+   };
 
    const blockUnBlockHandler = () => {
       blockTrigger(
          { phone_number: chosenUserForBlock?.phone_number, active: chosenUserForBlock?.role === 'blocked' },
          {
             onSuccess: () => {
-               mutate(`accounts/users/?page=${pageStatus}&page_size=${countValue}&role=${chosenCategory}`);
+               usersMutate();
                closeBlockUserModal();
             },
          }
       );
    };
+
+   useEffect(() => {
+      if (chosenUserForDetail) {
+         const founded = usersData?.result?.find(item => item?.phone_number === chosenUserForDetail?.phone_number);
+         setChosenUserForDetail(founded);
+      }
+   }, [usersData]);
 
    const columns = [
       { id: 1, title: 'ردیف', key: 'index' },
@@ -120,8 +134,8 @@ function Users() {
                <IconButton
                   size="small"
                   onClick={() => {
-                     // setChosenProductForEdit(data);
-                     // setShowAddEditProductModal(true);
+                     setChosenUserForDetail(data);
+                     setShowUserDetailModal(true);
                   }}
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
@@ -301,11 +315,17 @@ function Users() {
          <AddEditUserModal
             show={showAddEditUserModal}
             onClose={closeAddEditProductModalHandler}
-            pageStatus={pageStatus}
-            countValue={countValue}
             isEdit={!!chosenUserForEdit}
             detail={chosenUserForEdit}
-            categoryTitle={chosenCategory}
+            usersMutate={usersMutate}
+         />
+
+         <UserDetailModal
+            show={showUserDetailModal}
+            onClose={closeUserDetailModal}
+            detail={chosenUserForDetail}
+            setCountValue={setCountValue}
+            usersMutate={usersMutate}
          />
 
          <ConfirmModal

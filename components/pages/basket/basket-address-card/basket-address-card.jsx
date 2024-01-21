@@ -13,7 +13,7 @@ import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import BasketAddressModal from '../basket-address-modal/basket-address-modal';
 import BasketDeleteAddressModal from '../basket-delete-address-modal/basket-delete-address-modal';
 
-function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, isActive = false }) {
+function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, isActive = false, usersMutate }) {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
    const [showDeleteAddressModal, setShowDeleteAddressModal] = useState(false);
 
@@ -53,11 +53,13 @@ function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, is
             onClose={() => setShowBasketAddressModal(false)}
             isEdit
             detail={detail}
+            usersMutate={usersMutate}
          />
          <BasketDeleteAddressModal
             show={showDeleteAddressModal}
             onClose={() => setShowDeleteAddressModal(false)}
             detail={detail}
+            usersMutate={usersMutate}
          />
       </div>
    );

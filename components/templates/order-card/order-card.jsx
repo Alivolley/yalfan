@@ -11,6 +11,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ReplayIcon from '@mui/icons-material/Replay';
 import EastIcon from '@mui/icons-material/East';
+import MoneyOffCsredOutlinedIcon from '@mui/icons-material/MoneyOffCsredOutlined';
 
 // Components
 import OrderDetailModal from '../order-detail-modal/order-detail-modal';
@@ -41,6 +42,11 @@ function OrderCard({ detail }) {
                <div className="flex items-center gap-2 rounded-lg bg-[#CBB464] p-2 text-sm text-white">
                   <ReplayIcon fontSize="small" />
                   <p>{t('Returned')}</p>
+               </div>
+            ) : detail?.status === 'unpaid' ? (
+               <div className="flex items-center gap-2 rounded-lg bg-[#F03A50] p-2 text-sm text-white">
+                  <MoneyOffCsredOutlinedIcon fontSize="small" />
+                  <p>{t('Unpaid')}</p>
                </div>
             ) : null}
          </div>

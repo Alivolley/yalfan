@@ -8,7 +8,7 @@ import { Button, Dialog } from '@mui/material';
 // Apis
 import useDeleteAddress from '@/apis/profile/useDeleteAddress';
 
-function BasketDeleteAddressModal({ show, onClose, detail }) {
+function BasketDeleteAddressModal({ show, onClose, detail, usersMutate }) {
    const { locale } = useRouter();
    const t = useTranslations('addresses');
    const { trigger: deleteAddressTrigger, isMutating: deleteAddressIsMutating } = useDeleteAddress();
@@ -17,6 +17,9 @@ function BasketDeleteAddressModal({ show, onClose, detail }) {
       deleteAddressTrigger(detail?.id, {
          onSuccess: () => {
             onClose();
+            if (usersMutate) {
+               usersMutate();
+            }
          },
       });
    };

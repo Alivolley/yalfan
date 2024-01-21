@@ -35,10 +35,12 @@ function ColorComponent({ colorsAndCount, setColorsAndCount, detail }) {
             value={checkValue || !!matchItem}
             onChange={(e, newValue) => {
                if (newValue) {
-                  setColorsAndCount(prev => [...prev, { color: detail?.color, stock: 0 }]);
+                  setColorsAndCount(prev =>
+                     prev ? [...prev, { color: detail?.color, stock: 0 }] : [{ color: detail?.color, stock: 0 }]
+                  );
                } else {
                   setColorsAndCount(prev => {
-                     const filteredPrev = prev.filter(item => item?.color !== detail?.color);
+                     const filteredPrev = prev?.filter(item => item?.color !== detail?.color);
                      return filteredPrev;
                   });
                }

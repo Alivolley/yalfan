@@ -34,7 +34,11 @@ function Orders() {
 
    const t = useTranslations('adminPanelOrders');
 
-   const { data: cardsData, isLoading: cardsIsLoading } = useGetAllCards(chosenFilter, pageStatus, countValue);
+   const {
+      data: cardsData,
+      isLoading: cardsIsLoading,
+      mutate: cardMutate,
+   } = useGetAllCards(chosenFilter, pageStatus, countValue);
 
    const { locale } = useRouter();
 
@@ -298,9 +302,7 @@ function Orders() {
             show={showEditStatusModal}
             onClose={closeEditStatusModal}
             detail={chosenOrderForEdit}
-            pageStatus={pageStatus}
-            countValue={countValue}
-            status={chosenFilter}
+            cardMutate={cardMutate}
          />
       </AdminLayout>
    );

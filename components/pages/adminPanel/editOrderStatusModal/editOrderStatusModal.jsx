@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify';
-import { useSWRConfig } from 'swr';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
@@ -19,9 +18,8 @@ import MoneyOffCsredOutlinedIcon from '@mui/icons-material/MoneyOffCsredOutlined
 // Apis
 import useChangeStatus from '@/apis/pAdmin/orders/useChangeStatus';
 
-function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, status }) {
+function EditOrderStatusModal({ show, onClose, detail, cardMutate }) {
    const { locale } = useRouter();
-   const { mutate } = useSWRConfig();
    const t = useTranslations('adminPanelOrders');
 
    const { isMutating: changeStatusIsMutating, trigger: changeStatusTrigger } = useChangeStatus(detail?.order_code);
@@ -53,7 +51,7 @@ function EditOrderStatusModal({ show, onClose, detail, pageStatus, countValue, s
       };
       changeStatusTrigger(newData, {
          onSuccess: () => {
-            mutate(`store/cart/list/?status=${status}&page=${pageStatus}&page_size=${countValue}&is_admin_panel=True`);
+            cardMutate();
             closeModalHandler();
             toast.success(t('Status changed successfully'), {
                style: {
