@@ -17,30 +17,30 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 // Apis
 import useAddUser from '@/apis/pAdmin/users/useAddUser';
 
-const permissionList = [
-   { title: 'ویرایش ارتباط با ما', code: 101 },
-   { title: 'افزودن دسته بندی', code: 102 },
-   { title: 'ویرایش دسته بندی', code: 103 },
-   { title: 'حذف دسته بندی', code: 104 },
-   { title: 'افزودن محصول', code: 105 },
-   { title: 'ویرایش محصول', code: 106 },
-   { title: 'حذف محصول', code: 107 },
-   { title: 'ویرایش هزینه ارسال', code: 108 },
-   { title: 'مشاهده کد تخفیف', code: 109 },
-   { title: 'افزودن کد تخفیف', code: 110 },
-   { title: 'ویرایش کد تخفیف', code: 111 },
-   { title: 'حذف کد تخفیف', code: 112 },
-   { title: 'تغییر وضعیت سفارش', code: 113 },
-   { title: 'پاسخ به کامنت ها', code: 114 },
-   { title: 'حذف کامنت', code: 115 },
-   { title: 'مشاهده گزارش ها', code: 116 },
-   { title: 'ادیت اطلاعات کاربران', code: 117 },
-   { title: 'بلاک کردن کاربران', code: 118 },
-];
-
 function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }) {
    const { locale } = useRouter();
-   const t = useTranslations('addresses');
+   const t = useTranslations('adminPanelUsers');
+
+   const permissionList = [
+      { title: t('Edit contact us'), code: 101 },
+      { title: t('Add category'), code: 102 },
+      { title: t('Edit category'), code: 103 },
+      { title: t('Delete category'), code: 104 },
+      { title: t('Add product'), code: 105 },
+      { title: t('Edit product'), code: 106 },
+      { title: t('Delete product'), code: 107 },
+      { title: t('Edit shipping cost'), code: 108 },
+      { title: t('Show discount code'), code: 109 },
+      { title: t('Add discount code'), code: 110 },
+      { title: t('Edit discount code'), code: 111 },
+      { title: t('Delete discount code'), code: 112 },
+      { title: t('Change order status'), code: 113 },
+      { title: t('Reply to comment'), code: 114 },
+      { title: t('Delete comment'), code: 115 },
+      { title: t('Show reports'), code: 116 },
+      { title: t('Edit users info'), code: 117 },
+      { title: t('Block users'), code: 118 },
+   ];
 
    const { trigger: addUserTrigger, isMutating: addUserIsMutating } = useAddUser();
 
@@ -120,20 +120,14 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'} maxWidth="xs">
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-solid border-[#E4EAF0] bg-white pb-2 pt-3">
-               <p className="text-lg font-bold">
-                  {isEdit
-                     ? // t('Add product')
-                       'ویرایش شخص'
-                     : //   t('Edit product')
-                       'افزودن شخص'}
-               </p>
+               <p className="text-lg font-bold">{isEdit ? t('Edit user') : t('Add user')}</p>
                <IconButton onClick={closeModalHandler}>
                   <CloseIcon />
                </IconButton>
             </div>
             <form onSubmit={handleSubmit(formSubmit)} className="mt-10 space-y-4">
                <div className="flex flex-1 flex-col gap-1">
-                  <p className="text-sm text-customBlue">شماره تماس</p>
+                  <p className="text-sm text-customBlue">{t('Phone number')}</p>
 
                   <div dir="ltr">
                      <Controller
@@ -175,7 +169,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                      render={({ field: { onChange, value } }) => (
                         <FormControlLabel
                            control={<Checkbox checked={value} />}
-                           label="ادمین است"
+                           label={t('This is admin')}
                            value={value}
                            onChange={onChange}
                         />
@@ -186,7 +180,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                {isAdminCheckbox && (
                   <>
                      <div className="flex flex-1 flex-col gap-1">
-                        <p className="text-sm text-[#7E8AAB]">دسترسی ها</p>
+                        <p className="text-sm text-[#7E8AAB]">{t('Permissions')}</p>
                         <Controller
                            control={control}
                            name="permissions"
@@ -202,7 +196,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                                     onChange={(e, newValue) => onChange(newValue)}
                                     getOptionLabel={option => option.title}
                                     renderOption={(props, option, { selected }) => (
-                                       <li {...props}>
+                                       <li {...props} dir={locale === 'en' ? 'ltr' : 'rtl'}>
                                           <Checkbox
                                              icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
                                              checkedIcon={<CheckBoxIcon fontSize="small" />}
@@ -228,7 +222,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                      </div>
 
                      <div className="flex flex-1 flex-col gap-1">
-                        <p className="text-sm text-customBlue">رمز عبور</p>
+                        <p className="text-sm text-customBlue">{t('Password')}</p>
                         <TextField
                            variant="outlined"
                            fullWidth
@@ -240,7 +234,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                               },
                               minLength: {
                                  value: 8,
-                                 message: 'رمز عبور باید از 8 کلمه بیشتر باشد',
+                                 message: t('Password most be greater than 8 characters'),
                               },
                            })}
                            error={!!errors?.password}
@@ -260,7 +254,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                      fullWidth
                      className="!rounded-10 !p-3 !text-white"
                   >
-                     {isEdit ? 'ویرایش شخص' : 'افزودن شخص'}
+                     {isEdit ? t('Edit user') : t('Add user')}
                   </LoadingButton>
                </div>
             </form>

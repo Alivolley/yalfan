@@ -37,7 +37,7 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
    );
 
    const { locale } = useRouter();
-   const t = useTranslations('profile');
+   const t = useTranslations('adminPanelUsers');
 
    const {
       register,
@@ -86,19 +86,17 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
       }
    }, [detail]);
 
-   console.log(detail);
-
    return (
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'} maxWidth="xl">
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-solid border-[#E4EAF0] bg-white pb-2 pt-3">
-               <p className="text-lg font-bold">جزییات</p>
+               <p className="text-lg font-bold">{t('Detail')}</p>
                <IconButton onClick={closeModalHandler}>
                   <CloseIcon />
                </IconButton>
             </div>
             <div className="mt-5 border-b border-solid border-[#E4EAF0] pb-6">
-               <p className="font-bold">اطلاعات شخصی</p>
+               <p className="font-bold">{t('Personal info')}</p>
 
                <form
                   onSubmit={handleSubmit(formSubmit)}
@@ -131,8 +129,8 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
                   <div className="flex flex-col gap-5 customMd:flex-row customMd:items-stretch">
                      <div>
                         <TextField
-                           label="نام و نام خانوادگی"
-                           placeholder={t('Enter your name')}
+                           label={t('FullName')}
+                           placeholder={t('Enter your full name')}
                            {...register('fullName', {
                               required: {
                                  value: true,
@@ -156,7 +154,7 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
                            fullWidth
                            startIcon={<PublishIcon className="rotate-180" />}
                         >
-                           ویرایش
+                           {t('Edit')}
                         </LoadingButton>
                      </div>
                   </div>
@@ -165,7 +163,7 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
 
             <div className="rounded-md border-b border-solid border-[#E4EAF0] bg-[#f5f8fc] px-5 py-8">
                <div className="flex flex-wrap items-center justify-between gap-5">
-                  <p className="text-base font-bold">لیست آدرس های ثبت شده</p>
+                  <p className="text-base font-bold">{t('Registered addresses')}</p>
                   <Button
                      variant="contained"
                      type="submit"
@@ -175,8 +173,7 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
                      onClick={() => setShowBasketAddressModal(true)}
                      startIcon={<AddLocationAltOutlinedIcon />}
                   >
-                     {/* {t('Add new address')} */}
-                     افزودن آدرس
+                     {t('Add address')}
                   </Button>
                </div>
 
@@ -192,13 +189,13 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
                         </Grid>
                      </div>
                   ) : (
-                     <p className="text-center text-base font-bold">آدرسی ثبت نشده است</p>
+                     <p className="text-center text-base font-bold">{t('No address registered')}</p>
                   )}
                </div>
             </div>
 
             <div className="rounded-md px-5 py-8">
-               <p className="font-bold">لیست سفارشات</p>
+               <p className="font-bold">{t('Orders list')}</p>
 
                <div>
                   {detail?.carts?.length ? (
@@ -213,7 +210,7 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
                      </div>
                   ) : (
                      <div className="mx-auto my-14 flex max-w-[370px] flex-col gap-4 text-center">
-                        <p className="text-xl font-bold">سفارشی ثبت نشده است</p>
+                        <p className="text-xl font-bold">{t('No order registered')}</p>
                      </div>
                   )}
                </div>
@@ -222,7 +219,12 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
                <CircularProgress color="customPink" />
             </Backdrop>
 
-            <BasketAddressModal show={showBasketAddressModal} onClose={() => setShowBasketAddressModal(false)} />
+            <BasketAddressModal
+               show={showBasketAddressModal}
+               onClose={() => setShowBasketAddressModal(false)}
+               userId={detail?.id}
+               usersMutate={usersMutate}
+            />
          </div>
       </Dialog>
    );

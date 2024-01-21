@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 // MUI
@@ -33,6 +34,8 @@ function Users() {
    const [chosenUserForBlock, setChosenUserForBlock] = useState();
    const [showUserDetailModal, setShowUserDetailModal] = useState(false);
    const [chosenUserForDetail, setChosenUserForDetail] = useState();
+
+   const t = useTranslations('adminPanelUsers');
 
    const {
       data: usersData,
@@ -76,10 +79,10 @@ function Users() {
    }, [usersData]);
 
    const columns = [
-      { id: 1, title: 'ردیف', key: 'index' },
+      { id: 1, title: t('Row'), key: 'index' },
       {
          id: 2,
-         title: 'نام',
+         title: t('Name'),
          key: 'title',
          renderCell: data => (
             <div className="flex items-center justify-center gap-1">
@@ -90,7 +93,7 @@ function Users() {
       },
       {
          id: 3,
-         title: 'شماره تماس',
+         title: t('Phone number'),
          key: 'phone_number',
          renderCell: data => (
             <p className={`text-xs tracking-[1px] ${data?.role === 'blocked' ? 'text-customPinkHigh' : ''}`}>
@@ -101,23 +104,23 @@ function Users() {
 
       {
          id: 4,
-         title: 'ماهیت',
+         title: t('Role'),
          key: 'role',
          renderCell: data =>
             data?.role === 'super_admin' ? (
-               'ادمین اصلی'
+               t('Main admin')
             ) : data?.role === 'admin' ? (
-               'ادمین انتخاب شده'
+               t('Chosen admin')
             ) : data?.role === 'normal_user' ? (
-               'مشتری'
+               t('Customer')
             ) : data?.role === 'blocked' ? (
-               <p className="font-bold text-customPinkHigh">بلاک شده</p>
+               <p className="font-bold text-customPinkHigh">{t('Blocked')}</p>
             ) : null,
       },
 
       {
          id: 5,
-         title: 'عملیات',
+         title: t('Actions'),
          key: 'actions',
          renderCell: data => (
             <div className="flex items-center justify-center gap-2">
@@ -140,6 +143,7 @@ function Users() {
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
+
                <IconButton
                   size="small"
                   onClick={() => {
@@ -163,10 +167,7 @@ function Users() {
          <div className="bg-white p-5">
             <div className="flex items-center gap-1.5">
                <PeopleAltOutlinedIcon color="textColor" fontSize="small" />
-               <p className="font-bold">
-                  {/* {t('Products categories')} */}
-                  اشخاص
-               </p>
+               <p className="font-bold">{t('Users')}</p>
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-4 customMd:gap-10">
@@ -185,10 +186,7 @@ function Users() {
                            : 'bg-[#E4EAF0]'
                      }`}
                   />
-                  <p>
-                     {/* {t('All products')} */}
-                     همه اشخاص
-                  </p>
+                  <p>{t('All users')}</p>
                </Button>
 
                <Button
@@ -206,10 +204,7 @@ function Users() {
                            : 'bg-[#E4EAF0]'
                      }`}
                   />
-                  <p>
-                     {/* {t('All products')} */}
-                     ادمین اصلی
-                  </p>
+                  <p>{t('Main admin')}</p>
                </Button>
 
                <Button
@@ -227,10 +222,7 @@ function Users() {
                            : 'bg-[#E4EAF0]'
                      }`}
                   />
-                  <p>
-                     {/* {t('All products')} */}
-                     ادمین انتخاب شده
-                  </p>
+                  <p>{t('Chosen admin')}</p>
                </Button>
 
                <Button
@@ -248,10 +240,7 @@ function Users() {
                            : 'bg-[#E4EAF0]'
                      }`}
                   />
-                  <p>
-                     {/* {t('All products')} */}
-                     مشتری
-                  </p>
+                  <p>{t('Customer')}</p>
                </Button>
 
                <Button
@@ -269,10 +258,7 @@ function Users() {
                            : 'bg-[#E4EAF0]'
                      }`}
                   />
-                  <p>
-                     {/* {t('All products')} */}
-                     بلاک شده ها
-                  </p>
+                  <p>{t('Blocked')}</p>
                </Button>
             </div>
          </div>
@@ -281,10 +267,7 @@ function Users() {
             <div className="flex flex-wrap items-center justify-between gap-3">
                <div className="flex items-center gap-1.5">
                   <QrCodeOutlinedIcon color="textColor" fontSize="small" />
-                  <p className="font-bold">
-                     {/* {t('Products list')} */}
-                     لیست اشخاص
-                  </p>
+                  <p className="font-bold">{t('Users list')}</p>
                </div>
 
                <Button
@@ -292,8 +275,7 @@ function Users() {
                   color="customPinkHigh"
                   onClick={() => setShowAddEditUserModal(true)}
                >
-                  {/* {t('Add product')} */}
-                  افزودن شخص
+                  {t('Add user')}
                </Button>
             </div>
 
@@ -324,7 +306,6 @@ function Users() {
             show={showUserDetailModal}
             onClose={closeUserDetailModal}
             detail={chosenUserForDetail}
-            setCountValue={setCountValue}
             usersMutate={usersMutate}
          />
 
@@ -333,8 +314,8 @@ function Users() {
             closeModal={closeBlockUserModal}
             title={
                chosenUserForBlock?.role !== 'blocked'
-                  ? 'آیا از بلاک کردن کاربر مطمئن هستید ؟'
-                  : 'آیا از فعال کردن کابر مطمئن هستید ؟'
+                  ? t('Are you sure about blocking this user?')
+                  : t('Are you sure about Unblocking this user?')
             }
             confirmHandler={blockUnBlockHandler}
             confirmLoading={blockIsMutating}

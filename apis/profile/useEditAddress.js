@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import useSWRMutation from 'swr/mutation';
 import { useSWRConfig } from 'swr';
 import axiosInstance from '@/configs/axiosInstance';
@@ -13,6 +12,7 @@ const useEditAddress = () => {
             },
          })
          .then(res => {
+            // eslint-disable-next-line consistent-return
             mutate('accounts/address/list_create/', prevData => {
                if (prevData) {
                   const newData = prevData?.filter(item => item?.id !== data.arg?.addressId);
