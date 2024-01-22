@@ -21,6 +21,9 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import PercentIcon from '@mui/icons-material/Percent';
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 
+// Assets
+import noImage from '@/assets/images/noImage.png';
+
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
@@ -95,7 +98,7 @@ function Products() {
          renderCell: data => (
             <div className="flex items-center gap-1">
                <div className="relative h-9 w-9 rounded-full bg-[#f5f8fc]">
-                  <Image src={data.cover || ''} alt="product" className="rounded-full object-cover" fill />
+                  <Image src={data.cover || noImage} alt="product" className="rounded-full object-cover" fill />
                </div>
                <p>{data.title}</p>
             </div>

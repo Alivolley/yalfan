@@ -14,6 +14,9 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import EastIcon from '@mui/icons-material/East';
 import MoneyOffCsredOutlinedIcon from '@mui/icons-material/MoneyOffCsredOutlined';
 
+// Assets
+import noImage from '@/assets/images/noImage.png';
+
 // Components
 import OrderDetailModal from '../order-detail-modal/order-detail-modal';
 
@@ -73,7 +76,7 @@ function OrderCard({ detail }) {
                      key={crypto.randomUUID()}
                   >
                      <Image
-                        src={item?.product_color?.cover || ''}
+                        src={item?.product_color?.cover || noImage}
                         alt="order"
                         className="rounded-md object-cover"
                         fill

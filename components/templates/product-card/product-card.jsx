@@ -17,6 +17,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 // Assets
 import ProductCardStyle from './product-card.style';
+import noImage from '@/assets/images/noImage.png';
 
 // Apis
 import useToggleFavorites from '@/apis/favorites/useToggleFavorites';
@@ -61,7 +62,7 @@ function ProductCard({ detail }) {
             id="categoryImage"
          >
             <Link href={`/productDetail/${detail?.title}`} className="relative h-full w-full">
-               <Image src={detail?.cover || ''} alt={detail?.title} className="object-contain" fill />
+               <Image src={detail?.cover || noImage} alt={detail?.title} className="object-contain" fill />
             </Link>
             <div className="absolute end-1.5 top-1.5 customMd:end-2 customMd:top-2">
                <LoadingButton

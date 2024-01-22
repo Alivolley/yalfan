@@ -12,6 +12,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 
 // Assets
 import discountShape from '@/assets/images/discount-shape.png';
+import noImage from '@/assets/images/noImage.png';
 
 // Apis
 import useAddToBasket from '@/apis/basket/useAddToBasket';
@@ -48,7 +49,7 @@ function BasketCard({ detail }) {
                href={`/productDetail/${detail?.product_color?.product_title}`}
                className="relative block h-[123px] w-[133px] shrink-0 rounded-xl bg-[#f5f8fc]"
             >
-               <Image src={detail?.product_color?.cover || ''} alt="product" className="object-cover p-4" fill />
+               <Image src={detail?.product_color?.cover || noImage} alt="product" className="object-cover p-4" fill />
             </Link>
             <div className="flex grow justify-between">
                <div className="flex flex-col justify-between">
@@ -125,7 +126,7 @@ function BasketCard({ detail }) {
                href={`/productDetail/${detail?.product_color?.product_title}`}
                className="relative block h-[205px] w-full shrink-0 rounded-xl bg-[#f5f8fc]"
             >
-               <Image src={detail?.product_color?.cover || ''} alt="product" className="object-cover p-4" fill />
+               <Image src={detail?.product_color?.cover || noImage} alt="product" className="object-cover p-4" fill />
             </Link>
             <div className="mt-5 space-y-3">
                <p className="h-4 overflow-hidden font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box]">

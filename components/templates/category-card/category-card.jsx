@@ -11,6 +11,7 @@ import EastIcon from '@mui/icons-material/East';
 
 // Assets
 import CategoryCardStyle from './category-card.style';
+import noImage from '@/assets/images/noImage.png';
 
 function CategoryCard({ detail }) {
    const router = useRouter();
@@ -24,7 +25,7 @@ function CategoryCard({ detail }) {
             className="relative mb-5 flex h-[100px] items-center justify-center rounded-xl bg-[#F5F8FC] customMd:h-[180px]"
             id="categoryImage"
          >
-            <Image src={detail?.cover || ''} alt={detail?.title} className="object-contain" fill />
+            <Image src={detail?.cover || noImage} alt={detail?.title} className="object-contain" fill />
          </div>
 
          <Button

@@ -13,6 +13,9 @@ import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ReplayIcon from '@mui/icons-material/Replay';
 import MoneyOffCsredOutlinedIcon from '@mui/icons-material/MoneyOffCsredOutlined';
 
+// Assets
+import noImage from '@/assets/images/noImage.png';
+
 function OrderDetailModal({ show, onClose, detail, locale }) {
    const t = useTranslations('orders');
 
@@ -148,7 +151,7 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
                                  >
                                     <div className="relative my-auto h-[60px] w-[60px] rounded-md bg-[#F5F8FC]">
                                        <Image
-                                          src={item?.product_color?.cover || ''}
+                                          src={item?.product_color?.cover || noImage}
                                           alt="order"
                                           className="rounded-md object-cover"
                                           fill
