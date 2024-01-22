@@ -1,15 +1,14 @@
-FROM node:20.11-alpine
+FROM python:3.10.2-slim-bullseye
 
-WORKDIR /src
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 
-COPY package*.json ./
+RUN apt-get update
 
-RUN npm install -g npm@latest
-
-RUN npm install
-
+WORKDIR /backend
 COPY . .
 
-RUN npm run build
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
-CMD ["npm", "start"]
+CMD python manage.py runserver 0.0.0.0:8000
