@@ -22,6 +22,9 @@ import ReplyModal from '../reply-modal/reply-modal';
 // Apis
 import useDeleteComment from '@/apis/comments/useDeleteComment';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function Comment({ detail, commentsMutate }) {
    const [showReplyModal, setShowReplyModal] = useState(false);
    const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);
@@ -44,7 +47,7 @@ function Comment({ detail, commentsMutate }) {
          <div>
             <div className="flex items-start justify-between">
                <div className="flex gap-2">
-                  <div className="relative h-10 w-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:h-14 customMd:w-14">
+                  <div className="relative size-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:size-14">
                      <Image
                         src={detail?.user_image || userProfilePic}
                         className="rounded-full"
@@ -68,10 +71,24 @@ function Comment({ detail, commentsMutate }) {
 
                {userInfo?.is_admin && (
                   <div className="flex items-center gap-1">
-                     <IconButton color="customPinkHigh" onClick={() => setShowReplyModal(true)}>
+                     <IconButton
+                        color="customPinkHigh"
+                        onClick={() => setShowReplyModal(true)}
+                        disabled={
+                           !userInfo?.is_super_admin &&
+                           !userInfo?.permissions?.includes(permissions?.REPLY_ON_COMMENT?.PATCH)
+                        }
+                     >
                         <QuickreplyOutlinedIcon className="!text-base" />
                      </IconButton>
-                     <IconButton color="customPinkHigh" onClick={() => setShowDeleteCommentModal(true)}>
+                     <IconButton
+                        color="customPinkHigh"
+                        onClick={() => setShowDeleteCommentModal(true)}
+                        disabled={
+                           !userInfo?.is_super_admin &&
+                           !userInfo?.permissions?.includes(permissions?.DELETE_COMMENT?.DELETE)
+                        }
+                     >
                         <DeleteOutlineIcon className="!text-lg" />
                      </IconButton>
                   </div>
@@ -81,7 +98,7 @@ function Comment({ detail, commentsMutate }) {
          {detail?.reply_message && (
             <div className="mr-5 mt-6 rounded-10 bg-[#FCF7F7] p-2 text-white customXs:mr-16 customSm:p-5 customMd:mr-24">
                <div className="flex gap-3">
-                  <div className="relative h-10 w-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:h-14 customMd:w-14">
+                  <div className="relative size-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:size-14">
                      <Image
                         src={detail?.admin_image || userProfilePic}
                         className="rounded-full"

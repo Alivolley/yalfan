@@ -262,8 +262,8 @@ function ProductDetail({ error, productDetail, categoryItems }) {
                                        key={item.id}
                                        className={
                                           chosenColor?.id === item.id
-                                             ? 'h-[34px] w-[34px] shrink-0 rounded-full border-2 border-solid border-black p-1'
-                                             : 'h-[34px] w-[34px]'
+                                             ? 'size-[34px] shrink-0 rounded-full border-2 border-solid border-black p-1'
+                                             : 'size-[34px]'
                                        }
                                     >
                                        <Fab

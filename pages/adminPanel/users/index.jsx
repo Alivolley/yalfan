@@ -34,6 +34,9 @@ import UserDetailModal from '@/components/pages/adminPanel/userDetailModal/userD
 import useGetAllUsers from '@/apis/pAdmin/users/useGetAllUsers';
 import useBlockUser from '@/apis/pAdmin/users/useBlockUser';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function Users() {
    const [chosenCategory, setChosenCategory] = useState('');
    const [pageStatus, setPageStatus] = useState(1);
@@ -114,7 +117,7 @@ function Users() {
          key: 'title',
          renderCell: data => (
             <div className="flex items-center justify-center gap-1">
-               <div className="relative h-9 w-9 rounded-full bg-[#f5f8fc]">
+               <div className="relative size-9 rounded-full bg-[#f5f8fc]">
                   <Image src={data.image || userProfilePic} alt="product" className="rounded-full object-cover" fill />
                </div>
 
@@ -161,6 +164,7 @@ function Users() {
                      setChosenUserForEdit(data);
                      setShowAddEditUserModal(true);
                   }}
+                  disabled={!userInfo?.is_super_admin}
                >
                   <PersonAddAltOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -171,6 +175,9 @@ function Users() {
                      setChosenUserForDetail(data);
                      setShowUserDetailModal(true);
                   }}
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.EDIT_USERS_INFO?.PATCH)
+                  }
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -181,6 +188,9 @@ function Users() {
                      setChosenUserForBlock(data);
                      setShowBlockUserModal(true);
                   }}
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.BLOCK_USERS?.PATCH)
+                  }
                >
                   {data?.role === 'blocked' ? (
                      <RemoveCircleIcon fontSize="small" color="error" />
@@ -214,7 +224,7 @@ function Users() {
                   }}
                >
                   <div
-                     className={`h-4 w-4 shrink-0 rounded-full ${
+                     className={`size-4 shrink-0 rounded-full ${
                         !chosenCategory
                            ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
                            : 'bg-[#E4EAF0]'
@@ -232,7 +242,7 @@ function Users() {
                   }}
                >
                   <div
-                     className={`h-4 w-4 shrink-0 rounded-full ${
+                     className={`size-4 shrink-0 rounded-full ${
                         chosenCategory === 'super_admin'
                            ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
                            : 'bg-[#E4EAF0]'
@@ -250,7 +260,7 @@ function Users() {
                   }}
                >
                   <div
-                     className={`h-4 w-4 shrink-0 rounded-full ${
+                     className={`size-4 shrink-0 rounded-full ${
                         chosenCategory === 'admin'
                            ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
                            : 'bg-[#E4EAF0]'
@@ -268,7 +278,7 @@ function Users() {
                   }}
                >
                   <div
-                     className={`h-4 w-4 shrink-0 rounded-full ${
+                     className={`size-4 shrink-0 rounded-full ${
                         chosenCategory === 'normal_user'
                            ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
                            : 'bg-[#E4EAF0]'
@@ -286,7 +296,7 @@ function Users() {
                   }}
                >
                   <div
-                     className={`h-4 w-4 shrink-0 rounded-full ${
+                     className={`size-4 shrink-0 rounded-full ${
                         chosenCategory === 'blocked'
                            ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
                            : 'bg-[#E4EAF0]'
@@ -308,6 +318,7 @@ function Users() {
                   startIcon={<AddCircleOutlinedIcon />}
                   color="customPinkHigh"
                   onClick={() => setShowAddEditUserModal(true)}
+                  disabled={!userInfo?.is_super_admin}
                >
                   {t('Add user')}
                </Button>

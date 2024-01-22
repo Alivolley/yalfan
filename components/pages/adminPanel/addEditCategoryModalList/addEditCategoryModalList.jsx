@@ -2,6 +2,9 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { Button, CircularProgress, Dialog, IconButton } from '@mui/material';
 
@@ -19,11 +22,16 @@ import AddEditCategoryModal from '../addEditCategoryModal/addEditCategoryModal';
 import useCategories from '@/apis/categories/useCategories';
 import useDeleteCategory from '@/apis/pAdmin/categories/useDeleteCategory';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function AddEditCategoryModalList({ show, onClose }) {
    const [showDeleteCategoryModal, setShowDeleteCategoryModal] = useState(false);
    const [showAddEditModal, setShowAddEditModal] = useState(false);
    const [chosenCategoryForDelete, setChosenCategoryForDelete] = useState();
    const [chosenCategoryForEdit, setChosenCategoryForEdit] = useState();
+
+   const userInfo = useSelector(state => state?.userInfoReducer);
    const { locale } = useRouter();
    const t = useTranslations('adminPanelProducts');
 
@@ -61,6 +69,9 @@ function AddEditCategoryModalList({ show, onClose }) {
                      startIcon={<AddCircleOutlinedIcon />}
                      color="customPinkHigh"
                      onClick={() => setShowAddEditModal(true)}
+                     disabled={
+                        !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.CATEGORY?.POST)
+                     }
                   >
                      {t('Add category')}
                   </Button>
@@ -88,6 +99,10 @@ function AddEditCategoryModalList({ show, onClose }) {
                                  setShowAddEditModal(true);
                                  setChosenCategoryForEdit(item?.id);
                               }}
+                              disabled={
+                                 !userInfo?.is_super_admin &&
+                                 !userInfo?.permissions?.includes(permissions?.CATEGORY?.PATCH)
+                              }
                            >
                               <BorderColorOutlinedIcon fontSize="inherit" />
                            </IconButton>
@@ -97,6 +112,10 @@ function AddEditCategoryModalList({ show, onClose }) {
                                  setShowDeleteCategoryModal(true);
                                  setChosenCategoryForDelete(item?.id);
                               }}
+                              disabled={
+                                 !userInfo?.is_super_admin &&
+                                 !userInfo?.permissions?.includes(permissions?.CATEGORY?.DELETE)
+                              }
                            >
                               <DeleteOutlineOutlinedIcon fontSize="small" />
                            </IconButton>

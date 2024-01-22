@@ -29,6 +29,9 @@ import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function AdminSideBar({ isMobile, onClose }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
    const userInfo = useSelector(state => state?.userInfoReducer);
@@ -68,7 +71,7 @@ function AdminSideBar({ isMobile, onClose }) {
          >
             <div
                className={`relative transition-all duration-500 ${
-                  isSideBarOpen ? 'h-[65px] w-[65px]' : 'mx-auto h-[40px] w-[40px]'
+                  isSideBarOpen ? 'size-[65px]' : 'mx-auto size-[40px]'
                }`}
             >
                <Image alt="profile" src={userInfo?.image || profilePic} className="rounded-full object-cover" fill />
@@ -93,7 +96,7 @@ function AdminSideBar({ isMobile, onClose }) {
                }`}
             >
                <div
-                  className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                  className={`flex size-11 items-center justify-center rounded-10 ${
                      pathname === '/adminPanel/products' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
                   }`}
                >
@@ -110,7 +113,7 @@ function AdminSideBar({ isMobile, onClose }) {
                }`}
             >
                <div
-                  className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                  className={`flex size-11 items-center justify-center rounded-10 ${
                      pathname === '/adminPanel/orders' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
                   }`}
                >
@@ -127,7 +130,7 @@ function AdminSideBar({ isMobile, onClose }) {
                }`}
             >
                <div
-                  className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                  className={`flex size-11 items-center justify-center rounded-10 ${
                      pathname === '/adminPanel/users' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
                   }`}
                >
@@ -135,23 +138,26 @@ function AdminSideBar({ isMobile, onClose }) {
                </div>
                {isSideBarOpen && <p className="text-[15px]">{t('Users')}</p>}
             </Link>
-            <Link
-               href="/adminPanel/reports"
-               className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
-                  pathname === '/adminPanel/reports' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
-               }`}
-            >
-               <div
-                  className={`flex h-11 w-11 items-center justify-center rounded-10 ${
-                     pathname === '/adminPanel/reports' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+
+            {(userInfo?.is_super_admin || userInfo?.permissions?.includes(permissions?.VIEW_REPORTS?.LIST)) && (
+               <Link
+                  href="/adminPanel/reports"
+                  className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
+                     pathname === '/adminPanel/reports' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
                   }`}
                >
-                  <DescriptionOutlinedIcon
-                     color={pathname === '/adminPanel/reports' ? 'customPinkHigh' : 'textColor'}
-                  />
-               </div>
-               {isSideBarOpen && <p className="text-[15px]">{t('Reports')}</p>}
-            </Link>
+                  <div
+                     className={`flex size-11 items-center justify-center rounded-10 ${
+                        pathname === '/adminPanel/reports' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+                     }`}
+                  >
+                     <DescriptionOutlinedIcon
+                        color={pathname === '/adminPanel/reports' ? 'customPinkHigh' : 'textColor'}
+                     />
+                  </div>
+                  {isSideBarOpen && <p className="text-[15px]">{t('Reports')}</p>}
+               </Link>
+            )}
             <Link
                href="/adminPanel/information"
                className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
@@ -159,7 +165,7 @@ function AdminSideBar({ isMobile, onClose }) {
                }`}
             >
                <div
-                  className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                  className={`flex size-11 items-center justify-center rounded-10 ${
                      pathname === '/adminPanel/information' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
                   }`}
                >

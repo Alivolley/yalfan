@@ -36,6 +36,9 @@ import useGetProducts from '@/apis/pAdmin/products/useGetProducts';
 import useDeleteProduct from '@/apis/pAdmin/products/useDeleteProduct';
 import useCategories from '@/apis/categories/useCategories';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function Products() {
    const { locale, back, pathname } = useRouter();
    const [showDeleteProductModal, setShowDeleteProductModal] = useState(false);
@@ -97,7 +100,7 @@ function Products() {
          key: 'title',
          renderCell: data => (
             <div className="flex items-center gap-1">
-               <div className="relative h-9 w-9 rounded-full bg-[#f5f8fc]">
+               <div className="relative size-9 rounded-full bg-[#f5f8fc]">
                   <Image src={data.cover || noImage} alt="product" className="rounded-full object-cover" fill />
                </div>
                <p>{data.title}</p>
@@ -114,11 +117,7 @@ function Products() {
                   {data?.colors?.map(
                      (item, index) =>
                         index < 3 && (
-                           <div
-                              className="h-4 w-4 rounded-full"
-                              style={{ backgroundColor: item.color }}
-                              key={item.id}
-                           />
+                           <div className="size-4 rounded-full" style={{ backgroundColor: item.color }} key={item.id} />
                         )
                   )}
                   {data?.colors?.length > 3 && (
@@ -130,7 +129,7 @@ function Products() {
                                  (item, index) =>
                                     index >= 3 && (
                                        <div
-                                          className="h-4 w-4 rounded-full"
+                                          className="size-4 rounded-full"
                                           style={{ backgroundColor: item.color }}
                                           key={item.id}
                                        />
@@ -199,6 +198,7 @@ function Products() {
                      setChosenProductForEdit(data);
                      setShowAddEditProductModal(true);
                   }}
+                  disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.PATCH)}
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -208,6 +208,7 @@ function Products() {
                      setChosenProductForDelete(data?.title);
                      setShowDeleteProductModal(true);
                   }}
+                  disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.DELETE)}
                >
                   <DeleteOutlineOutlinedIcon fontSize="small" />
                </IconButton>
@@ -254,7 +255,7 @@ function Products() {
                            }}
                         >
                            <div
-                              className={`h-4 w-4 shrink-0 rounded-full ${
+                              className={`size-4 shrink-0 rounded-full ${
                                  !chosenCategory
                                     ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
                                     : 'bg-[#E4EAF0]'
@@ -274,7 +275,7 @@ function Products() {
                               }}
                            >
                               <div
-                                 className={`h-4 w-4 shrink-0 rounded-full ${
+                                 className={`size-4 shrink-0 rounded-full ${
                                     chosenCategory === item.title
                                        ? 'border-[3px] border-solid border-[#E4EAF0] bg-customPinkHigh'
                                        : 'bg-[#E4EAF0]'
@@ -299,6 +300,7 @@ function Products() {
                   startIcon={<AddCircleOutlinedIcon />}
                   color="customPinkHigh"
                   onClick={() => setShowAddEditProductModal(true)}
+                  disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.POST)}
                >
                   {t('Add product')}
                </Button>

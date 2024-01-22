@@ -28,6 +28,9 @@ import EditOrderStatusModal from '@/components/pages/adminPanel/editOrderStatusM
 // Apis
 import useGetAllCards from '@/apis/pAdmin/orders/useGetAllCards';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function Orders() {
    const [chosenFilter, setChosenFilter] = useState('');
    const [pageStatus, setPageStatus] = useState(1);
@@ -123,6 +126,10 @@ function Orders() {
                      setChosenOrderForEdit(data);
                      setShowEditStatusModal(true);
                   }}
+                  disabled={
+                     !userInfo?.is_super_admin &&
+                     !userInfo?.permissions?.includes(permissions?.CHANGE_CART_STATUS?.PATCH)
+                  }
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
