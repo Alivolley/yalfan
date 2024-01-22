@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
@@ -26,7 +28,6 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 
 // Data
-import { toast } from 'react-toastify';
 import colorPallet from '@/data/color-pallet';
 
 // Components
@@ -346,11 +347,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, productsMu
                         <div className="flex flex-wrap items-center gap-5">
                            {coverImageURL ? (
                               <div className="relative flex aspect-square w-28 shrink-0 items-center justify-center rounded-2xl border border-solid border-[#9da8ba48]">
-                                 <img
-                                    src={coverImageURL}
-                                    alt="pic"
-                                    className="h-full w-full rounded-2xl object-cover"
-                                 />
+                                 <Image src={coverImageURL} alt="pic" className="rounded-2xl object-cover" fill />
                                  <div className="absolute end-0 top-0">
                                     <IconButton
                                        onClick={() => removeCoverHandler()}
@@ -403,10 +400,11 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, productsMu
                                  key={item?.source || item?.image}
                                  className="relative flex aspect-square w-28 shrink-0 items-center justify-center rounded-2xl border border-solid border-[#9da8ba48]"
                               >
-                                 <img
+                                 <Image
                                     src={item?.source || item?.image}
                                     alt="pic"
-                                    className="h-full w-full rounded-2xl object-cover"
+                                    className="rounded-2xl object-cover"
+                                    fill
                                  />
                                  <div className="absolute end-0 top-0">
                                     <IconButton
@@ -429,10 +427,11 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, productsMu
                                     key={item?.source || item?.image}
                                     className="relative flex aspect-square w-28 shrink-0 items-center justify-center rounded-2xl border border-solid border-[#9da8ba48]"
                                  >
-                                    <img
+                                    <Image
                                        src={item?.source || item?.image}
                                        alt="pic"
-                                       className="h-full w-full rounded-2xl object-cover"
+                                       className="rounded-2xl object-cover"
+                                       fill
                                     />
                                     <div className="absolute end-0 top-0">
                                        <IconButton

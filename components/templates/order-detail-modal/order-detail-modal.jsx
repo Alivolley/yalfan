@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
@@ -145,11 +146,12 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
                                     href={`/productDetail/${item?.product_color?.product_title}`}
                                     className="flex gap-1.5 rounded-md bg-[#F5F8FC] p-1.5"
                                  >
-                                    <div className="my-auto h-[60px] w-[60px] rounded-md bg-[#F5F8FC]">
-                                       <img
-                                          src={item?.product_color?.cover}
+                                    <div className="relative my-auto h-[60px] w-[60px] rounded-md bg-[#F5F8FC]">
+                                       <Image
+                                          src={item?.product_color?.cover || ''}
                                           alt="order"
-                                          className="h-full w-full rounded-md object-cover"
+                                          className="rounded-md object-cover"
+                                          fill
                                        />
                                     </div>
 

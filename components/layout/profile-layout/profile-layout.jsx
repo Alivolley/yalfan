@@ -37,12 +37,8 @@ function ProfileLayout({ children }) {
       <div className="gap-6 bg-[#f5f8fc] px-5 py-16 customMd:flex customMd:px-[60px]">
          <aside className="hidden h-fit w-[378px] shrink-0 rounded-2xl bg-white px-8 py-7 customMd:block">
             <div className="flex items-center gap-4">
-               <div className="h-[75px] w-[75px]">
-                  {userInfo?.image ? (
-                     <img alt="profile" src={userInfo?.image} className="h-full w-full rounded-full object-cover" />
-                  ) : (
-                     <Image alt="profile" src={profilePic} className="h-full w-full rounded-full object-cover" />
-                  )}
+               <div className="relative h-[75px] w-[75px]">
+                  <Image alt="profile" src={userInfo?.image || profilePic} className="rounded-full object-cover" fill />
                </div>
                <div className="space-y-1.5">
                   <p className="text-xl font-bold">{userInfo?.name}</p>

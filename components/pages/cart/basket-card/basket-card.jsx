@@ -46,9 +46,9 @@ function BasketCard({ detail }) {
          <div className="hidden gap-5 rounded-2xl bg-white p-5 customMd:flex">
             <Link
                href={`/productDetail/${detail?.product_color?.product_title}`}
-               className="block h-[123px] w-[133px] shrink-0 rounded-xl bg-[#f5f8fc] p-4"
+               className="relative block h-[123px] w-[133px] shrink-0 rounded-xl bg-[#f5f8fc]"
             >
-               <img src={detail?.product_color?.cover} alt="product" className="h-full w-full object-cover" />
+               <Image src={detail?.product_color?.cover || ''} alt="product" className="object-cover p-4" fill />
             </Link>
             <div className="flex grow justify-between">
                <div className="flex flex-col justify-between">
@@ -123,9 +123,9 @@ function BasketCard({ detail }) {
          <div className="w-[230px] shrink-0 rounded-10 bg-white p-3 customMd:hidden">
             <Link
                href={`/productDetail/${detail?.product_color?.product_title}`}
-               className="block h-[205px] w-full shrink-0 rounded-xl bg-[#f5f8fc] p-4"
+               className="relative block h-[205px] w-full shrink-0 rounded-xl bg-[#f5f8fc]"
             >
-               <img src={detail?.product_color?.cover} alt="product" className="h-full w-full object-cover" />
+               <Image src={detail?.product_color?.cover || ''} alt="product" className="object-cover p-4" fill />
             </Link>
             <div className="mt-5 space-y-3">
                <p className="h-4 overflow-hidden font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box]">

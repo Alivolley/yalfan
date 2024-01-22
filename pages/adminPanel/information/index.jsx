@@ -96,20 +96,13 @@ function Information() {
             {Object.keys(userInfo).length > 0 ? (
                <div className="mt-6 rounded bg-white p-7">
                   <div className="relative mx-auto w-fit cursor-pointer customMd:mx-0">
-                     <div className="h-28 w-28 cursor-pointer">
-                        {userInfo?.image ? (
-                           <img
-                              src={userInfo?.image}
-                              alt="user profile"
-                              className="h-full w-full cursor-pointer rounded-full object-cover"
-                           />
-                        ) : (
-                           <Image
-                              src={userProfilePic}
-                              alt="user profile"
-                              className="h-full w-full cursor-pointer rounded-full object-cover"
-                           />
-                        )}
+                     <div className="relative h-28 w-28 cursor-pointer">
+                        <Image
+                           src={userInfo?.image || userProfilePic}
+                           alt="user profile"
+                           className="cursor-pointer rounded-full object-cover"
+                           fill
+                        />
                      </div>
                      <IconButton
                         className="!absolute !bottom-[-15px] !start-1 !cursor-pointer !bg-customPinkHigh"

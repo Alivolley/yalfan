@@ -67,15 +67,11 @@ function AdminSideBar({ isMobile, onClose }) {
             }`}
          >
             <div
-               className={`transition-all duration-500 ${
+               className={`relative transition-all duration-500 ${
                   isSideBarOpen ? 'h-[65px] w-[65px]' : 'mx-auto h-[40px] w-[40px]'
                }`}
             >
-               {userInfo?.image ? (
-                  <img alt="profile" src={userInfo?.image} className="h-full w-full rounded-full object-cover" />
-               ) : (
-                  <Image alt="profile" src={profilePic} className="h-full w-full rounded-full object-cover" />
-               )}
+               <Image alt="profile" src={userInfo?.image || profilePic} className="rounded-full object-cover" fill />
             </div>
             <div className={`space-y-3 transition-all duration-500 ${isSideBarOpen ? '' : 'w-full'}`}>
                <p

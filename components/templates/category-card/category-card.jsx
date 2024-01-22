@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 // MUI
@@ -20,10 +21,10 @@ function CategoryCard({ detail }) {
          className="w-[162px] shrink-0 rounded-2xl bg-white p-5 customMd:flex-1"
       >
          <div
-            className="mb-5 flex h-[100px] items-center justify-center rounded-xl bg-[#F5F8FC] customMd:h-[180px]"
+            className="relative mb-5 flex h-[100px] items-center justify-center rounded-xl bg-[#F5F8FC] customMd:h-[180px]"
             id="categoryImage"
          >
-            <img src={detail?.cover} alt={detail?.title} className="h-full w-full object-contain" />
+            <Image src={detail?.cover || ''} alt={detail?.title} className="object-contain" fill />
          </div>
 
          <Button

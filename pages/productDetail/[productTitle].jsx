@@ -168,8 +168,8 @@ function ProductDetail({ error, productDetail, categoryItems }) {
                      </p>
                   </div>
                </div>
-               <div className="h-[250px] w-full customSm:h-[500px]">
-                  <img src={chosenPicture?.image} alt="product" className="h-full w-full rounded-2xl object-cover" />
+               <div className="relative h-[250px] w-full customSm:h-[500px]">
+                  <Image src={chosenPicture?.image} alt="product" className="rounded-2xl object-cover" fill />
                </div>
 
                <div className="mt-3">
@@ -178,15 +178,16 @@ function ProductDetail({ error, productDetail, categoryItems }) {
                         <Grid item xs={2} xl={1} key={item?.id}>
                            <button
                               type="button"
-                              className={`h-[40px] w-full rounded-[4px] border-none bg-none outline-none customSm:h-[80px] customMd:h-[60px] ${
+                              className={`relative h-[40px] w-full rounded-[4px] border-none bg-none outline-none customSm:h-[80px] customMd:h-[60px] ${
                                  item?.id === chosenPicture?.id ? '!border-2 !border-solid !border-customBlue' : ''
                               }`}
                               onClick={() => setChosenPicture(item)}
                            >
-                              <img
+                              <Image
                                  src={item?.image}
                                  alt="product"
-                                 className="h-full w-full cursor-pointer rounded-[4px] object-cover"
+                                 className="cursor-pointer rounded-[4px] object-cover p-0.5"
+                                 fill
                               />
                            </button>
                         </Grid>

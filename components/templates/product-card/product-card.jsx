@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
@@ -59,8 +60,8 @@ function ProductCard({ detail }) {
             }`}
             id="categoryImage"
          >
-            <Link href={`/productDetail/${detail?.title}`} className="h-full w-full">
-               <img src={detail?.cover} alt={detail?.title} className="h-full w-full object-contain" />
+            <Link href={`/productDetail/${detail?.title}`} className="relative h-full w-full">
+               <Image src={detail?.cover || ''} alt={detail?.title} className="object-contain" fill />
             </Link>
             <div className="absolute end-1.5 top-1.5 customMd:end-2 customMd:top-2">
                <LoadingButton

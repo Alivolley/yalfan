@@ -44,12 +44,13 @@ function Comment({ detail, commentsMutate }) {
          <div>
             <div className="flex items-start justify-between">
                <div className="flex gap-2">
-                  <div className="h-10 w-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:h-14 customMd:w-14">
-                     {detail?.user_image ? (
-                        <img src={detail?.user_image} className="h-full w-full rounded-full" alt="user profile" />
-                     ) : (
-                        <Image src={userProfilePic} className="h-full w-full rounded-full" alt="user profile" />
-                     )}
+                  <div className="relative h-10 w-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:h-14 customMd:w-14">
+                     <Image
+                        src={detail?.user_image || userProfilePic}
+                        className="rounded-full"
+                        alt="user profile"
+                        fill
+                     />
                   </div>
                   <div className="flex flex-col gap-1">
                      <div className="flex flex-wrap items-center gap-2 customSm:flex-nowrap">
@@ -80,12 +81,13 @@ function Comment({ detail, commentsMutate }) {
          {detail?.reply_message && (
             <div className="mr-5 mt-6 rounded-10 bg-[#FCF7F7] p-2 text-white customXs:mr-16 customSm:p-5 customMd:mr-24">
                <div className="flex gap-3">
-                  <div className="h-10 w-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:h-14 customMd:w-14">
-                     {detail?.admin_image ? (
-                        <img src={detail?.admin_image} className="h-full w-full rounded-full" alt="admin profile" />
-                     ) : (
-                        <Image src={userProfilePic} className="h-full w-full rounded-full" alt="admin profile" />
-                     )}
+                  <div className="relative h-10 w-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:h-14 customMd:w-14">
+                     <Image
+                        src={detail?.admin_image || userProfilePic}
+                        className="rounded-full"
+                        alt="admin profile"
+                        fill
+                     />
                   </div>
                   <div>
                      <div className="flex flex-wrap items-center gap-2 text-textColor customSm:flex-nowrap">

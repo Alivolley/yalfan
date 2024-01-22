@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -68,13 +69,14 @@ function OrderCard({ detail }) {
                {detail?.orders?.map(item => (
                   <Link
                      href={`/productDetail/${item?.product_color?.product_title}`}
-                     className="aspect-square w-16 rounded-md bg-[#F5F8FC] p-1 customMd:w-24"
+                     className="relative aspect-square w-16 rounded-md bg-[#F5F8FC] p-1 customMd:w-24"
                      key={crypto.randomUUID()}
                   >
-                     <img
-                        src={item?.product_color?.cover}
+                     <Image
+                        src={item?.product_color?.cover || ''}
                         alt="order"
-                        className="h-full w-full rounded-md object-cover"
+                        className="rounded-md object-cover"
+                        fill
                      />
                   </Link>
                ))}

@@ -107,7 +107,7 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
                         <Image
                            src={detail?.image || userProfilePic}
                            alt="user profile"
-                           className="h-full w-full cursor-pointer rounded-full object-cover"
+                           className="cursor-pointer rounded-full object-cover"
                            fill
                         />
                      </div>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useTranslations } from 'next-intl';
@@ -17,6 +18,9 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+
+// Assets
+import userProfilePic from '@/assets/images/userProfile.png';
 
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
@@ -109,7 +113,10 @@ function Users() {
          key: 'title',
          renderCell: data => (
             <div className="flex items-center justify-center gap-1">
-               <img src={data.image} alt="product" className="h-9 w-9 rounded-full bg-[#f5f8fc] object-cover" />
+               <div className="relative h-9 w-9 rounded-full bg-[#f5f8fc]">
+                  <Image src={data.image || userProfilePic} alt="product" className="rounded-full object-cover" fill />
+               </div>
+
                <p>{data.name}</p>
             </div>
          ),

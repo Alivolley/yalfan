@@ -42,12 +42,8 @@ function Profile() {
 
          <div className="px-5 py-12 customMd:hidden">
             <div className="flex items-center gap-4">
-               <div className="h-[75px] w-[75px]">
-                  {userInfo?.image ? (
-                     <img alt="profile" src={userInfo?.image} className="h-full w-full rounded-full object-cover" />
-                  ) : (
-                     <Image alt="profile" src={profilePic} className="h-full w-full rounded-full object-cover" />
-                  )}
+               <div className="relative h-[75px] w-[75px]">
+                  <Image alt="profile" src={userInfo?.image || profilePic} className="rounded-full object-cover" fill />
                </div>
                <div className="space-y-1.5">
                   <p className="text-xl font-bold">{userInfo?.name}</p>

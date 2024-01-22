@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
@@ -138,11 +139,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
                         <div className="flex flex-wrap items-center gap-5">
                            {coverImageURL ? (
                               <div className="relative flex aspect-square w-28 shrink-0 items-center justify-center rounded-2xl border border-solid border-[#9da8ba48]">
-                                 <img
-                                    src={coverImageURL}
-                                    alt="pic"
-                                    className="h-full w-full rounded-2xl object-cover"
-                                 />
+                                 <Image src={coverImageURL} alt="pic" className="rounded-2xl object-cover" fill />
                                  <div className="absolute end-0 top-0">
                                     <IconButton
                                        onClick={() => removeCoverHandler()}

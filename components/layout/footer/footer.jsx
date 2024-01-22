@@ -22,7 +22,7 @@ function Footer() {
    return (
       <footer className="bg-[#0A1B2F] px-8 pb-14 pt-20 text-white customMd:px-16">
          <div className="border-y border-solid border-[#ffffffa2] py-8 customMd:py-[70px]">
-            <Grid container>
+            <Grid container spacing={{ xs: 3, md: 0 }}>
                <Grid item xs={12} md={6}>
                   <div className="flex items-center justify-center gap-2 customMd:gap-3 customMd:ps-16">
                      <div className="w-[100px] shrink-0 customMd:w-[131px]">

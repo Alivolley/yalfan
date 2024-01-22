@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
@@ -68,8 +69,6 @@ function Products() {
       });
    };
 
-   console.log(userInfo);
-
    useEffect(() => {
       if (userInfo?.phone_number && !userInfo?.is_admin) {
          back();
@@ -94,7 +93,9 @@ function Products() {
          key: 'title',
          renderCell: data => (
             <div className="flex items-center gap-1">
-               <img src={data.cover} alt="product" className="h-9 w-9 rounded-full bg-[#f5f8fc] object-cover" />
+               <div className="relative h-9 w-9 rounded-full bg-[#f5f8fc]">
+                  <Image src={data.cover || ''} alt="product" className="rounded-full object-cover" fill />
+               </div>
                <p>{data.title}</p>
             </div>
          ),
