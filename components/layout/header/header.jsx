@@ -126,7 +126,7 @@ function Header({ language, isLogin }) {
                </IconButton>
                <Link href="/" className="flex items-center gap-2 customMd:gap-3">
                   <div className="w-[40px] shrink-0 customMd:h-16 customMd:w-[73px]">
-                     <Image src={fakeLogo} alt="logo" className="h-full w-full" />
+                     <Image src={fakeLogo} alt="logo" className="size-full" />
                   </div>
                   <div className="space-y-0.5">
                      <p className="text-sm font-bold customMd:text-xl">{t('yalfan')}</p>
@@ -466,7 +466,7 @@ function Header({ language, isLogin }) {
             </div>
          </div>
          <div
-            className={`fixed inset-x-0 bottom-0 top-[185px] bg-[#0000004D] transition-all duration-300 ${
+            className={`fixed inset-x-0 bottom-0 top-[185px] bg-[#0000004D] transition-all duration-300${
                showSearchSection || showCategoriesMenu ? 'visible opacity-100' : 'invisible opacity-0'
             }`}
          />
