@@ -71,7 +71,7 @@ function Products() {
    console.log(userInfo);
 
    useEffect(() => {
-      if (!userInfo?.is_admin) {
+      if (userInfo?.phone_number && !userInfo?.is_admin) {
          back();
          toast.warn(t("You don't have permission to visit this page"), {
             style: {

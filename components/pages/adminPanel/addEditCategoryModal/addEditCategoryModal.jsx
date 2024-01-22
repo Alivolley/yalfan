@@ -118,7 +118,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] border-b border-solid border-[#E4EAF0] bg-white">
                <div className="flex items-center justify-between pt-3">
-                  <p className="text-lg font-bold">{t('Add category')}</p>
+                  <p className="text-lg font-bold">{isEdit ? t('Edit category') : t('Add category')}</p>
                   <IconButton onClick={closeModalHandler}>
                      <CloseIcon />
                   </IconButton>
@@ -248,7 +248,7 @@ function AddEditCategoryModal({ show, onClose, isEdit = false, detail }) {
                            type="submit"
                            loading={addCategoryIsMutating || editCategoryIsMutating}
                         >
-                           {t('Add category')}
+                           {isEdit ? t('Edit category') : t('Add category')}
                         </LoadingButton>
                      </div>
                   </form>

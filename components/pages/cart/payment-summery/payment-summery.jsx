@@ -27,13 +27,25 @@ function PaymentSummery({ detail, setBasketStep, basketStep, chosenAddress, orde
       }
 
       if (basketStep === 2 && chosenAddress) {
-         console.log('payment');
-         const addressDetail = {
-            address: chosenAddress?.id,
-            order_description: orderDescription,
-         };
+         if (isNaN(detail?.shipping_cost)) {
+            toast.info(t('To continue the payment contact our support'), {
+               style: {
+                  direction: locale === 'en' ? 'ltr' : 'rtl',
+                  fontFamily:
+                     locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+                  lineHeight: '25px',
+               },
+               theme: 'colored',
+               autoClose: 5000,
+            });
+         } else {
+            const addressDetail = {
+               address: chosenAddress?.id,
+               order_description: orderDescription,
+            };
 
-         sendAddressTrigger(addressDetail);
+            sendAddressTrigger(addressDetail);
+         }
       } else if (basketStep === 2) {
          toast.info(t('Enter or select your address'), {
             style: {

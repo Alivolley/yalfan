@@ -874,7 +874,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, productsMu
          </div>
 
          <Backdrop sx={{ zIndex: 2 }} open={addProductIsMutating || editProductIsMutating}>
-            <div className="flex w-full max-w-[200px] flex-col items-center justify-center gap-7 customMd:max-w-[300px]">
+            <div className="flex w-full max-w-[200px] flex-col items-center justify-center gap-7 rounded-md bg-[#f5f8fc] px-5 py-10 customMd:max-w-[300px]">
                <p className="text-lg font-bold">{t('Sending info')} ...</p>
                <div className="flex w-full items-center justify-between gap-3">
                   <p className="font-bold">{uploadPercent}%</p>
