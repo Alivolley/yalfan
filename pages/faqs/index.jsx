@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -18,6 +19,10 @@ function Faqs() {
 
    return (
       <div className="bg-[#fcf7f7] px-8 py-[60px] customMd:px-16">
+         <Head>
+            <title>{router.locale === 'fa' ? `یلفان - سوالات متداول` : `Yalfan-faqs`}</title>
+         </Head>
+
          <div className="flex items-start gap-5">
             <div
                className={`hidden h-[435px] w-[300px] shrink-0 border-solid border-[#E4EAF0] customMd:block ${
@@ -256,7 +261,7 @@ function Faqs() {
          <div className="mt-16 flex flex-col items-center justify-center gap-3">
             <p className="text-sm font-bold customMd:text-base">{t("Didn't find your answer")}</p>
             <p className="text-xs text-[#626E94]">{t('Contact Our backup team')}</p>
-            <Link href="/">
+            <Link href="/contactUs">
                <Button color="customPink2" variant="contained" className="!px-10 !text-customPinkHigh">
                   {t('Contact us')}
                </Button>

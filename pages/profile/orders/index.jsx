@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -23,6 +25,7 @@ import useGetCards from '@/apis/profile/useGetCards';
 function Orders() {
    const [tabsValue, setTabsValue] = useState('');
    const [page, setPage] = useState(1);
+   const { locale } = useRouter();
 
    const t = useTranslations('orders');
 
@@ -30,6 +33,9 @@ function Orders() {
 
    return (
       <ProfileLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - سفارش های من` : `Yalfan-orders`}</title>
+         </Head>
          <div className="rounded-2xl bg-white p-7">
             <p className="text-lg font-bold text-[#050F2C]">{t('Track orders')}</p>
 

@@ -6,7 +6,11 @@ const nextConfig = {
    reactStrictMode: true,
 
    images: {
-      domains: ['yalfan.com'],
+      remotePatterns: [
+         {
+            hostname: 'yalfan.com',
+         },
+      ],
    },
 
    i18n: {

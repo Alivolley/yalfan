@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -32,6 +33,9 @@ export default function Home({ categoryList, error, newestList, bestSellersList 
 
    return (
       <div>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان` : `Yalfan`}</title>
+         </Head>
          <Banner />
          <Categories detail={categoryList} />
          <OffersBanner />

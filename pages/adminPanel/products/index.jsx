@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
@@ -214,6 +215,9 @@ function Products() {
 
    return (
       <AdminLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - پنل ادمین` : `Yalfan-admin panel`}</title>
+         </Head>
          <div className="bg-white p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
                <div className="flex items-center gap-1.5">

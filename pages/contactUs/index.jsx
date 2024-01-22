@@ -1,5 +1,7 @@
-import { useTranslations } from 'next-intl';
 /* eslint-disable jsx-a11y/control-has-associated-label */
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { useTranslations } from 'next-intl';
 import { Controller, useForm } from 'react-hook-form';
 import Image from 'next/image';
 
@@ -27,6 +29,7 @@ import useContactUs from '@/apis/useContactUs';
 
 function ContactUs() {
    const t = useTranslations('contactUs');
+   const { locale } = useRouter();
    const { trigger: contactUsTrigger, isMutating: contactUsIsMutating } = useContactUs();
 
    const {
@@ -64,6 +67,9 @@ function ContactUs() {
 
    return (
       <div className="bg-[#fcf7f7] px-8 py-[60px] customMd:px-16">
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - تماس با ما` : `Yalfan-contact us`}</title>
+         </Head>
          <Grid container columnSpacing={4}>
             <Grid item xs={12} md={5} lg={3.5}>
                <div className="rounded-2xl bg-white p-5">

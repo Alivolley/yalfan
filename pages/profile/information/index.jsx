@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,6 +28,7 @@ import useChangeProfileInfo from '@/apis/profile/useChangeProfileInfo';
 
 function Information() {
    const userInfo = useSelector(state => state?.userInfoReducer);
+   const { locale } = useRouter();
 
    const { trigger: changeProfileTrigger, isMutating: changeProfileIsMutating } = useChangeProfileImage();
    const { trigger: changeProfileInfoTrigger, isMutating: changeProfileInfoIsMutating } = useChangeProfileInfo();
@@ -67,6 +70,9 @@ function Information() {
 
    return (
       <ProfileLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - اطلاعات حساب` : `Yalfan-account`}</title>
+         </Head>
          <div>
             <p className="rounded-2xl bg-white p-7 text-lg font-bold text-[#050F2C]">{t('Account information')}</p>
 

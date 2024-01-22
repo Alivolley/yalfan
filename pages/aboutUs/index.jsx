@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -39,7 +40,10 @@ function AboutUs({ categoryList, error }) {
    }, [error]);
 
    return (
-      <div className="">
+      <>
+         <Head>
+            <title>{locale === 'fa' ? 'یلفان - درباره ما' : 'Yalfan-about us'}</title>
+         </Head>
          <div className="bg-[#fcf7f7] px-8 py-16 customMd:px-16">
             <Grid container spacing={4}>
                <Grid item xs={12} md={7} order={{ xs: 2, md: 1 }}>
@@ -134,7 +138,7 @@ function AboutUs({ categoryList, error }) {
                </Grid>
             </Grid>
          </div>
-      </div>
+      </>
    );
 }
 

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -125,6 +126,9 @@ function ProductDetail({ error, productDetail, categoryItems }) {
 
    return (
       <div className="bg-[#fcf7f7] px-8 py-[60px] customMd:px-16">
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - ${productDetail?.title}` : `Yalfan-${productDetail?.title}`}</title>
+         </Head>
          <Grid container columnSpacing={4}>
             <Grid item xs={12} md={6}>
                <div className="mb-8 customMd:hidden">

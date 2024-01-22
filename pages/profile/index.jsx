@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { usePathname } from 'next/navigation';
@@ -36,6 +37,9 @@ function Profile() {
 
    return (
       <main>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - پروفایل` : `Yalfan-profile`}</title>
+         </Head>
          <div className="hidden customMd:block">
             <ProfileLayout />
          </div>

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
@@ -194,6 +195,9 @@ function Users() {
 
    return (
       <AdminLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - پنل ادمین` : `Yalfan-admin panel`}</title>
+         </Head>
          <div className="bg-white p-5">
             <div className="flex items-center gap-1.5">
                <PeopleAltOutlinedIcon color="textColor" fontSize="small" />

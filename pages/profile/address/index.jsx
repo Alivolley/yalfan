@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -23,9 +25,13 @@ function Address() {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
    const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
    const t = useTranslations('addresses');
+   const { locale } = useRouter();
 
    return (
       <ProfileLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - آدرس های من` : `Yalfan-addresses`}</title>
+         </Head>
          <div>
             <div className="flex items-center gap-2 rounded-2xl bg-white p-7">
                <p className="text-lg font-bold text-[#050F2C]">{t('List of your addresses')}</p>

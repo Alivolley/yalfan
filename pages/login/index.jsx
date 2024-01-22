@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
@@ -90,6 +91,9 @@ function Login() {
 
    return (
       <LoginStyle className="fixed inset-0 px-5 py-12 customMd:p-16">
+         <Head>
+            <title>{router.locale === 'fa' ? `یلفان - ورود` : `Yalfan-login`}</title>
+         </Head>
          <div className="h-full max-w-[486px] rounded-2xl bg-white p-7 2xl:max-w-[550px]" id="container">
             <Link href="/" className="flex w-fit items-center gap-2 customMd:gap-3">
                <div className="w-[73px] shrink-0 customMd:h-16">

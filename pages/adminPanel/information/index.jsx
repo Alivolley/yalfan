@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
@@ -88,6 +89,9 @@ function Information() {
 
    return (
       <AdminLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - پنل ادمین` : `Yalfan-admin panel`}</title>
+         </Head>
          <div>
             <p className="flex items-center gap-2 rounded bg-white p-7 text-lg font-bold">
                <FeedOutlinedIcon /> {t('Account information')}

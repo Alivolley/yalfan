@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
@@ -153,6 +154,9 @@ function Reports() {
 
    return (
       <AdminLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - پنل ادمین` : `Yalfan-admin panel`}</title>
+         </Head>
          <div className="flex flex-col gap-2 customSm:flex-row customSm:items-center customSm:gap-4">
             <button
                type="button"

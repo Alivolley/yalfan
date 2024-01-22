@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -17,11 +19,15 @@ import useGetFavorites from '@/apis/favorites/useGetFavorites';
 function Favorites() {
    const t = useTranslations('profile');
    const isLogin = useSelector(state => state?.loginStatusReducer);
+   const { locale } = useRouter();
 
    const { data: favoritesData, isLoading: favoritesIsLoading } = useGetFavorites(isLogin);
 
    return (
       <ProfileLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - علاقه مندی ها` : `Yalfan-favorites`}</title>
+         </Head>
          <div>
             <div className="flex items-center gap-2 rounded-2xl bg-white p-7">
                <p className="text-lg font-bold text-[#050F2C]">{t('Your favorites list')}</p>

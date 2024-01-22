@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
@@ -71,6 +72,9 @@ function Cart() {
 
    return (
       <div className="bg-[#fcf7f7] p-8 customMd:px-16 customLg:py-16">
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - سبد خرید` : `Yalfan-cart`}</title>
+         </Head>
          {loading ? (
             <div className="my-12 flex w-full items-center justify-center">
                <CircularProgress color="customPink" />

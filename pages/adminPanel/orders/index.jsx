@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
@@ -141,6 +142,9 @@ function Orders() {
 
    return (
       <AdminLayout>
+         <Head>
+            <title>{locale === 'fa' ? `یلفان - پنل ادمین` : `Yalfan-admin panel`}</title>
+         </Head>
          <div>
             <Grid container spacing={2}>
                <Grid item xs={6} lg={2.4}>
