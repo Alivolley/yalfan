@@ -418,15 +418,16 @@ export default CategoryDetail;
 
 export async function getServerSideProps(context) {
    const { query } = context;
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const categoryList = await axios('http://yalfan.com/api/store/categories/list_create/', {
+      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`, {
          params: {
             lang: context.locale,
          },
       }).then(res => res.data);
 
-      const productsList = await axios('http://yalfan.com/api/store/products/list_create/', {
+      const productsList = await axios(`${baseURL}api/store/products/list_create/`, {
          params: {
             lang: context.locale,
             highest_price: true,

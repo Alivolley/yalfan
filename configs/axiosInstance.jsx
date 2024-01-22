@@ -3,8 +3,10 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const axiosInstance = axios.create({
-   baseURL: 'http://yalfan.com/api/',
+   baseURL: `${baseURL}api/`,
 });
 
 axiosInstance.interceptors.request.use(

@@ -498,16 +498,17 @@ export default ProductDetail;
 
 export async function getServerSideProps(context) {
    const { query, locale } = context;
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const productDetail = await axios('http://yalfan.com/api/store/products/get_update_destroy/', {
+      const productDetail = await axios(`${baseURL}api/store/products/get_update_destroy/`, {
          params: {
             lang: locale,
             title: query?.productTitle,
          },
       }).then(res => res.data);
 
-      const categoryItems = await axios(`http://yalfan.com/api/store/products/list_create/`, {
+      const categoryItems = await axios(`${baseURL}api/store/products/list_create/`, {
          params: {
             lang: locale,
             category: productDetail?.category,

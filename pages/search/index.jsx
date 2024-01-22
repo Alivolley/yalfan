@@ -128,9 +128,10 @@ export default Search;
 export async function getServerSideProps(context) {
    const { query, req, locale } = context;
    const accessToken = req?.cookies?.yalfan_accessToken;
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const searchResultList = await axios('http://yalfan.com/api/store/products/list_create/', {
+      const searchResultList = await axios(`${baseURL}api/store/products/list_create/`, {
          params: {
             lang: locale,
             search: query?.productName,
@@ -143,7 +144,7 @@ export async function getServerSideProps(context) {
          }),
       }).then(res => res.data);
 
-      const suggestsList = await axios('http://yalfan.com/api/store/products/list_create/', {
+      const suggestsList = await axios(`${baseURL}api/store/products/list_create/`, {
          params: {
             lang: locale,
             suggest: true,

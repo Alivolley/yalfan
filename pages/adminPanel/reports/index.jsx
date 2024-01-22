@@ -98,6 +98,7 @@ function Reports() {
    const [startDate, setStartDate] = useState();
    const [endDate, setEndDate] = useState();
    const [isDownloading, setIsDownloading] = useState(false);
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    const t = useTranslations('adminPanelReports');
    const userInfo = useSelector(state => state?.userInfoReducer);
@@ -116,7 +117,7 @@ function Reports() {
             `accounts/report/?excel=True&start=${Math.floor(startDate / 1000)}&end=${Math.floor(endDate / 1000)}`
          )
             .then(res => {
-               window.location.href = `http://yalfan.com/${res?.data?.link}`;
+               window.location.href = `${baseURL}${res?.data?.link}`;
                setTimeout(() => {
                   setIsDownloading(false);
                }, 1500);

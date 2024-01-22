@@ -145,8 +145,10 @@ function AboutUs({ categoryList, error }) {
 export default AboutUs;
 
 export async function getStaticProps(context) {
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
    try {
-      const categoryList = await axios('http://yalfan.com/api/store/categories/list_create/', {
+      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`, {
          params: {
             lang: context.locale,
          },
