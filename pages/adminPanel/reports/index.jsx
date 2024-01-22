@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Recharts
 import {
@@ -16,6 +16,9 @@ import {
    LineChart,
    Line,
 } from 'recharts';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // MUI
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -96,7 +99,9 @@ function Reports() {
    const [isDownloading, setIsDownloading] = useState(false);
 
    const t = useTranslations('adminPanelReports');
-   const { locale } = useRouter();
+   const userInfo = useSelector(state => state?.userInfoReducer);
+
+   const { locale, back, pathname } = useRouter();
 
    const { data: reportsData, isLoading: reportsIsLoading } = useGetReports(
       chosenFilter === 1 || chosenFilter === 12 ? chosenFilter : '',
@@ -129,6 +134,22 @@ function Reports() {
          });
       }
    };
+
+   useEffect(() => {
+      if (!userInfo?.is_admin) {
+         back();
+         toast.warn(t("You don't have permission to visit this page"), {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [userInfo, pathname]);
 
    return (
       <AdminLayout>
@@ -294,9 +315,21 @@ function Reports() {
 export default Reports;
 
 export async function getServerSideProps(context) {
+   const { req } = context;
+   const accessToken = req?.cookies?.yalfan_accessToken;
+   const refreshToken = req?.cookies?.yalfan_refreshToken;
+
+   if (accessToken && refreshToken) {
+      return {
+         props: {
+            messages: (await import(`../../../messages/${context.locale}.json`)).default,
+         },
+      };
+   }
+
    return {
-      props: {
-         messages: (await import(`../../../messages/${context.locale}.json`)).default,
+      redirect: {
+         destination: '/login',
       },
    };
 }

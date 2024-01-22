@@ -3,13 +3,13 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 
 // MUI
-import { Badge, Button, ClickAwayListener, Drawer, Grow, IconButton, Paper, Popper } from '@mui/material';
+import { Button, ClickAwayListener, Drawer, Grow, IconButton, Paper, Popper } from '@mui/material';
 
 // Icons
 import LanguageIcon from '@mui/icons-material/Language';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -63,7 +63,7 @@ function AdminLayout({ children }) {
                   </IconButton>
                </div>
                <div className="flex items-center gap-6">
-                  <Link href="/">
+                  {/* <Link href="/">
                      <IconButton sx={{ backgroundColor: '#F5F8FC' }}>
                         <Badge
                            badgeContent={5}
@@ -84,7 +84,7 @@ function AdminLayout({ children }) {
                            <NotificationsNoneOutlinedIcon />
                         </Badge>
                      </IconButton>
-                  </Link>
+                  </Link> */}
 
                   <IconButton
                      sx={{ backgroundColor: '#F5F8FC' }}
@@ -140,6 +140,12 @@ function AdminLayout({ children }) {
                         </Grow>
                      )}
                   </Popper>
+
+                  <Link href="/">
+                     <IconButton sx={{ backgroundColor: '#F5F8FC' }}>
+                        <HomeOutlinedIcon />
+                     </IconButton>
+                  </Link>
                </div>
             </div>
             <div className="w-full p-8">{children}</div>

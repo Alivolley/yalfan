@@ -142,7 +142,8 @@
         "Phone number": "رقم التليفون",
         "Edit information": "تعديل المعلومات",
         "Your favorites list": "قائمة المفضلة لديك",
-        "Your favorites list is empty": "قائمة المفضلة الخاصة بك فارغة"
+        "Your favorites list is empty": "قائمة المفضلة الخاصة بك فارغة",
+        "You don't have permission to visit this page": "ليس لديك إذن لزيارة هذه الصفحة"
     },
     "addresses": {
         "Add new address": "أضف عنوانًا جديدًا",
@@ -244,7 +245,8 @@
         "Add comment": "أضف تعليق",
         "Similar products": "منتجات مماثلة",
         "Show all": "عرض الكل",
-        "The product is not available": "المنتج غير متوفر"
+        "The product is not available": "المنتج غير متوفر",
+        "To add to your favorites , you need to login first": "للإضافة إلى المفضلة لديك، يجب عليك تسجيل الدخول أولا"
     },
     "basket": {
         "Basket": "سلة",
@@ -341,7 +343,8 @@
         "Amount": "كمية",
         "Show product to users": "عرض المنتج للمستخدمين",
         "Edit product": "تحرير المنتج",
-        "Sending info": "إرسال المعلومات"
+        "Sending info": "إرسال المعلومات",
+        "You don't have permission to visit this page": "ليس لديك إذن لزيارة هذه الصفحة"
     },
     "adminPanelOrders": {
         "Row": "صف",
@@ -363,7 +366,8 @@
         "Change status to": "تغيير الحالة إلى",
         "This filed is required": "هذه الخانة مطلوبه",
         "Change status description": "تغيير وصف الحالة",
-        "Apply changes": "تطبيق التغييرات"
+        "Apply changes": "تطبيق التغييرات",
+        "You don't have permission to visit this page": "ليس لديك إذن لزيارة هذه الصفحة"
     },
     "adminPanelReports": {
         "Please select both dates for download": "الرجاء تحديد كلا التاريخين للتحميل",
@@ -378,7 +382,8 @@
         "Sell": "يبيع",
         "Day": "يوم",
         "unit": "$",
-        "No data": "لايوجد بيانات"
+        "No data": "لايوجد بيانات",
+        "You don't have permission to visit this page": "ليس لديك إذن لزيارة هذه الصفحة"
     },
     "adminPanelUsers": {
         "Row": "صف",
@@ -429,6 +434,7 @@
         "Delete comment": "حذف تعليق",
         "Show reports": "عرض التقارير",
         "Edit users info": "تحرير معلومات المستخدمين",
-        "Block users": "حظر المستخدم"
+        "Block users": "حظر المستخدم",
+        "You don't have permission to visit this page": "ليس لديك إذن لزيارة هذه الصفحة"
     }
 }

@@ -1,6 +1,10 @@
+import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // MUI
 import { Button, CircularProgress, Grid, IconButton, Tooltip } from '@mui/material';
@@ -28,7 +32,7 @@ import useDeleteProduct from '@/apis/pAdmin/products/useDeleteProduct';
 import useCategories from '@/apis/categories/useCategories';
 
 function Products() {
-   const { locale } = useRouter();
+   const { locale, back, pathname } = useRouter();
    const [showDeleteProductModal, setShowDeleteProductModal] = useState(false);
    const [showAddEditProductModal, setShowAddEditProductModal] = useState(false);
    const [showAddEditCategoryModal, setShowAddEditCategoryModal] = useState(false);
@@ -39,6 +43,7 @@ function Products() {
    const [countValue, setCountValue] = useState(6);
    const t = useTranslations('adminPanelProducts');
 
+   const userInfo = useSelector(state => state?.userInfoReducer);
    const { data: categoryList, isLoading: categoryIsLoading } = useCategories();
    const {
       data: productsData,
@@ -62,6 +67,24 @@ function Products() {
          onSuccess: () => closeDeleteProductModalHandler(),
       });
    };
+
+   console.log(userInfo);
+
+   useEffect(() => {
+      if (!userInfo?.is_admin) {
+         back();
+         toast.warn(t("You don't have permission to visit this page"), {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [userInfo, pathname]);
 
    const columns = [
       { id: 1, title: t('Row'), key: 'index' },
@@ -312,9 +335,21 @@ function Products() {
 export default Products;
 
 export async function getServerSideProps(context) {
+   const { req } = context;
+   const accessToken = req?.cookies?.yalfan_accessToken;
+   const refreshToken = req?.cookies?.yalfan_refreshToken;
+
+   if (accessToken && refreshToken) {
+      return {
+         props: {
+            messages: (await import(`../../../messages/${context.locale}.json`)).default,
+         },
+      };
+   }
+
    return {
-      props: {
-         messages: (await import(`../../../messages/${context.locale}.json`)).default,
+      redirect: {
+         destination: '/login',
       },
    };
 }

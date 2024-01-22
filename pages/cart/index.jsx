@@ -217,10 +217,21 @@ function Cart() {
 
 export default Cart;
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
+   const { req } = context;
+   const accessToken = req?.cookies?.yalfan_accessToken;
+   const refreshToken = req?.cookies?.yalfan_refreshToken;
+
+   if (accessToken && refreshToken) {
+      return {
+         props: {
+            messages: (await import(`../../messages/${context.locale}.json`)).default,
+         },
+      };
+   }
    return {
-      props: {
-         messages: (await import(`../../messages/${context.locale}.json`)).default,
+      redirect: {
+         destination: '/login',
       },
    };
 }

@@ -221,38 +221,39 @@ function Header({ language, isLogin }) {
                   {language}
                </Fab>
 
-               <Link href="/cart">
-                  <Fab
-                     sx={{
-                        width: '60px',
-                        height: '60px',
-                        borderRadius: '10px',
-                        color: '#626E94',
-                        border: '1px solid #E4EAF0',
-                     }}
-                     color="white"
-                  >
-                     <Badge
-                        badgeContent={basketData?.all_orders_count}
-                        color="error"
-                        anchorOrigin={{
-                           vertical: 'bottom',
-                           horizontal: 'left',
-                        }}
+               {isUserLogin && (
+                  <Link href="/cart">
+                     <Fab
                         sx={{
-                           '& .MuiBadge-badge': {
-                              fontSize: 10,
-                              width: 16,
-                              height: 16,
-                              minWidth: 16,
-                           },
+                           width: '60px',
+                           height: '60px',
+                           borderRadius: '10px',
+                           color: '#626E94',
+                           border: '1px solid #E4EAF0',
                         }}
+                        color="white"
                      >
-                        <ShoppingBasketOutlinedIcon />
-                     </Badge>
-                  </Fab>
-               </Link>
-
+                        <Badge
+                           badgeContent={basketData?.all_orders_count}
+                           color="error"
+                           anchorOrigin={{
+                              vertical: 'bottom',
+                              horizontal: 'left',
+                           }}
+                           sx={{
+                              '& .MuiBadge-badge': {
+                                 fontSize: 10,
+                                 width: 16,
+                                 height: 16,
+                                 minWidth: 16,
+                              },
+                           }}
+                        >
+                           <ShoppingBasketOutlinedIcon />
+                        </Badge>
+                     </Fab>
+                  </Link>
+               )}
                {!isUserLogin ? (
                   <Link href="/login">
                      <Button

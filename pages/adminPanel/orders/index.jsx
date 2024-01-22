@@ -1,6 +1,10 @@
+import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // MUI
 import { Grid, IconButton } from '@mui/material';
@@ -33,6 +37,7 @@ function Orders() {
    const [chosenOrderForEdit, setChosenOrderForEdit] = useState();
 
    const t = useTranslations('adminPanelOrders');
+   const userInfo = useSelector(state => state?.userInfoReducer);
 
    const {
       data: cardsData,
@@ -40,7 +45,7 @@ function Orders() {
       mutate: cardMutate,
    } = useGetAllCards(chosenFilter, pageStatus, countValue);
 
-   const { locale } = useRouter();
+   const { locale, back, pathname } = useRouter();
 
    const closeDetailModal = () => {
       setShowDetailModal(false);
@@ -51,6 +56,22 @@ function Orders() {
       setShowEditStatusModal(false);
       setChosenOrderForEdit();
    };
+
+   useEffect(() => {
+      if (!userInfo?.is_admin) {
+         back();
+         toast.warn(t("You don't have permission to visit this page"), {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [userInfo, pathname]);
 
    const columns = [
       { id: 1, title: t('Row'), key: 'index' },
@@ -311,9 +332,21 @@ function Orders() {
 export default Orders;
 
 export async function getServerSideProps(context) {
+   const { req } = context;
+   const accessToken = req?.cookies?.yalfan_accessToken;
+   const refreshToken = req?.cookies?.yalfan_refreshToken;
+
+   if (accessToken && refreshToken) {
+      return {
+         props: {
+            messages: (await import(`../../../messages/${context.locale}.json`)).default,
+         },
+      };
+   }
+
    return {
-      props: {
-         messages: (await import(`../../../messages/${context.locale}.json`)).default,
+      redirect: {
+         destination: '/login',
       },
    };
 }

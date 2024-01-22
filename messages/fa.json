@@ -142,7 +142,8 @@
         "Phone number": "شماره تلفن همراه",
         "Edit information": "ویرایش اطلاعات",
         "Your favorites list": "لیست علاقه مندی های شما",
-        "Your favorites list is empty": "لیست علاقه مندی های شما خالی است"
+        "Your favorites list is empty": "لیست علاقه مندی های شما خالی است",
+        "You don't have permission to visit this page": "شما مجوز دسترسی به این صفحه را ندارید"
     },
     "addresses": {
         "Add new address": "اضافه کردن آدرس",
@@ -244,7 +245,8 @@
         "Add comment": "ثبت نظر",
         "Similar products": "محصولات مشابه",
         "Show all": "مشاهده همه",
-        "The product is not available": "محصول موجود نیست"
+        "The product is not available": "محصول موجود نیست",
+        "To add to your favorites , you need to login first": "برای افزودن به علاقه مندی ها ، ابتدا وارد حساب کاربری خود شوید"
     },
     "basket": {
         "Basket": "سبد خرید",
@@ -341,7 +343,8 @@
         "Amount": "مقداری",
         "Show product to users": "نمایش محصول به کاربر",
         "Edit product": "ویرایش محصول",
-        "Sending info": "در حال ارسال اطلاعات"
+        "Sending info": "در حال ارسال اطلاعات",
+        "You don't have permission to visit this page": "شما مجوز دسترسی به این صفحه را ندارید"
     },
     "adminPanelOrders": {
         "Row": "ردیف",
@@ -363,7 +366,8 @@
         "Change status to": "تغییر وضعیت به حالت",
         "This filed is required": "این فیلد اجباری است",
         "Change status description": "توضیح تغییر وضعیت",
-        "Apply changes": "اعمال تغییرات"
+        "Apply changes": "اعمال تغییرات",
+        "You don't have permission to visit this page": "شما مجوز دسترسی به این صفحه را ندارید"
     },
     "adminPanelReports": {
         "Please select both dates for download": "لطفا هر دو تاریخ را برای دانلود انتخاب کنید",
@@ -378,7 +382,8 @@
         "Sell": "فروش",
         "Day": "روز",
         "unit": "تومان",
-        "No data": "دیتایی وجود ندارد"
+        "No data": "دیتایی وجود ندارد",
+        "You don't have permission to visit this page": "شما مجوز دسترسی به این صفحه را ندارید"
     },
     "adminPanelUsers": {
         "Row": "ردیف",
@@ -429,6 +434,7 @@
         "Delete comment": "حذف کامنت",
         "Show reports": "نمایش گزارشات",
         "Edit users info": "ویرایش اطلاعات کاربران",
-        "Block users": "بلاک کردن کاربران"
+        "Block users": "بلاک کردن کاربران",
+        "You don't have permission to visit this page": "شما مجوز دسترسی به این صفحه را ندارید"
     }
 }
