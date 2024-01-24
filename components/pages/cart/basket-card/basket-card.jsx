@@ -57,7 +57,7 @@ function BasketCard({ detail }) {
                   <div className="flex items-center gap-2 text-sm text-textColor">
                      <p>{t('Chosen color')} : </p>
                      <div
-                        className="h-6 w-6 shrink-0 rounded-full"
+                        className="size-6 shrink-0 rounded-full"
                         style={{ backgroundColor: detail?.product_color?.product_color }}
                      />
                   </div>
@@ -135,7 +135,7 @@ function BasketCard({ detail }) {
                <div className="flex items-center gap-2 text-sm text-textColor">
                   <p>{t('Chosen color')} : </p>
                   <div
-                     className="h-6 w-6 shrink-0 rounded-full"
+                     className="size-6 shrink-0 rounded-full"
                      style={{ backgroundColor: detail?.product_color?.product_color }}
                   />
                </div>
@@ -180,8 +180,8 @@ function BasketCard({ detail }) {
                      <div className="flex h-10 items-center gap-1">
                         {detail?.percentage > 0 && (
                            <>
-                              <div className="relative h-6 w-6">
-                                 <Image src={discountShape} alt="discount" className="h-full w-full" />
+                              <div className="relative size-6">
+                                 <Image src={discountShape} alt="discount" className="size-full" />
                                  <p className="absolute right-[4px] top-[8px] text-[8px] text-white">
                                     {detail?.percentage}%
                                  </p>

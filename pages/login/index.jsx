@@ -97,7 +97,7 @@ function Login() {
          <div className="h-full max-w-[486px] rounded-2xl bg-white p-7 2xl:max-w-[550px]" id="container">
             <Link href="/" className="flex w-fit items-center gap-2 customMd:gap-3">
                <div className="w-[73px] shrink-0 customMd:h-16">
-                  <Image src={fakeLogo} alt="logo" className="h-full w-full" />
+                  <Image src={fakeLogo} alt="logo" className="size-full" />
                </div>
                <div className="space-y-0.5">
                   <p className="text-xl font-bold">{t('yalfan')}</p>

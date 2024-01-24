@@ -63,7 +63,7 @@ function Search({ searchResultList, error, suggestsList }) {
                   <div>
                      <p className="mb-10 text-center font-bold">{t('No product with this title')}</p>
                      <div className="mt-4 w-[250px]">
-                        <Image alt="no result" src={noResult} className="h-full w-full" priority />
+                        <Image alt="no result" src={noResult} className="size-full" priority />
                      </div>
                   </div>
                ) : (
