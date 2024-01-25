@@ -10,7 +10,7 @@ const pAdminSideBarStatus = createSlice({
 
       changeToStatusFalse: () => false,
 
-      toggleStatusStatus: state => {
+      toggleStatus: state => {
          if (state) {
             return false;
          }
@@ -19,5 +19,5 @@ const pAdminSideBarStatus = createSlice({
    },
 });
 
-export const { changeToStatusTrue, changeToStatusFalse, toggleStatusStatus } = pAdminSideBarStatus.actions;
+export const { changeToStatusTrue, changeToStatusFalse, toggleStatus } = pAdminSideBarStatus.actions;
 export default pAdminSideBarStatus.reducer;

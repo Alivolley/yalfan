@@ -13,7 +13,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleStatusStatus } from '@/store/reducers/pAdminSideBarStatus';
+import { toggleStatus } from '@/store/reducers/pAdminSideBarStatus';
 
 // Components
 import AdminSideBar from '../admin-sideBar/admin-sideBar';
@@ -49,7 +49,7 @@ function AdminLayout({ children }) {
          <div className="w-full customMd:grow">
             <div className="sticky top-0 z-[2] flex w-full items-center justify-between bg-white px-8 py-4 customMd:px-16 customMd:py-8">
                <div className="hidden customMd:block">
-                  <IconButton onClick={() => dispatch(toggleStatusStatus())}>
+                  <IconButton onClick={() => dispatch(toggleStatus())}>
                      {isSideBarOpen ? (
                         <MenuOutlinedIcon className="!text-3xl" />
                      ) : (
