@@ -149,7 +149,7 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
                                     href={`/productDetail/${item?.product_color?.product_title}`}
                                     className="flex gap-1.5 rounded-md bg-[#F5F8FC] p-1.5"
                                  >
-                                    <div className="relative my-auto h-[60px] w-[60px] rounded-md bg-[#F5F8FC]">
+                                    <div className="relative my-auto size-[60px] rounded-md bg-[#F5F8FC]">
                                        <Image
                                           src={item?.product_color?.cover || noImage}
                                           alt="order"
@@ -167,7 +167,7 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
                                        <div className="mt-0.5 flex flex-wrap items-center justify-between">
                                           <p className="text-[11px] text-textColor">{t('Color')} :</p>
                                           <div
-                                             className="h-4 w-4 rounded-full"
+                                             className="size-4 rounded-full"
                                              style={{ backgroundColor: item?.product_color?.product_color }}
                                           />
                                        </div>

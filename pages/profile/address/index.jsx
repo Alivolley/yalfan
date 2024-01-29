@@ -36,7 +36,7 @@ function Address() {
             <div className="flex items-center gap-2 rounded-2xl bg-white p-7">
                <p className="text-lg font-bold text-[#050F2C]">{t('List of your addresses')}</p>
                {!addressIsLoading && addressData?.length ? (
-                  <p className="flex h-6 w-6 items-center justify-center rounded-full bg-[#D14F4D] text-white">
+                  <p className="flex size-6 items-center justify-center rounded-full bg-[#D14F4D] text-white">
                      {addressData?.length}
                   </p>
                ) : null}
@@ -74,7 +74,7 @@ function Address() {
                            )}
                         </p>
                         <div>
-                           <Image src={noAddressPic} alt="no address" className="h-full w-full object-cover" />
+                           <Image src={noAddressPic} alt="no address" className="size-full object-cover" />
                         </div>
                         <Button
                            variant="contained"

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-restricted-globals */
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -15,11 +16,9 @@ axiosInstance.interceptors.request.use(
       const lang = Cookies.get('NEXT_LOCALE');
 
       if (accessToken) {
-         // eslint-disable-next-line no-param-reassign
          config.headers.Authorization = `Bearer ${accessToken}`;
       }
 
-      // eslint-disable-next-line no-param-reassign
       config.params = { ...config.params, lang };
 
       return config;

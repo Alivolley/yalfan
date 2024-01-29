@@ -117,14 +117,7 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail, usersMutate
                            },
                         },
                      }}
-                     {...register('postCode', {
-                        required: {
-                           value: true,
-                           message: t('This filed is required'),
-                        },
-                     })}
-                     error={!!errors?.postCode}
-                     helperText={errors?.postCode?.message}
+                     {...register('postCode')}
                      disabled={addAddressIsMutating || editAddressIsMutating}
                   />
                </div>

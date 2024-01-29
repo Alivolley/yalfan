@@ -74,7 +74,7 @@ function ContactUs() {
             <Grid item xs={12} md={5} lg={3.5}>
                <div className="rounded-2xl bg-white p-5">
                   <div className="w-full rounded-2xl bg-[#fcf7f7] px-2 pb-2 pt-12">
-                     <Image src={contactUsPic} alt="contact us" className="h-full w-full" />
+                     <Image src={contactUsPic} alt="contact us" className="size-full" />
                   </div>
                   <p className="mt-14 text-base font-bold customMd:text-xl">
                      {t('We are waiting for your warm voice')}

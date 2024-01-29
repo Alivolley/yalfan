@@ -10,7 +10,7 @@ import TableStyle from './table.style';
 function Table({
    columns,
    rows,
-   pageStatus,
+   pageStatus = 1,
    setPageStatus,
    loading = false,
    totalPages,
@@ -34,7 +34,10 @@ function Table({
                   <thead className="bg-[#f5f8fc]">
                      <tr>
                         {columns?.map(column => (
-                           <th key={column?.id} className="text-center text-sm font-bold text-customBlue">
+                           <th
+                              key={column?.id || crypto.randomUUID()}
+                              className="text-center text-sm font-bold text-customBlue"
+                           >
                               {column?.title}
                            </th>
                         ))}
@@ -42,14 +45,14 @@ function Table({
                   </thead>
                   <tbody>
                      {rows?.map((row, rowIndex) => (
-                        <tr key={row?.id}>
+                        <tr key={row?.id || crypto.randomUUID()}>
                            {columns?.map((column, colIndex) =>
                               colIndex === 0 ? (
-                                 <td key={column?.id} className="text-center text-sm">
+                                 <td key={column?.id || crypto.randomUUID()} className="text-center text-sm">
                                     {tableRowCalculator(countValue, pageStatus, rowIndex)}
                                  </td>
                               ) : (
-                                 <td key={column?.id} className="text-center text-sm">
+                                 <td key={column?.id || crypto.randomUUID()} className="text-center text-sm">
                                     {!column?.renderCell ? row?.[column?.key] : column?.renderCell(row)}
                                  </td>
                               )

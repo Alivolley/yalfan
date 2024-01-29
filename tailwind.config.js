@@ -35,11 +35,6 @@ module.exports = {
             customGold: '#FF9F1C',
          },
 
-         backgroundImage: {
-            // lineLinear:
-            //    'linear-gradient(90deg, rgba(224, 225, 226, 0) 0%, rgb(224, 225, 226) 49.52%, rgba(224, 225, 226, 0) 100%)',
-         },
-
          fontFamily: {
             dana: 'dana',
             poppins: 'poppins',
