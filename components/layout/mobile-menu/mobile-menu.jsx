@@ -90,7 +90,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
             <div className="flex items-start justify-between">
                <Link href="/" className="flex items-center gap-2 p-5 customMd:gap-3">
                   <div className="w-[40px] shrink-0 customMd:h-16 customMd:w-[73px]">
-                     <Image src={fakeLogo} alt="logo" className="h-full w-full" />
+                     <Image src={fakeLogo} alt="logo" className="size-full" />
                   </div>
                   <div className="space-y-0.5">
                      <p className="text-sm font-bold customMd:text-xl">{t('yalfan')}</p>
@@ -212,7 +212,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                                        sx={{ padding: '0 !important' }}
                                     >
                                        <div className="flex items-center gap-2 text-sm text-customBlue">
-                                          <div className="h-1 w-1 rounded-full bg-customBlue" />
+                                          <div className="size-1 rounded-full bg-customBlue" />
                                           {item?.title}
                                        </div>
                                     </AccordionSummary>
@@ -232,7 +232,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                                                 id="arrowIcon"
                                                 key={innerItem.id}
                                              >
-                                                <div className="h-1 w-1 rounded-full bg-customBlue" />
+                                                <div className="size-1 rounded-full bg-customBlue" />
                                                 {innerItem?.title}
                                              </Link>
                                           ))

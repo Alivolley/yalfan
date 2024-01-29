@@ -181,7 +181,7 @@ function AdminSideBar({ isMobile, onClose }) {
             variant="contained"
             size="large"
             color="white"
-            className="!rounded-10 !px-3 !py-2.5"
+            className="!rounded-10 !px-3 !py-2.5 !text-customPinkHigh"
             fullWidth
             onClick={() => setShowLogoutModal(true)}
          >
@@ -189,7 +189,7 @@ function AdminSideBar({ isMobile, onClose }) {
                <LogoutOutlinedIcon
                   className={`rounded-xl bg-[#FFEEED] p-2.5 text-customPinkHigh ${locale === 'en' ? '' : 'rotate-180'}`}
                />
-               {isSideBarOpen && <p className="text-customPinkHigh">{t('Log out')}</p>}
+               {isSideBarOpen && <p>{t('Log out')}</p>}
             </div>
          </Button>
 

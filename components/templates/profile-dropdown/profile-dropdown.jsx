@@ -42,7 +42,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                         {isAdmin && (
                            <Link
                               href="/adminPanel/products"
-                              className="flex items-center gap-1 p-3 text-sm text-white transition-all duration-150 hover:bg-customPink2 hover:text-black"
+                              className="flex items-center gap-1 p-3 text-sm text-white transition-all duration-150 hover:bg-[#D1706F]"
                               onClick={() => setProfileDropDown(false)}
                            >
                               <IsoIcon fontSize="small" />
@@ -52,7 +52,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                         <Link
                            href="/profile/information"
                            className="flex items-center gap-1 border-t border-solid border-[#E4EAF0] p-3 text-sm text-white transition-all
-                            duration-150 hover:bg-customPink2 hover:text-black"
+                            duration-150 hover:bg-[#D1706F]"
                            onClick={() => setProfileDropDown(false)}
                         >
                            <PersonOutlinedIcon fontSize="small" />
@@ -61,7 +61,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                         <Link
                            href="/profile/address"
                            className="flex items-center gap-1 border-t border-solid border-[#E4EAF0] p-3 text-sm text-white transition-all
-                                      duration-150 hover:bg-customPink2 hover:text-black"
+                                      duration-150 hover:bg-[#D1706F]"
                            onClick={() => setProfileDropDown(false)}
                         >
                            <LocationOnOutlinedIcon fontSize="small" />
@@ -70,7 +70,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                         <Link
                            href="/profile/orders"
                            className="flex items-center gap-1 border-t border-solid border-[#E4EAF0] p-3 text-sm text-white transition-all
-                                      duration-150 hover:bg-customPink2 hover:text-black"
+                                      duration-150 hover:bg-[#D1706F]"
                            onClick={() => setProfileDropDown(false)}
                         >
                            <AccountBalanceWalletOutlinedIcon fontSize="small" />
@@ -79,7 +79,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                         <Link
                            href="/profile/favorites"
                            className="flex items-center gap-1 border-t border-solid border-[#E4EAF0] p-3 text-sm text-white transition-all
-                                      duration-150 hover:bg-customPink2 hover:text-black"
+                                      duration-150 hover:bg-[#D1706F]"
                            onClick={() => setProfileDropDown(false)}
                         >
                            <FavoriteBorderIcon fontSize="small" />
@@ -87,7 +87,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                         </Link>
                         <Button
                            className="flex items-center justify-start gap-1 !border-t !border-solid !border-[#E4EAF0] !p-3 text-sm !text-white transition-all
-                                      duration-150 hover:!bg-customPink2 hover:!text-black"
+                                      duration-150 hover:!bg-[#D1706F]"
                            onClick={() => setShowLogoutModal(true)}
                         >
                            <LogoutOutlinedIcon fontSize="small" className="rotate-180" />

@@ -31,6 +31,7 @@ import FiberNewIcon from '@mui/icons-material/FiberNew';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import PercentIcon from '@mui/icons-material/Percent';
 
 // hooks
 import useOnClickOutside from '@/hooks/useOnclickOutside';
@@ -39,7 +40,6 @@ import useOnClickOutside from '@/hooks/useOnclickOutside';
 import fakeLogo from '@/assets/images/fake-logo.png';
 import searchIcon from '@/assets/icons/search-icon.svg';
 import categoriesIcon from '@/assets/icons/menu-categories-icon.svg';
-import discountIcon from '@/assets/icons/discount-icon.svg';
 import callIcon from '@/assets/icons/call-icon.svg';
 
 // Components
@@ -271,13 +271,13 @@ function Header({ language, isLogin }) {
                         <Button
                            variant="contained"
                            color="customPink"
-                           className="!h-full !min-w-[167px] !rounded-10 !text-white"
+                           className="!h-full !min-w-[193px] !rounded-10 !text-white"
                            size="large"
                            ref={profileRef}
                            onMouseEnter={() => setProfileDropDown(true)}
                            onMouseLeave={() => setProfileDropDown(false)}
                         >
-                           <p className="flex items-center gap-1">
+                           <p className="flex items-center gap-5">
                               <PersonOutlinedIcon fontSize="small" />
                               {userInfo?.name || userInfo?.phone_number}
                               <KeyboardArrowDownIcon
@@ -447,19 +447,27 @@ function Header({ language, isLogin }) {
                   </Button>
                </Link>
                <Link href="/categoryDetail?has_discount=true">
-                  <Button size="small" color="textColor" startIcon={<Image src={discountIcon} alt="discount" />}>
+                  <Button
+                     size="small"
+                     color="textColor"
+                     startIcon={<PercentIcon className="rounded-full border border-solid p-0.5 !text-xs" />}
+                  >
                      {t('discounts and offers')}
                   </Button>
                </Link>
             </div>
 
             <div className="flex items-center gap-4 text-xs text-textColor customLg:gap-6">
-               <Link href="/faqs" className="hidden lg:block">
+               <Link href="/faqs" className="hidden hover:text-[#B1302E] lg:block">
                   {t('any question')}
                </Link>
-               <Link href="/aboutUs">{t('about us')}</Link>
-               <Link href="/contactUs">{t('contact us')}</Link>
-               <a href="tel:02152687469" className="flex items-center gap-1">
+               <Link href="/aboutUs" className=" hover:text-[#B1302E]">
+                  {t('about us')}
+               </Link>
+               <Link href="/contactUs" className=" hover:text-[#B1302E]">
+                  {t('contact us')}
+               </Link>
+               <a href="tel:02152687469" className="flex items-center gap-1 hover:text-[#B1302E]">
                   <p>021-52687469</p>
                   <Image src={callIcon} alt="phone number" />
                </a>

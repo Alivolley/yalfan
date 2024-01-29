@@ -49,18 +49,41 @@ const getDesignTokens = (mode, direction, language) => ({
             root: {
                boxShadow: 'none',
                zIndex: 1,
+               '&:hover': {
+                  boxShadow: 'none',
+                  color: '#B1302E',
+               },
+            },
+         },
+      },
+
+      MuiIconButton: {
+         styleOverrides: {
+            root: {
+               '&:hover': {
+                  color: '#B1302E',
+               },
             },
          },
       },
 
       MuiButton: {
          styleOverrides: {
-            root: () => ({
+            root: props => ({
                boxShadow: 'none',
-               '&:hover': {
-                  boxShadow: '0px 4px 7px 0px #C2C2C236',
-               },
                textTransform: 'none',
+               '&:hover': {
+                  boxShadow: 'none',
+                  ...(props?.ownerState?.variant !== 'contained'
+                     ? {
+                          backgroundColor: 'transparent',
+                          color: '#B1302E',
+                       }
+                     : {
+                          backgroundColor: '#D1706F',
+                          color: '#fff !important',
+                       }),
+               },
             }),
          },
       },

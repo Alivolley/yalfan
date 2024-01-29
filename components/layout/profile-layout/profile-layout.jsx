@@ -37,7 +37,7 @@ function ProfileLayout({ children }) {
       <div className="gap-6 bg-[#f5f8fc] px-5 py-16 customMd:flex customMd:px-[60px]">
          <aside className="hidden h-fit w-[378px] shrink-0 rounded-2xl bg-white px-8 py-7 customMd:block">
             <div className="flex items-center gap-4">
-               <div className="relative h-[75px] w-[75px]">
+               <div className="relative size-[75px]">
                   <Image alt="profile" src={userInfo?.image || profilePic} className="rounded-full object-cover" fill />
                </div>
                <div className="space-y-1.5">
@@ -56,7 +56,7 @@ function ProfileLayout({ children }) {
                   }`}
                >
                   <div
-                     className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                     className={`flex size-11 items-center justify-center rounded-10 ${
                         pathName === '/profile/information' ? 'bg-[#FFBEBC]' : 'bg-[#F5F8FC]'
                      }`}
                   >
@@ -82,7 +82,7 @@ function ProfileLayout({ children }) {
                   }`}
                >
                   <div
-                     className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                     className={`flex size-11 items-center justify-center rounded-10 ${
                         pathName === '/profile/address' ? 'bg-[#FFBEBC]' : 'bg-[#F5F8FC]'
                      }`}
                   >
@@ -108,7 +108,7 @@ function ProfileLayout({ children }) {
                   }`}
                >
                   <div
-                     className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                     className={`flex size-11 items-center justify-center rounded-10 ${
                         pathName === '/profile/orders' ? 'bg-[#FFBEBC]' : 'bg-[#F5F8FC]'
                      }`}
                   >
@@ -134,7 +134,7 @@ function ProfileLayout({ children }) {
                   }`}
                >
                   <div
-                     className={`flex h-11 w-11 items-center justify-center rounded-10 ${
+                     className={`flex size-11 items-center justify-center rounded-10 ${
                         pathName === '/profile/favorites' ? 'bg-[#FFBEBC]' : 'bg-[#F5F8FC]'
                      }`}
                   >
@@ -157,7 +157,7 @@ function ProfileLayout({ children }) {
                type="submit"
                size="large"
                color="white"
-               className="!rounded-10 !px-5 !py-3.5"
+               className="!rounded-10 !px-5 !py-3.5 !text-customPinkHigh"
                fullWidth
                onClick={() => setShowLogoutModal(true)}
             >
@@ -167,7 +167,7 @@ function ProfileLayout({ children }) {
                         locale === 'en' ? '' : 'rotate-180'
                      }`}
                   />
-                  <p className="pt-1 text-customPinkHigh">{t('Log out')}</p>
+                  <p className="pt-1">{t('Log out')}</p>
                </div>
             </Button>
          </aside>

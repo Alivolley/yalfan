@@ -314,11 +314,11 @@ function ProductDetail({ error, productDetail, categoryItems }) {
                               color="customPink3"
                               loading={addToBasketIsMutating || removeFromBasketIsMutating}
                               fullWidth
-                              className="!rounded-10 !p-2"
+                              className="!rounded-10 !p-2 !text-customPinkHigh"
                               onClick={addToBasketHandler}
                            >
-                              <div className="flex w-full items-center justify-between">
-                                 <p className="text-customPinkHigh">{t('Add to basket')}</p>
+                              <div className="flex w-full items-center justify-between transition-all duration-150">
+                                 <p>{t('Add to basket')}</p>
 
                                  <ShoppingBasketOutlinedIcon className="rounded-xl bg-white p-2 text-customPinkHigh" />
                               </div>

@@ -14,13 +14,19 @@ import EastIcon from '@mui/icons-material/East';
 import introducePic from '@/assets/images/introduce-pic.png';
 import bagIcon from '@/assets/icons/introduce-bag.svg';
 import bannerBg from '@/assets/images/bannerBg.png';
+import bagVector from '@/assets/images/bag-Vector.png';
 
 function Introduce() {
    const t = useTranslations('home');
-   const router = useRouter();
+   const { locale } = useRouter();
 
    return (
-      <div className="px-8 pb-14 customMd:px-16">
+      <div className="relative px-8 customMd:px-16">
+         <Image
+            src={bagVector}
+            alt="vector"
+            className={`absolute bottom-0 end-0 ${locale === 'en' ? '' : 'scale-x-[-1]'}`}
+         />
          <Grid container spacing={4}>
             <Grid item xs={12} md={5}>
                <p className="mb-8 text-center text-xl font-bold customMd:hidden">
@@ -44,10 +50,10 @@ function Introduce() {
                      </p>
                      <span className="absolute -inset-y-3 start-0 z-[-1] w-[250px] rounded-e-full bg-customPinkLow" />
                   </div>
-                  <p className="my-8 text-sm leading-[30px] text-[#62768C] customMd:text-lg customMd:leading-[40px]">
+                  <p className="my-8 max-w-[732px] text-sm leading-[30px] text-[#62768C] customMd:text-lg customMd:leading-[40px]">
                      {t('lorem')} {t('lorem')}
                   </p>
-                  <div className="flex flex-col-reverse gap-5 customMd:flex-row customMd:items-center customMd:gap-8">
+                  <div className="flex flex-col-reverse gap-5 customMd:flex-row customMd:items-center">
                      <Link href="/categoryDetail">
                         <Button
                            color="customPinkLow"
@@ -64,7 +70,7 @@ function Introduce() {
                            color="customPinkHigh"
                            className="!w-full !font-bold"
                            size="large"
-                           endIcon={router.locale === 'en' ? <EastIcon /> : <KeyboardBackspaceIcon />}
+                           endIcon={locale === 'en' ? <EastIcon /> : <KeyboardBackspaceIcon />}
                         >
                            {t('see all products')}
                         </Button>
@@ -75,7 +81,7 @@ function Introduce() {
                            className="!w-full !rounded-10 !py-3"
                            size="large"
                            variant="outlined"
-                           endIcon={router.locale === 'en' ? <EastIcon /> : <KeyboardBackspaceIcon />}
+                           endIcon={locale === 'en' ? <EastIcon /> : <KeyboardBackspaceIcon />}
                         >
                            {t('see all products')}
                         </Button>
