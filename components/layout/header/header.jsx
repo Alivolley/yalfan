@@ -114,12 +114,12 @@ function Header({ language, isLogin }) {
 
    return (
       <header
-         className="sticky top-0 z-10 bg-white px-8 pt-5 customMd:px-16 customMd:pt-10"
+         className="sticky top-0 z-10 bg-white px-8 pt-5 customMd:px-16"
          style={{
             boxShadow: '0px 11px 44px 23px #7e8aaba',
          }}
       >
-         <div className="flex items-center justify-between border-solid border-borderColor pb-6 customMd:border-b">
+         <div className="flex items-center justify-between border-solid border-borderColor pb-4 customMd:border-b">
             <div className="flex items-center gap-2 customMd:gap-11">
                <IconButton className="!p-0 customMd:!hidden" onClick={() => setShowMobileMenu(true)}>
                   <MenuOutlinedIcon />
@@ -271,7 +271,7 @@ function Header({ language, isLogin }) {
                         <Button
                            variant="contained"
                            color="customPink"
-                           className="!h-full !rounded-10 !text-white"
+                           className="!h-full !min-w-[167px] !rounded-10 !text-white"
                            size="large"
                            ref={profileRef}
                            onMouseEnter={() => setProfileDropDown(true)}

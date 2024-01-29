@@ -13,6 +13,7 @@ import EastIcon from '@mui/icons-material/East';
 // Assets
 import introducePic from '@/assets/images/introduce-pic.png';
 import bagIcon from '@/assets/icons/introduce-bag.svg';
+import bannerBg from '@/assets/images/bannerBg.png';
 
 function Introduce() {
    const t = useTranslations('home');
@@ -25,12 +26,13 @@ function Introduce() {
                <p className="mb-8 text-center text-xl font-bold customMd:hidden">
                   {t('with yalfan')} {t('make great styles')}
                </p>
-               <div className="h-full w-full">
+               <div className="relative size-full">
                   <Image
                      src={introducePic}
                      alt="introduce"
                      className="h-[200px] w-full object-contain customMd:h-full"
                   />
+                  <Image src={bannerBg} alt="introduce" className="absolute inset-0 z-[-1]" />
                </div>
             </Grid>
             <Grid item xs={12} md={7}>
@@ -40,7 +42,7 @@ function Introduce() {
                      <p className="text-4xl font-bold">
                         {t('with yalfan')} {t('make great styles')}
                      </p>
-                     <span className="absolute -inset-y-3 start-0 z-[-1] w-[250px] rounded-l-full bg-customPinkLow" />
+                     <span className="absolute -inset-y-3 start-0 z-[-1] w-[250px] rounded-e-full bg-customPinkLow" />
                   </div>
                   <p className="my-8 text-sm leading-[30px] text-[#62768C] customMd:text-lg customMd:leading-[40px]">
                      {t('lorem')} {t('lorem')}
