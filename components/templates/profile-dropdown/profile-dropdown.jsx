@@ -38,7 +38,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                   }}
                >
                   <Paper>
-                     <div className="flex flex-col rounded-md bg-customPink">
+                     <div className="flex min-w-[193px] flex-col overflow-hidden rounded-md bg-customPink">
                         {isAdmin && (
                            <Link
                               href="/adminPanel/products"
@@ -86,7 +86,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                            {t('Favorites')}
                         </Link>
                         <Button
-                           className="flex items-center justify-start gap-1 !border-t !border-solid !border-[#E4EAF0] !p-3 text-sm !text-white transition-all
+                           className="!flex !items-center !justify-start gap-1 !border-t !border-solid !border-[#E4EAF0] !p-3 text-sm !text-white transition-all
                                       duration-150 hover:!bg-[#D1706F]"
                            onClick={() => setShowLogoutModal(true)}
                         >

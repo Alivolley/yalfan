@@ -267,24 +267,19 @@ function Header({ language, isLogin }) {
                   </Link>
                ) : (
                   <>
-                     <div>
-                        <Button
-                           variant="contained"
-                           color="customPink"
-                           className="!h-full !min-w-[193px] !rounded-10 !text-white"
-                           size="large"
-                           ref={profileRef}
-                           onMouseEnter={() => setProfileDropDown(true)}
-                           onMouseLeave={() => setProfileDropDown(false)}
-                        >
-                           <p className="flex items-center gap-5">
-                              <PersonOutlinedIcon fontSize="small" />
-                              {userInfo?.name || userInfo?.phone_number}
-                              <KeyboardArrowDownIcon
-                                 className={`!transition-all !duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
-                              />
-                           </p>
-                        </Button>
+                     <div
+                        className={`flex min-w-[193px] cursor-pointer items-center justify-center gap-5 rounded-10 text-white transition-all duration-200 ${
+                           profileDropDown ? 'bg-[#D1706F]' : 'bg-customPink'
+                        }`}
+                        ref={profileRef}
+                        onMouseEnter={() => setProfileDropDown(true)}
+                        onMouseLeave={() => setProfileDropDown(false)}
+                     >
+                        <PersonOutlinedIcon fontSize="small" />
+                        {userInfo?.name || userInfo?.phone_number}
+                        <KeyboardArrowDownIcon
+                           className={`!transition-all !duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
+                        />
                      </div>
 
                      <ProfileDropdown
