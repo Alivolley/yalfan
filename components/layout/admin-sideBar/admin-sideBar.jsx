@@ -16,6 +16,7 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
 import PercentIcon from '@mui/icons-material/Percent';
+import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -173,6 +174,23 @@ function AdminSideBar({ isMobile, onClose }) {
                   <PercentIcon color={pathname === '/adminPanel/discounts' ? 'customPinkHigh' : 'textColor'} />
                </div>
                {isSideBarOpen && <p className="text-[15px]">{t('Discounts')}</p>}
+            </Link>
+            <Link
+               href="/adminPanel/tickets"
+               className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
+                  pathname === '/adminPanel/tickets' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
+               }`}
+            >
+               <div
+                  className={`flex size-11 items-center justify-center rounded-10 ${
+                     pathname === '/adminPanel/tickets' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+                  }`}
+               >
+                  <ConfirmationNumberOutlinedIcon
+                     color={pathname === '/adminPanel/tickets' ? 'customPinkHigh' : 'textColor'}
+                  />
+               </div>
+               {isSideBarOpen && <p className="text-[15px]">{t('Tickets')}</p>}
             </Link>
             <Link
                href="/adminPanel/information"

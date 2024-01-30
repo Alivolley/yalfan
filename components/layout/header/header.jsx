@@ -268,7 +268,7 @@ function Header({ language, isLogin }) {
                ) : (
                   <>
                      <div
-                        className={`flex min-w-[193px] cursor-pointer items-center justify-center gap-5 rounded-10 text-white transition-all duration-200 ${
+                        className={`flex min-w-[193px] cursor-pointer items-center justify-center gap-5 rounded-10 px-2 text-white transition-all duration-200 ${
                            profileDropDown ? 'bg-[#D1706F]' : 'bg-customPink'
                         }`}
                         ref={profileRef}

@@ -3,13 +3,14 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 
 // MUI
-import { Button, ClickAwayListener, Drawer, Grow, IconButton, Paper, Popper } from '@mui/material';
+import { Badge, Button, ClickAwayListener, Drawer, Grow, IconButton, Paper, Popper } from '@mui/material';
 
 // Icons
 import LanguageIcon from '@mui/icons-material/Language';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -62,8 +63,8 @@ function AdminLayout({ children }) {
                      <MenuOutlinedIcon className="!text-3xl" />
                   </IconButton>
                </div>
-               <div className="flex items-center gap-6">
-                  {/* <Link href="/">
+               <div className="flex items-center gap-4">
+                  <Link href="/adminPanel/tickets">
                      <IconButton sx={{ backgroundColor: '#F5F8FC' }}>
                         <Badge
                            badgeContent={5}
@@ -84,7 +85,7 @@ function AdminLayout({ children }) {
                            <NotificationsNoneOutlinedIcon />
                         </Badge>
                      </IconButton>
-                  </Link> */}
+                  </Link>
 
                   <IconButton
                      sx={{ backgroundColor: '#F5F8FC' }}
