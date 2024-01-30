@@ -16,7 +16,7 @@ import useEditDiscount from '@/apis/pAdmin/discounts/useEditDiscount';
 
 function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discountsMutate }) {
    const { locale } = useRouter();
-   const t = useTranslations('adminPanelUsers');
+   const t = useTranslations('adminPanelDiscounts');
 
    const { trigger: addDiscountTrigger, isMutating: addDiscountIsMutating } = useAddDiscount();
    const { trigger: editDiscountTrigger, isMutating: editDiscountIsMutating } = useEditDiscount(detail?.id);
@@ -80,7 +80,7 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'}>
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-solid border-[#E4EAF0] bg-white pb-2 pt-3">
-               <p className="text-lg font-bold">{isEdit ? 'ویرایش کد تخفیف' : 'افزودن کد تخفیف'}</p>
+               <p className="text-lg font-bold">{isEdit ? t('Edit discount code') : t('Add discount code')}</p>
                <IconButton onClick={closeModalHandler}>
                   <CloseIcon />
                </IconButton>
@@ -89,7 +89,7 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
             <form onSubmit={handleSubmit(formSubmit)} className="mt-10 space-y-6">
                <div className="flex flex-col gap-5 customSm:flex-row customSm:items-start">
                   <div className="flex flex-1 flex-col gap-1">
-                     <p className="text-sm text-customBlue">نام کد</p>
+                     <p className="text-sm text-customBlue">{t('Code name')}</p>
                      <TextField
                         variant="outlined"
                         fullWidth
@@ -106,7 +106,7 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
                   </div>
 
                   <div className="flex flex-1 flex-col gap-1">
-                     <p className="text-sm text-[#626E94]">درصد تخفیف</p>
+                     <p className="text-sm text-[#626E94]">{t('Discount percent')}</p>
                      <TextField
                         fullWidth
                         type="number"
@@ -134,7 +134,7 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
 
                <div className="flex flex-col gap-5 customSm:flex-row customSm:items-start">
                   <div className="flex flex-1 flex-col gap-1">
-                     <p className="mb-2 text-sm text-[#626E94]">تعداد محصول</p>
+                     <p className="mb-2 text-sm text-[#626E94]">{t('Count for discount')}</p>
                      <TextField
                         fullWidth
                         type="number"
@@ -160,7 +160,7 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
                   </div>
 
                   <div className="flex flex-1 flex-col gap-1">
-                     <p className="mb-2 text-sm text-[#626E94]">تعداد روزها</p>
+                     <p className="mb-2 text-sm text-[#626E94]">{t('Days count')}</p>
                      <TextField
                         fullWidth
                         type="number"
@@ -196,7 +196,7 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
                      fullWidth
                      className="!rounded-10 !p-3 !text-white"
                   >
-                     {isEdit ? 'ویرایش کد تخفیف' : 'افزودن کد تخفیف'}
+                     {isEdit ? t('Edit discount code') : t('Add discount code')}
                   </LoadingButton>
                </div>
             </form>

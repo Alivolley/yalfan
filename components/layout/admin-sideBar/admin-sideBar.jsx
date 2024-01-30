@@ -160,21 +160,24 @@ function AdminSideBar({ isMobile, onClose }) {
                   {isSideBarOpen && <p className="text-[15px]">{t('Reports')}</p>}
                </Link>
             )}
-            <Link
-               href="/adminPanel/discounts"
-               className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
-                  pathname === '/adminPanel/discounts' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
-               }`}
-            >
-               <div
-                  className={`flex size-11 items-center justify-center rounded-10 ${
-                     pathname === '/adminPanel/discounts' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+            {(userInfo?.is_super_admin || userInfo?.permissions?.includes(permissions?.DISCOUNT_CODE?.LIST)) && (
+               <Link
+                  href="/adminPanel/discounts"
+                  className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${
+                     pathname === '/adminPanel/discounts' ? 'bg-[#FCF7F7] text-customPinkHigh' : ''
                   }`}
                >
-                  <PercentIcon color={pathname === '/adminPanel/discounts' ? 'customPinkHigh' : 'textColor'} />
-               </div>
-               {isSideBarOpen && <p className="text-[15px]">{t('Discounts')}</p>}
-            </Link>
+                  <div
+                     className={`flex size-11 items-center justify-center rounded-10 ${
+                        pathname === '/adminPanel/discounts' ? 'bg-[#FFEEED]' : 'bg-[#F5F8FC]'
+                     }`}
+                  >
+                     <PercentIcon color={pathname === '/adminPanel/discounts' ? 'customPinkHigh' : 'textColor'} />
+                  </div>
+                  {isSideBarOpen && <p className="text-[15px]">{t('Discounts')}</p>}
+               </Link>
+            )}
+
             <Link
                href="/adminPanel/tickets"
                className={`flex w-full items-center gap-4 rounded-2xl p-3 hover:bg-[#FCF7F7] ${

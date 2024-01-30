@@ -19,11 +19,15 @@ import { toggleStatus } from '@/store/reducers/pAdminSideBarStatus';
 // Components
 import AdminSideBar from '../admin-sideBar/admin-sideBar';
 
+// Apis
+import useGetUnreadTickets from '@/apis/pAdmin/tickets/useGetUnreadTickets';
+
 function AdminLayout({ children }) {
    const [showLanguageDropDown, setShowLanguageDropDown] = useState(false);
    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
    const isSideBarOpen = useSelector(state => state?.pAdminSideBarStatus);
+   const { data: ticketsData } = useGetUnreadTickets();
 
    const { locale, pathname, push, query, asPath } = useRouter();
    const dispatch = useDispatch();
@@ -67,7 +71,7 @@ function AdminLayout({ children }) {
                   <Link href="/adminPanel/tickets">
                      <IconButton sx={{ backgroundColor: '#F5F8FC' }}>
                         <Badge
-                           badgeContent={5}
+                           badgeContent={ticketsData?.length}
                            color="error"
                            anchorOrigin={{
                               vertical: 'bottom',

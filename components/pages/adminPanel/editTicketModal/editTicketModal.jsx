@@ -1,3 +1,4 @@
+import { useSWRConfig } from 'swr';
 import { useRouter } from 'next/router';
 
 // Redux
@@ -19,6 +20,7 @@ import permissions from '@/utils/permission';
 
 function EditTicketModal({ show, onClose, detail, ticketsMutate }) {
    const { locale } = useRouter();
+   const { mutate } = useSWRConfig();
    const userInfo = useSelector(state => state?.userInfoReducer);
 
    const { trigger: editTicketTrigger, isMutating: editTicketIsMutating } = useEditTickets(detail?.id);
@@ -34,6 +36,7 @@ function EditTicketModal({ show, onClose, detail, ticketsMutate }) {
             onSuccess: () => {
                closeModalHandler();
                ticketsMutate();
+               mutate('accounts/contact-us/list_create/?has_seen=false');
             },
          }
       );

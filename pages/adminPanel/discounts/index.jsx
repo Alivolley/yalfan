@@ -3,6 +3,9 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { Button, IconButton } from '@mui/material';
 
@@ -22,6 +25,9 @@ import AddEditDiscountModal from '@/components/pages/adminPanel/addEditDiscountM
 import useGetDiscounts from '@/apis/pAdmin/discounts/useGetDiscounts';
 import useDeleteCode from '@/apis/pAdmin/discounts/useDeleteCode';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function Discounts() {
    const [pageStatus, setPageStatus] = useState(1);
    const [countValue, setCountValue] = useState(6);
@@ -31,7 +37,8 @@ function Discounts() {
    const [chosenCodeForEdit, setChosenCodeForEdit] = useState();
 
    const { locale } = useRouter();
-   const t = useTranslations('adminPanelProducts');
+   const t = useTranslations('adminPanelDiscounts');
+   const userInfo = useSelector(state => state?.userInfoReducer);
 
    const {
       data: discountsList,
@@ -62,43 +69,52 @@ function Discounts() {
    const columns = [
       { id: 1, title: t('Row'), key: 'index' },
       { id: 2, title: t('Name'), key: 'code' },
-      { id: 3, title: 'درصد تخفیف', key: 'percent' },
-      { id: 4, title: 'تعداد برای تخفیف', key: 'count', renderCell: data => <p>{data?.count} عدد</p> },
-      { id: 5, title: 'ساعت ایجاد', key: 'created' },
+      { id: 3, title: t('Discount percent'), key: 'percent' },
+      {
+         id: 4,
+         title: t('Count for discount'),
+         key: 'count',
+         renderCell: data => (
+            <p>
+               {data?.count} {t('Count')}
+            </p>
+         ),
+      },
+      { id: 5, title: t('Created time'), key: 'created' },
       {
          id: 6,
-         title: 'زمان انقضا',
+         title: t('Expiration time'),
          key: 'expiration_time',
          renderCell: data => (
             <div className="flex items-start justify-center gap-3" dir="ltr">
                <div className="flex flex-col items-center justify-center">
                   <p>{data?.expiration_time?.year}</p>
-                  <p className="text-[11px]">سال</p>
+                  <p className="text-[11px]">{t('Year')}</p>
                </div>
                <p>:</p>
                <div className="flex flex-col items-center justify-center">
                   <p>{data?.expiration_time?.month}</p>
-                  <p className="text-[11px]">ماه</p>
+                  <p className="text-[11px]">{t('Month')}</p>
                </div>
                <p>:</p>
                <div className="flex flex-col items-center justify-center">
                   <p>{data?.expiration_time?.day}</p>
-                  <p className="text-[11px]">روز</p>
+                  <p className="text-[11px]">{t('Day')}</p>
                </div>
                <p>:</p>
                <div className="flex flex-col items-center justify-center">
                   <p>{data?.expiration_time?.hour}</p>
-                  <p className="text-[11px]">ساعت</p>
+                  <p className="text-[11px]">{t('Hour')}</p>
                </div>
                <p>:</p>
                <div className="flex flex-col items-center justify-center">
                   <p>{data?.expiration_time?.minute}</p>
-                  <p className="text-[11px]">دقیقه</p>
+                  <p className="text-[11px]">{t('Minute')}</p>
                </div>
                <p>:</p>
                <div className="flex flex-col items-center justify-center">
                   <p>{data?.expiration_time?.second}</p>
-                  <p className="text-[11px]">ثانیه</p>
+                  <p className="text-[11px]">{t('Second')}</p>
                </div>
             </div>
          ),
@@ -115,7 +131,9 @@ function Discounts() {
                      setChosenCodeForEdit(data);
                      setShowAddEditDiscountModal(true);
                   }}
-                  //   disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.PATCH)}
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.DISCOUNT_CODE?.PATCH)
+                  }
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -125,7 +143,9 @@ function Discounts() {
                      setShowDeleteModal(true);
                      setChosenCodeForDelete(data);
                   }}
-                  //   disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.DELETE)}
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.DISCOUNT_CODE?.DELETE)
+                  }
                >
                   <DeleteOutlineOutlinedIcon fontSize="small" />
                </IconButton>
@@ -143,16 +163,18 @@ function Discounts() {
             <div className="flex flex-wrap items-center justify-between gap-3">
                <div className="flex items-center gap-1.5">
                   <PercentIcon color="textColor" fontSize="small" />
-                  <p className="font-bold">لیست تخفیفات</p>
+                  <p className="font-bold">{t('Discounts list')}</p>
                </div>
 
                <Button
                   startIcon={<AddCircleOutlinedIcon />}
                   color="customPinkHigh"
                   onClick={() => setShowAddEditDiscountModal(true)}
-                  //   disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.POST)}
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.DISCOUNT_CODE?.POST)
+                  }
                >
-                  افزودن تخفیف
+                  {t('Add discount')}
                </Button>
             </div>
 
@@ -182,7 +204,7 @@ function Discounts() {
          <ConfirmModal
             open={showDeleteModal}
             closeModal={closeDeleteCodeModal}
-            title="آیا از حذف این کد تخفیف مطمئن هستید؟"
+            title={t('Are you sure about deleting this code?')}
             confirmHandler={deleteCodeHandler}
             confirmLoading={deleteCodeIsMutating}
          />
