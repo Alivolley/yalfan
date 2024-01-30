@@ -77,7 +77,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
             setValue('permissions', filteredPermissions);
          }
       }
-   }, [detail, detail]);
+   }, [detail]);
 
    const formSubmit = data => {
       let newUser = null;

@@ -12,12 +12,14 @@ import CloseIcon from '@mui/icons-material/Close';
 
 // Apis
 import useAddDiscount from '@/apis/pAdmin/discounts/useAddDiscount';
+import useEditDiscount from '@/apis/pAdmin/discounts/useEditDiscount';
 
 function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discountsMutate }) {
    const { locale } = useRouter();
    const t = useTranslations('adminPanelUsers');
 
    const { trigger: addDiscountTrigger, isMutating: addDiscountIsMutating } = useAddDiscount();
+   const { trigger: editDiscountTrigger, isMutating: editDiscountIsMutating } = useEditDiscount(detail);
 
    const {
       register,
@@ -41,30 +43,21 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
    };
 
    const formSubmit = data => {
-      let newCode = null;
+      const newCode = {
+         code: data?.codeName,
+         percent: data?.discountPercent,
+         count: data?.productCount,
+         expiration_days: data?.daysLimit,
+      };
 
       if (isEdit) {
-         //    const codesArray = data?.permissions?.map(item => item.code);
-         //    newCode = new FormData();
-         //    newCode.append('phone_number', data?.phoneNumber);
-         //    newCode.append('is_admin', data?.isAdmin);
-         //    if (data?.password) {
-         //       newCode.append('password', data?.password);
-         //    }
-         //    codesArray?.map(item => newCode.append('codes', item));
-         //    addUserTrigger(newCode, {
-         //       onSuccess: () => {
-         //          usersMutate();
-         //          closeModalHandler();
-         //       },
-         //    });
+         editDiscountTrigger(newCode, {
+            onSuccess: () => {
+               discountsMutate();
+               closeModalHandler();
+            },
+         });
       } else {
-         newCode = {
-            code: data?.codeName,
-            percent: data?.discountPercent,
-            count: data?.productCount,
-            expiration_days: data?.daysLimit,
-         };
          addDiscountTrigger(newCode, {
             onSuccess: () => {
                discountsMutate();
@@ -73,6 +66,15 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
          });
       }
    };
+
+   useEffect(() => {
+      if (isEdit && detail) {
+         setValue('codeName', detail?.code);
+         setValue('discountPercent', detail?.percent);
+         setValue('productCount', detail?.count);
+         setValue('daysLimit', detail?.expiration_time?.day);
+      }
+   }, [detail]);
 
    return (
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'}>
@@ -190,7 +192,7 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
                      type="submit"
                      size="large"
                      color="customPinkHigh"
-                     loading={addDiscountIsMutating}
+                     loading={addDiscountIsMutating || editDiscountIsMutating}
                      fullWidth
                      className="!rounded-10 !p-3 !text-white"
                   >

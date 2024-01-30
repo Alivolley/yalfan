@@ -15,25 +15,44 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
+import ConfirmModal from '@/components/templates/confirm-modal/confirm-modal';
+import AddEditDiscountModal from '@/components/pages/adminPanel/addEditDiscountModal/addEditDiscountModal';
 
 // Apis
 import useGetDiscounts from '@/apis/pAdmin/discounts/useGetDiscounts';
-import AddEditDiscountModal from '@/components/pages/adminPanel/addEditDiscountModal/addEditDiscountModal';
+import useDeleteComment from '@/apis/comments/useDeleteComment';
 
 function Discounts() {
    const [showAddEditDiscountModal, setShowAddEditDiscountModal] = useState(false);
+   const [chosenCodeForDelete, setChosenCodeForDelete] = useState();
+   const [showDeleteModal, setShowDeleteModal] = useState(false);
+   const [chosenCodeForEdit, setChosenCodeForEdit] = useState();
 
    const { locale } = useRouter();
    const t = useTranslations('adminPanelProducts');
 
    const { data: discountsList, isLoading: discountsIsLoading, mutate: discountsMutate } = useGetDiscounts();
+   const { trigger: deleteCommentTrigger, isMutating: deleteCommentIsMutating } = useDeleteComment();
 
    const closeAddEditDiscountModalHandler = () => {
       setShowAddEditDiscountModal(false);
-      // setChosenUserForEdit();
+      setChosenCodeForEdit();
    };
 
-   console.log(discountsList);
+   const closeDeleteCodeModal = () => {
+      setShowDeleteModal(false);
+      setChosenCodeForDelete();
+   };
+
+   const deleteCodeHandler = () => {
+      console.log(chosenCodeForDelete);
+      deleteCommentTrigger(chosenCodeForDelete.id, {
+         onSuccess: () => {
+            discountsMutate();
+            closeDeleteCodeModal();
+         },
+      });
+   };
 
    const columns = [
       { id: 1, title: t('Row'), key: 'index' },
@@ -87,20 +106,20 @@ function Discounts() {
             <div className="flex items-center justify-center gap-2">
                <IconButton
                   size="small"
-                  //   onClick={() => {
-                  //      setChosenProductForEdit(data);
-                  //      setShowAddEditProductModal(true);
-                  //   }}
+                  onClick={() => {
+                     setChosenCodeForEdit(data);
+                     setShowAddEditDiscountModal(true);
+                  }}
                   //   disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.PATCH)}
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
                <IconButton
                   size="small"
-                  //   onClick={() => {
-                  //      setChosenProductForDelete(data?.title);
-                  //      setShowDeleteProductModal(true);
-                  //   }}
+                  onClick={() => {
+                     setShowDeleteModal(true);
+                     setChosenCodeForDelete(data);
+                  }}
                   //   disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.DELETE)}
                >
                   <DeleteOutlineOutlinedIcon fontSize="small" />
@@ -145,9 +164,17 @@ function Discounts() {
          <AddEditDiscountModal
             show={showAddEditDiscountModal}
             onClose={closeAddEditDiscountModalHandler}
-            // isEdit={!!chosenUserForEdit}
-            // detail={chosenUserForEdit}
+            isEdit={!!chosenCodeForEdit}
+            detail={chosenCodeForEdit}
             discountsMutate={discountsMutate}
+         />
+
+         <ConfirmModal
+            open={showDeleteModal}
+            closeModal={closeDeleteCodeModal}
+            title="آیا از حذف این کد تخفیف مطمئن هستید؟"
+            confirmHandler={deleteCodeHandler}
+            confirmLoading={deleteCommentIsMutating}
          />
       </AdminLayout>
    );
