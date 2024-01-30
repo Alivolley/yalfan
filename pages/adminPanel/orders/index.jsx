@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 // MUI
-import { Grid, IconButton } from '@mui/material';
+import { Button, Grid, IconButton } from '@mui/material';
 
 // Icons
 import QrCodeOutlinedIcon from '@mui/icons-material/QrCodeOutlined';
@@ -18,12 +18,14 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import MoneyOffCsredOutlinedIcon from '@mui/icons-material/MoneyOffCsredOutlined';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
 import OrderDetailModal from '@/components/templates/order-detail-modal/order-detail-modal';
 import EditOrderStatusModal from '@/components/pages/adminPanel/editOrderStatusModal/editOrderStatusModal';
+import EditShippingCostModal from '@/components/pages/adminPanel/editShippingCostModal/editShippingCostModal';
 
 // Apis
 import useGetAllCards from '@/apis/pAdmin/orders/useGetAllCards';
@@ -39,6 +41,7 @@ function Orders() {
    const [showDetailModal, setShowDetailModal] = useState(false);
    const [showEditStatusModal, setShowEditStatusModal] = useState(false);
    const [chosenOrderForEdit, setChosenOrderForEdit] = useState();
+   const [showEditShippingCostModal, setShowEditShippingCostModal] = useState(false);
 
    const t = useTranslations('adminPanelOrders');
    const userInfo = useSelector(state => state?.userInfoReducer);
@@ -306,6 +309,18 @@ function Orders() {
                   <QrCodeOutlinedIcon color="textColor" fontSize="small" />
                   <p className="font-bold">{t('Orders list')}</p>
                </div>
+
+               <Button
+                  startIcon={<AddCircleOutlinedIcon />}
+                  color="customPinkHigh"
+                  onClick={() => setShowEditShippingCostModal(true)}
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.SHIPPING_COST?.PATCH)
+                  }
+               >
+                  {/* {t('Add product')} */}
+                  تغییر هزینه ارسال
+               </Button>
             </div>
 
             <div className="mx-auto mt-6 w-full">
@@ -336,6 +351,8 @@ function Orders() {
             detail={chosenOrderForEdit}
             cardMutate={cardMutate}
          />
+
+         <EditShippingCostModal show={showEditShippingCostModal} onClose={() => setShowEditShippingCostModal(false)} />
       </AdminLayout>
    );
 }
