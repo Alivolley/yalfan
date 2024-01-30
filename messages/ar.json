@@ -372,7 +372,10 @@
         "This filed is required": "هذه الخانة مطلوبه",
         "Change status description": "تغيير وصف الحالة",
         "Apply changes": "تطبيق التغييرات",
-        "You don't have permission to visit this page": "ليس لديك إذن لزيارة هذه الصفحة"
+        "You don't have permission to visit this page": "ليس لديك إذن لزيارة هذه الصفحة",
+        "Change shipping cost": "تغيير تكلفة الشحن",
+        "Change": "يتغير",
+        "Price": "سعر"
     },
     "adminPanelReports": {
         "Please select both dates for download": "الرجاء تحديد كلا التاريخين للتحميل",

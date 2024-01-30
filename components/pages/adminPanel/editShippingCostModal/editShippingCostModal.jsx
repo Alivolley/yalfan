@@ -66,10 +66,7 @@ function EditShippingCostModal({ show, onClose }) {
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'} maxWidth="xs">
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-solid border-[#E4EAF0] bg-white pb-2 pt-3">
-               <p className="text-lg font-bold">
-                  {/* {t('Change order status')} */}
-                  تغییر هزینه ارسال
-               </p>
+               <p className="text-lg font-bold">{t('Change shipping cost')}</p>
                <IconButton onClick={closeModalHandler}>
                   <CloseIcon />
                </IconButton>
@@ -81,10 +78,7 @@ function EditShippingCostModal({ show, onClose }) {
             ) : (
                <form onSubmit={handleSubmit(formSubmit)} className="mt-5">
                   <div className="flex flex-1 flex-col gap-1">
-                     <p className="mb-2 text-sm text-[#626E94]">
-                        {/* {t('Price')} ( {t('Toman')} ) */}
-                        هزینه
-                     </p>
+                     <p className="mb-2 text-sm text-[#626E94]">{t('Price')}</p>
                      <TextField
                         fullWidth
                         type="number"
@@ -119,7 +113,7 @@ function EditShippingCostModal({ show, onClose }) {
                         type="submit"
                         loading={changeShippingCostIsMutating}
                      >
-                        تغییر هزینه
+                        {t('Change')}
                      </LoadingButton>
                   </div>
                </form>

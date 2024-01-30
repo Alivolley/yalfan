@@ -372,7 +372,10 @@
         "This filed is required": "این فیلد اجباری است",
         "Change status description": "توضیح تغییر وضعیت",
         "Apply changes": "اعمال تغییرات",
-        "You don't have permission to visit this page": "شما مجوز دسترسی به این صفحه را ندارید"
+        "You don't have permission to visit this page": "شما مجوز دسترسی به این صفحه را ندارید",
+        "Change shipping cost": "تغییر هزینه ارسال",
+        "Change": "تغییر",
+        "Price": "هزینه"
     },
     "adminPanelReports": {
         "Please select both dates for download": "لطفا هر دو تاریخ را برای دانلود انتخاب کنید",

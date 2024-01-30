@@ -177,8 +177,10 @@ function Header({ language, isLogin }) {
 
             <div className="hidden items-stretch gap-1 customMd:flex lg:gap-3">
                <div
-                  className={`flex items-center transition-all duration-100 ${
-                     showLanguageSelector ? 'visible opacity-100' : 'invisible -translate-x-3 opacity-0'
+                  className={`flex items-center transition-all duration-300 ${
+                     showLanguageSelector
+                        ? 'visible opacity-100'
+                        : `invisible ${language === 'en' ? 'translate-x-10' : '-translate-x-10'} opacity-0`
                   }`}
                >
                   <Button
@@ -198,11 +200,11 @@ function Header({ language, isLogin }) {
                   </Button>
                   <div className="mx-1 h-8 w-[1px] bg-[#E4EAF0]" />
                   <Button
-                     className={`!min-w-0 !px-2 !py-1 ${language === 'fa' ? '!text-[#B1302E]' : ''}`}
+                     className={`!min-w-0 !px-2 !py-1 !font-dana ${language === 'fa' ? '!text-[#B1302E]' : ''}`}
                      color="textColor"
                      onClick={() => changeLanguage('fa')}
                   >
-                     FA
+                     فا
                   </Button>
                </div>
                <Fab
@@ -213,12 +215,15 @@ function Header({ language, isLogin }) {
                      color: '#626E94',
                      fontSize: '16px',
                      border: '1px solid #E4EAF0',
+                     display: 'flex',
+                     alignItems: 'center',
                   }}
                   color="white"
                   onClick={() => setShowLanguageSelector(prev => !prev)}
                   ref={languageRef}
                >
-                  {language}
+                  {language === 'fa' ? 'فا' : language}
+                  <LanguageOutlinedIcon className="ms-1" fontSize="small" />
                </Fab>
 
                {isUserLogin && (

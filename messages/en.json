@@ -372,7 +372,10 @@
         "This filed is required": "This filed is required",
         "Change status description": "Change status description",
         "Apply changes": "Apply changes",
-        "You don't have permission to visit this page": "You don't have permission to visit this page"
+        "You don't have permission to visit this page": "You don't have permission to visit this page",
+        "Change shipping cost": "Change shipping cost",
+        "Change": "Change",
+        "Price": "Price"
     },
     "adminPanelReports": {
         "Please select both dates for download": "Please select both dates for download",

@@ -318,8 +318,7 @@ function Orders() {
                      !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.SHIPPING_COST?.PATCH)
                   }
                >
-                  {/* {t('Add product')} */}
-                  تغییر هزینه ارسال
+                  {t('Change shipping cost')}
                </Button>
             </div>
 
