@@ -20,9 +20,11 @@ import AddEditDiscountModal from '@/components/pages/adminPanel/addEditDiscountM
 
 // Apis
 import useGetDiscounts from '@/apis/pAdmin/discounts/useGetDiscounts';
-import useDeleteComment from '@/apis/comments/useDeleteComment';
+import useDeleteCode from '@/apis/pAdmin/discounts/useDeleteCode';
 
 function Discounts() {
+   const [pageStatus, setPageStatus] = useState(1);
+   const [countValue, setCountValue] = useState(6);
    const [showAddEditDiscountModal, setShowAddEditDiscountModal] = useState(false);
    const [chosenCodeForDelete, setChosenCodeForDelete] = useState();
    const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -31,8 +33,12 @@ function Discounts() {
    const { locale } = useRouter();
    const t = useTranslations('adminPanelProducts');
 
-   const { data: discountsList, isLoading: discountsIsLoading, mutate: discountsMutate } = useGetDiscounts();
-   const { trigger: deleteCommentTrigger, isMutating: deleteCommentIsMutating } = useDeleteComment();
+   const {
+      data: discountsList,
+      isLoading: discountsIsLoading,
+      mutate: discountsMutate,
+   } = useGetDiscounts(pageStatus, countValue);
+   const { trigger: deleteCodeTrigger, isMutating: deleteCodeIsMutating } = useDeleteCode();
 
    const closeAddEditDiscountModalHandler = () => {
       setShowAddEditDiscountModal(false);
@@ -45,8 +51,7 @@ function Discounts() {
    };
 
    const deleteCodeHandler = () => {
-      console.log(chosenCodeForDelete);
-      deleteCommentTrigger(chosenCodeForDelete.id, {
+      deleteCodeTrigger(chosenCodeForDelete.id, {
          onSuccess: () => {
             discountsMutate();
             closeDeleteCodeModal();
@@ -154,9 +159,14 @@ function Discounts() {
             <div className="mx-auto mt-6 w-full">
                <Table
                   columns={columns}
-                  rows={discountsList}
+                  rows={discountsList?.result}
                   loading={discountsIsLoading}
-                  countValue={discountsList?.length}
+                  totalPages={discountsList?.total_pages}
+                  totalObjects={discountsList?.total_objects}
+                  pageStatus={pageStatus}
+                  setPageStatus={setPageStatus}
+                  countValue={countValue}
+                  setCountValue={setCountValue}
                />
             </div>
          </div>
@@ -174,7 +184,7 @@ function Discounts() {
             closeModal={closeDeleteCodeModal}
             title="آیا از حذف این کد تخفیف مطمئن هستید؟"
             confirmHandler={deleteCodeHandler}
-            confirmLoading={deleteCommentIsMutating}
+            confirmLoading={deleteCodeIsMutating}
          />
       </AdminLayout>
    );

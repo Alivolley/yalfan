@@ -19,7 +19,7 @@ function AddEditDiscountModal({ show, onClose, isEdit = false, detail, discounts
    const t = useTranslations('adminPanelUsers');
 
    const { trigger: addDiscountTrigger, isMutating: addDiscountIsMutating } = useAddDiscount();
-   const { trigger: editDiscountTrigger, isMutating: editDiscountIsMutating } = useEditDiscount(detail);
+   const { trigger: editDiscountTrigger, isMutating: editDiscountIsMutating } = useEditDiscount(detail?.id);
 
    const {
       register,
