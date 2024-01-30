@@ -417,6 +417,22 @@
         "Code name": "Code name",
         "Days count": "Days count"
     },
+    "adminPanelTickets": {
+        "Row": "Row",
+        "Name": "Name",
+        "FullName": "FullName",
+        "Last name": "Last name",
+        "Phone number": "Phone number",
+        "Status": "Status",
+        "Read": "Read",
+        "Not read": "Not read",
+        "Actions": "Actions",
+        "Tickets list": "Tickets list",
+        "Ticket detail": "Ticket detail",
+        "Email": "Email",
+        "Message text": "Message text",
+        "Change to read": "Change to read"
+    },
     "adminPanelUsers": {
         "Row": "Row",
         "Name": "Name",

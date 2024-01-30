@@ -24,7 +24,7 @@ function Tickets() {
    const [chosenTicketForEdit, setChosenTicketForEdit] = useState();
    const [showEditTicketModal, setShowEditTicketModal] = useState(false);
    const { locale } = useRouter();
-   const t = useTranslations('adminPanelProducts');
+   const t = useTranslations('adminPanelTickets');
 
    const closeEditStatusModal = () => {
       setShowEditTicketModal(false);
@@ -39,18 +39,18 @@ function Tickets() {
 
    const columns = [
       { id: 1, title: t('Row'), key: 'index' },
-      { id: 2, title: 'نام', key: 'first_name' },
-      { id: 3, title: 'نام خانوادگی', key: 'last_name' },
-      { id: 4, title: 'شماره تماس', key: 'phone_number' },
+      { id: 2, title: t('Name'), key: 'first_name' },
+      { id: 3, title: t('FullName'), key: 'last_name' },
+      { id: 4, title: t('Phone number'), key: 'phone_number' },
       {
          id: 5,
-         title: 'وضعیت',
-         key: 'phone_number',
+         title: t('Status'),
+         key: 'Status',
          renderCell: data =>
             data?.has_seen ? (
-               <p className="text-green-500">خوانده شده</p>
+               <p className="text-green-500">{t('Read')}</p>
             ) : (
-               <p className="text-customPinkHigh">خوانده نشده</p>
+               <p className="text-customPinkHigh">{t('Not read')}</p>
             ),
       },
       {
@@ -80,7 +80,7 @@ function Tickets() {
          <div className="w-full bg-white p-5">
             <div className="flex items-center gap-1.5">
                <ConfirmationNumberOutlinedIcon color="textColor" fontSize="small" />
-               <p className="font-bold">لیست تیکت ها</p>
+               <p className="font-bold">{t('Tickets list')}</p>
             </div>
             <div className="mx-auto mt-10 w-full">
                <Table

@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { useSWRConfig } from 'swr';
 import { useRouter } from 'next/router';
 
@@ -21,6 +22,8 @@ import permissions from '@/utils/permission';
 function EditTicketModal({ show, onClose, detail, ticketsMutate }) {
    const { locale } = useRouter();
    const { mutate } = useSWRConfig();
+   const t = useTranslations('adminPanelTickets');
+
    const userInfo = useSelector(state => state?.userInfoReducer);
 
    const { trigger: editTicketTrigger, isMutating: editTicketIsMutating } = useEditTickets(detail?.id);
@@ -45,7 +48,7 @@ function EditTicketModal({ show, onClose, detail, ticketsMutate }) {
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir={locale === 'en' ? 'ltr' : 'rtl'} maxWidth="xs">
          <div className="relative p-5 pt-0">
             <div className="sticky top-0 z-[2] flex items-center justify-between border-b border-solid border-[#E4EAF0] bg-white pb-2 pt-3">
-               <p className="text-lg font-bold">جزییات تیکت</p>
+               <p className="text-lg font-bold">{t('Ticket detail')}</p>
                <IconButton onClick={closeModalHandler}>
                   <CloseIcon />
                </IconButton>
@@ -53,23 +56,23 @@ function EditTicketModal({ show, onClose, detail, ticketsMutate }) {
 
             <div className="mt-8 space-y-7 text-sm">
                <div className="flex items-center gap-2">
-                  <p className="text-textColor">نام : </p>
+                  <p className="text-textColor">{t('Name')} : </p>
                   <p>{detail?.first_name}</p>
                </div>
                <div className="flex items-center gap-2">
-                  <p className="text-textColor">نام خانوادگی : </p>
+                  <p className="text-textColor">{t('Last name')} : </p>
                   <p>{detail?.last_name}</p>
                </div>
                <div className="flex items-center gap-2">
-                  <p className="text-textColor">شماره تماس : </p>
+                  <p className="text-textColor">{t('Phone number')} : </p>
                   <p>{detail?.phone_number}</p>
                </div>
                <div className="flex items-center gap-2">
-                  <p className="text-textColor">ایمیل : </p>
+                  <p className="text-textColor">{t('Email')} : </p>
                   <p>{detail?.email}</p>
                </div>
                <div className="space-y-2">
-                  <p className="text-textColor">متن پیام : </p>
+                  <p className="text-textColor">{t('Message text')} : </p>
                   <p>{detail?.text}</p>
                </div>
             </div>
@@ -84,14 +87,14 @@ function EditTicketModal({ show, onClose, detail, ticketsMutate }) {
                      disabled
                      startIcon={<CheckCircleOutlineOutlinedIcon />}
                   >
-                     خوانده شده
+                     {t('Read')}
                   </Button>
                ) : (
                   <LoadingButton
                      variant="contained"
                      color="customPinkHigh"
                      fullWidth
-                     className="!rounded-10 !py-2"
+                     className="!rounded-10 !py-2 !text-white"
                      size="large"
                      onClick={editTicketHandler}
                      loading={editTicketIsMutating}
@@ -99,7 +102,7 @@ function EditTicketModal({ show, onClose, detail, ticketsMutate }) {
                         !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.CONTACT_US?.PATCH)
                      }
                   >
-                     تغییر به خوانده شد
+                     {t('Change to read')}
                   </LoadingButton>
                )}
             </div>

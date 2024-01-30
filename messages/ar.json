@@ -417,6 +417,22 @@
         "Code name": "اسم الرمز",
         "Days count": "عدد الأيام"
     },
+    "adminPanelTickets": {
+        "Row": "صف",
+        "Name": "اسم",
+        "FullName": "الاسم الكامل",
+        "Last name": "اسم العائلة",
+        "Phone number": "رقم التليفون",
+        "Status": "حالة",
+        "Read": "يقرأ",
+        "Not read": "لا يقرأ",
+        "Actions": "أجراءات",
+        "Tickets list": "قائمة التذاكر",
+        "Ticket detail": "تفاصيل التذكرة",
+        "Email": "بريد إلكتروني",
+        "Message text": "رسالة نصية",
+        "Change to read": "تغيير للقراءة"
+    },
     "adminPanelUsers": {
         "Row": "صف",
         "Name": "اسم",

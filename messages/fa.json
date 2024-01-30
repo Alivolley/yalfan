@@ -417,6 +417,22 @@
         "Code name": "نام کد",
         "Days count": "تعداد روزها"
     },
+    "adminPanelTickets": {
+        "Row": "ردیف",
+        "Name": "نام",
+        "FullName": "نام و نام خانوادگی",
+        "Last name": "نام خانوادگی",
+        "Phone number": "شماره تماس",
+        "Status": "وضعیت",
+        "Read": "خوانده شده",
+        "Not read": "خوانده نشده",
+        "Actions": "عملیات",
+        "Tickets list": "لیست تیکت ها",
+        "Ticket detail": "جزییات تیکت",
+        "Email": "ایمیل",
+        "Message text": "متن پیام",
+        "Change to read": "تغییر به خوانده شد"
+    },
     "adminPanelUsers": {
         "Row": "ردیف",
         "Name": "نام",
