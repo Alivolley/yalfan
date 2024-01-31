@@ -389,7 +389,7 @@ function CategoryDetail({ error, productsList, mostExpensivePrice, categoryList 
                         ))}
                      </div>
                   ) : (
-                     <p className="mt-14 text-center">محصولی با این فیلتر ها وجود ندارد</p>
+                     <p className="mt-14 text-center">{t('There are no products with these filters')}</p>
                   )}
                </div>
 

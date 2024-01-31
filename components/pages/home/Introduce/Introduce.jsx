@@ -38,7 +38,7 @@ function Introduce() {
                      alt="introduce"
                      className="h-[200px] w-full object-contain customMd:h-full"
                   />
-                  <Image src={bannerBg} alt="introduce" className="absolute inset-0 z-[-1]" />
+                  <Image src={bannerBg} alt="introduce" className="absolute inset-0 z-[-1] size-full" />
                </div>
             </Grid>
             <Grid item xs={12} md={7}>

@@ -22,7 +22,7 @@ function Banner() {
          <BannerStyle className="px-8 customMd:px-16" locale={router.locale}>
             <Grid container>
                <Grid item xs={12} md={6}>
-                  <div className="flex h-full w-full flex-col justify-center py-12">
+                  <div className="flex size-full flex-col justify-center py-6 customMd:py-12">
                      <p className="text-xl font-bold text-[#284566] customMd:text-5xl">{t('with yalfan')}</p>
                      <p className="text-xl font-bold text-[#284566] customMd:mt-5 customMd:text-5xl">
                         {t('make great styles')}
@@ -48,7 +48,7 @@ function Banner() {
                         <Image
                            src={bannerModel}
                            alt="banner"
-                           className={`h-full w-full ${router.locale === 'en' ? 'scale-x-[-1]' : ''}`}
+                           className={`size-full ${router.locale === 'en' ? 'scale-x-[-1]' : ''}`}
                         />
                      </div>
                   </div>

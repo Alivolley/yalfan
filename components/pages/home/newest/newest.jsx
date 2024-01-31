@@ -38,7 +38,7 @@ function Newest({ detail }) {
             </Link>
          </div>
 
-         <div className="mt-10 flex items-center gap-4 overflow-auto pb-5">
+         <div className="mt-10 flex items-center gap-4 overflow-auto pb-8">
             {detail?.result?.map(item => (
                <ProductCard key={item.id} detail={item} />
             ))}

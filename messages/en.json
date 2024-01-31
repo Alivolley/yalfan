@@ -46,7 +46,13 @@
         "address": "Iran hamedan hamedan city shir khorshid",
         "developers": "Designed and developed by",
         "neuro code": "neuro code",
-        "team": "team"
+        "team": "team",
+        "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "Easy access": "Easy access",
+        "Categories": "Categories",
+        "Contact us": "Contact us",
+        "Address": "Address",
+        "Phone number": "Phone number"
     },
     "categoryDetail": {
         "Sorting": "Sorting",
@@ -74,7 +80,8 @@
         "Filter based on": "Filter based on",
         "Categories": "Categories",
         "Color": "Color",
-        "More colors": "More colors"
+        "More colors": "More colors",
+        "There are no products with these filters": "There are no products with these filters"
     },
     "faqs": {
         "Didn't find your answer": "Didn't find your answer ?",

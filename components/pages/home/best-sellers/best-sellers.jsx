@@ -39,7 +39,7 @@ function BestSellers({ detail }) {
                   {t('Best sellers')}
                </p>
                <div className={`mt-7 customMd:mb-3 ${router.locale === 'en' ? 'scale-x-[-1]' : ''}`}>
-                  <Image src={bestSellersPic} alt="best sellers" className="h-full w-full" />
+                  <Image src={bestSellersPic} alt="best sellers" className="size-full" />
                </div>
 
                <Link href="/categoryDetail?ordering=sales" className="mt-8 hidden customMd:block">
@@ -56,7 +56,7 @@ function BestSellers({ detail }) {
                </Link>
             </div>
 
-            <div className="mt-10 flex items-center gap-4 overflow-auto scroll-smooth pb-5" ref={productsRef}>
+            <div className="mt-10 flex items-center gap-4 overflow-auto scroll-smooth pb-10" ref={productsRef}>
                {detail?.result?.map(item => (
                   <ProductCard key={item.id} detail={item} />
                ))}

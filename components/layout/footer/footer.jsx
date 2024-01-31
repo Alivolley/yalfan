@@ -34,16 +34,13 @@ function Footer() {
                      </div>
                   </div>
 
-                  <p className="mt-8 max-w-[430px] text-sm leading-[35px] text-[#DBDEEA]">
-                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها
-                     و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
-                  </p>
+                  <p className="mt-8 max-w-[430px] text-sm leading-[35px] text-[#DBDEEA]">{t('lorem')}</p>
                </Grid>
                <Grid item xs={12} sm={6} md={2.5}>
                   <div className="flex flex-col gap-7">
-                     <p className="text-xl font-bold">دسترسی آسان</p>
+                     <p className="text-xl font-bold">{t('Easy access')}</p>
                      <div className="flex flex-col gap-5 text-sm text-[#CCD5E3]">
-                        <Link href="/categoryDetail">دسته بندی کالاها</Link>
+                        <Link href="/categoryDetail">{t('Categories')}</Link>
                         <Link href="/faqs">{t('any question')}</Link>
                         <Link href="/aboutUs">{t('about us')}</Link>
                         <Link href="/contactUs">{t('contact us')}</Link>
@@ -52,17 +49,17 @@ function Footer() {
                </Grid>
                <Grid item xs={12} sm={6} md={3.5}>
                   <div className="flex flex-col gap-7">
-                     <p className="text-xl font-bold">ارتباط با ما</p>
+                     <p className="text-xl font-bold">{t('Contact us')}</p>
                      <div className="flex flex-col gap-8 text-sm text-[#CCD5E3]">
                         <div>
                            <p className="mb-3 flex items-center gap-2.5">
-                              <LocationOnIcon fontSize="small" /> آدرس
+                              <LocationOnIcon fontSize="small" /> {t('Address')}
                            </p>
                            <p>{t('address')}</p>
                         </div>
                         <a href="tel:02152687469">
                            <p className="mb-3 flex items-center gap-2.5">
-                              <PhoneEnabledIcon fontSize="small" /> شماره تماس
+                              <PhoneEnabledIcon fontSize="small" /> {t('Phone number')}
                            </p>
                            <p>021-52687469</p>
                         </a>

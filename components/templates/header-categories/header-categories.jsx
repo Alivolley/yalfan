@@ -52,7 +52,7 @@ function HeaderCategories({ language }) {
                      <Grid item xs={6} key={item.id}>
                         <Link
                            href={`/productDetail/${item?.title}`}
-                           className="block py-3 text-sm transition-all duration-200 hover:text-[#FF817E]"
+                           className="block border-s-2 border-solid border-transparent py-3 ps-1 text-sm transition-all duration-200 hover:border-[#FF817E] hover:text-[#FF817E]"
                         >
                            {item?.title}
                         </Link>
