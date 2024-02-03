@@ -10,12 +10,18 @@ const getKey = pageIndex => {
 };
 
 const useGetComments = productId =>
-   useSWRInfinite(getKey, url =>
-      axiosInstance(url, {
-         params: {
-            product_id: productId,
-         },
-      }).then(res => res.data)
+   useSWRInfinite(
+      getKey,
+      url =>
+         axiosInstance(url, {
+            params: {
+               product_id: productId,
+            },
+         }).then(res => res.data),
+      {
+         revalidateIfStale: false,
+         revalidateOnFocus: false,
+      }
    );
 
 export default useGetComments;

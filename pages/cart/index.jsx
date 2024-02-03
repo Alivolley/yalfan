@@ -87,7 +87,7 @@ function Cart() {
                         <div className="flex items-center justify-between rounded-2xl bg-white p-5">
                            <p className="flex items-center gap-2 text-customBlue">
                               <ShoppingBasketOutlinedIcon /> {t('Basket')}
-                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-customPinkHigh text-sm text-white">
+                              <span className="flex size-6 items-center justify-center rounded-full bg-customPinkHigh text-sm text-white">
                                  {basketData?.all_orders_count}
                               </span>
                            </p>

@@ -91,7 +91,7 @@ function Orders() {
                         <p className="text-xl font-bold">{t('Your order list is empty')}</p>
                         <p className="text-sm text-textColor">{t('Place your first order now')}</p>
                         <div>
-                           <Image src={ordersEmptyPic} alt="no address" className="h-full w-full object-cover" />
+                           <Image src={ordersEmptyPic} alt="no address" className="size-full object-cover" />
                         </div>
                      </div>
                   )}

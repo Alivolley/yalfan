@@ -44,6 +44,7 @@ import searchIcon from '@/assets/icons/search-icon.svg';
 
 // Components
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
+import MobileMenuStyle from './mobile-menu.style';
 
 // Apis
 import useCategories from '@/apis/categories/useCategories';
@@ -86,7 +87,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
 
    return (
       <Drawer anchor="left" open={open} onClose={onClose} dir={locale === 'en' ? 'ltr' : 'rtl'}>
-         <div className="w-[300px]">
+         <MobileMenuStyle className="w-[300px]">
             <div className="flex items-start justify-between">
                <Link href="/" className="flex items-center gap-2 p-5 customMd:gap-3">
                   <div className="w-[40px] shrink-0 customMd:h-16 customMd:w-[73px]">
@@ -199,7 +200,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                            </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                           <div className="ms-[-15px] border-s border-solid border-customPink pe-8 ps-3">
+                           <div className="ms-[-15px] max-h-[300px] overflow-auto pe-8 ps-3" id="scroll">
                               {categoryList?.map(item => (
                                  <Accordion
                                     key={item.id}
@@ -281,7 +282,7 @@ function MobileMenu({ open, onClose, locale, isUserLogin }) {
                   <Link href="/contactUs">{t('contact us')}</Link>
                </div>
             </div>
-         </div>
+         </MobileMenuStyle>
          <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} />
       </Drawer>
    );

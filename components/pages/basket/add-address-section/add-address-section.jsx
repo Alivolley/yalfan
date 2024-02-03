@@ -20,8 +20,8 @@ import BasketAddressModal from '../basket-address-modal/basket-address-modal';
 import useGetAddress from '@/apis/profile/useGetAddress';
 
 function AddAddressSection({ chosenAddress, setChosenAddress, orderDescription, setOrderDescription }) {
-   const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
+   const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
 
    const t = useTranslations('basket');
 
@@ -73,7 +73,7 @@ function AddAddressSection({ chosenAddress, setChosenAddress, orderDescription, 
                      <p className="text-xl font-bold">{t('You have not registered an address yet')}</p>
                      <p className="text-sm text-textColor">{t('Add your address to the list of addresses')}</p>
                      <div className="mx-auto max-w-[250px]">
-                        <Image src={noAddressPic} alt="no address" className="h-full w-full object-cover" />
+                        <Image src={noAddressPic} alt="no address" className="size-full object-cover" />
                      </div>
                   </div>
                )}
