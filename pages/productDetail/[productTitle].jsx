@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -37,6 +36,9 @@ import categoriesIcon from '@/assets/icons/categories-icon.svg';
 import Comment from '@/components/pages/productDetail/comment/comment';
 import AddComment from '@/components/pages/productDetail/add-comment/add-comment';
 import ProductCard from '@/components/templates/product-card/product-card';
+
+// Configs
+import axiosInstance from '@/configs/axiosInstance';
 
 // Apis
 import useGetFavorites from '@/apis/favorites/useGetFavorites';
@@ -498,17 +500,16 @@ export default ProductDetail;
 
 export async function getServerSideProps(context) {
    const { query, locale } = context;
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const productDetail = await axios(`${baseURL}api/store/products/get_update_destroy/`, {
+      const productDetail = await axiosInstance(`store/products/get_update_destroy/`, {
          params: {
             lang: locale,
             title: query?.productTitle,
          },
       }).then(res => res.data);
 
-      const categoryItems = await axios(`${baseURL}api/store/products/list_create/`, {
+      const categoryItems = await axiosInstance(`store/products/list_create/`, {
          params: {
             lang: locale,
             category: productDetail?.category,

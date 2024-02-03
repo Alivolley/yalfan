@@ -1,10 +1,9 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import Image from 'next/image';
 
 // MUI
@@ -13,6 +12,9 @@ import { Button, Grid } from '@mui/material';
 // Icons
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import EastIcon from '@mui/icons-material/East';
+
+// Config
+import axiosInstance from '@/configs/axiosInstance';
 
 // Assets
 import contactUsPic1 from '@/assets/images/contactUsPic1.png';
@@ -92,7 +94,7 @@ function AboutUs({ categoryList, error }) {
                </Grid>
 
                <Grid item xs={12} md={5} order={{ xs: 1, md: 2 }}>
-                  <div className="h-full w-full">
+                  <div className="size-full">
                      <Image
                         src={contactUsPic1}
                         alt="introduce"
@@ -118,7 +120,7 @@ function AboutUs({ categoryList, error }) {
          <div className="bg-[#fcf7f7] px-8 py-16 customMd:px-16">
             <Grid container spacing={{ md: 8 }}>
                <Grid item xs={12} md={5}>
-                  <div className="h-full w-full">
+                  <div className="size-full">
                      <Image
                         src={contactUsPic2}
                         alt="introduce"
@@ -145,10 +147,8 @@ function AboutUs({ categoryList, error }) {
 export default AboutUs;
 
 export async function getStaticProps(context) {
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
    try {
-      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`, {
+      const categoryList = await axiosInstance(`store/categories/list_create/`, {
          params: {
             lang: context.locale,
          },

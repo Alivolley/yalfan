@@ -6,9 +6,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
-// Configs
-import axios from 'axios';
-
 // MUI
 import { Button, Pagination } from '@mui/material';
 
@@ -16,6 +13,9 @@ import { Button, Pagination } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+
+// Configs
+import axiosInstance from '@/configs/axiosInstance';
 
 // Assets
 import noResult from '@/assets/images/search-not-found.png';
@@ -128,10 +128,9 @@ export default Search;
 export async function getServerSideProps(context) {
    const { query, req, locale } = context;
    const accessToken = req?.cookies?.yalfan_accessToken;
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const searchResultList = await axios(`${baseURL}api/store/products/list_create/`, {
+      const searchResultList = await axiosInstance(`store/products/list_create/`, {
          params: {
             lang: locale,
             search: query?.productName,
@@ -144,7 +143,7 @@ export async function getServerSideProps(context) {
          }),
       }).then(res => res.data);
 
-      const suggestsList = await axios(`${baseURL}api/store/products/list_create/`, {
+      const suggestsList = await axiosInstance(`store/products/list_create/`, {
          params: {
             lang: locale,
             suggest: true,

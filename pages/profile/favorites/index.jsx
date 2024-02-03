@@ -32,7 +32,7 @@ function Favorites() {
             <div className="flex items-center gap-2 rounded-2xl bg-white p-7">
                <p className="text-lg font-bold text-[#050F2C]">{t('Your favorites list')}</p>
                {!favoritesIsLoading && favoritesData?.length ? (
-                  <p className="flex h-6 w-6 items-center justify-center rounded-full bg-[#D14F4D] text-white">
+                  <p className="flex size-6 items-center justify-center rounded-full bg-[#D14F4D] text-white">
                      {favoritesData?.length}
                   </p>
                ) : null}
@@ -50,7 +50,7 @@ function Favorites() {
                         {t('Your favorites list is empty')}
                      </p>
                      <div className="mx-auto w-[300px]">
-                        <Image src={emptyFavoritesPic} alt="empty" className="h-full w-full" />
+                        <Image src={emptyFavoritesPic} alt="empty" className="size-full" />
                      </div>
                   </div>
                )}

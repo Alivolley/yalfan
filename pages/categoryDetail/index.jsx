@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
-import axios from 'axios';
 
 // MUI
 import {
@@ -28,6 +27,9 @@ import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
 import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+// Config
+import axiosInstance from '@/configs/axiosInstance';
 
 // Assets
 import filterIcon from '@/assets/icons/filter-icon.svg';
@@ -418,16 +420,15 @@ export default CategoryDetail;
 
 export async function getServerSideProps(context) {
    const { query } = context;
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`, {
+      const categoryList = await axiosInstance(`store/categories/list_create/`, {
          params: {
             lang: context.locale,
          },
       }).then(res => res.data);
 
-      const productsList = await axios(`${baseURL}api/store/products/list_create/`, {
+      const productsList = await axiosInstance(`store/products/list_create/`, {
          params: {
             lang: context.locale,
             highest_price: true,

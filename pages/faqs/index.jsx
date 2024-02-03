@@ -29,7 +29,7 @@ function Faqs() {
                   router.locale === 'en' ? 'border-e pe-5' : 'scale-x-[-1] border-s ps-5'
                }`}
             >
-               <Image src={faqPic} alt="faq" className="h-full w-full" />
+               <Image src={faqPic} alt="faq" className="size-full" />
             </div>
             <div className="bg-white px-1 py-5 customMd:grow customMd:px-10">
                <Accordion
@@ -47,7 +47,7 @@ function Faqs() {
                      id="panel1a-header"
                   >
                      <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 shrink-0 rounded-full bg-[#F7C1CA]" />
+                        <div className="size-3 shrink-0 rounded-full bg-[#F7C1CA]" />
                         <p className="text-sm font-bold customMd:text-base">{t('how')}</p>
                      </div>
                   </AccordionSummary>
@@ -75,7 +75,7 @@ function Faqs() {
                      id="panel1a-header"
                   >
                      <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 shrink-0 rounded-full bg-[#F7C1CA]" />
+                        <div className="size-3 shrink-0 rounded-full bg-[#F7C1CA]" />
                         <p className="text-sm font-bold customMd:text-base">{t('when')}</p>
                      </div>
                   </AccordionSummary>
@@ -103,7 +103,7 @@ function Faqs() {
                      id="panel1a-header"
                   >
                      <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 shrink-0 rounded-full bg-[#F7C1CA]" />
+                        <div className="size-3 shrink-0 rounded-full bg-[#F7C1CA]" />
                         <p className="text-sm font-bold customMd:text-base">{t('how')}</p>
                      </div>
                   </AccordionSummary>
@@ -131,7 +131,7 @@ function Faqs() {
                      id="panel1a-header"
                   >
                      <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 shrink-0 rounded-full bg-[#F7C1CA]" />
+                        <div className="size-3 shrink-0 rounded-full bg-[#F7C1CA]" />
                         <p className="text-sm font-bold customMd:text-base">{t('when')}</p>
                      </div>
                   </AccordionSummary>
@@ -159,7 +159,7 @@ function Faqs() {
                      id="panel1a-header"
                   >
                      <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 shrink-0 rounded-full bg-[#F7C1CA]" />
+                        <div className="size-3 shrink-0 rounded-full bg-[#F7C1CA]" />
                         <p className="text-sm font-bold customMd:text-base">{t('how')}</p>
                      </div>
                   </AccordionSummary>
@@ -187,7 +187,7 @@ function Faqs() {
                      id="panel1a-header"
                   >
                      <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 shrink-0 rounded-full bg-[#F7C1CA]" />
+                        <div className="size-3 shrink-0 rounded-full bg-[#F7C1CA]" />
                         <p className="text-sm font-bold customMd:text-base">{t('when')}</p>
                      </div>
                   </AccordionSummary>
@@ -215,7 +215,7 @@ function Faqs() {
                      id="panel1a-header"
                   >
                      <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 shrink-0 rounded-full bg-[#F7C1CA]" />
+                        <div className="size-3 shrink-0 rounded-full bg-[#F7C1CA]" />
                         <p className="text-sm font-bold customMd:text-base">{t('how')}</p>
                      </div>
                   </AccordionSummary>
@@ -243,7 +243,7 @@ function Faqs() {
                      id="panel1a-header"
                   >
                      <div className="flex items-center gap-2">
-                        <div className="h-3 w-3 shrink-0 rounded-full bg-[#F7C1CA]" />
+                        <div className="size-3 shrink-0 rounded-full bg-[#F7C1CA]" />
                         <p className="text-sm font-bold customMd:text-base">{t('when')}</p>
                      </div>
                   </AccordionSummary>

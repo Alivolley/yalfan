@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axiosInstance from '@/configs/axiosInstance';
 
 // Components
 import Introduce from '@/components/pages/home/Introduce/Introduce';
@@ -48,23 +48,21 @@ export default function Home({ categoryList, error, newestList, bestSellersList 
 }
 
 export async function getStaticProps(context) {
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
    try {
-      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`, {
+      const categoryList = await axiosInstance(`store/categories/list_create/`, {
          params: {
             lang: context.locale,
          },
       }).then(res => res.data);
 
-      const newestList = await axios(`${baseURL}api/store/products/list_create/`, {
+      const newestList = await axiosInstance(`store/products/list_create/`, {
          params: {
             lang: context.locale,
             ordering: 'created',
          },
       }).then(res => res.data);
 
-      const bestSellersList = await axios(`${baseURL}api/store/products/list_create/`, {
+      const bestSellersList = await axiosInstance(`store/products/list_create/`, {
          params: {
             lang: context.locale,
             ordering: 'sales',
