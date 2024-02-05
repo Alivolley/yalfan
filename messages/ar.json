@@ -254,7 +254,9 @@
         "Similar products": "منتجات مماثلة",
         "Show all": "عرض الكل",
         "The product is not available": "المنتج غير متوفر",
-        "To add to your favorites , you need to login first": "للإضافة إلى المفضلة لديك، يجب عليك تسجيل الدخول أولا"
+        "To add to your favorites , you need to login first": "للإضافة إلى المفضلة لديك، يجب عليك تسجيل الدخول أولا",
+        "To add to your basket , you need to login first": "لإضافتها إلى سلتك، يجب عليك تسجيل الدخول أولاً",
+        "To add comment , you need to login first": "لإضافة تعليق، تحتاج إلى تسجيل الدخول أولا"
     },
     "basket": {
         "Basket": "سلة",

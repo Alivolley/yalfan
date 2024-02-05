@@ -61,7 +61,7 @@ function ProductCard({ detail }) {
             }`}
             id="categoryImage"
          >
-            <Link href={`/productDetail/${detail?.title}`} className="relative h-full w-full">
+            <Link href={`/productDetail/${detail?.title}`} className="relative size-full">
                <Image src={detail?.cover || noImage} alt={detail?.title} className="object-contain" fill />
             </Link>
             <div className="absolute end-1.5 top-1.5 customMd:end-2 customMd:top-2">

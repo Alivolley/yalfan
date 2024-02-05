@@ -1,5 +1,10 @@
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import { Controller, useForm } from 'react-hook-form';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // MUI
 import { Rating, TextField } from '@mui/material';
@@ -13,6 +18,8 @@ import useAddComment from '@/apis/comments/useAddComment';
 
 function AddComment({ productDetail, commentsMutate }) {
    const t = useTranslations('productDetail');
+   const isLogin = useSelector(state => state?.loginStatusReducer);
+   const { locale } = useRouter();
 
    const { trigger: addCommentTrigger, isMutating: addCommentIsMutating } = useAddComment();
 
@@ -32,18 +39,32 @@ function AddComment({ productDetail, commentsMutate }) {
    });
 
    const formSubmit = data => {
-      const newComment = {
-         message: data?.comment,
-         product: productDetail?.id,
-         score: Number(data?.rate),
-      };
+      if (isLogin) {
+         const newComment = {
+            message: data?.comment,
+            product: productDetail?.id,
+            score: Number(data?.rate),
+         };
 
-      addCommentTrigger(newComment, {
-         onSuccess: () => {
-            commentsMutate();
-            reset();
-         },
-      });
+         addCommentTrigger(newComment, {
+            onSuccess: () => {
+               commentsMutate();
+               reset();
+            },
+         });
+      } else {
+         toast.info(t('To add comment , you need to login first'), {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+               fontSize: '14px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
    };
 
    const rateValue = watch('rate');

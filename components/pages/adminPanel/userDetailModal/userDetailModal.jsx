@@ -103,7 +103,7 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
                   className="mb-6 mt-12 flex flex-col items-center gap-12 customMd:flex-row customMd:items-end customMd:gap-5"
                >
                   <div className="relative mx-auto w-fit cursor-pointer customMd:mx-0">
-                     <div className="h-28 w-28 cursor-pointer">
+                     <div className="size-28 cursor-pointer">
                         <Image
                            src={detail?.image || userProfilePic}
                            alt="user profile"

@@ -254,7 +254,9 @@
         "Similar products": "Similar products",
         "Show all": "Show all",
         "The product is not available": "The product is not available",
-        "To add to your favorites , you need to login first": "To add to your favorites , you need to login first"
+        "To add to your favorites , you need to login first": "To add to your favorites , you need to login first",
+        "To add to your basket , you need to login first": "To add to your basket , you need to login first",
+        "To add comment , you need to login first": "To add comment , you need to login first"
     },
     "basket": {
         "Basket": "Basket",

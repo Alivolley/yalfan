@@ -109,12 +109,26 @@ function ProductDetail({ error, productDetail, categoryItems }) {
    };
 
    const addToBasketHandler = () => {
-      const productObj = {
-         product_color_id: chosenColor?.id,
-         product_count: isInCart ? Number(isInCart?.count) + 1 : 1,
-      };
+      if (isLogin) {
+         const productObj = {
+            product_color_id: chosenColor?.id,
+            product_count: isInCart ? Number(isInCart?.count) + 1 : 1,
+         };
 
-      addToBasketTrigger(productObj);
+         addToBasketTrigger(productObj);
+      } else {
+         toast.info(t('To add to your basket , you need to login first'), {
+            style: {
+               direction: locale === 'en' ? 'ltr' : 'rtl',
+               fontFamily:
+                  locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
+               lineHeight: '25px',
+               fontSize: '14px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
    };
 
    const removeFromBasketHandler = () => {
