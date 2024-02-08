@@ -100,7 +100,7 @@ function Information() {
             {Object.keys(userInfo).length > 0 ? (
                <div className="mt-6 rounded bg-white p-7">
                   <div className="relative mx-auto w-fit cursor-pointer customMd:mx-0">
-                     <div className="relative h-28 w-28 cursor-pointer">
+                     <div className="relative size-28 cursor-pointer">
                         <Image
                            src={userInfo?.image || userProfilePic}
                            alt="user profile"

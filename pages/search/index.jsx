@@ -130,25 +130,20 @@ export async function getServerSideProps(context) {
    const accessToken = req?.cookies?.yalfan_accessToken;
 
    try {
-      const searchResultList = await axiosInstance(`store/products/list_create/`, {
-         params: {
-            lang: locale,
-            search: query?.productName,
-            page: query?.page,
-         },
-         ...(accessToken && {
-            headers: {
-               Authorization: `Bearer ${accessToken}`,
-            },
-         }),
-      }).then(res => res.data);
+      const searchResultList = await axiosInstance(
+         `store/products/list_create/?lang=${locale}&search=${query?.productName}&page=${query?.page}`,
+         {
+            ...(accessToken && {
+               headers: {
+                  Authorization: `Bearer ${accessToken}`,
+               },
+            }),
+         }
+      ).then(res => res.data);
 
-      const suggestsList = await axiosInstance(`store/products/list_create/`, {
-         params: {
-            lang: locale,
-            suggest: true,
-         },
-      }).then(res => res.data);
+      const suggestsList = await axiosInstance(`store/products/list_create/?lang=${locale}&suggest=true`).then(
+         res => res.data
+      );
 
       return {
          props: {

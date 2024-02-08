@@ -516,23 +516,17 @@ export async function getServerSideProps(context) {
    const { query, locale } = context;
 
    try {
-      const productDetail = await axiosInstance(`store/products/get_update_destroy/`, {
-         params: {
-            lang: locale,
-            title: query?.productTitle,
-         },
-      }).then(res => res.data);
+      const productDetail = await axiosInstance(
+         `store/products/get_update_destroy/?lang=${locale}&title=${query?.productTitle}`
+      ).then(res => res.data);
 
-      const categoryItems = await axiosInstance(`store/products/list_create/`, {
-         params: {
-            lang: locale,
-            category: productDetail?.category,
-         },
-      }).then(res => res.data?.result?.filter(item => item?.title !== productDetail?.title));
+      const categoryItems = await axiosInstance(
+         `store/products/list_create/?lang=${locale}&category=${productDetail?.category}`
+      ).then(res => res.data?.result?.filter(item => item?.title !== productDetail?.title));
 
       return {
          props: {
-            messages: (await import(`../../messages/${context.locale}.json`)).default,
+            messages: (await import(`../../messages/${locale}.json`)).default,
             productDetail,
             categoryItems,
          },
@@ -540,7 +534,7 @@ export async function getServerSideProps(context) {
    } catch (error) {
       return {
          props: {
-            messages: (await import(`../../messages/${context.locale}.json`)).default,
+            messages: (await import(`../../messages/${locale}.json`)).default,
             error: error?.message,
          },
       };

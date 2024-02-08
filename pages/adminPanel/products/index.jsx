@@ -179,7 +179,7 @@ function Products() {
                   title={
                      <p
                         className={`flex items-center justify-center ${
-                           data?.discount_percent ? 'rounded-full bg-green-500 p-0.5 text-sm' : 'text-base text-black'
+                           data?.percentage ? 'rounded-full bg-green-500 p-0.5 text-sm' : 'text-base text-black'
                         }`}
                         dir={locale === 'en' ? 'ltr' : 'rtl'}
                      >

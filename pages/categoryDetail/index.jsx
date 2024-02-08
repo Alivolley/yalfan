@@ -422,15 +422,12 @@ export async function getServerSideProps(context) {
    const { query } = context;
 
    try {
-      const categoryList = await axiosInstance(`store/categories/list_create/`, {
-         params: {
-            lang: context.locale,
-         },
-      }).then(res => res.data);
+      const categoryList = await axiosInstance(`store/categories/list_create/?lang=${context.locale}`).then(
+         res => res.data
+      );
 
-      const productsList = await axiosInstance(`store/products/list_create/`, {
+      const productsList = await axiosInstance(`store/products/list_create/?lang=${context.locale}`, {
          params: {
-            lang: context.locale,
             highest_price: true,
             ...(query?.available && {
                available: true,
