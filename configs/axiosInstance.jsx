@@ -19,7 +19,9 @@ axiosInstance.interceptors.request.use(
          config.headers.Authorization = `Bearer ${accessToken}`;
       }
 
-      config.params = { ...config.params, lang };
+      if (lang) {
+         config.params = { ...config.params, lang };
+      }
 
       return config;
    },

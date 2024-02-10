@@ -155,7 +155,7 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, productsMu
             autoClose: 5000,
          });
       } else if (!pictures?.length && !EditPictures?.length) {
-         toast.info(t('Please select picture for your product"'), {
+         toast.info(t('Please select picture for your product'), {
             style: {
                direction: locale === 'en' ? 'ltr' : 'rtl',
                fontFamily:
