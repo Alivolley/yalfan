@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }) {
             <meta name="description" content="Your website description here" />
             <meta name="keywords" content="comma, separated, keywords" />
             <meta name="author" content={locale === 'fa' ? 'یلفان' : 'Yalfan'} />
+            <meta name="enamad" content="101500" />
          </Head>
          <AppLayout>
             <Component {...pageProps} />
