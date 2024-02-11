@@ -86,7 +86,7 @@ function Orders() {
       { id: 3, title: t('Order code'), key: 'order_code' },
       {
          id: 4,
-         title: t('Row'),
+         title: t('Price'),
          key: 'Total price',
          renderCell: data => `${Number(data?.final_price).toLocaleString()} ${t('unit')}`,
       },

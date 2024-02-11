@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -110,7 +111,12 @@ function OrderDetailModal({ show, onClose, detail, locale }) {
                   <div className="flex items-center justify-between gap-1">
                      <p className="text-textColor">{t('Price without discount')} :</p>
                      <p>
-                        {Number(detail?.before_discount_price).toLocaleString()} {t('unit')}
+                        {isNaN(detail?.shipping_cost)
+                           ? detail?.before_discount_price
+                           : (
+                                Number(detail?.before_discount_price) - Number(detail?.shipping_cost)
+                             ).toLocaleString()}{' '}
+                        {t('unit')}
                      </p>
                   </div>
                   <div className="flex items-center justify-between gap-1">

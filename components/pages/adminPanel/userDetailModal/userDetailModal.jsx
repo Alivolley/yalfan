@@ -25,9 +25,12 @@ import OrderCard from '@/components/templates/order-card/order-card';
 // Apis
 import useChangeProfileImage from '@/apis/profile/useChangeProfileImage';
 import useChangeProfileInfo from '@/apis/profile/useChangeProfileInfo';
+import useGetUserDetail from '@/apis/pAdmin/users/useGetUserDetail';
 
 function UserDetailModal({ show, onClose, detail, usersMutate }) {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
+
+   const { data: userData, isLoading: userIsLoading } = useGetUserDetail(detail?.id);
 
    const { trigger: changeProfileTrigger, isMutating: changeProfileIsMutating } = useChangeProfileImage(
       detail?.phone_number
@@ -197,23 +200,29 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
             <div className="rounded-md px-5 py-8">
                <p className="font-bold">{t('Orders list')}</p>
 
-               <div>
-                  {detail?.carts?.length ? (
-                     <div className="mx-auto mt-10 flex max-w-2xl flex-col gap-5">
-                        <Grid container spacing={2}>
-                           {detail?.carts?.map(item => (
-                              <Grid key={item?.order_code} item xs={12}>
-                                 <OrderCard detail={item} />
-                              </Grid>
-                           ))}
-                        </Grid>
-                     </div>
-                  ) : (
-                     <div className="mx-auto my-14 flex max-w-[370px] flex-col gap-4 text-center">
-                        <p className="text-xl font-bold">{t('No order registered')}</p>
-                     </div>
-                  )}
-               </div>
+               {userIsLoading ? (
+                  <div className="my-16 flex w-full items-center justify-center">
+                     <CircularProgress color="customPink" />
+                  </div>
+               ) : (
+                  <div>
+                     {userData?.result?.length ? (
+                        <div className="mx-auto mt-10 flex max-w-2xl flex-col gap-5">
+                           <Grid container spacing={2}>
+                              {userData?.result?.map(item => (
+                                 <Grid key={item?.order_code} item xs={12}>
+                                    <OrderCard detail={item} />
+                                 </Grid>
+                              ))}
+                           </Grid>
+                        </div>
+                     ) : (
+                        <div className="mx-auto my-14 flex max-w-[370px] flex-col gap-4 text-center">
+                           <p className="text-xl font-bold">{t('No order registered')}</p>
+                        </div>
+                     )}
+                  </div>
+               )}
             </div>
             <Backdrop sx={{ zIndex: 2 }} open={changeProfileIsMutating}>
                <CircularProgress color="customPink" />

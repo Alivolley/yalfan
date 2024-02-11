@@ -75,7 +75,11 @@ function PaymentSummery({ detail, setBasketStep, basketStep, chosenAddress, orde
             <div className="flex items-center justify-between">
                <p className="text-sm text-textColor">{t('Products Price')}</p>
                <div className="flex items-center gap-1">
-                  <p className="font-bold">{Number(detail?.before_discount_price).toLocaleString()}</p>
+                  <p className="font-bold">
+                     {isNaN(detail?.shipping_cost)
+                        ? detail?.before_discount_price
+                        : (Number(detail?.before_discount_price) - Number(detail?.shipping_cost)).toLocaleString()}
+                  </p>
                   <p className="text-textColor">{t('unit')}</p>
                </div>
             </div>
@@ -95,7 +99,11 @@ function PaymentSummery({ detail, setBasketStep, basketStep, chosenAddress, orde
             <div className="flex items-center justify-between">
                <p className="text-sm text-textColor">{t('Price after discount')}</p>
                <div className="flex items-center gap-1">
-                  <p className="font-bold">{Number(detail?.final_price).toLocaleString()}</p>
+                  <p className="font-bold">
+                     {isNaN(detail?.shipping_cost)
+                        ? detail?.final_price
+                        : (Number(detail?.final_price) - Number(detail?.shipping_cost)).toLocaleString()}
+                  </p>
                   <p className="text-textColor">{t('unit')}</p>
                </div>
             </div>
@@ -110,11 +118,7 @@ function PaymentSummery({ detail, setBasketStep, basketStep, chosenAddress, orde
          <div className="mb-10 flex items-center justify-between">
             <p className="text-sm text-textColor">{t('Final price')}</p>
             <div className="flex items-center gap-1">
-               <p className="font-bold">
-                  {isNaN(detail?.shipping_cost)
-                     ? detail?.final_price
-                     : (Number(detail?.final_price) + Number(detail?.shipping_cost)).toLocaleString()}
-               </p>
+               <p className="font-bold">{detail?.final_price?.toLocaleString()}</p>
                <p className="text-textColor">{t('unit')}</p>
             </div>
          </div>
