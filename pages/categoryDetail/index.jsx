@@ -426,29 +426,28 @@ export async function getServerSideProps(context) {
          res => res.data
       );
 
-      const productsList = await axiosInstance(`store/products/list_create/?lang=${context.locale}`, {
-         params: {
-            highest_price: true,
-            ...(query?.available && {
-               available: true,
-            }),
-            ...(query?.has_discount && {
-               has_discount: true,
-            }),
-            ...(query?.price && {
-               price: query?.price,
-            }),
-            ...(query?.category && {
-               category: query?.category,
-            }),
-            ...(query?.ordering && {
-               ordering: query?.ordering,
-            }),
-            ...(query?.color && {
-               color: `#${query?.color}`,
-            }),
-         },
-      }).then(res => res.data);
+      let queryString = `store/products/list_create/?lang=${context.locale}&highest_price=true`;
+
+      if (query?.available) {
+         queryString += '&available=true';
+      }
+      if (query?.has_discount) {
+         queryString += '&has_discount=true';
+      }
+      if (query?.price) {
+         queryString += `&price=${query.price}`;
+      }
+      if (query?.category) {
+         queryString += `&category=${query.category}`;
+      }
+      if (query?.ordering) {
+         queryString += `&ordering=${query.ordering}`;
+      }
+      if (query?.color) {
+         queryString += `&color=#${query.color}`;
+      }
+
+      const productsList = await axiosInstance(queryString).then(res => res.data);
 
       return {
          props: {
