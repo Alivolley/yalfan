@@ -446,6 +446,9 @@ export async function getServerSideProps(context) {
       if (query?.color) {
          queryString += `&color=#${query.color}`;
       }
+      if (query?.page) {
+         queryString += `&page=${query.page}`;
+      }
 
       const productsList = await axiosInstance(queryString).then(res => res.data);
 
