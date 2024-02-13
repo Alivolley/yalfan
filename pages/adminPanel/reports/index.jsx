@@ -92,7 +92,10 @@ function CustomTooltipMonthly({ active, payload, translator }) {
 }
 
 function Reports() {
-   const todayTimestamp = Math.floor(new Date().getTime() / 1000);
+   const currentDate = new Date();
+   currentDate.setHours(0, 0, 0, 0);
+   const todayTimestamp = Math.floor(currentDate.getTime() / 1000);
+
    const [chosenFilter, setChosenFilter] = useState(todayTimestamp);
    const [chosenPeriod, setChosenPeriod] = useState('daily');
    const [startDate, setStartDate] = useState();
@@ -176,13 +179,7 @@ function Reports() {
                          : null
                }`}
             >
-               <p
-                  className={
-                     new Date(chosenFilter)?.getDate() === new Date(todayTimestamp)?.getDate()
-                        ? 'font-bold text-black'
-                        : 'text-[#98A2B2]'
-                  }
-               >
+               <p className={chosenFilter === todayTimestamp ? 'font-bold text-black' : 'text-[#98A2B2]'}>
                   {t('Daily sell')}
                </p>
             </button>
