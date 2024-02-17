@@ -444,7 +444,7 @@ export async function getServerSideProps(context) {
          queryString += `&ordering=${query.ordering}`;
       }
       if (query?.color) {
-         queryString += `&color=#${query.color}`;
+         queryString += `&color=${query.color}`;
       }
       if (query?.page) {
          queryString += `&page=${query.page}`;

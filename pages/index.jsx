@@ -47,7 +47,7 @@ export default function Home({ categoryList, error, newestList, bestSellersList 
    );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
    try {
       const categoryList = await axiosInstance(`store/categories/list_create/?lang=${context.locale}`).then(
          res => res.data
@@ -68,7 +68,6 @@ export async function getStaticProps(context) {
             newestList,
             bestSellersList,
          },
-         revalidate: 300,
       };
    } catch (error) {
       return {
