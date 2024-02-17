@@ -34,7 +34,10 @@ export default function Home({ categoryList, error, newestList, bestSellersList 
    return (
       <div>
          <Head>
-            <title>{locale === 'fa' ? `یلفان` : `Yalfan`}</title>
+            <title>
+               {/* {locale === 'fa' ? `یلفان` : `Yalfan`} */}
+               394779
+            </title>
          </Head>
          <Banner />
          <Categories detail={categoryList} />
