@@ -34,10 +34,7 @@ export default function Home({ categoryList, error, newestList, bestSellersList 
    return (
       <div>
          <Head>
-            <title>
-               {/* {locale === 'fa' ? `یلفان` : `Yalfan`} */}
-               394779
-            </title>
+            <title>{locale === 'fa' ? `یلفان` : `Yalfan`}</title>
          </Head>
          <Banner />
          <Categories detail={categoryList} />
@@ -50,7 +47,7 @@ export default function Home({ categoryList, error, newestList, bestSellersList 
    );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
    try {
       const categoryList = await axiosInstance(`store/categories/list_create/?lang=${context.locale}`).then(
          res => res.data
@@ -71,6 +68,7 @@ export async function getServerSideProps(context) {
             newestList,
             bestSellersList,
          },
+         revalidate: 300,
       };
    } catch (error) {
       return {

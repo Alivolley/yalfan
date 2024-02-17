@@ -8,7 +8,7 @@ const nextConfig = {
    images: {
       remotePatterns: [
          {
-            hostname: 'yalfan.com',
+            hostname: 'yalfantest.pythonanywhere.com',
          },
       ],
    },
