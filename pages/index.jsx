@@ -68,9 +68,11 @@ export async function getStaticProps(context) {
             newestList,
             bestSellersList,
          },
-         revalidate: 300,
+         revalidate: 5,
       };
    } catch (error) {
+      console.log(error);
+
       return {
          props: {
             messages: (await import(`../messages/${context.locale}.json`)).default,
