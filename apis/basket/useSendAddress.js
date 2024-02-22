@@ -10,7 +10,9 @@ const useSendAddress = () => {
    return useSWRMutation('store/cart/get_update/', (url, data) =>
       axiosInstance.patch(url, data.arg).then(res => {
          axiosInstance('accounts/payment').then(innerRes => {
-            push(innerRes?.data?.url);
+            if (innerRes?.data?.url) {
+               push(innerRes?.data?.url);
+            }
             mutate('store/cart/get_update/', res.data);
          });
          return res.data;

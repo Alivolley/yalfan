@@ -8,7 +8,8 @@ const nextConfig = {
    images: {
       remotePatterns: [
          {
-            hostname: 'yalfan.com',
+            protocol: 'https',
+            hostname: '**',
          },
       ],
    },

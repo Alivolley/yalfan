@@ -37,7 +37,7 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                      transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
                   }}
                >
-                  <Paper>
+                  <Paper sx={{ boxShadow: 'none' }}>
                      <div className="flex min-w-[193px] flex-col overflow-hidden rounded-md bg-customPink">
                         {isAdmin && (
                            <Link
@@ -86,8 +86,8 @@ function ProfileDropdown({ profileDropDown, setProfileDropDown, profileRef, isAd
                            {t('Favorites')}
                         </Link>
                         <Button
-                           className="!flex !items-center !justify-start gap-1 !border-t !border-solid !border-[#E4EAF0] !p-3 text-sm !text-white transition-all
-                                      duration-150 hover:!bg-[#D1706F]"
+                           className="!flex !items-center !justify-start !gap-1 !rounded-none !border-t !border-solid
+                            !border-[#E4EAF0] !p-3 !text-sm !text-white !transition-all !duration-150 hover:!bg-[#D1706F]"
                            onClick={() => setShowLogoutModal(true)}
                         >
                            <LogoutOutlinedIcon fontSize="small" className="rotate-180" />
