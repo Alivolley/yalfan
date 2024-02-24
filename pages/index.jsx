@@ -48,36 +48,36 @@ export default function Home({ categoryList, error, newestList, bestSellersList 
 }
 
 export async function getStaticProps(context) {
-   try {
-      const categoryList = await axiosInstance(`store/categories/list_create/?lang=${context.locale}`).then(
-         res => res.data
-      );
+   // try {
+   const categoryList = await axiosInstance(`store/categories/list_create/?lang=${context.locale}`).then(
+      res => res.data
+   );
 
-      const newestList = await axiosInstance(
-         `store/products/list_create/?lang=${context.locale}&ordering=created`
-      ).then(res => res.data);
+   const newestList = await axiosInstance(`store/products/list_create/?lang=${context.locale}&ordering=created`).then(
+      res => res.data
+   );
 
-      const bestSellersList = await axiosInstance(
-         `store/products/list_create/?lang=${context.locale}&ordering=sales`
-      ).then(res => res.data);
+   const bestSellersList = await axiosInstance(
+      `store/products/list_create/?lang=${context.locale}&ordering=sales`
+   ).then(res => res.data);
 
-      return {
-         props: {
-            messages: (await import(`../messages/${context.locale}.json`)).default,
-            categoryList,
-            newestList,
-            bestSellersList,
-         },
-         revalidate: 5,
-      };
-   } catch (error) {
-      console.log(error);
+   return {
+      props: {
+         messages: (await import(`../messages/${context.locale}.json`)).default,
+         categoryList,
+         newestList,
+         bestSellersList,
+      },
+      revalidate: 5,
+   };
+   // } catch (error) {
+   //    console.log(error);
 
-      return {
-         props: {
-            messages: (await import(`../messages/${context.locale}.json`)).default,
-            error: error?.message,
-         },
-      };
-   }
+   //    return {
+   //       props: {
+   //          messages: (await import(`../messages/${context.locale}.json`)).default,
+   //          error: error?.message,
+   //       },
+   //    };
+   // }
 }
